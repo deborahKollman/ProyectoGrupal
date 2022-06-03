@@ -1,7 +1,6 @@
 const {obtenerUsuarios , obtenerDetalleUsuario} = require('../services/users.js')
 
 exports.getUsers = (req,res,next) => {
-    //Ejecutar logica del negocio
     try {
         const r = obtenerUsuarios()
         res.json(r)
