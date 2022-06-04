@@ -2,7 +2,7 @@
 function App() {
   return (
     <div className="App">
-      asdf
+      <h1>asdf sintax error xD</h1>
     </div>
   );
 }
