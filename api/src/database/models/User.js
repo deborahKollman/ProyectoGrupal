@@ -32,10 +32,6 @@ module.exports = (sequelize) =>{
             type:DataTypes.VIRTUAL,
             get(){
                 return `${this.province_state}, ${this.country}`
-            },
-            set:function(country,province){
-                this.setDataValue('country',country);
-                this.setDataValue('province_state',province);
             }
         },
         seller_reputation:{
