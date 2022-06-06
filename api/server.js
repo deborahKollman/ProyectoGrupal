@@ -6,6 +6,7 @@ const cors = require('cors');
 const server = express();
 const router = require('./app/routes');
 
+// Middlewares
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
