@@ -22,8 +22,21 @@ module.exports = (sequelize) =>{
         name:{
             type:DataTypes.STRING
         },
+        country:{
+            type:DataTypes.STRING
+        },
+        province_state:{
+            type:DataTypes.STRING
+        },
         location:{
-
+            type:DataTypes.VIRTUAL,
+            get(){
+                return `${this.province_state}, ${this.country}`
+            },
+            set:function(country,province){
+                this.setDataValue('country',country);
+                this.setDataValue('province_state',province);
+            }
         },
         seller_reputation:{
             type:DataTypes.FLOAT,

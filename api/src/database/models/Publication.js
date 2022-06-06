@@ -16,9 +16,6 @@ module.exports = (sequelize) =>{
         state:{
             type:DataTypes.STRING
         },
-        location:{
-
-        },
         album_id:{
             type:DataTypes.INTEGER
         },
