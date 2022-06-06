@@ -1,0 +1,18 @@
+  1 git branch sergio
+   2 git branch -a
+   3 git checkout sergio
+   4 git add
+   5 git status
+   6 git add .
+   7 git commit -m"hola"
+   8 git status
+   9 git push origin sergio
+  10 git checkout develoment
+  11 git checkout development
+  12 git pull origin development
+  13 git pull
+  14 git branch
+  15 git pull
+  16 git pull orirgin development
+  17 git pull origin development
+  18 git pull
