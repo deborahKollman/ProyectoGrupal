@@ -52,14 +52,14 @@ Customer.belongsTo(Favorite);
 
 
 //Autenticacion
-// sequelize
-//   .authenticate()
-//   .then(() => {
-//     console.log('Todo bien 😋');
-//   })
-//   .catch((error) => {
-//     console.error('Error: 😥', error);
-//   });
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Todo bien 😋');
+  })
+  .catch((error) => {
+    console.error('Error: 😥', error);
+  });
 
 module.exports = {
   ...sequelize.models,
