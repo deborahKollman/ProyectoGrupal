@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const server = express();
-const router = require('./app/routes');
+const router = require('./src/routes');
 
 // Middlewares
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));

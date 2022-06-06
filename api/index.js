@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { connection } = require('./config/postgres.js');
+const { connection } = require('./src/database/postgres.js');
 const server = require('./server');
 
 // Importamos la variable de entorno PORT
