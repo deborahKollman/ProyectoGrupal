@@ -11,15 +11,6 @@ const sequelize = new Sequelize(
   }
 );
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Todo bien 😋');
-  })
-  .catch((error) => {
-    console.error('Error: 😥', error);
-  });
-
 module.exports = {
   ...sequelize.models,
   connection: sequelize
