@@ -1,24 +1,33 @@
 import React from 'react'
-import Styles from './LandingPage.module.scss'
+import Styles from './styles/LandingPage.module.scss'
 import Carousel from 'react-bootstrap/Carousel'
-import { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
+import {MDBContainer} from "mdbreact";
+import Button from '@mui/material/Button';
 
 const LandingPage = () => {
 
-  // function ControlledCarousel() {
-  //   let [index, setIndex] = useState(0);
-  
-  //   let handleSelect = (selectedIndex, e) => {
-  //     setIndex(selectedIndex);
-  //   };
-  // }
+  const navigate = useNavigate()
 
   return (
     <div className={Styles.landingctn}>
+
      <h1 className={Styles.title}>ServiExpress</h1>
-      <div className={Styles.descriptionctn}>
-       <p className={Styles.description}>Find the services you are looking for. You get everything you need in one place.</p>
+
+     <div className={Styles.btn}>
+       <Button variant="text" onClick={() => navigate('/login')} 
+       sx={{
+         color: 'black',
+         fontSize: 16,
+       }}>
+         Login
+       </Button>
      </div>
+
+
+    <div className={Styles.descriptionctn}>
+       <p className={Styles.description}>Find the services you are looking for. You get everything you need in one place.</p>
+      </div>
      <h3 className={Styles.subtitle}>Popular professional services</h3>
   
   <div className={Styles.carousel}>
@@ -31,7 +40,6 @@ const LandingPage = () => {
     />
     <Carousel.Caption>
       <h3>Architecture</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
     </Carousel.Caption>
   </Carousel.Item>
 
@@ -44,7 +52,6 @@ const LandingPage = () => {
 
     <Carousel.Caption>
       <h3>Plumbing</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </Carousel.Caption>
   </Carousel.Item>
 
@@ -57,12 +64,18 @@ const LandingPage = () => {
 
     <Carousel.Caption>
       <h3>Carpentry</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
     </Carousel.Caption>
   </Carousel.Item>
 </Carousel>
 
   </div>
+   
+     <div className={Styles.footer}>
+        <MDBContainer fluid>
+          &copy; 2022 Copyright: ServiExpress 
+        </MDBContainer>
+      </div>
+
     </div>
   )
 }
