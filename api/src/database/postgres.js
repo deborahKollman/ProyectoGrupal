@@ -30,8 +30,6 @@ const {
   Service,
   User,
   Admin,
-  Customer,
-  Seller,
   Contract,
   Favorite,
   Publication
@@ -41,21 +39,23 @@ Service.belongsTo(Category);
 
 User.hasOne(Admin);
 Admin.belongsTo(User);
-User.hasOne(Customer);
-Customer.belongsTo(User);
-Customer.hasOne(Seller);
-Seller.belongsTo(User);
 
-Seller.hasMany(Publication);
-Publication.belongsTo(Seller);
+User.hasMany(Publication);
+Publication.belongsTo(User);
+Service.belongsToMany(Publication,{through:'PublicationServices'})
+Publication.belongsToMany(Service,{through:'PublicationServices'})
 
-Customer.hasMany(Contract);
-Contract.belongsTo(Customer);
+User.hasMany(Contract);
+Contract.belongsTo(User);
+Publication.hasMany(Contract);
+Contract.belongsTo(Publication)
 
-Favorite.hasMany(Publication);
-Publication.belongsTo(Favorite);
-Favorite.hasMany(Customer);
-Customer.belongsTo(Favorite);
+User.hasMany(Favorite);
+Favorite.belongsTo(User);
+Favorite.belongsToMany(Publication,{through:'FavoritePublications'})
+Publication.belongsToMany(Favorite,{through:'FavoritePublications'})
+
+
 
 module.exports = {
   ...sequelize.models,
