@@ -19,10 +19,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING
       },
       album_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.ARRAY(DataTypes.STRING)
       },
       detail: {
         type: DataTypes.TEXT
+      },
+      price:{
+        type:DataTypes.FLOAT
       }
     },
     {
