@@ -6,8 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "jest --verbose --silent",
-    "test:watch": "npm run test -- --watch --silent",
-    "start": "nodemon index.js",
+    "test:watch": "npm run test -- --watchAll",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "format": "eslint --fix --ext .js,.jsx ."
   },
   "author": "",
