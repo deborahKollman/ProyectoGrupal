@@ -28,7 +28,7 @@ server.use('/', router);
 // Endwares
 server.use((error, req, res, next) => {
   console.log(`index error: ${error.message}`);
-  res.status(error.status).send({ message: error.message });
+  res.status(500).send({ message: error.message });
 });
 
 module.exports = server;
