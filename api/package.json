@@ -44,7 +44,8 @@
         "error",
         "always"
       ],
-      "no-undef": "off"
+      "no-undef": "off",
+      "space-before-function-paren": "off"
     }
   }
 }
