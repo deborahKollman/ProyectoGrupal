@@ -1,5 +1,5 @@
 const request = require('supertest');
-const server = require('../../../server');
+const server = require('../../server');
 
 describe('GET /users', () => {
   it('Debe retornar un usuario', async () => {

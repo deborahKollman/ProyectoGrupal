@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "jest --verbose --silent",
+    "test": "jest --verbose --detectOpenHandles",
     "test:watch": "npm run test -- --watchAll",
     "dev": "nodemon index.js",
     "start": "node index.js",
@@ -44,7 +44,8 @@
         "error",
         "always"
       ],
-      "no-undef": "off"
+      "no-undef": "off",
+      "space-before-function-paren": "off"
     }
   }
 }
