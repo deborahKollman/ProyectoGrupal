@@ -36,23 +36,9 @@ module.exports = (sequelize) => {
           return `${this.province_state}, ${this.country}`;
         }
       },
-      seller_reputation: {
-        type: DataTypes.FLOAT,
-        defaultValue: 0,
-        validate: {
-          isFloat: true
-        }
-      },
-      buyer_reputation: {
-        type: DataTypes.FLOAT,
-        defaultValue: 0,
-        validate: {
-          isFloat: true
-        }
-      },
       rol: {
-        type: DataTypes.ENUM('admin', 'client', 'guest'),
-        defaultValue: 'guest'
+        type: DataTypes.ENUM('admin', 'client'),
+        defaultValue: 'client'
       }
     },
     {
