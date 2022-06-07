@@ -13,20 +13,29 @@ const sequelize = new Sequelize(
   }
 );
 
-const basename = path.basename(__filename);
-const modelDefiners = [];
 fs.readdirSync(path.join(__dirname, '/models'))
-.filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-.forEach((file) => {
-  modelDefiners.push(require(path.join(__dirname, '/models', file)));
-});
-modelDefiners.forEach(model => model(sequelize));
-let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
-sequelize.models = Object.fromEntries(capsEntries);
+  .map((model) => require(`./models/${model.replace('.js', '')}`))
+  .forEach((model) => model(sequelize));
 
-//Relaciones de DB
-const { Category, Service, User, Admin, Customer, Seller, Contract, Favorite, Publication} = sequelize.models
+sequelize.models = Object.entries(sequelize.models).reduce(
+  (acc, [key, value]) => {
+    acc[key[0].toUpperCase() + key.slice(1)] = value;
+    return acc;
+  },
+  {}
+);
+// Relaciones de DB
+const {
+  Category,
+  Service,
+  User,
+  Admin,
+  Customer,
+  Seller,
+  Contract,
+  Favorite,
+  Publication
+} = sequelize.models;
 Category.hasMany(Service);
 Service.belongsTo(Category);
 
@@ -47,19 +56,6 @@ Favorite.hasMany(Publication);
 Publication.belongsTo(Favorite);
 Favorite.hasMany(Customer);
 Customer.belongsTo(Favorite);
-
-
-
-
-//Autenticacion
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Todo bien 😋');
-  })
-  .catch((error) => {
-    console.error('Error: 😥', error);
-  });
 
 module.exports = {
   ...sequelize.models,
