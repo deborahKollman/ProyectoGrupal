@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MyTextField } from "../elements/Forms";
-import BurgerButton from "../components/NavBar/NavBar";
+import BurgerButton from "../components/NavBar/NavBar.jsx";
 import Typography from '@mui/material/Typography'
 import Button from "@mui/material/Button";
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
@@ -47,71 +47,7 @@ const Login = () => {
           </MyButton>
 
         </section> 
-{/* 
-        
-        <section className="content">
-          
-          <Typography variant="h4" color="initial">
-            Login
-          </Typography>
-
-          <MyTextField
-            required
-            label="E-MAIL"
-            value={first}
-            type='email'
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
-          />
-          <MyTextField
-            label="PASSWORD"
-            value={first}
-            type='password'
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
-          />
-
-          <MyButton 
-              variant="contained"
-              endIcon={<VolunteerActivismIcon />}>
-            Join Serviexpress
-          </MyButton>
-
-        </section> 
-        <section className="content">
-          
-          <Typography variant="h4" color="initial">
-            Login
-          </Typography>
-
-
-          <MyTextField
-            required
-            label="E-MAIL"
-            value={first}
-            type='email'
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
-          />
-          <MyTextField
-            label="PASSWORD"
-            value={first}
-            type='password'
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
-          />
-
-          <MyButton 
-              variant="contained"
-              endIcon={<VolunteerActivismIcon />}>
-            Join Serviexpress
-          </MyButton>
-
-        </section>  */}
+ 
 
 
       </div>

@@ -1,8 +1,10 @@
-import styled from "styled-components";
-import Button from "@mui/material/Button";
-const StyleMUI = require("@mui/material/styles").styled;
+import styled from "@emotion/styled";
 
 const MyHeader = styled.header`
+  * {
+    margin: 0;
+  }
+  padding: 0 4vw;
   .burgerFigure {
     display: none;
   }
@@ -10,36 +12,55 @@ const MyHeader = styled.header`
   width: 100%;
   height: 10vh;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: end;
   border-bottom: 3px solid #f0ce77;
+
+  .initial {
+    height: 10vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .NavBar-login_user{
+    display: flex;
+    width: 20vw;
+    align-items: center;
+    justify-content: space-between;
+  }
   @media (max-width: 500px) {
+    .header-input-container {
+      display: none;
+    }
+    .NavBar-login_user{
+      display: none;
+    }
+    align-items: normal;
+    flex-flow: column nowrap;
     .burgerFigure {
       display: flex;
     }
-    position: fixed;
-    right: 0px;
-    top: 0px;
     z-index: 3;
-    width: ${({ pOpen }) => (!pOpen ? "79px" : "100%")};
-    height: ${({ pOpen }) => (!pOpen ? "79px" : "100%")};
+    height: ${({ pOpen }) => (!pOpen ? "12vh" : "100%")};
     clip-path: ${({ pOpen }) =>
-      !pOpen
-        ? "polygon(0 0, 100% 100%, 100% 0);"
-        : "polygon(0 0, 100% 0, 100% 100%, 30% 100%);"};
+      !pOpen ? "none" : "polygon(0 0, 100% 0, 100% 100%, 30% 100%);"};
+
+    position: ${({ pOpen }) => (!pOpen ? "inherit" : "absolute")};
   }
 `;
 //===============================================================
 
 const ListNav = styled.ul`
-  display: flex;
+  display: none;
+  padding: 0;
   flex-flow: row wrap;
-  margin: 0;
   list-style: none;
   text-align: right;
   li {
     text-decoration: none;
-    padding: 10px 20px;
+    align-self: center;
+    margin-left: 12px;
     a {
       text-decoration: none;
       color: white;
@@ -51,27 +72,24 @@ const ListNav = styled.ul`
   }
 
   @media (max-width: 500px) {
+    display: ${({ pOpen }) => !pOpen ? "none" : "flex"};
     transform: ${({ pOpen }) => (pOpen ? "translateX(0)" : "translateX(100%)")};
     flex-flow: column nowrap;
-    position: fixed;
-    top: 0;
-    right: 0;
     height: 100vh;
     width: 100%;
-    padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
     z-index: 1;
     li {
       color: white;
+      align-self: end;
     }
   }
 `;
 //===============================================================
 const StyledBurger = styled.figure`
-  margin: 10px;
   width: 2rem;
   height: 2rem;
-  position: absolute;
+  /* position: absolute; */
   top: 0px;
   right: 0px;
 
@@ -100,26 +118,14 @@ const StyledBurger = styled.figure`
   }
 `;
 
-const MyButton = StyleMUI(Button)({
-  width: "130px",
-  color: "#fff",
-  backgroundColor: "#3C2F1E",
-  margin: "4px 40px",
-  "&:hover": {
-    backgroundColor: "#3C2F1E",
-    borderColor: "#3C2F1E",
-    boxShadow: "none",
-  },
-  "&:active": {
-    boxShadow: "none",
-    backgroundColor: "#3C2F1E",
-    borderColor: "#3C2F1E",
-  },
-  "&:focus": {
-    boxShadow: "0 0 0 0.2rem #ff51007f",
-    color: "#ff51007f",
-  },
-});
+const MyNav = styled.nav`
+  ol{
+    display: flex;
+    list-style: none;
+    li{
+      margin-left: 12px;
+    }
+  }
+`;
 
-//export components of style-components
-export { MyHeader, ListNav, StyledBurger, MyButton };
+export { MyNav, MyHeader, ListNav, StyledBurger };
