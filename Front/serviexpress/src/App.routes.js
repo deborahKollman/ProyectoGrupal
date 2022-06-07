@@ -1,9 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
+import NotFound from './pages/NotFound.jsx';
+import LandingPage from './pages/LandingPage.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Lorem Ipsus</h1>
-    </div>
+    <Routes>
+      <Route exact path="/" element={<LandingPage/>} />
+      <Route path='*' element={<NotFound/>} />
+    </Routes>
   );
 }
 
