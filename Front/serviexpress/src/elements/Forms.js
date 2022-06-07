@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 
 const MyTextField = styled(TextField)({
     'margin': '40px',
+    'width': '300px',
   '& label.Mui-focused': {
     color: '#FCDC3C',
   },
