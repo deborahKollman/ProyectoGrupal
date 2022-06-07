@@ -29,9 +29,13 @@ npm i axios
 :: STYLES
 npm install --save styled-components
 npm install sass
-
+npm i @mui/styles
 
 :: ICONS
+$ npm install @mui/icons-material
 
+
+::LIBRARIES
+npm install @mui/material @emotion/react @emotion/styled
 
 */

@@ -13,6 +13,7 @@ server.use(cookieParser());
 server.use(morgan('dev'));
 server.use(express.json());
 server.use(cors());
+server.use(express.static('public'));
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'true');
@@ -28,7 +29,7 @@ server.use('/', router);
 // Endwares
 server.use((error, req, res, next) => {
   console.log(`index error: ${error.message}`);
-  res.status(error.status).send({ message: error.message });
+  res.status(500).send({ message: error.message });
 });
 
 module.exports = server;
