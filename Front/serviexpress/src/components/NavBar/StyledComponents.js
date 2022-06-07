@@ -1,57 +1,6 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-const StyleMUI = require ('@mui/material/styles').styled;
-
-  
-const BurgerButton = () => {
-  const [open, setOpen] = useState(false);
-
-  const mReloadOpen = () => {
-    setOpen(!open);
-  };
-
-  return (
-    <MyHeader pOpen={open}>
-      <StyledBurger pOpen={open} onClick={mReloadOpen} className="burgerFigure">
-        <span></span>
-        <span></span>
-        <span></span>
-      </StyledBurger>
-      <ListNav pOpen={open}>
-        <MyButton 
-            variant="contained"
-            endIcon={<VolunteerActivismIcon />}>
-          Join Serviexpress
-        </MyButton>
-
-        <li>
-          <Link to="/" onClick={mReloadOpen}>
-            Landing Page
-          </Link>
-        </li>
-        <li>
-          <Link to="/home" onClick={mReloadOpen}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/c_recipeA" onClick={mReloadOpen}>
-            Create Video Game
-          </Link>
-        </li>
-      </ListNav>
-    </MyHeader>
-  );
-};
-
-export default BurgerButton;
-
-//---------------------------------------------------------------------------
-//-----------------------------STYLED COMPONENTS-----------------------------
-//---------------------------------------------------------------------------
+const StyleMUI = require("@mui/material/styles").styled;
 
 const MyHeader = styled.header`
   .burgerFigure {
@@ -59,7 +8,7 @@ const MyHeader = styled.header`
   }
   background-color: #fcdc3c;
   width: 100%;
-  height: 7vh;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -151,25 +100,26 @@ const StyledBurger = styled.figure`
   }
 `;
 
-
-
 const MyButton = StyleMUI(Button)({
-    width: '130px',
-    color: '#fff',
-    backgroundColor: '#3C2F1E',
-    margin: '4px 40px',
-        '&:hover': {
-        backgroundColor: '#3C2F1E',
-        borderColor: '#3C2F1E',
-        boxShadow: 'none',
-      },
-      '&:active': {
-        boxShadow: 'none',
-        backgroundColor: '#3C2F1E',
-        borderColor: '#3C2F1E',
-      },
-      '&:focus': {
-        boxShadow: '0 0 0 0.2rem #ff51007f',
-        color: '#ff51007f'
-      },
+  width: "130px",
+  color: "#fff",
+  backgroundColor: "#3C2F1E",
+  margin: "4px 40px",
+  "&:hover": {
+    backgroundColor: "#3C2F1E",
+    borderColor: "#3C2F1E",
+    boxShadow: "none",
+  },
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#3C2F1E",
+    borderColor: "#3C2F1E",
+  },
+  "&:focus": {
+    boxShadow: "0 0 0 0.2rem #ff51007f",
+    color: "#ff51007f",
+  },
 });
+
+//export components of style-components
+export { MyHeader, ListNav, StyledBurger, MyButton };

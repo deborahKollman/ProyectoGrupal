@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MyTextField } from "../elements/Forms";
-import BurgerButton from "../components/NavBar";
+import BurgerButton from "../components/NavBar/NavBar";
 import Typography from '@mui/material/Typography'
 import Button from "@mui/material/Button";
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
@@ -13,38 +13,109 @@ const Login = () => {
     <div className="page-login">
       <BurgerButton />
 
-      <section className="login-container">
+      <div className="login-container">
+
+        <section className="content">
+          
+          <Typography variant="h4" color="initial">
+            Login
+          </Typography>
+
+
+          <MyTextField
+            required
+            label="E-MAIL"
+            value={first}
+            type='email'
+            onChange={(e) => {
+              setFirst(e.target.value);
+            }}
+          />
+          <MyTextField
+            label="PASSWORD"
+            value={first}
+            type='password'
+            onChange={(e) => {
+              setFirst(e.target.value);
+            }}
+          />
+
+          <MyButton 
+              variant="contained"
+              endIcon={<VolunteerActivismIcon />}>
+            Join Serviexpress
+          </MyButton>
+
+        </section> 
+{/* 
         
-        <Typography variant="h4" color="initial">
-          Login
-        </Typography>
+        <section className="content">
+          
+          <Typography variant="h4" color="initial">
+            Login
+          </Typography>
+
+          <MyTextField
+            required
+            label="E-MAIL"
+            value={first}
+            type='email'
+            onChange={(e) => {
+              setFirst(e.target.value);
+            }}
+          />
+          <MyTextField
+            label="PASSWORD"
+            value={first}
+            type='password'
+            onChange={(e) => {
+              setFirst(e.target.value);
+            }}
+          />
+
+          <MyButton 
+              variant="contained"
+              endIcon={<VolunteerActivismIcon />}>
+            Join Serviexpress
+          </MyButton>
+
+        </section> 
+        <section className="content">
+          
+          <Typography variant="h4" color="initial">
+            Login
+          </Typography>
 
 
-        <MyTextField
-          required
-          label="E-MAIL"
-          value={first}
-          type='email'
-          onChange={(e) => {
-            setFirst(e.target.value);
-          }}
-        />
-        <MyTextField
-          label="PASSWORD"
-          value={first}
-          type='password'
-          onChange={(e) => {
-            setFirst(e.target.value);
-          }}
-        />
+          <MyTextField
+            required
+            label="E-MAIL"
+            value={first}
+            type='email'
+            onChange={(e) => {
+              setFirst(e.target.value);
+            }}
+          />
+          <MyTextField
+            label="PASSWORD"
+            value={first}
+            type='password'
+            onChange={(e) => {
+              setFirst(e.target.value);
+            }}
+          />
 
-        <MyButton 
-            variant="contained"
-            endIcon={<VolunteerActivismIcon />}>
-          Join Serviexpress
-        </MyButton>
+          <MyButton 
+              variant="contained"
+              endIcon={<VolunteerActivismIcon />}>
+            Join Serviexpress
+          </MyButton>
 
-      </section> 
+        </section>  */}
+
+
+      </div>
+
 
 
 
