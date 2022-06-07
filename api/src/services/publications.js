@@ -1,6 +1,6 @@
 const { publications } = require('../database/data.js');
 
-exports.getPublications = () => {
-  // Retorna las n publicaciones activas
+exports.getPublications = (offset, limit) => {
+  // Retorna las limit publicaciones activas a partir de la nro offset
   return publications;
 };
