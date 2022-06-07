@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 // import {getVideoGameByName} from '../../redux/action'
-import {useDispatch} from 'react-redux'
+// import {useDispatch} from 'react-redux'
 import styled from "styled-components";
 
 const SearchGroup = () => {
 
-  const xDispatch = useDispatch();
+  // const xDispatch = useDispatch();
   
   const [crntSearch, setSearch] = useState('');
   
