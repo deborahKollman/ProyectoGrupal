@@ -28,9 +28,18 @@ module.exports = {
       pub_sel_name: 'Juan Carlos Garcia',
       pub_sel_reputation: 4,
       pub_date: '01/06/2022',
-      pub_detail:
-        '10 años dde experiencia en el rubro. Seriedad y responsabilidad',
+      pub_album: ['http://localhost:3001/img/img1.png', 'http://localhost:3001/img/img2.png'],
       pub_price: 1200
+    },
+    {
+      pub_id: 2,
+      pub_cat_name: 'Electricidad',
+      pub_cat_ser: ['Asesoramiento', 'Instalaciones'],
+      pub_sel_name: 'Brian Cristopher',
+      pub_sel_reputation: 3,
+      pub_date: '18/06/2020',
+      pub_album: ['http://localhost:3001/img/img3.png', 'http://localhost:3001/img/img4.png'],
+      pub_price: 800
     }
   ]
 };
