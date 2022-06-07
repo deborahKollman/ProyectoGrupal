@@ -39,7 +39,29 @@ module.exports = (sequelize) => {
       rol: {
         type: DataTypes.ENUM('admin', 'client'),
         defaultValue: 'client'
-      }
+      },
+      buyer_reputation: {
+        type: DataTypes.FLOAT,
+        defaultValue: 0,
+        validate: {
+          isFloat: true
+        }
+      },
+      buyer_opinions:{
+        type:DataTypes.INTEGER,
+        defaultValue:0
+      },
+      seller_reputation: {
+        type: DataTypes.FLOAT,
+        defaultValue: 0,
+        validate: {
+          isFloat: true
+        }
+      },
+      seller_opinions:{
+        type:DataTypes.INTEGER,
+        defaultValue:0
+      },
     },
     {
       timestamps: false
