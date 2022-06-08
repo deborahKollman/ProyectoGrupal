@@ -41,5 +41,46 @@ module.exports = {
       pub_album: ['http://localhost:3001/img/img3.png', 'http://localhost:3001/img/img4.png'],
       pub_price: 800
     }
+  ],
+  users: [
+    {
+      usr_id: 1,
+      usr_email: 'usr1@hotmail.com',
+      usr_password: 'textosincifrar',
+      usr_name: 'Usuario 1',
+      usr_country: 'Argentina',
+      usr_province_state: 'Santa Fe',
+      usr_rol: 'Customer',
+      usr_buyer_reputation: 3,
+      usr_buyer_opinions: 3,
+      usr_seller_reputation: 4,
+      usr_seller_opinions: 4
+    },
+    {
+      usr_id: 2,
+      usr_email: 'usr2@hotmail.com',
+      usr_password: 'laclave',
+      usr_name: 'Usuario2',
+      usr_country: 'Argentina',
+      usr_province_state: 'Buenos Aires',
+      usr_rol: 'Customer',
+      usr_buyer_reputation: 4,
+      usr_buyer_opinions: 3,
+      usr_seller_reputation: 3,
+      usr_seller_opinions: 4
+    },
+    {
+      usr_id: 3,
+      usr_email: 'usr3@hotmail.com',
+      usr_password: 'contraseña',
+      usr_name: 'Usuario3',
+      usr_country: 'Bolivia',
+      usr_province_state: 'Bolivia',
+      usr_rol: 'Admin',
+      usr_buyer_reputation: 0,
+      usr_buyer_opinions: 0,
+      usr_seller_reputation: 0,
+      usr_seller_opinions: 0
+    }
   ]
 };
