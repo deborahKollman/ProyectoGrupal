@@ -1,4 +1,5 @@
-const { getPublications } = require('../services/publications.js');
+const { getPublications, postPublication } = require('../services/publications.js');
+
 
 exports.getPublications = (req, res, next) => {
   // Recibe offset y nros de registros a devolver x body
@@ -13,12 +14,11 @@ exports.getPublications = (req, res, next) => {
 };
 
 exports.postPublication = (req, res, next) => {
-  // Recibe offset y nros de registros a devolver x body
+  // 
   try {
-    const { offset = 0, limit = 0 } = req.body;
-    console.log(offset, limit);
-    const r = getPublications(offset, limit);
-    res.json(r);
+   console.log(req.file);
+   console.log(req.body);
+   
   } catch (error) {
     next(error);
   }

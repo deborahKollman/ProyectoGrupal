@@ -7,9 +7,15 @@ const {
 } = require('../controllers/publications.js');
 
 const router = Router();
+const multer = require('multer');
+
+const upload = multer ({
+  dest: '../../public/img'
+})
+
 
 router.get('/', getPublications);
-router.post('/', postPublication);
+router.post('/', upload.single('file'), postPublication);
 router.delete('/:id', deletePublication);
 router.put('/:id', updatePublication);
 

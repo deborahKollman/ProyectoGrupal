@@ -63,3 +63,4 @@ exports.updateCategory = async (id, name) => {
   const category = await Category.findByPk(id);
   await category.update({ name });
   return category;
+}

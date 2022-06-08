@@ -1,4 +1,4 @@
-const { users } = require('../database/data.js');
+//const { users } = require('../database/data.js');
 const { User } = require('../database/postgres');
 
 exports.checkUser = (usr, password) => {
