@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles",
+    "test": "jest routes --verbose --detectOpenHandles",
     "test:watch": "npm run test -- --watchAll",
     "dev": "nodemon index.js",
     "start": "node index.js",
@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.6",
