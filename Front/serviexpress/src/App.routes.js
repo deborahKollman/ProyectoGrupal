@@ -8,12 +8,16 @@ import Detail from './pages/Detail.jsx'
 import Register from './pages/Register.jsx';
 import RecpveryPassword from './pages/RecoveryPassword.jsx';
 import Seller from './pages/Seller.jsx';
+import ProfileUser from './pages/ProfileUser.jsx';
+import CreateService from './pages/CreateService.jsx';
 
 
 function App() {
   return (
     <Routes>
+      <Route exact path="/seller/add-service" element={<CreateService/>} />
       <Route exact path="/seller" element={<Seller/>} />
+      <Route exact path="/user" element={<ProfileUser/>} />
 
       <Route exact path="/recoverypass/:token" element={<RecpveryPassword/>} />
       <Route exact path="/register" element={<Register/>} />
