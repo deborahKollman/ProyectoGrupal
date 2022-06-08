@@ -7,19 +7,20 @@ const {
   deleteUser,
   updateUser,
   registerUser,
-  recoverUserPwd
+  recoverUserPwd,
+  updatePassword
 } = require('../controllers/users.js');
 
 const router = Router();
 
 router.post('/register', registerUser);
 router.get('/login', checkUser);
-router.post('/logout', recoverUserPwd);
 router.get('/recover', recoverUserPwd);
 router.get('/', getUsers);
 router.get('/:id', getUserDetail);
 router.post('/', postUser);
 router.delete('/:id', deleteUser);
 router.put('/:id', updateUser);
+router.put('/recover',updatePassword);
 
 module.exports = router;

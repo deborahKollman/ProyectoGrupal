@@ -53,9 +53,7 @@ exports.postCategory=async(name,services=[])=>{
 
 exports.deleteCategory = async (id) => {
   // Elimina una categoria
-  const category = await Category.findByPk(id);
-  await category.destroy();
-  return category;
+  await Category.destroy({where:{id:id}});
 };
 
 exports.updateCategory = async (id, name) => {
@@ -63,3 +61,4 @@ exports.updateCategory = async (id, name) => {
   const category = await Category.findByPk(id);
   await category.update({ name });
   return category;
+}

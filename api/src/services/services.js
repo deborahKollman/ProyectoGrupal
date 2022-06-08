@@ -36,3 +36,13 @@ exports.postService=async(name,categories=[])=>{
 
     return service
 }
+
+exports.updateService=async(id,name)=>{
+  const service=await Service.findById(id);
+  service.update({name});
+  return service
+}
+
+exports.deleteService=async(id)=>{
+  await Service.destroy({where:{id:id}});
+}
