@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getRecipes,getRecipesForDiet,orderByName, orderByHScore,recipesCreate, recipesapi, swich_loading} from "../../actions/index"
+import {getServices,getServicesForCategory,orderByName, orderByScore, swich_loading} from "../../actions/index"
 import {Link} from 'react-router-dom';
 import Card from "../pages/components/Card/Card"
 import Pagination from "../pages/components/Pagination/Pagination";
@@ -65,13 +65,13 @@ export default function Home(){
             }
         }
 
-        function orderforHScore(e){
+        function orderforScore(e){
             if(e.target.value === 'default'){
                 dispatch(getServices())
             } 
             else {
                 e.preventDefault();
-                dispatch(orderByHScore(e.target.value))
+                dispatch(orderByScore(e.target.value))
                 setorderscore(`ordenadopscore ${e.target.value}`)
                 setCurrentPage((pag)=> pag = 1)
             }
@@ -93,7 +93,7 @@ export default function Home(){
                         </select>
                     </div>
                     <div className="divbuttonbar">
-                        <select  onChange={e=> orderforHScore(e)}>
+                        <select  onChange={e=> orderforScore(e)}>
                             <option key = 'default' value='default'>By score...</option>
                             <option key = 'best' value='best'>Best Score</option>
                             <option key = 'worst' value='worst'>Worst Score</option>
