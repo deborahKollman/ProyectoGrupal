@@ -2,7 +2,7 @@ const { Admin, User, connection } = require('../../src/database/postgres');
 const users = require('../helpers/users');
 const admins = users.filter((user) => user.rol === 'admin');
 
-xdescribe('Admin model', () => {
+describe('Admin model', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });

@@ -11,7 +11,7 @@ const publications = require('../helpers/publications.js');
 const services = require('../helpers/services.js');
 const categories = require('../helpers/categories.js');
 
-xdescribe('Publication model', () => {
+describe('Publication model', () => {
   let user;
   beforeAll(async () => {
     await connection.sync({ force: true });

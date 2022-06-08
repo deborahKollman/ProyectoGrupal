@@ -1,7 +1,7 @@
 const { Category, connection } = require('../../src/database/postgres.js');
 const categories = require('../helpers/categories.js');
 
-xdescribe('Categories model', () => {
+describe('Categories model', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });
@@ -12,9 +12,7 @@ xdescribe('Categories model', () => {
   it('el atributo "name" no puede ser nulo', async () => {
     try {
       const category = await Category.create({ ...categories[1], name: null });
-      if (!category.name) {
-        throw new Error('El nombre no puede ser nulo');
-      }
+      expect(category.name).not.toBeNull();
     } catch ({ name }) {
       expect(name).toBe('SequelizeValidationError');
     }
