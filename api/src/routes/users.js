@@ -5,13 +5,17 @@ const {
   getUserDetail,
   postUser,
   deleteUser,
-  updateUser
+  updateUser,
+  registerUser,
+  recoverUserPwd
 } = require('../controllers/users.js');
 
 const router = Router();
 
+router.post('/register', registerUser);
 router.get('/login', checkUser);
-
+router.post('/logout', recoverUserPwd);
+router.get('/recover', recoverUserPwd);
 router.get('/', getUsers);
 router.get('/:id', getUserDetail);
 router.post('/', postUser);
