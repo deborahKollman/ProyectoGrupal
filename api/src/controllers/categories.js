@@ -1,8 +1,8 @@
 const { getCategories } = require('../services/categories.js');
 
-exports.getCategories = (req, res, next) => {
+exports.getCategories = async (req, res, next) => {
   try {
-    const r = getCategories();
+    const r = await getCategories();
     res.json(r);
   } catch (error) {
     next(error);
