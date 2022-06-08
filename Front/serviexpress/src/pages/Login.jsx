@@ -1,32 +1,42 @@
 import React, { useState } from "react";
-import { MyTextField } from "../elements/Forms";
+import { MyButtonThree, MyButtonTwo, MyTextField } from "../elements/Forms";
 import BurgerButton from "../components/NavBar/NavBar.jsx";
-import Typography from '@mui/material/Typography'
-import Button from "@mui/material/Button";
-import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import './styles/Login.scss'
-const StyleMUI = require ('@mui/material/styles').styled;
+import Typography from "@mui/material/Typography";
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import Checkbox from "@mui/material/Checkbox";
+import GoogleIcon from '@mui/icons-material/Google';
+
+import "./styles/Login.scss";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [first, setFirst] = useState("");
+
+  const [checked, setChecked] = useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
   return (
     <div className="page-login">
       <BurgerButton />
 
       <div className="login-container">
-
         <section className="content">
-          
           <Typography variant="h4" color="initial">
             Login
           </Typography>
 
+          <MyButtonThree variant="contained" endIcon={<GoogleIcon />}>
+            Sing In With Google
+          </MyButtonThree>
 
           <MyTextField
             required
             label="E-MAIL"
             value={first}
-            type='email'
+            type="email"
             onChange={(e) => {
               setFirst(e.target.value);
             }}
@@ -34,53 +44,45 @@ const Login = () => {
           <MyTextField
             label="PASSWORD"
             value={first}
-            type='password'
+            type="password"
             onChange={(e) => {
               setFirst(e.target.value);
             }}
           />
 
-          <MyButton 
-              variant="contained"
-              endIcon={<VolunteerActivismIcon />}>
-            Join Serviexpress
-          </MyButton>
+          <MyButtonTwo variant="contained" endIcon={<LockOpenIcon />}>
+            Login
+          </MyButtonTwo>
 
-        </section> 
- 
+          <div className="Login-3">
+            <div className="Login-3remenver">
+              <Checkbox
+                checked={checked}
+                onChange={handleChange}
+                sx={{
+                  color: "#000000",
+                  "&.Mui-checked": {
+                    color: "#fcdc3c",
+                  },
+                }}
+              />
+              <Typography variant="body1" color="initial" >
+                Remember me
+              </Typography>
+            </div>
+            <Link to="/#" >Forgot Password</Link>
+          </div>
 
+          <Typography variant="body1" color="initial" >
+            Not a Member Yet?
+            <Link to="/register" >    Join now</Link>
+          </Typography>
+
+        </section>
 
       </div>
-
-
-
-
-      
     </div>
   );
 };
 
 export default Login;
-
-
-const MyButton = StyleMUI(Button)({
-  width: '130px',
-  color: '#3C2F1E',
-  fontWeight: 'bold',
-  backgroundColor: '#fcdc3c',
-  margin: '4px 40px',
-      '&:hover': {
-      backgroundColor: '#3C2F1E',
-      borderColor: '#3C2F1E',
-      boxShadow: 'none',
-    },
-    '&:active': {
-      boxShadow: 'none',
-      backgroundColor: '#3C2F1E',
-      borderColor: '#3C2F1E',
-    },
-    '&:focus': {
-      boxShadow: '0 0 0 0.2rem #ff51007f',
-      color: '#ff51007f'
-    },
-});

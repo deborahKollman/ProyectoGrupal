@@ -1,7 +1,7 @@
 const request = require('supertest');
 const server = require('../../server');
 
-describe('GET /users', () => {
+xdescribe('GET /users', () => {
   it('Debe retornar un usuario', async () => {
     const response = await request(server).get('/users').send();
     const user = {
@@ -14,7 +14,7 @@ describe('GET /users', () => {
   });
 });
 
-describe('GET /users/:id', () => {
+xdescribe('GET /users/:id', () => {
   it('Debe retornar el usario con id 1', async () => {
     const response = await request(server).get('/users/1').send();
     const user = {

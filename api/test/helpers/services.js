@@ -19,5 +19,20 @@ module.exports = [
   },
   {
     name: 'exampleService7'
+  },
+  {
+    name: 'exampleService8'
+  },
+  {
+    name: 'exampleService9'
+  },
+  {
+    name: 'exampleService10'
+  },
+  {
+    name: 'exampleService11'
+  },
+  {
+    name: 'exampleService12'
   }
 ];

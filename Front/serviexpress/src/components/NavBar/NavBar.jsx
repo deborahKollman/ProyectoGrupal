@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import Favorite from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import {
-  MyHeader,
-  ListNav,
-  StyledBurger,
-  MyNav
-} from "./NavBar-StyleComp";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+
+import { MyHeader, ListNav, StyledBurger, MyNav } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
 import AccountMenu from "./AcountMenu";
 
@@ -28,7 +24,7 @@ const BurgerButton = () => {
           <img src={logo} alt="" />
         </figure>
 
-        <IconButton className="burgerFigure"  onClick={mReloadOpen}>
+        <IconButton className="burgerFigure" onClick={mReloadOpen}>
           <StyledBurger pOpen={open}>
             <span></span>
             <span></span>
@@ -37,29 +33,32 @@ const BurgerButton = () => {
         </IconButton>
       </div>
 
-     <SearchGroup  />
+      <SearchGroup />
 
+      <div className="NavBar-login_user">
+        <MyNav>
+          <ol>
+            <li>
+              <IconButton aria-label="delete" size="large">
+                <Favorite />
+              </IconButton>
+            </li>
+            <li>
+              <IconButton aria-label="delete" size="large">
+                <NotificationsActiveIcon />
+              </IconButton>
+            </li>
+            <li>
+              <IconButton aria-label="delete" size="large">
+                <LocalMallIcon />
+              </IconButton>
+            </li>
+          </ol>
+        </MyNav>
 
-    <div className="NavBar-login_user">
-      <MyNav>
-        <ol>
-          <li>
-            <FavoriteBorderIcon/>
-          </li>
-          <li>
-            <NotificationsActiveIcon/>
-          </li>
-          <li>
-            <LocalMallIcon/>
-          </li>
-        </ol>
-      </MyNav>
-
-      
-
-      <AccountMenu/>
+        <AccountMenu />
       </div>
-      
+
       <ListNav pOpen={open}>
         <li>
           <Link to="/" onClick={mReloadOpen}>
@@ -80,7 +79,6 @@ const BurgerButton = () => {
       {/* <MyButton variant="contained" endIcon={<VolunteerActivismIcon />}>
         Join Serviexpress
       </MyButton> */}
-      
     </MyHeader>
   );
 };
@@ -90,3 +88,7 @@ export default BurgerButton;
 //---------------------------------------------------------------------------
 //-----------------------------STYLED COMPONENTS-----------------------------
 //---------------------------------------------------------------------------
+/* 
+            <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            
+            */

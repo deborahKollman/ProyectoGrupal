@@ -25,15 +25,8 @@ sequelize.models = Object.entries(sequelize.models).reduce(
   {}
 );
 // Relaciones de DB
-const {
-  Category,
-  Service,
-  User,
-  Admin,
-  Contract,
-  Favorite,
-  Publication
-} = sequelize.models;
+const { Category, Service, User, Admin, Contract, Favorite, Publication } =
+  sequelize.models;
 Category.hasMany(Service);
 Service.belongsTo(Category);
 
@@ -42,20 +35,22 @@ Admin.belongsTo(User);
 
 User.hasMany(Publication);
 Publication.belongsTo(User);
-Service.belongsToMany(Publication,{through:'PublicationServices'})
-Publication.belongsToMany(Service,{through:'PublicationServices'})
+Service.belongsToMany(Publication, {
+  through: 'PublicationServices'
+});
+Publication.belongsToMany(Service, {
+  through: 'PublicationServices'
+});
 
 User.hasMany(Contract);
 Contract.belongsTo(User);
 Publication.hasMany(Contract);
-Contract.belongsTo(Publication)
+Contract.belongsTo(Publication);
 
 User.hasMany(Favorite);
 Favorite.belongsTo(User);
-Favorite.belongsToMany(Publication,{through:'FavoritePublications'})
-Publication.belongsToMany(Favorite,{through:'FavoritePublications'})
-
-
+Favorite.belongsToMany(Publication, { through: 'FavoritePublications' });
+Publication.belongsToMany(Favorite, { through: 'FavoritePublications' });
 
 module.exports = {
   ...sequelize.models,
