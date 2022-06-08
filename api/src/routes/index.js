@@ -9,6 +9,11 @@ fs.readdirSync(__dirname).forEach((file) => {
   }
 });
 
+router.get('/', (req, res) => {
+  console.log(req.user);
+  res.send('Registrado!');
+});
+
 router.get('*', (req, res) => {
   res.status(404).send({ message: 'Not Found' });
 });

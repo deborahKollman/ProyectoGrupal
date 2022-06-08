@@ -2,7 +2,8 @@ exports.getUsers = (req, res, next) => {
   try {
     res.send({
       name: 'name',
-      lastName: 'lastName'
+      lastName: 'lastName',
+      user: 'http://localhost:3001/login/user'
     });
   } catch (error) {
     next(error);
