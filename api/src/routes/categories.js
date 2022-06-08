@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const {
   getCategories,
+  getCategorieById,
   postCategory,
   deleteCategory,
   updateCategory
@@ -12,5 +13,9 @@ router.get('/', getCategories);
 router.post('/', postCategory);
 router.delete('/:id', deleteCategory);
 router.put('/:id', updateCategory);
+
+router.get('/:id',getCategorieById)
+
+router.post('/',postCategory)
 
 module.exports = router;
