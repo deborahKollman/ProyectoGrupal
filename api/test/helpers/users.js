@@ -21,7 +21,7 @@ module.exports = [
     name: 'exampleuser3',
     country: 'examplecountry3',
     province_state: 'exampleprovince_state3',
-    rol: 'guest'
+    rol: 'client'
   },
   {
     email: 'exampleemail4@gmail.com',
@@ -45,7 +45,7 @@ module.exports = [
     name: 'exampleuser6',
     country: 'examplecountry6',
     province_state: 'exampleprovince_state6',
-    rol: 'guest'
+    rol: 'client'
   },
   {
     email: 'exampleemail7@gmail.com',
@@ -69,7 +69,7 @@ module.exports = [
     name: 'exampleuser9',
     country: 'examplecountry9',
     province_state: 'exampleprovince_state9',
-    rol: 'guest'
+    rol: 'client'
   },
   {
     email: 'exampleemail10@gmail.com',
@@ -93,7 +93,7 @@ module.exports = [
     name: 'exampleuser12',
     country: 'examplecountry12',
     province_state: 'exampleprovince_state12',
-    rol: 'guest'
+    rol: 'client'
   },
   {
     email: 'exampleemail13@gmail.com',
@@ -104,7 +104,7 @@ module.exports = [
     rol: 'admin'
   },
   {
-    email: 'exampleemail4@gmail.com',
+    email: 'exampleemail14@gmail.com',
     password: 'examplepassword4',
     name: 'exampleuser4',
     country: 'examplecountry4',
@@ -117,7 +117,7 @@ module.exports = [
     name: 'exampleuser15',
     country: 'examplecountry15',
     province_state: 'exampleprovince_state15',
-    rol: 'guest'
+    rol: 'client'
   },
   {
     email: 'exampleemail16@gmail.com',
@@ -141,7 +141,7 @@ module.exports = [
     name: 'exampleuser18',
     country: 'examplecountry18',
     province_state: 'exampleprovince_state18',
-    rol: 'guest'
+    rol: 'client'
   },
   {
     email: 'exampleemail19@gmail.com',
@@ -165,6 +165,6 @@ module.exports = [
     name: 'exampleuser21',
     country: 'examplecountry21',
     province_state: 'exampleprovince_state21',
-    rol: 'guest'
+    rol: 'client'
   }
 ];

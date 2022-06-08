@@ -18,14 +18,14 @@ module.exports = (sequelize) => {
       state: {
         type: DataTypes.STRING
       },
-      album_id: {
+      album: {
         type: DataTypes.ARRAY(DataTypes.STRING)
       },
       detail: {
         type: DataTypes.TEXT
       },
-      price:{
-        type:DataTypes.FLOAT
+      price: {
+        type: DataTypes.FLOAT
       }
     },
     {
