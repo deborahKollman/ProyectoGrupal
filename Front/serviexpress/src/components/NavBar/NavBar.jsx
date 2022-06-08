@@ -7,7 +7,12 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 import { MyHeader, ListNav, StyledBurger, MyNav } from "./NavBar-StyleComp";
 
+
 import AccountMenu from "./AcountMenu";
+
+import SearchGroup from "../SearchGroup";
+import AccountMenu from "./MUI-AcountMenu";
+
 
 const logo = require("../../assets/icons/log.png");
 const BurgerButton = () => {
