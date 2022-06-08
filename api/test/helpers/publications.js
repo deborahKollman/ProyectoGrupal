@@ -1,37 +1,51 @@
 module.exports = [
   {
-    id: 1,
     date: new Date(),
     state: 'published',
-    album_id: 1,
-    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
   },
   {
-    id: 2,
     date: new Date(),
     state: 'published',
-    album_id: 2,
-    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
   },
   {
-    id: 3,
     date: new Date(),
     state: 'published',
-    album_id: 3,
-    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
   },
   {
-    id: 4,
     date: new Date(),
     state: 'published',
-    album_id: 4,
-    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
   },
   {
-    id: 5,
     date: new Date(),
     state: 'published',
-    album_id: 5,
-    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
+  },
+  {
+    date: new Date(),
+    state: 'published',
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
+  },
+  {
+    date: new Date(),
+    state: 'published',
+    album: ['image1.jpg', 'image2.png', 'image3.gif'],
+    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    price: 128.99
   }
 ];

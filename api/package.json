@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles",
+    "test": "jest routes --verbose --detectOpenHandles",
     "test:watch": "npm run test -- --watchAll",
     "dev": "nodemon index.js",
     "start": "node index.js",
@@ -15,11 +15,16 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-google-oidc": "^0.1.0",
     "pg": "^8.7.3",
     "sequelize": "^6.20.1"
   },
