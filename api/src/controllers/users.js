@@ -1,4 +1,4 @@
-const { checkUser } = require('../services/users.js');
+const { checkUser, registerUser, recoverUserPwd } = require('../services/users.js');
 
 exports.checkUser = (req, res, next) => {
   // Retorna:
@@ -24,6 +24,32 @@ exports.checkUser = (req, res, next) => {
       usr_seller_reputation: checkResult.usr_seller_reputation,
       usr_seller_opinions: checkResult.usr_seller_opinions
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.registerUser = (req, res, next) => {
+  try {
+    const { user, password } = req.body;
+    const registerResult = registerUser(user, password);
+    if (registerResult.error_msg) res.status(401).send(registerResult);
+    else {
+      return res.status(200).send(registerResult);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.recoverUserPwd = (req, res, next) => {
+  try {
+    const { user } = req.body;
+    const recoveryResult = recoverUserPwd(user);
+    if (recoveryResult.error_msg) res.status(400).send(recoveryResult);
+    else {
+      return res.status(200).send(recoveryResult);
+    }
   } catch (error) {
     next(error);
   }
