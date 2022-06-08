@@ -1,4 +1,6 @@
-const { checkUser } = require('../services/users.js');
+const { checkUser, createUser, getAllUsers } = require('../services/users.js');
+const { User } = require('../database/postgres');
+const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 
 exports.checkUser = (req, res, next) => {
   // Retorna:
@@ -29,35 +31,55 @@ exports.checkUser = (req, res, next) => {
   }
 };
 
-exports.getUsers = (req, res, next) => {
+exports.getUsers = async (req, res, next) => {
+  if (!req.query.limit || !req.query.offset) {
+    return res.redirect(
+      'http://localhost:3001/users?page=1&offset=10&limit=10'
+    );
+  }
   try {
-    res.send({
-      name: 'name',
-      lastName: 'lastName',
-      user: 'http://localhost:3001/login/user'
+    const response = await getAllUsers(req.query);
+    res.status(OK).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.postUser = async (req, res, next) => {
+  try {
+    const [created, userCreated] = await createUser(req.body);
+    if (userCreated) {
+      return res.status(CREATED).json({
+        created
+      });
+    }
+    return res.status(BAD_REQUEST).json({
+      message: 'User not created'
+    });
+  } catch (error) {
+    res.send({ error });
+  }
+};
+
+exports.getUserDetail = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(BAD_REQUEST).send({ message: 'User not found' });
+    }
+    return res.status(OK).send({
+      user
     });
   } catch (error) {
     next(error);
   }
 };
 
-exports.getUserDetail = (req, res, next) => {
-  const { id } = req.params;
-
-  try {
-    if (id === '1') {
-      res.send({
-        name: 'name',
-        lastName: 'lastName',
-        ci: '000000000',
-        age: 20
-      });
-    } else {
-      res.status(404).send({
-        message: 'User not found'
-      });
-    }
-  } catch (error) {
-    next(error);
-  }
+exports.updateUser = (req, res, next) => {
+  res.send('Listo');
+};
+exports.deleteUser = (req, res, next) => {
+  res.send('Listo');
 };

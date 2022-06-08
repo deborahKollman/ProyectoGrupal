@@ -8,3 +8,7 @@ exports.getCategories = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.postCategory = async (req, res, next) => {};
+exports.deleteCategory = async (req, res, next) => {};
+exports.updateCategory = async (req, res, next) => {};
