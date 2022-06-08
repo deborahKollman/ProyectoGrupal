@@ -27,8 +27,8 @@ sequelize.models = Object.entries(sequelize.models).reduce(
 // Relaciones de DB
 const { Category, Service, User, Admin, Contract, Favorite, Publication } =
   sequelize.models;
-Category.hasMany(Service);
-Service.belongsTo(Category);
+Category.belongsToMany(Service,{through:'CategoryServices'});
+Service.belongsToMany(Category,{through:'CategoryServices'});
 
 User.hasOne(Admin);
 Admin.belongsTo(User);
