@@ -2,6 +2,9 @@ import NavDetail from '../components/NavDetail'
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 import CardSellerDetail from '../components/CardSellerDetail';
+import CardOthersServices from '../components/CardOthersServices';
+import ProfileOpinion from '../components/ProfileOpinion';
+import Footer from '../components/FooterDetail';
 
 
 export default function Detail(){
@@ -9,7 +12,10 @@ export default function Detail(){
         <h1 className={stylesDetail.title}>ServiExpress</h1>
 
     <NavDetail></NavDetail>
+
         <div className={stylesDetail.division}>
+       
+
         <div>
         <div className={stylesDetail.carousel}>
      <Carousel fade>
@@ -59,7 +65,25 @@ export default function Detail(){
         </p>
             <button>Ver Mas</button>
         </div>
+        
+        <h2>We Recommend Also...</h2>
+        
+        <div className={stylesDetail.cardOthers}>
+        <button className={stylesDetail.btnFowardBack}>a</button>
+        <CardOthersServices></CardOthersServices>
+        <CardOthersServices></CardOthersServices>
+        <button className={stylesDetail.btnFowardBack}>h</button>
 
+        </div>
+
+        <div className={stylesDetail.opinion} >
+
+          <ProfileOpinion></ProfileOpinion>
+          <ProfileOpinion></ProfileOpinion>
+          <ProfileOpinion></ProfileOpinion>
+          <ProfileOpinion></ProfileOpinion>
+        </div>
+        <Footer></Footer>
     </div>
     <CardSellerDetail></CardSellerDetail>
 
