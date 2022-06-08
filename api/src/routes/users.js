@@ -3,8 +3,9 @@ const { checkUser, registerUser, recoverUserPwd, getUsers, getUserDetail } = req
 
 const router = Router();
 
-router.get('/login', checkUser);
 router.post('/register', registerUser);
+router.get('/login', checkUser);
+router.post('/logout', recoverUserPwd);
 router.get('/recover', recoverUserPwd);
 router.get('/', getUsers);
 router.get('/:id', getUserDetail);
