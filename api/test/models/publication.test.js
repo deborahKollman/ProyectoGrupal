@@ -1,75 +1,108 @@
 const {
   Publication,
   User,
-  Seller,
+  Service,
+  Category,
   connection
 } = require('../../src/database/postgres.js');
+
 const users = require('../helpers/users.js');
 const publications = require('../helpers/publications.js');
-describe('Publication model', () => {
+const services = require('../helpers/services.js');
+const categories = require('../helpers/categories.js');
+
+xdescribe('Publication model', () => {
+  let user;
   beforeAll(async () => {
     await connection.sync({ force: true });
+    user = await User.create({ ...users[0] });
   });
-  it('deberia crear una publicacion con el id respectivo del vendedor', async () => {
-    const user = await User.create(users[1]);
-    const seller = await Seller.create({ userId: user.id });
-    const publication = await Publication.create({
-      ...publications[0],
-      sellerId: seller.id
+  it('deberia crear una publicacion si los campos son validos', async () => {
+    const category = await Category.create(categories[0]);
+    const service = await Service.create({
+      ...services[0],
+      categoryId: category.id
     });
+    const publication = await Publication.create({ ...publications[0] });
+    await publication.setUser(user);
+    await service.addPublication(publication);
 
-    expect(publication.sellerId).toBe(seller.id);
+    expect(publication).toBeDefined();
   });
-  it('no deberia crear una publicacion sin el id del vendedor', async () => {
+  it('el atributo "date" no puede ser nulo', async () => {
     try {
-      const publication = await Publication.create(publications[1]);
-      expect(publication).toBeUndefined();
+      const publication = await Publication.create({
+        ...publications[1],
+        date: null
+      });
+      await publication.setUser(user);
+      expect(publication.date).not.toBeNull();
     } catch ({ name }) {
       expect(name).toBe('SequelizeValidationError');
     }
   });
-  it('no deberia crear una publicacion con un id de vendedor invalido', async () => {
+  it('el atributo "state" no puede ser nulo', async () => {
     try {
       const publication = await Publication.create({
         ...publications[2],
-        sellerId: 'invalid'
+        state: null
       });
-      expect(publication).toBeUndefined();
-    } catch ({ name }) {
-      expect(name).toBe('SequelizeDatabaseError');
-    }
-  });
-  it('no deberia crear una publicacion sin "detail"', async () => {
-    try {
-      const publication = await Publication.create({
-        ...publications[2],
-        detail: null
-      });
-      expect(publication).toBeUndefined();
+      await publication.setUser(user);
+      expect(publication.state).not.toBeNull();
     } catch ({ name }) {
       expect(name).toBe('SequelizeValidationError');
     }
   });
-  it('no deberia crear una publicacion sin el "state"', async () => {
+  it('el atributo "serviceId" no puede ser nulo', async () => {
     try {
       const publication = await Publication.create({
         ...publications[3],
-        state: null
+        serviceId: null
       });
-      expect(publication).toBeUndefined();
+      await publication.setUser(user);
+      expect(publication.serviceId).not.toBeNull();
     } catch ({ name }) {
       expect(name).toBe('SequelizeValidationError');
     }
   });
-  it('no deberia crear una publicacion sin el "album_id"', async () => {
+  it('el atributo "detail" no puede ser nulo', async () => {
     try {
       const publication = await Publication.create({
         ...publications[4],
-        album_id: null
+        detail: null
       });
-      expect(publication).toBeUndefined();
+      await publication.setUser(user);
+      expect(publication.detail).not.toBeNull();
     } catch ({ name }) {
       expect(name).toBe('SequelizeValidationError');
+    }
+  });
+  it('el atributo "price" no puede ser nulo', async () => {
+    try {
+      const publication = await Publication.create({
+        ...publications[5],
+        price: null
+      });
+      await publication.setUser(user);
+      expect(publication.price).not.toBeNull();
+    } catch ({ name }) {
+      expect(name).toBe('SequelizeValidationError');
+    }
+  });
+  it('deberia crear una publicacion con su respectiva categoria y serviceId', async () => {
+    const category = await Category.create(categories[0]);
+    const service = await Service.create({
+      ...services[0],
+      categoryId: category.id
+    });
+    for (let i = 0; i < publications.length; i++) {
+      const publication = await Publication.create(publications[i]);
+      await publication.setUser(user);
+      await service.addPublication(publication);
+    }
+    const Publications = await Publication.findAll();
+    for (let i = 0; i < Publications.length; i++) {
+      expect(Publications[i].userId).toBe(1);
     }
   });
   afterAll(async () => {

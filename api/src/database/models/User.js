@@ -47,9 +47,9 @@ module.exports = (sequelize) => {
           isFloat: true
         }
       },
-      buyer_opinions:{
-        type:DataTypes.INTEGER,
-        defaultValue:0
+      buyer_opinions: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       seller_reputation: {
         type: DataTypes.FLOAT,
@@ -58,10 +58,10 @@ module.exports = (sequelize) => {
           isFloat: true
         }
       },
-      seller_opinions:{
-        type:DataTypes.INTEGER,
-        defaultValue:0
-      },
+      seller_opinions: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+      }
     },
     {
       timestamps: false
