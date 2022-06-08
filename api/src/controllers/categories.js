@@ -9,7 +9,7 @@ exports.getCategories = async (req, res, next) => {
   }
 };
 
-exports.getCategorieById =async (req, res, next) => {
+ exports.getCategorieById =async (req, res, next) => {
   try {
     const r = await getCategorieById(req.params.id);
     res.json(r);
@@ -27,3 +27,6 @@ exports.postCategory=async(req,res,next)=>{
     next(error);
   }
 };
+  
+exports.deleteCategory = async (req, res, next) => {};
+exports.updateCategory = async (req, res, next) => {};

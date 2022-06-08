@@ -1,0 +1,78 @@
+.carousel{
+    height: 400px;
+    width: 700px;
+    margin-left: 50px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+
+
+
+}
+.carousel img{
+    height: 400px;
+    
+
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+
+}
+
+.title{
+    font-style: italic;
+   display: flex;
+   justify-content: center;
+
+   
+}
+
+.division{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    
+
+
+}
+
+.about{
+    font-size: large;
+
+}
+
+.cardOthers{
+    margin-top: 70px;
+    width: 900px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.btnFowardBack{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+}
+
+.opinion{
+
+    padding-top: 40px;
+}
+
+
+@media (max-width: 1000px){
+    .division{
+        display: flex;
+        flex-direction: column;
+    }
+
+}

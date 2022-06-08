@@ -1,10 +1,9 @@
-//const { categories } = require('../database/data.js');
+// const { categories } = require('../database/data.js');
 const { Category, Service } = require('../database/postgres.js');
 
 exports.getCategories = async () => {
   // Retorna un arreglo de servicios, y por cada uno, en forma anidada, los servicios
-
-  //Esto son algunos datos agregados
+//Esto son algunos datos agregados
   // const plom=await Category.create({ name: 'Plomeria' });
   // const gas = await Category.create({ name: 'Electricidad' });
   // const ases= await Service.create({name:'Asesoramiento'});
@@ -51,3 +50,16 @@ exports.postCategory=async(name,services=[])=>{
 
   return category;
 }
+
+exports.deleteCategory = async (id) => {
+  // Elimina una categoria
+  const category = await Category.findByPk(id);
+  await category.destroy();
+  return category;
+};
+
+exports.updateCategory = async (id, name) => {
+  // Actualiza una categoria
+  const category = await Category.findByPk(id);
+  await category.update({ name });
+  return category;
