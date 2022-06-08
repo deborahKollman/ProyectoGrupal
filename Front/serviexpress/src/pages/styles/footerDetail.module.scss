@@ -1,10 +1,3 @@
-.btn{
-    background-color:  rgb(255, 222, 6);
-    border: none;
-
-
-}
-
 .text{
     font-size: large;
 
@@ -24,7 +17,19 @@
 }
 
 .container{
-    border-top: 2px solid;
     padding-top: 50px;
+    margin-left: 20%;
+    margin-right: 20%;
 
 }
+
+.copyright {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    background-color: rgb(242, 229, 206);
+}
+
