@@ -2,12 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import NotFound from './pages/NotFound.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import Login from './pages/Login.jsx';
-<<<<<<< HEAD
+
 import Detail from './pages/Detail.jsx'
-=======
+
 import Register from './pages/Register.jsx';
 import RecpveryPassword from './pages/RecoveryPassword.jsx';
->>>>>>> 7951e5e88dcc2ed0140514912d9b899c7b8a4aab
+
 
 function App() {
   return (
