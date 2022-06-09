@@ -37,7 +37,7 @@ const ProfileUser = () => {
     phone_number: ""
   })
 
-  function handleChange() {
+  function handleChange(e) {
     setInput({
       ...input,
       [e.target.name] : e.target.value
@@ -48,7 +48,7 @@ const ProfileUser = () => {
     }))
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     e.preventDefault();
     setError(validate(input))
 
@@ -65,19 +65,19 @@ const ProfileUser = () => {
         <MyTextField
           required
           label="FULL NAME"
-          value={first}
+          value={input.name}
           type="password"
           onChange={(e) => {
-            setFirst(e.target.value);
+            setInput(e.target.value);
           }}
         />
         <MyTextField
           required
           label="LAST NAME"
-          value={second}
+          value={input.last_name}
           type="password"
           onChange={(e) => {
-            setSecond(e.target.value);
+            setInput(e.target.value);
           }}
         />
         <UploadImg />
@@ -87,7 +87,7 @@ const ProfileUser = () => {
           value={second}
           type="text"
           onChange={(e) => {
-            setSecond(e.target.value);
+            setInput(e.target.value);
           }}
         /> */}
         <MyTextField
@@ -100,10 +100,10 @@ const ProfileUser = () => {
         <MyTextField
           required
           label="PHONE NUMBER"
-          value={second}
+          value={input.phone_number}
           type="number"
           onChange={(e) => {
-            setSecond(e.target.value);
+            setInput(e.target.value);
           }}
         />
         <MyButtonTwo variant="contained">Continue</MyButtonTwo>
