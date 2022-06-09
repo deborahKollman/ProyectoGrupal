@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles",
+    "test": "jest routes --verbose --detectOpenHandles",
     "test:watch": "npm run test -- --watchAll",
     "dev": "nodemon index.js",
     "start": "node index.js",
@@ -24,6 +24,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "passport": "0.5.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",

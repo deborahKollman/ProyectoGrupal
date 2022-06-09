@@ -9,7 +9,7 @@ export default function Opinion(){
             <img src={star} alt="star"></img>
             <label>5.0</label>
             </div>
-            <label>Texto </label>
+            <label>Texto</label>
         </div>
 
     </div>

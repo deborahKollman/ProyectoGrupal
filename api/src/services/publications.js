@@ -14,6 +14,20 @@ exports.getPublications = (offset, limit) => {
     return activePub;
 };
 
+
+exports.getPublicationDetails = (id) => {
+  // Retorna detalle de la publicacion
+    const pubDetail = Publication.findOne({
+      where: {id:id},
+      include: {
+        model:Service
+        
+      }
+    });
+    console.log(pubDetail)
+    return pubDetail;
+};
+
 exports.postPublication = async (detail, price, album, usr_id=1) => {
   try {
     const user= await User.findOne({where: {id:usr_id}})
@@ -26,3 +40,4 @@ exports.postPublication = async (detail, price, album, usr_id=1) => {
     return { err_msg: 'Publication post error' }
   }
 }
+
