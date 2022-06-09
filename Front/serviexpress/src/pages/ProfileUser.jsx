@@ -1,12 +1,34 @@
 import React, { useState } from "react";
+import {Link, useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
 import "./styles/SellerRegister.scss";
 import BurgerButton from "../components/NavBar/NavBar";
 import { MyButtonTwo, MyTextField } from "../elements/Forms";
 import {UploadImg} from "../components/UploadImg";
 
+const check = /\S+/;
+const regExpr = /^[a-z]+$/i;
+
+function validate(input) {
+  let errors = {}
+  if (!check.test(input.name) || !regExpr.test(input.name) || input.name <= 2) {
+    errors.name = "Please, tell us your name!";
+  }
+   return errors;
+}
+
 const ProfileUser = () => {
-  const [first, setFirst] = useState("");
-  const [second, setSecond] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [errors, setError] = useState({})
+ 
+  const [input, setInput] = useState({
+    name: "",
+    lastName: "",
+    description: "",
+    phoneNumber: ""
+  })
 
   return (
     <div className="page-seller_register">
@@ -32,7 +54,7 @@ const ProfileUser = () => {
           }}
         />
         <UploadImg />
-        <MyTextField
+        {/* <MyTextField
           required
           label="DESCRIPTION"
           value={second}
@@ -40,7 +62,7 @@ const ProfileUser = () => {
           onChange={(e) => {
             setSecond(e.target.value);
           }}
-        />
+        /> */}
         <MyTextField
           id="outlined-multiline-static"
           label="DESCRIPTION"

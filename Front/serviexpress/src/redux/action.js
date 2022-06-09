@@ -18,3 +18,12 @@ export const getAllServices = () => {
         }
     }
 }
+
+export const getAllCategories = () => {
+    return async (dispatch) => {
+        try {
+            const {categories} = await axios('http:localhost')
+            
+        } catch (error) {console.log(error)}
+    }
+}
