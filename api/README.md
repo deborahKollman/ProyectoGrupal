@@ -1,6 +1,7 @@
-# Hacer npm install
+# Actualizaciones
 
-- se añadieron nuevas dependencia para la autenticacion
+- ejecutar "npm install" se añadieron nuevas dependencias para la autenticacion
+- en index.js colocar force en true
 
 ## Scripts
 

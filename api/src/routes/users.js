@@ -21,6 +21,6 @@ router.get('/:id', getUserDetail);
 router.post('/', postUser);
 router.delete('/:id', deleteUser);
 router.put('/:id', updateUser);
-router.put('/recover',updatePassword);
+router.put('/recover', updatePassword);
 
 module.exports = router;
