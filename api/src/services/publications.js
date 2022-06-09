@@ -1,25 +1,27 @@
 const { publications } = require('../database/data.js');
-const { multer } = require('multer');
 
-/* const storage = multer.diskStorage({
-  destination: '../../public/img',
-  filename: function (req,file,cb){
-    cb("","imagen.jpg");
-  }
-});
+const { Publication, User } = require('../database/postgres.js');
 
-const upload = multer ({
-  storages: storage
-})
- */
-
-exports.getPublications = (offset, limit) => {
+exports.getPublications = async (offset, limit) => {
   // Retorna las limit publicaciones activas a partir de la nro offset
 
-  return publications;
+    console.log('en get pub')
+    const activePub = await Publication.findAll({
+      attributes: [
+        'date'
+      ]})
+    return activePub;
 };
 
-exports.postPublication = (req, res, next) => {
-
-  
+exports.postPublication = async (detail, price, album, usr_id=1) => {
+  try {
+    const user= await User.findOne({where: {id:usr_id}})
+    const publication= await Publication.create({date: Date.now(), state: 'Active', detail, price, album});
+    publication.setUser(user)
+    return publication;  
+  }
+  catch (error)
+  {
+    return { err_msg: 'Publication post error' }
+  }
 }

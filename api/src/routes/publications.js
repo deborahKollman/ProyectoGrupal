@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const {upload } = require('../middlewares/index.js')
+
 const {
   getPublications,
   postPublication,
@@ -7,15 +9,9 @@ const {
 } = require('../controllers/publications.js');
 
 const router = Router();
-const multer = require('multer');
-
-const upload = multer ({
-  dest: '../../public/img'
-})
-
 
 router.get('/', getPublications);
-router.post('/', upload.single('file'), postPublication);
+router.post('/', upload.array('pictures', 5), postPublication);
 router.delete('/:id', deletePublication);
 router.put('/:id', updatePublication);
 
