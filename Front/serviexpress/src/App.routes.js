@@ -9,7 +9,6 @@ import Seller from './pages/Seller.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
 import CreateService from './pages/CreateService.jsx';
 
-
 function App() {
   return (
     <Routes>
@@ -20,7 +19,7 @@ function App() {
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
       <Route exact path="/" element={<LandingPage/>} />
-      <Route exact path="detail" element={<Detail></Detail>}></Route>
+      <Route exact path="detail" element={<Detail/>}/>
       <Route path='*' element={<NotFound/>} />
     </Routes>
   );
