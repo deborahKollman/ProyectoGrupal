@@ -12,9 +12,8 @@ import Seller from './pages/Seller'
 import ProfileUser from './pages/ProfileUser.jsx';
 
 import RecoveryPassword from './pages/RecoveryPassword.jsx';
-import Seller from './pages/Seller.jsx';
-import ProfileUser from './pages/ProfileUser.jsx';
-import CreateService from './pages/CreateService.jsx';
+
+
 
 
 function App() {
