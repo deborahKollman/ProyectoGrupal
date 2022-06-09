@@ -1,4 +1,4 @@
-const { getPublications, postPublication } = require('../services/publications.js');
+const { getPublications, getPublicationDetails, postPublication } = require('../services/publications.js');
 
 exports.getPublications = async (req, res, next) => {
   // Recibe offset y nros de registros a devolver x body
@@ -33,6 +33,19 @@ exports.postPublication = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+exports.getPublicationDetails = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    console.log (id)
+    const r = await getPublicationDetails(id)
+    res.send(r)
+  }
+  catch (error) {
+    next(error)
+  }
+
 };
 
 exports.deletePublication = (req, res, next) => {};
