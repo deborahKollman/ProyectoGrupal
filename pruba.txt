@@ -1,0 +1,20 @@
+git clone https://github.com/camiFK/ProyectoGrupal.git
+  501  git pull
+  502  git status
+  503  git add
+  504  git add .
+  505  git commit -m"s"
+  506  git status
+  507  cd ..
+  508  git status
+  509  git add .
+  510  git commit -m"s"
+  511  git status
+  512  git pull
+  513  git pull origin development
+  514  git checkout
+  515  git branch
+  516  git checkout sergio
+  517  git merge
+  518  git merge development
+  519  history
