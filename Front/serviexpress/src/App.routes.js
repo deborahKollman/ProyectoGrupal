@@ -11,13 +11,20 @@ import CreateService from './pages/CreateService.jsx';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 
+ 
+
 function App() {
+
+  const isAutn = true;
+
   return (
     <Routes>
-      <Route exact path="/orders" element={<Orders/>} />
-      <Route exact path="/favorites" element={<Favorites/>} />
+
+      {isAutn && ( <Route exact path="/orders" element={<Orders/>} /> )}
+      {isAutn && ( <Route exact path="/favorites" element={<Favorites/>} /> )}
 
       <Route exact path="/seller/add-service" element={<CreateService/>} />
+      
       <Route exact path="/seller" element={<Seller/>} />
       <Route exact path="/user" element={<ProfileUser/>} />
       <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />

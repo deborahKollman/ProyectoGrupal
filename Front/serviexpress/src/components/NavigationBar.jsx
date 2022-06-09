@@ -32,10 +32,10 @@ const NavigationBar = () => {
       />
 
       <BottomNavigationAction
-        label="Services"
+        label="seller"
         icon={<VolunteerActivismIcon fontSize="large" />}
         onClick={() => {
-            mNavigation("services");
+            mNavigation("seller");
           }}  
       />
 
@@ -52,6 +52,7 @@ const NavigationBar = () => {
         icon={<ShopTwoIcon fontSize="large" />}
         onClick={() => {
             mNavigation("orders");
+            console.log("orders");
         }}
       />
     </List>
