@@ -48,10 +48,9 @@ exports.createUser = async (newUser) => {
   var hash = bcrypt.hashSync(newUser.password, 10);
   newUser={...newUser,password:hash};
   const [user,created] = await User.findOrCreate({
-    where:{...newUser},
+    where:{email:newUser.email},
     defaults:{...newUser}
   })
-  
   return [user,created];
 };
 exports.registerUser = (usr, password) => {
