@@ -1,15 +1,16 @@
-const { publications } = require('../database/data.js');
+//const { publications } = require('../database/data.js');
 
-const { Publication, User } = require('../database/postgres.js');
+const { Publication, Service, User } = require('../database/postgres.js');
 
-exports.getPublications = async (offset, limit) => {
+exports.getPublications = (offset, limit) => {
   // Retorna las limit publicaciones activas a partir de la nro offset
-
-    console.log('en get pub')
-    const activePub = await Publication.findAll({
-      attributes: [
-        'date'
-      ]})
+    activePub = Publication.findAll({
+      where: {state:'Active'},
+      include: {
+        model:Service
+        
+      }
+    });
     return activePub;
 };
 
