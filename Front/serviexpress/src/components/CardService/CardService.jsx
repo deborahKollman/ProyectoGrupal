@@ -39,21 +39,13 @@ const CardServices = ({ id, score,summary, image, title, price}) => {
 		return arrayDiets.length ? arrayDiets.join(',') : 'not found'
 	}
 
-    // const buttonx = function(){
-    //     if (id.toString().includes("-")) return(<button onClick={(e)=>{handleClick(e)}}>x</button>)
-    // }
-
-    // function handleClick(e){
-    //     e.preventDefault(); //evita que se recargue y se rompa la pagina
-    //     dispatch(deleteRecipes(id))
-    // }
-    return (
+       return (
     <div className='container'>
         
             <div className='card' >
             {/* <p className='butonX'>{buttonx()}</p>        */}
             
-            <Link className='link' to={`/recipes/${id}`}> 
+            <Link className='link' to={`/detail`}> 
                 <div className='card-image'>
                 
                 <img src={image} alt="not found" />  
@@ -85,7 +77,7 @@ const CardServices = ({ id, score,summary, image, title, price}) => {
     );
 };
 
-export default Card;
+export default CardServices;
 
 
 
