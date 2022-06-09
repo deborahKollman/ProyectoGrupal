@@ -41,6 +41,8 @@ Service.belongsToMany(Publication, {
 Publication.belongsToMany(Service, {
   through: 'PublicationServices'
 });
+Category.hasMany(Publication);
+Publication.belongsTo(Category);
 
 User.hasMany(Contract);
 Contract.belongsTo(User);

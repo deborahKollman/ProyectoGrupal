@@ -110,3 +110,6 @@ package-lock.json
 
 #build
 build
+
+#publications pictures
+/api/pulic/img/pub
