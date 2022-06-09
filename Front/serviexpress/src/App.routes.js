@@ -10,11 +10,16 @@ import RecpveryPassword from './pages/RecoveryPassword.jsx';
 import Seller from './pages/Seller.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
 import CreateService from './pages/CreateService.jsx';
+import Favorites from './pages/Favorites';
+import Orders from './pages/Orders';
 
 
 function App() {
   return (
     <Routes>
+      <Route exact path="/orders" element={<Orders/>} />
+      <Route exact path="/favorites" element={<Favorites/>} />
+
       <Route exact path="/seller/add-service" element={<CreateService/>} />
       <Route exact path="/seller" element={<Seller/>} />
       <Route exact path="/user" element={<ProfileUser/>} />
@@ -30,3 +35,10 @@ function App() {
 }
 
 export default App;
+
+/* 
+home
+services
+favorites
+orders
+*/
