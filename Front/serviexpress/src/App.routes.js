@@ -27,15 +27,13 @@ function App() {
       {isAutn && ( <Route exact path="/orders" element={<Orders/>} /> )}
       {isAutn && ( <Route exact path="/favorites" element={<Favorites/>} /> )}
 
-      <Route exact path="/seller/add-service" element={<CreateService/>} />
+      {isAutn && ( <Route exact path="/seller/add-service" element={<CreateService/>} /> ) }
       
       <Route exact path="/seller" element={<Seller/>} />
       <Route exact path="/user" element={<ProfileUser/>} />
-      <Route exact path="/seller/add-service" element={<CreateService/>} /> 
       <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
-      {/* <Route exact path="/Home" element={<Home/>}/> */}
 
       <Route exact path="/" element={<LandingPage/>} />
       <Route path="/detail" element={<Detail></Detail>}></Route>
