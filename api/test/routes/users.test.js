@@ -1,7 +1,7 @@
 const request = require('supertest');
 const server = require('../../server');
 const { User, Op, connection } = require('../../src/database/postgres');
-const { OK, CREATED } = require('../../src/routes/helpers/status');
+const { OK, CREATED, NOT_FOUND } = require('../../src/routes/helpers/status');
 
 describe('GET /users', () => {
   beforeAll(async () => {
@@ -58,6 +58,9 @@ describe('GET /users:id', () => {
     expect(response.body.user).toEqual(user.toJSON());
     expect(response.status).toBe(OK);
   });
+  afterAll(async () => {
+    await connection.sync({ force: true });
+  });
 });
 
 describe('POST /users', () => {
@@ -86,6 +89,81 @@ describe('POST /users', () => {
   });
   afterAll(async () => {
     await connection.sync({ force: true });
-    connection.close();
+  });
+});
+
+describe('PUT /users:id', () => {
+  beforeAll(async () => {
+    await connection.sync({ force: true });
+  });
+  it('Debe retornar el usuario si se actualiza el usuario', async () => {
+    await User.create({
+      email: 'carlos65357@gmail.com',
+      password: '123456',
+      name: 'Carlos',
+      country: 'Colombia',
+      province_state: 'Antioquia',
+      rol: 'admin'
+    });
+    const response = await request(server).put('/users/1').send({
+      email: 'carlos65357@gmail.com',
+      password: '1109',
+      name: 'Carlos',
+      country: 'Colombia',
+      province_state: 'Antioquia',
+      rol: 'admin'
+    });
+
+    const user = await User.findByPk(1);
+
+    expect(response.body).toEqual(user.toJSON());
+    expect(response.status).toBe(OK);
+  });
+  it('Debe retornar un error si el usuario no existe', async () => {
+    const response = await request(server).put('/users/1').send({
+      email: 'carlos65357@gmail.com',
+      password: '123456',
+      name: 'Carlos',
+      country: 'Colombia',
+      province_state: 'Antioquia',
+      rol: 'admin'
+    });
+    expect(response.status).toBe(NOT_FOUND);
+  });
+  afterAll(async () => {
+    await connection.sync({ force: true });
+  });
+});
+
+describe('DELETE /users:id', () => {
+  beforeAll(async () => {
+    await connection.sync({ force: true });
+  });
+  it('Debe retornar el un mensaje si se elimina el usuario', async () => {
+    await User.create({
+      email: 'carlos65357@gmail.com',
+      password: '123456',
+      name: 'Carlos',
+      country: 'Colombia',
+      province_state: 'Antioquia',
+      rol: 'admin'
+    });
+    const response = await request(server).delete('/users/1');
+    const user = await User.findByPk(1);
+    expect(user).toBeNull();
+    expect(response.body).toEqual({
+      message: 'User deleted'
+    });
+    expect(response.status).toBe(OK);
+  });
+  it('Debe retornar un mensaje si no existe el usuario', async () => {
+    const response = await request(server).delete('/users/1');
+    expect(response.body).toEqual({
+      message: 'User not found'
+    });
+    expect(response.status).toBe(NOT_FOUND);
+  });
+  afterAll(async () => {
+    await connection.sync({ force: true });
   });
 });
