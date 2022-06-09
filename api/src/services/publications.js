@@ -24,15 +24,16 @@ exports.getPublicationDetails = (id) => {
         
       }
     });
-    console.log(pubDetail)
     return pubDetail;
 };
 
-exports.postPublication = async (detail, price, album, usr_id=1) => {
+exports.postPublication = async (title, detail, detail_resume, price, album, categoryId, usr_id=1 ) => {
   try {
     const user= await User.findOne({where: {id:usr_id}})
-    const publication= await Publication.create({date: Date.now(), state: 'Active', detail, price, album});
+    console.log(title, detail, detail_resume, price, album, categoryId, usr_id=1)
+    const publication= await Publication.create({date: Date.now(), state: 'Active', title, detail, detail_resume, price, album, categoryId});
     publication.setUser(user)
+
     return publication;  
   }
   catch (error)

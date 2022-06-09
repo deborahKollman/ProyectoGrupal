@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { OK, BAD_REQUEST } = require('./helpers/status');
 
+const fx = require('../database/cargabase.js');
+
 fs.readdirSync(__dirname).forEach((file) => {
   const [name] = file.split('.');
   if (name !== 'index' && name !== 'helpers') {
@@ -13,9 +15,12 @@ fs.readdirSync(__dirname).forEach((file) => {
 
 router.get('/public/img/pub/:id', (req, res)=>{
   const file = req.params.id;
-  //const pub = req.params.pub;
-  //console.log(pub,file)
   res.download('./public/img/pub/'+file, file)
+});
+
+router.get('/cargabase', (req,res)=>{
+  fx();
+  res.send('ok')
 });
 
 router.get('/', (req, res) => {
