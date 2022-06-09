@@ -16,6 +16,5 @@ router.put('/:id', updateCategory);
 
 router.get('/:id',getCategorieById)
 
-router.post('/',postCategory)
 
 module.exports = router;

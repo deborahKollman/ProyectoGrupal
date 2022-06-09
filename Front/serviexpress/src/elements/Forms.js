@@ -6,7 +6,7 @@ const StyleMUI = require("@mui/material/styles").styled;
 
 const MyTextField = styled(TextField)({
     'margin-top': '40px',
-    'width': '300px',
+    'width': '260px',
   '& label.Mui-focused': {
     color: '#000',
   },
@@ -75,7 +75,7 @@ const MyButtonTwo = StyleMUI(Button)({
 });
 
 const MyButtonThree = StyleMUI(Button)({
-  width: '300px',
+  width: '260px',
   color: '#000',
   fontWeight: 'bold',
   backgroundColor: '#fcdc3c',
@@ -96,9 +96,12 @@ const MyButtonThree = StyleMUI(Button)({
       color: '#fff'
     },
 });
+
+  
+
 export {
     MyTextField,
     MyButton,
     MyButtonTwo,
-    MyButtonThree
+    MyButtonThree,
 }
