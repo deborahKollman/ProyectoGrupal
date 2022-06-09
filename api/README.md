@@ -1,3 +1,8 @@
+# Actualizaciones
+
+- ejecutar "npm install" se añadieron nuevas dependencias para la autenticacion
+- en index.js colocar force en true
+
 ## Scripts
 
 ```bash
@@ -67,3 +72,11 @@ npm run test:watch
     }
   }
   ```
+
+- ### Nota
+
+  para problemas con 'passport' usar en el archivo .env
+
+  GOOGLE_CLIENT_ID=501870436365-eq75i2tfr3rrabcflqjspnrb14ikg6gq.apps.googleusercontent.com
+
+  GOOGLE_CLIENT_SECRET=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
