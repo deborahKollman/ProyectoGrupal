@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles",
+    "test": "jest routes --verbose --detectOpenHandles",
     "test:watch": "npm run test -- --watchAll",
     "dev": "nodemon index.js",
     "start": "node index.js",
