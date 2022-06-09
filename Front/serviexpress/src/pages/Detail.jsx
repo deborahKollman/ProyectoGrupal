@@ -7,30 +7,19 @@ import ProfileOpinion from '../components/ProfileOpinion';
 import Footer from '../components/FooterDetail';
 import NavBar from '../components/NavBar/NavBar';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import Pagination from 'react-bootstrap/Pagination'
+import ServicesBar from '../components/ServicesBar';
+
+
 
 export default function Detail(){
+
+
+
+
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
-          <Pagination className={stylesDetail.paginate}>
-  <Pagination.First />
-  <Pagination.Prev />
-  <Pagination.Item>{"Electrician"}</Pagination.Item>
-  <Pagination.Ellipsis />
-
-  <Pagination.Item>{"Plumb"}</Pagination.Item>
-  <Pagination.Item>{"Worker"}</Pagination.Item>
-  <Pagination.Item active>{"Barber"}</Pagination.Item>
-  <Pagination.Item>{"Carpenter"}</Pagination.Item>
-
-
-  <Pagination.Ellipsis />
-  <Pagination.Item>{"Painter"}</Pagination.Item>
-  <Pagination.Next />
-  <Pagination.Last />
-  </Pagination>
-
+            <ServicesBar></ServicesBar>
           </div>
 
 

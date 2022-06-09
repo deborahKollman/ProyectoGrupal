@@ -1,0 +1,70 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    font-size: medium;
+    margin-left: 30px;
+    margin-right: 30px;
+    
+    
+}
+
+.container input{
+    height: 250px;
+    border-radius: 10px;
+    border: 3px solid lightgrey;
+    align-items: flex-start;
+
+}
+
+.container label{
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+.user img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid;
+    border-radius: 10px;
+    padding-top: 10px;
+    width: 140px;
+    background-color: rgb(255, 222, 6);
+}
+
+.btns button{
+    border: none;
+    gap: 20px;
+
+}
+.btns{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btns button:focus{
+    background-color: rgb(255, 222, 6);
+    color: white;
+}
+
+.userCenter{
+    display: flex;
+    
+    justify-content: center;
+
+}
+
+
+
+
+
