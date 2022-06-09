@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getServices, swich_loading} from "../redux/action"
 import {Link} from 'react-router-dom';
-import Card from "../pages/components/Card/Card"
+import Card from "../components/CardService/CardService"
 import PaginationRounded from "../components/Pagination/Pagination";
-import Loading from '../pages/components/Loading/Loading';
+import Loading from '../components/Loading/Loading';
 import NavBar from '../components/NavBar/NavBar'
 import ServicesBar from "../components/ServicesBar";
-import './Home.css';
+// import './Home.css';
 
 export default function Home(){
     const dispatch = useDispatch();
