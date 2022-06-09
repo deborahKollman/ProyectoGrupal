@@ -1,4 +1,6 @@
-const { checkUser, registerUser, recoverUserPwd } = require('../services/users.js');
+const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword} = require('../services/users.js');
+const { User } = require('../database/postgres');
+const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 
 exports.checkUser = (req, res, next) => {
   // Retorna:
@@ -29,61 +31,79 @@ exports.checkUser = (req, res, next) => {
   }
 };
 
-exports.registerUser = (req, res, next) => {
+exports.getUsers = async (req, res, next) => {
+  if (!req.query.limit || !req.query.offset) {
+    return res.redirect(
+      'http://localhost:3001/users?page=1&offset=10&limit=10'
+    );
+  }
   try {
-    const { user, password } = req.body;
-    const registerResult = registerUser(user, password);
-    if (registerResult.error_msg) res.status(401).send(registerResult);
-    else {
-      return res.status(200).send(registerResult);
-    }
+    const response = await getAllUsers(req.query);
+    res.status(OK).json(response);
   } catch (error) {
     next(error);
   }
 };
 
-exports.recoverUserPwd = (req, res, next) => {
+exports.postUser = async (req, res, next) => {
   try {
-    const { user } = req.body;
-    const recoveryResult = recoverUserPwd(user);
-    if (recoveryResult.error_msg) res.status(400).send(recoveryResult);
-    else {
-      return res.status(200).send(recoveryResult);
+    const [created, userCreated] = await createUser(req.body);
+    if (userCreated) {
+      return res.status(CREATED).json({
+        created
+      });
     }
+    return res.status(BAD_REQUEST).json({
+      message: 'User not created'
+    });
   } catch (error) {
-    next(error);
+    res.send({ error });
   }
 };
 
-exports.getUsers = (req, res, next) => {
+exports.getUserDetail = async (req, res, next) => {
+  const { id } = req.params;
+
   try {
-    res.send({
-      name: 'name',
-      lastName: 'lastName',
-      user: 'http://localhost:3001/login/user'
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(BAD_REQUEST).send({ message: 'User not found' });
+    }
+    return res.status(OK).send({
+      user
     });
   } catch (error) {
     next(error);
   }
 };
 
-exports.getUserDetail = (req, res, next) => {
-  const { id } = req.params;
+exports.updateUser = (req, res, next) => {
+  res.send('Listo');
+};
+exports.deleteUser = (req, res, next) => {
+  res.send('Listo');
+};
 
+exports.recoverUserPwd = async(req,res,next) => {
   try {
-    if (id === '1') {
-      res.send({
-        name: 'name',
-        lastName: 'lastName',
-        ci: '000000000',
-        age: 20
-      });
-    } else {
-      res.status(404).send({
-        message: 'User not found'
-      });
+    const r = await recoverUserPwd(req.body.email);
+    if(r.err_msg){
+      return res.status(BAD_REQUEST).send(r.err_msg)
     }
+    return res.status(OK).send(r.message)
   } catch (error) {
     next(error);
   }
-};
+}
+
+exports.updatePassword = async(req,res,next) => {
+  try {
+    const r = await updatePassword(req.body.email,req.body.password);
+    if(r.err_msg){
+      return res.status(BAD_REQUEST).send(r.err_msg)
+    }
+    return res.status(OK).send(r.message)
+  } catch (error) {
+    next(error)
+  }
+}

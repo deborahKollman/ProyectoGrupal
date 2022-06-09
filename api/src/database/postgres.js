@@ -2,7 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
-const { Sequelize } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 const sequelize = new Sequelize(
@@ -27,8 +27,8 @@ sequelize.models = Object.entries(sequelize.models).reduce(
 // Relaciones de DB
 const { Category, Service, User, Admin, Contract, Favorite, Publication } =
   sequelize.models;
-Category.hasMany(Service);
-Service.belongsTo(Category);
+Category.belongsToMany(Service, { through: 'CategoryServices' });
+Service.belongsToMany(Category, { through: 'CategoryServices' });
 
 User.hasOne(Admin);
 Admin.belongsTo(User);
@@ -54,5 +54,6 @@ Publication.belongsToMany(Favorite, { through: 'FavoritePublications' });
 
 module.exports = {
   ...sequelize.models,
-  connection: sequelize
+  connection: sequelize,
+  Op
 };

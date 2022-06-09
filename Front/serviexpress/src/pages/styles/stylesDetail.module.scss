@@ -1,0 +1,107 @@
+.carousel{
+    height: 400px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+
+
+}
+.carousel img{
+    height: 400px;
+    width: max-content;
+
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+
+}
+
+.title{
+    font-style: italic;
+   display: flex;
+   justify-content: center;
+
+   
+}
+
+.division{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    
+
+
+}
+
+.about{
+    font-size: large;
+
+}
+
+.cardOthers{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    display: flex;
+    justify-content: space-around;
+    
+
+}
+
+.opinion{
+
+    padding-top: 40px;
+}
+
+
+@media (max-width: 1000px){
+    .division{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+       
+    }
+
+
+
+}
+
+.anchors{
+    font-size: large;
+    margin-top: 30px;
+    margin-left: 50px;
+
+
+}
+
+.paginate{
+   display: flex;
+   font-size: large;
+
+     justify-content: center;
+
+}
+.paginate a{
+  color: rgb(255, 222, 6);
+ 
+    
+}
+
+.page-link{
+  background-color:  rgb(255, 222, 6);
+  font-size: xx-large;
+ 
+}
+
+.leftSide{
+  
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 94%;
+
+}

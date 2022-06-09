@@ -9,7 +9,6 @@ import Search from "../pages/components/Search/Search";
 import Loading from '../pages/components/Loading/Loading';
 import './Home.css';
 
-
 export default function Home(){
     const dispatch = useDispatch();
     const allServices = useSelector ((state)=>state.Services);

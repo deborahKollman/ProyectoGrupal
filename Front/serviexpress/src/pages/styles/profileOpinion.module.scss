@@ -1,0 +1,44 @@
+.profile{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 20px;
+
+}
+.container{
+    display: grid;
+    grid-template-columns: 1fr 2fr 6fr;
+    border: 2px solid gray;
+    border-radius: 10px;
+    align-items: center;
+    margin-bottom: 40px;
+   background-color: whitesmoke;
+   
+
+}
+
+.stars img{
+    width: 20px;
+    height: 20px;
+
+}
+
+.divStars{
+    display: flex;
+   
+
+}
+
+.divStars label{
+    font-size: medium;
+    font-weight: 700;
+    margin-left: 5px;
+
+}
+
+.container p{
+    font-size: x-large;
+    font-style: italic;
+
+
+}
