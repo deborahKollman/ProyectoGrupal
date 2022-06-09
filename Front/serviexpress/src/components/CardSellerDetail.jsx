@@ -64,6 +64,8 @@ export default function CardSellerDetail(){
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
         <button onClick={handleShow}>Contact</button>
 
+
+        
         <Modal show={show} onHide={handleClose} className={stylesCardSeller.contact}>
         <Modal.Header closeButton>
           <Modal.Title>Contact</Modal.Title>
@@ -78,7 +80,7 @@ export default function CardSellerDetail(){
           </Button>
         </Modal.Footer>
       </Modal>
-
+      
     </div>
 
 
