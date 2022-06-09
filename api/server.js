@@ -10,14 +10,14 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 // Middlewares
-server.use(bodyParser.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: true }));
 server.use(bodyParser.json({ limit: '50mb' }));
-server.use(cookieParser());
+server.use(cookieParser('secret'));
 server.use(morgan('dev'));
 server.use(express.json());
 server.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   })
@@ -26,20 +26,21 @@ server.use(express.static('public'));
 // set up session cookies
 server.use(
   cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: ['Pana']
+    name: 'session',
+    keys: ['key1', 'key2']
   })
 );
 // manejador de sesión
 server.use(
   session({
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true
+    secret: 'secret',
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false
   })
 );
 server.use(passport.initialize());
 server.use(passport.session());
+server.use(passport.authenticate('session'));
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'true');
