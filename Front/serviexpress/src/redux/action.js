@@ -2,7 +2,6 @@ const axios = require('axios');
 
 export const TEMP_VARIABLES = 'TEMP_VARIABLES';
 export const GET_SERVICES = 'GET_SERVICES'
-export const SWICH_LOADING = 'SWICH_LOADING'
 const URL = `http://127.0.0.1:4001`;
 
 
