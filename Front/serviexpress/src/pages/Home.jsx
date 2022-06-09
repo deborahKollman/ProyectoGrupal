@@ -1,3 +1,4 @@
+
 import React from "react";
 // import { useState, useEffect } from "react";
 // import {useDispatch, useSelector} from "react-redux";
@@ -11,6 +12,7 @@ import ServicesBar from "../components/ServicesBar";
 // import './Home.css';
 const currentServices = [1,2,3]
 const SwichL= false
+
 
 export default function Home(){
     // const dispatch = useDispatch();
@@ -107,6 +109,8 @@ export default function Home(){
 
 
 
+
+
           {/* <select onChange={e=>  filterforCategory(e)}>
                             <option key = 'All' value='All'>All categories</option>
                             <option key = 'plumbing' value='plumbing'>plumbing</option>
@@ -165,3 +169,4 @@ export default function Home(){
         //         setCurrentPage((pag)=> pag = 1)
         //     }
         // }
+

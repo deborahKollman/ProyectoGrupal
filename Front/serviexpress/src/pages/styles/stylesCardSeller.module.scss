@@ -63,15 +63,6 @@ h3{
 
 }
 
-.contact{
-    width: max-content;
-    height: max-content;
-    margin: 0;
-    
-
-
-
-}
 
 .contact button{
     font-size: large;
@@ -79,15 +70,24 @@ h3{
 
 
 
-
-
 @media (max-width: 1000px){
     .containerCard{
         width: 290px;
         height: 650px;
-       
+       padding-right: 0px;
     }
 
     
+
+}
+
+@media (max-width: 600px){
+    .contact{
+        width: max-content;
+        margin: 0px;
+        padding: 0px;
+      
+
+    }
 
 }
