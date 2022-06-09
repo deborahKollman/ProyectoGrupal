@@ -84,7 +84,7 @@ describe('POST /users', () => {
       }
     });
 
-    expect(response.body.created).toEqual(user.toJSON());
+    expect(response.body.user).toEqual(user.toJSON());
     expect(response.status).toBe(CREATED);
   });
   afterAll(async () => {
