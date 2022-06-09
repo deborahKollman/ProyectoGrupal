@@ -25,13 +25,11 @@ const CardServices = ({ id, score,summary, album, title, price}) => {
                 <div className='card-text' >
                 <h6 className="titlec">{title}</h6>
 
-              
+
                      </div>
 
                     <div className='card-stats'>
-                 
-               
-                   
+
                     
                 </div>
                 </Link>
