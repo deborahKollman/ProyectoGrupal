@@ -1,4 +1,4 @@
-import NavDetail from '../components/NavDetail'
+
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 import CardSellerDetail from '../components/CardSellerDetail';
@@ -16,14 +16,14 @@ export default function Detail(){
           <Pagination className={stylesDetail.paginate}>
   <Pagination.First />
   <Pagination.Prev />
-  <Pagination.Item >{"Electrician"}</Pagination.Item>
+  <Pagination.Item>{"Electrician"}</Pagination.Item>
   <Pagination.Ellipsis />
 
   <Pagination.Item>{"Plumb"}</Pagination.Item>
   <Pagination.Item>{"Worker"}</Pagination.Item>
   <Pagination.Item active>{"Barber"}</Pagination.Item>
   <Pagination.Item>{"Carpenter"}</Pagination.Item>
-  <Pagination.Item disabled>{"Constructor"}</Pagination.Item>
+
 
   <Pagination.Ellipsis />
   <Pagination.Item>{"Painter"}</Pagination.Item>
@@ -35,7 +35,7 @@ export default function Detail(){
 
 
         <div className={stylesDetail.division}>
-        <div>
+        <div className={stylesDetail.leftSide}>
           <div>
           <Breadcrumb className={stylesDetail.anchors} >
           <Breadcrumb.Item href="#" >Home</Breadcrumb.Item>
@@ -97,16 +97,34 @@ export default function Detail(){
         </p>
             <button>Ver Mas</button>
         </div>
-        
-        <h2>We Recommend Also...</h2>
-        
-        <div className={stylesDetail.cardOthers}>
-        <button className={stylesDetail.btnFowardBack}>a</button>
-        <CardOthersServices></CardOthersServices>
-        <CardOthersServices></CardOthersServices>
-        <button className={stylesDetail.btnFowardBack}>h</button>
+
+         <h2>We Recommend Also...</h2>
+          <div className={stylesDetail.cardOthers}>
+ 
+             <Carousel>
+            <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+                 
+             </Carousel.Item>
+
+             <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+             </Carousel.Item>
+
+             <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+             </Carousel.Item>
+
+             <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+             </Carousel.Item>
+
+
+            </Carousel>
 
         </div>
+
+
 
         <div className={stylesDetail.opinion} >
 
