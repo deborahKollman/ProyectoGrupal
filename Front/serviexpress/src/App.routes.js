@@ -34,14 +34,9 @@ function App() {
       <Route exact path="/detail" element={<Detail/>}/>
 
       <Route exact path="/" element={<LandingPage/>} />
-
       <Route path="/detail" element={<Detail></Detail>}></Route>
-
-
       <Route exact path="/Home" element={<Home/>}/>
-
       <Route path='*' element={<NotFound/>} />
-    
     </Routes>
   )}
 
