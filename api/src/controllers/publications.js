@@ -12,6 +12,18 @@ exports.getPublications = async (req, res, next) => {
   }
 };
 
+exports.getPublicationDetails = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    console.log (id)
+    const r = await getPublicationDetails(id)
+    res.send(r)
+  }
+  catch (error) {
+    next(error)
+  }
+};
+
 exports.postPublication = async (req, res, next) => {
 /*   req.files: [
     {
@@ -25,28 +37,17 @@ exports.postPublication = async (req, res, next) => {
       size: 393334
     } */
   try {
-    const {detail = '', price = 0, usr_id} = req.body;
+    const {title = '', detail = '', detail_resume = '', price = 0, usr_id, categoryId} = req.body;
     const album = req.files.map((e)=> ('http://' + process.env.HOST + ':' + process.env.PORT +
     e.destination.slice(1) + '/' + e.filename));
-    const r = await postPublication(detail, price, album, usr_id);
+    const r = await postPublication(title, detail, detail_resume, price, album, categoryId, usr_id);
     res.status(200).send(r);
   } catch (error) {
     next(error);
   }
 };
 
-exports.getPublicationDetails = async (req, res, next) => {
-  try {
-    const {id} = req.params;
-    console.log (id)
-    const r = await getPublicationDetails(id)
-    res.send(r)
-  }
-  catch (error) {
-    next(error)
-  }
 
-};
 
 exports.deletePublication = (req, res, next) => {};
 exports.updatePublication = (req, res, next) => {};
