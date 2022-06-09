@@ -59,3 +59,4 @@ exports.updateCategory = async (id, name) => {
   await category.update({ name });
   return {message:'Category updated successfully'};
 }
+

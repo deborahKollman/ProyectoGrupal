@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const {upload } = require('../middlewares/index.js')
+
 const {
   getPublications,
   postPublication,
@@ -9,7 +11,7 @@ const {
 const router = Router();
 
 router.get('/', getPublications);
-router.post('/', postPublication);
+router.post('/', upload.array('pictures', 5), postPublication);
 router.delete('/:id', deletePublication);
 router.put('/:id', updatePublication);
 
