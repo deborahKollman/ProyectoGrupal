@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 export const TEMP_VARIABLES = 'TEMP_VARIABLES';
+export const GET_SERVICES = 'GET_SERVICES'
 
 const URL = `http://127.0.0.1:4001`;
 
@@ -19,11 +20,18 @@ export const getAllServices = () => {
     }
 }
 
-export const getAllCategories = () => {
-    return async (dispatch) => {
-        try {
-            const {categories} = await axios('http:localhost')
-            
-        } catch (error) {console.log(error)}
-    }
-}
+
+//Traer All services
+// export function getRecipes(){
+//     return async (dispatch)=>{
+//         try{
+//         const serv = await axios.get(`${URL}/services`)
+//         dispatch({
+//             type:GET_SERVICES,
+//             payload:response.data
+//         });
+//     } catch (error){
+//         console.log("SERVICES NO FOUND")
+//     }
+//     }
+// }

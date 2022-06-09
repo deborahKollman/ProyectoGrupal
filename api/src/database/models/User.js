@@ -19,16 +19,36 @@ module.exports = (sequelize) => {
         }
       },
       password: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:false
       },
       name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:false
+      },
+      last_name:{
+        type:DataTypes.STRING,
+        defaultValue:""
+      },
+      avatar_image:{
+        type:DataTypes.STRING,
+        defaultValue:""
+      },
+      description:{
+        type:DataTypes.TEXT,
+        defaultValue:""
+      },
+      phone_number:{
+        type:DataTypes.STRING,
+        defaultValue:""
       },
       country: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue:""
       },
       province_state: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue:""
       },
       location: {
         type: DataTypes.VIRTUAL,

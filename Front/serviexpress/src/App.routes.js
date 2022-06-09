@@ -5,9 +5,7 @@ import Login from './pages/Login.jsx';
 import Detail from './pages/Detail.jsx'
 import Register from './pages/Register.jsx';
 import RecoveryPassword from './pages/RecoveryPassword.jsx';
-import Seller from './pages/Seller.jsx';
-import ProfileUser from './pages/ProfileUser.jsx';
-import CreateService from './pages/CreateService.jsx';
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -19,10 +17,11 @@ function App() {
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
       <Route exact path="/" element={<LandingPage/>} />
-      <Route exact path="detail" element={<Detail/>}/>
+      <Route path="/detail" element={<Detail></Detail>}></Route>
+      <Route exact path="/Home" element={<Home/>}/>
       <Route path='*' element={<NotFound/>} />
     </Routes>
-  );
-}
+  )}
+
 
 export default App;

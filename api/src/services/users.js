@@ -4,14 +4,18 @@ const { User } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
 
 
-exports.checkUser = (usr, password) => {
+exports.checkUser = async(usr, password) => {
   // Chequea si el usuario existe y si la clave es correcta
-  // Retorna:
-  // -1 si el usr no existe, 0 si la clave es erronea y 1 si esta OK
-  const usrFound = users.find((u) => u.usr_email === usr);
-  if (!usrFound) return -1;
-  else if (usrFound.usr_password === password) return usrFound;
-  return 0;
+  const user = await User.findOne({where:{email:usr}})
+
+  if(user){
+    if(bcrypt.compareSync(password,user.dataValues.password)){
+      return user;
+    }else{
+      return {err_msg:'Contraseña incorrecta'}
+    }
+  }
+  return {err_msg:'Usuario no encontrado'}
 };
 
 exports.getAllUsers = async ({ page, offset, limit }) => {
@@ -41,12 +45,14 @@ exports.getAllUsers = async ({ page, offset, limit }) => {
   };
 };
 exports.createUser = async (newUser) => {
-  const [user, created] = await User.findOrCreate({
-    where: { ...newUser },
-    defaults: { ...newUser }
-  });
-
-  return [user, created];
+  var hash = bcrypt.hashSync(newUser.password, 10);
+  newUser={...newUser,password:hash};
+  const [user,created] = await User.findOrCreate({
+    where:{...newUser},
+    defaults:{...newUser}
+  })
+  
+  return [user,created];
 };
 exports.registerUser = (usr, password) => {
   // retorna un obj con el id de usuario si se registra correctamente o un obj con el motivo del error
@@ -54,7 +60,7 @@ exports.registerUser = (usr, password) => {
   // Cambiar por el nuevo id registrado
   const idRegistered = 8;
 
-  const usrFound = users.find((u) => u.usr_email === usr);
+  const usrFound = User.findOne({where:{email:usr}});
   if (usrFound) return { err_msg: 'Email is already registered' };
   else return { idRegistered };
 };
