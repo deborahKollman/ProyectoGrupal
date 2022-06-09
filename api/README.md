@@ -1,3 +1,7 @@
+# Hacer npm install
+
+- se añadieron nuevas dependencia para la autenticacion
+
 ## Scripts
 
 ```bash
@@ -67,3 +71,11 @@ npm run test:watch
     }
   }
   ```
+
+- ### Nota
+
+  para problemas con 'passport' usar en el archivo .env
+
+  GOOGLE_CLIENT_ID=501870436365-eq75i2tfr3rrabcflqjspnrb14ikg6gq.apps.googleusercontent.com
+
+  GOOGLE_CLIENT_SECRET=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
