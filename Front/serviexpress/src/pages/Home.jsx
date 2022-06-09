@@ -98,75 +98,11 @@ export default function Home(){
         </div>
     )
 
-}
+} 
 
 
 
 
 
 
-
-
-
-
-
-
-          {/* <select onChange={e=>  filterforCategory(e)}>
-                            <option key = 'All' value='All'>All categories</option>
-                            <option key = 'plumbing' value='plumbing'>plumbing</option>
-                            <option key = 'electricity' value='electricity'>electricity</option>
-                            <option key = 'carpentry' value='carpentry'>carpentry</option>
-                            <option key = 'developers' value='developers'>developers</option>
-                            <option key = 'graphic & design' value='graphic & design'>graphic & design</option>
-                            <option key = 'advocacy' value='advocacy'>advocacy</option>
-                            <option key = 'engineering' value='engineering'>engineering</option>
-                            <option key = 'technical service' value='technical service'>technical service</option>
-                            <option key = 'digital marketing' value='digital marketing'>digital marketing</option>
-                            <option key = 'music & audio' value='music & audio'>music & audio</option>
-                        </select> */}
-
-
-
-
-                        // function orderforName(e){
-                        //     if(e.target.value === 'default'){
-                        //         dispatch(getServices())
-                        //     } 
-                        //     else{
-                        //         e.preventDefault();
-                        //         dispatch(orderByName(e.target.value))
-                        //         setorder(`ordenado ${e.target.value}`)
-                        //         setCurrentPage((pag)=> pag = 1)
-                        //     }
-                        // }
-
-
-
-                            // function handleClick(e){
-        //     e.preventDefault(); //evita que se recargue y se rompa la pagina
-        //     dispatch(getServices())
-        // }
-    
-        // function filterforCategory(e){
-        //     if(e.target.value === 'All'){ 
-        //         dispatch(getServices())
-        //     } 
-        //     else{
-        //         dispatch(getServicesForCategory(e.target.value))
-        //     }
-        // }
-
-
-
-        // function orderforScore(e){
-        //     if(e.target.value === 'default'){
-        //         dispatch(getServices())
-        //     } 
-        //     else {
-        //         e.preventDefault();
-        //         dispatch(orderByScore(e.target.value))
-        //         setorderscore(`ordenadopscore ${e.target.value}`)
-        //         setCurrentPage((pag)=> pag = 1)
-        //     }
-        // }
-
+ 

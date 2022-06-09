@@ -10,7 +10,7 @@ const rootReducer = (state = initialState, action) => {
         case 'TEMP_VARIABLES':
             return {
                 ...state,
-                rdcr_tempVariables: payload,
+                rdcr_tempVariables: action.payload,
             }
         case 'GET_SERVICES':
             return{
