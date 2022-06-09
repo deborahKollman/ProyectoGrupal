@@ -4,8 +4,10 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const { id } = req.body;
-    const ruta = `./public/img/${id}`
+    //const { id } = req.body;
+    //const ruta = `./public/img/${id}`
+
+    const ruta = `./public/img/pub`
     if (!fs.existsSync(ruta)) {
       fs.mkdirSync(ruta)
     }    

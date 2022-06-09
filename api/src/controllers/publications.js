@@ -1,12 +1,12 @@
 const { getPublications, postPublication } = require('../services/publications.js');
 
-exports.getPublications = (req, res, next) => {
+exports.getPublications = async (req, res, next) => {
   // Recibe offset y nros de registros a devolver x body
   try {
     const { offset = 0, limit = 0 } = req.body;
-    const r = getPublications(offset, limit);
+    const r = await getPublications(offset, limit);
     res.json(r);
-
+    
   } catch (error) {
     next(error);
   }

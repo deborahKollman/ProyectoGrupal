@@ -4,14 +4,13 @@ import LandingPage from './pages/LandingPage.jsx';
 import Login from './pages/Login.jsx';
 import Detail from './pages/Detail.jsx'
 import Register from './pages/Register.jsx';
+// import Home from './pages/Home'
 import RecoveryPassword from './pages/RecoveryPassword.jsx';
 import Seller from './pages/Seller.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
 import CreateService from './pages/CreateService.jsx';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
-
- 
 
 function App() {
 
@@ -30,8 +29,10 @@ function App() {
       <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
+      {/* <Route exact path="/Home" element={<Home/>}/> */}
+      <Route exact path="/detail" element={<Detail/>}/>
+
       <Route exact path="/" element={<LandingPage/>} />
-      <Route exact path="detail" element={<Detail/>}/>
       <Route path='*' element={<NotFound/>} />
     </Routes>
   );

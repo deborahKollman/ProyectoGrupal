@@ -1,7 +1,7 @@
-import React from "react";
+/* import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getServices,getServicesForCategory,orderByName, orderByScore, swich_loading} from "../../actions/index"
+import {getServices,getServicesForCategory,orderByName, orderByScore, swich_loading} from "../redux/action"
 import {Link} from 'react-router-dom';
 import Card from "../pages/components/Card/Card"
 import Pagination from "../pages/components/Pagination/Pagination";
@@ -173,3 +173,4 @@ export default function Home(){
     )
 
 }
+ */
