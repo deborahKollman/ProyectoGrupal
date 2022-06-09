@@ -1,5 +1,8 @@
-//const { users } = require('../database/data.js');
-const { User } = require('../database/postgres');
+
+const { users } = require('../database/data.js');
+const { User } = require('../database/postgres.js');
+const bcrypt = require('bcryptjs');
+
 
 exports.checkUser = (usr, password) => {
   // Chequea si el usuario existe y si la clave es correcta
@@ -56,8 +59,30 @@ exports.registerUser = (usr, password) => {
   else return { idRegistered };
 };
 
-exports.recoverUserPwd = (usr) => {
-  const usrFound = users.find((u) => u.usr_email === usr);
+exports.recoverUserPwd = async(usr) => {
+  //const usrFound = users.find((u) => u.usr_email === usr);
+  const usrFound = await User.findOne({
+    where:{email:usr}
+  })
+
   if (!usrFound) return { err_msg: 'Email is not registered' };
   else return { message: 'The recovery email was send' };
 };
+
+exports.updatePassword = async(email,password) => {
+ 
+  const usrFound = await User.findOne({
+    where:{email:email}
+  })
+  
+  if (usrFound){ 
+    var hash = bcrypt.hashSync(password, 10);
+    if(bcrypt.compareSync(password,usrFound.dataValues.password)){
+      return {err_msg:'Password cannot be previous password'}
+    }
+
+    usrFound.update({password:hash})
+    return { message: 'Password has been changed' };
+
+  }else return { err_msg: 'Email is not registered' };
+}

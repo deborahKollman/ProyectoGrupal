@@ -4,12 +4,14 @@
     width: 400px;
     height: 600px;
     border: 2px solid;
-  
+    background-color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+   position: sticky;
+   top: 20px;
 }
 
 .containerCard img{
@@ -58,5 +60,18 @@
 h3{
     margin-top: 20px;
     margin-bottom: 20px;
+
+}
+
+
+
+@media (max-width: 1000px){
+    .containerCard{
+        width: 290px;
+        height: 650px;
+       
+    }
+
+    
 
 }

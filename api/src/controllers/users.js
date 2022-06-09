@@ -1,4 +1,4 @@
-const { checkUser, createUser, getAllUsers } = require('../services/users.js');
+const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword} = require('../services/users.js');
 const { User } = require('../database/postgres');
 const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 
@@ -83,3 +83,27 @@ exports.updateUser = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
   res.send('Listo');
 };
+
+exports.recoverUserPwd = async(req,res,next) => {
+  try {
+    const r = await recoverUserPwd(req.body.email);
+    if(r.err_msg){
+      return res.status(BAD_REQUEST).send(r.err_msg)
+    }
+    return res.status(OK).send(r.message)
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.updatePassword = async(req,res,next) => {
+  try {
+    const r = await updatePassword(req.body.email,req.body.password);
+    if(r.err_msg){
+      return res.status(BAD_REQUEST).send(r.err_msg)
+    }
+    return res.status(OK).send(r.message)
+  } catch (error) {
+    next(error)
+  }
+}

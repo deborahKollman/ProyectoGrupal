@@ -1,22 +1,54 @@
-import NavDetail from '../components/NavDetail'
+
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 import CardSellerDetail from '../components/CardSellerDetail';
 import CardOthersServices from '../components/CardOthersServices';
 import ProfileOpinion from '../components/ProfileOpinion';
 import Footer from '../components/FooterDetail';
-
+import NavBar from '../components/NavBar/NavBar';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Pagination from 'react-bootstrap/Pagination'
 
 export default function Detail(){
     return <div className={stylesDetail.container}>
-        <h1 className={stylesDetail.title}>ServiExpress</h1>
+        <NavBar></NavBar>
+          <div>
+          <Pagination className={stylesDetail.paginate}>
+  <Pagination.First />
+  <Pagination.Prev />
+  <Pagination.Item>{"Electrician"}</Pagination.Item>
+  <Pagination.Ellipsis />
 
-    <NavDetail></NavDetail>
+  <Pagination.Item>{"Plumb"}</Pagination.Item>
+  <Pagination.Item>{"Worker"}</Pagination.Item>
+  <Pagination.Item active>{"Barber"}</Pagination.Item>
+  <Pagination.Item>{"Carpenter"}</Pagination.Item>
+
+
+  <Pagination.Ellipsis />
+  <Pagination.Item>{"Painter"}</Pagination.Item>
+  <Pagination.Next />
+  <Pagination.Last />
+  </Pagination>
+
+          </div>
+
 
         <div className={stylesDetail.division}>
-       
+        <div className={stylesDetail.leftSide}>
+          <div>
+          <Breadcrumb className={stylesDetail.anchors} >
+          <Breadcrumb.Item href="#" >Home</Breadcrumb.Item>
+          <Breadcrumb.Item href="#">
+          Services
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>Detail</Breadcrumb.Item>
+          </Breadcrumb>
 
-        <div>
+          </div>
+
+
+
         <div className={stylesDetail.carousel}>
      <Carousel fade>
        <Carousel.Item>
@@ -65,16 +97,34 @@ export default function Detail(){
         </p>
             <button>Ver Mas</button>
         </div>
-        
-        <h2>We Recommend Also...</h2>
-        
-        <div className={stylesDetail.cardOthers}>
-        <button className={stylesDetail.btnFowardBack}>a</button>
-        <CardOthersServices></CardOthersServices>
-        <CardOthersServices></CardOthersServices>
-        <button className={stylesDetail.btnFowardBack}>h</button>
+
+         <h2>We Recommend Also...</h2>
+          <div className={stylesDetail.cardOthers}>
+ 
+             <Carousel>
+            <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+                 
+             </Carousel.Item>
+
+             <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+             </Carousel.Item>
+
+             <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+             </Carousel.Item>
+
+             <Carousel.Item>
+                 <CardOthersServices></CardOthersServices>
+             </Carousel.Item>
+
+
+            </Carousel>
 
         </div>
+
+
 
         <div className={stylesDetail.opinion} >
 
@@ -83,12 +133,12 @@ export default function Detail(){
           <ProfileOpinion></ProfileOpinion>
           <ProfileOpinion></ProfileOpinion>
         </div>
-        <Footer></Footer>
+       
     </div>
     <CardSellerDetail></CardSellerDetail>
 
     </div>
-
+     <Footer></Footer>
     </div>
 
 };

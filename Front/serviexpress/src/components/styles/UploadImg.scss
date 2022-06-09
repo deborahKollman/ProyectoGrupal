@@ -1,0 +1,31 @@
+.comp-upload_img{
+    display: flex;
+    align-content: center;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 20px 61px 0;
+    figure{
+        width: 70px;
+        height: 70px;
+        border: 1px solid black;
+        margin: 9px;
+        border-radius: 6%;
+        padding: 9px;
+        img{
+            width: 100%;
+        }
+    }
+    label{
+        display: grid;
+    }
+}
+
+.comp-multiImgs{
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 30px 0;
+
+    .cmp-MultiImgs-label{
+        margin-bottom: 30px;
+    }
+}

@@ -34,5 +34,24 @@ exports.postService=async(name,categories=[])=>{
     const service=await Service.create({name:name});
     service.setCategories(categories)
 
-    return service
+    return {message:'Service updated successfully'}
+}
+
+exports.updateService=async(id,name)=>{
+  const service=await Service.findById(id);
+
+  if(!service){
+    return {err_message:'Service not found'}
+  }
+  service.update({name});
+  return {message:'Service updated successfully'}
+}
+
+exports.deleteService=async(id)=>{
+  const service= await Service.findById(id);
+  if(!service){
+    return {err_message:'Service not found'}
+  }
+  await Service.destroy({where:{id:id}});
+  return {message:'Service deleted successfully'}
 }
