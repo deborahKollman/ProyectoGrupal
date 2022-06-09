@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getServices,getServicesForCategory,orderByName, orderByScore, swich_loading} from "../redux/action"
+import {getServices, swich_loading} from "../redux/action"
 import {Link} from 'react-router-dom';
 import Card from "../pages/components/Card/Card"
 import PaginationRounded from "../components/Pagination/Pagination";
 import Loading from '../pages/components/Loading/Loading';
 import NavBar from '../components/NavBar/NavBar'
+import ServicesBar from "../components/ServicesBar";
 import './Home.css';
 
 export default function Home(){
@@ -43,7 +44,10 @@ else if(allServices.length!==0)dispatch(swich_loading(false))
                 
             </NavBar>
                 
-                    <div className="divpag">
+            <div className="divpag">
+            <ServicesBar>
+                
+            </ServicesBar>
                     
                         <PaginationRounded className ="pagination"
                             ServicesPerPag={ServicesPerPage}
