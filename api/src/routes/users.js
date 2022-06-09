@@ -17,7 +17,7 @@ const router = Router();
 router.get('/', getUsers);
 router.get('/login', checkUser);
 router.get('/:id', getUserDetail);
-router.post('/',upload.array('pictures', 5), postUser);
+router.post('/',upload.single('avatar_image'), postUser);
 
 /* router.post('/register', registerUser);
 router.get('/recover', recoverUserPwd);

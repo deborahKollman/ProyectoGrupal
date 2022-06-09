@@ -1,7 +1,7 @@
 const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword} = require('../services/users.js');
 const { User } = require('../database/postgres');
 const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
-
+const {HOST,PORT}=process.env
 
 
 exports.checkUser = async(req, res, next) => {
@@ -37,11 +37,10 @@ exports.getUsers = async (req, res, next) => {
 exports.postUser = async (req, res, next) => {
   try {
     var newUser=req.body;
-    if(req.files){
-    const avatar_image = req.files.map((e)=> ('http://' + process.env.HOST + ':' + process.env.PORT + e.destination.slice(1) + '/' + e.filename));
-    
-    newUser={...newUser,avatar_image}
-  }
+    if(req.file){
+      const avatar_image = 'http://' + HOST + ':' + PORT + req.file.destination.slice(1) + '/' + req.file.filename;
+      newUser={...newUser,avatar_image}
+    }
     const [user,created] = await createUser(newUser);
     if(created){
       return res.status(CREATED).json(user);
