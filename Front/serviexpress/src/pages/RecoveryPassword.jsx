@@ -3,7 +3,7 @@ import {  MyButtonTwo, MyTextField } from "../elements/Forms";
 import Typography from "@mui/material/Typography";
 import "./styles/Login.scss";
 import GppGoodIcon from '@mui/icons-material/GppGood';
-const RecpveryPassword = () =>  {
+const RecoveryPassword = () =>  {
   const [first, setFirst] = useState("");
  
   return (
@@ -43,4 +43,4 @@ const RecpveryPassword = () =>  {
   );
 };
 
-export default RecpveryPassword
+export default RecoveryPassword
