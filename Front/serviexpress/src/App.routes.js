@@ -23,7 +23,8 @@ function App() {
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
       <Route exact path="/" element={<LandingPage/>} />
-      <Route exact path="detail" element={<Detail></Detail>}></Route>
+      <Route path="/detail" element={<Detail></Detail>}></Route>
+
       <Route path='*' element={<NotFound/>} />
     </Routes>
   );
