@@ -4,15 +4,15 @@ import LandingPage from './pages/LandingPage.jsx';
 import Login from './pages/Login.jsx';
 import Detail from './pages/Detail.jsx'
 import Register from './pages/Register.jsx';
-import RecpveryPassword from './pages/RecoveryPassword.jsx';
+import RecoveryPassword from './pages/RecoveryPassword.jsx';
 import Home from './pages/Home'
 
 function App() {
   return (
     <Routes>
-      <Route exact path="/seller/add-service" element={<CreateService/>} />
-      <Route exact path="/seller" element={<Seller/>} />
-      <Route exact path="/user" element={<ProfileUser/>} />
+      {/* <Route exact path="/seller/add-service" element={<CreateService/>} /> */}
+      {/* <Route exact path="/seller" element={<Seller/>} /> */}
+      {/* <Route exact path="/user" element={<ProfileUser/>} /> */}
       <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
