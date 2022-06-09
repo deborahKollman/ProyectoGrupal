@@ -10,9 +10,9 @@ import Home from './pages/Home'
 function App() {
   return (
     <Routes>
-      <Route exact path="/seller/add-service" element={<CreateService/>} />
-      <Route exact path="/seller" element={<Seller/>} />
-      <Route exact path="/user" element={<ProfileUser/>} />
+      {/* <Route exact path="/seller/add-service" element={<CreateService/>} /> */}
+      {/* <Route exact path="/seller" element={<Seller/>} /> */}
+      {/* <Route exact path="/user" element={<ProfileUser/>} /> */}
       <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
