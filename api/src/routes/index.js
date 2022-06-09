@@ -11,11 +11,11 @@ fs.readdirSync(__dirname).forEach((file) => {
   }
 });
 
-router.get('/public/img/:pub/:id', (req, res)=>{
+router.get('/public/img/pub/:id', (req, res)=>{
   const file = req.params.id;
-  const pub = req.params.pub;
-  console.log(pub,file)
-  res.download('./public/img/'+pub+'/'+file, file)
+  //const pub = req.params.pub;
+  //console.log(pub,file)
+  res.download('./public/img/pub/'+file, file)
 });
 
 router.get('/', (req, res) => {
