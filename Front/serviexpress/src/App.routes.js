@@ -4,7 +4,6 @@ import LandingPage from './pages/LandingPage.jsx';
 import Login from './pages/Login.jsx';
 import Detail from './pages/Detail.jsx'
 import Register from './pages/Register.jsx';
-<<<<<<< HEAD
 
 
 import Home from './pages/Home'
@@ -14,10 +13,6 @@ import Seller from './pages/Seller.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
 import CreateService from './pages/CreateService.jsx';
 
-=======
-import RecoveryPassword from './pages/RecoveryPassword.jsx';
-import Home from './pages/Home'
->>>>>>> development
 
 function App() {
   return (
@@ -31,12 +26,7 @@ function App() {
       <Route exact path="/" element={<LandingPage/>} />
       <Route path="/detail" element={<Detail></Detail>}></Route>
       <Route exact path="/Home" element={<Home/>}/>
-<<<<<<< HEAD
-      <Route path='*' element={<NotFound/>}/>
-
-=======
       <Route path='*' element={<NotFound/>} />
->>>>>>> development
     </Routes>
   )}
 
