@@ -10,15 +10,18 @@ const {
   recoverUserPwd,
   updatePassword
 } = require('../controllers/users.js');
+const {upload } = require('../middlewares/index.js')
 
 const router = Router();
 
-/* router.post('/register', registerUser);
-router.get('/login', checkUser);
-router.get('/recover', recoverUserPwd);
 router.get('/', getUsers);
+router.get('/login', checkUser);
 router.get('/:id', getUserDetail);
-router.post('/', postUser);
+router.post('/',upload.array('pictures', 5), postUser);
+
+/* router.post('/register', registerUser);
+router.get('/recover', recoverUserPwd);
+
 router.delete('/:id', deleteUser);
 
 router.put('/:id', updateUser);

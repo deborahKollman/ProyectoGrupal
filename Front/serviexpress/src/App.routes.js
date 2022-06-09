@@ -11,6 +11,7 @@ import ProfileUser from './pages/ProfileUser.jsx';
 import CreateService from './pages/CreateService.jsx';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
+import Home from './pages/Home'
 
 function App() {
 
@@ -33,10 +34,17 @@ function App() {
       <Route exact path="/detail" element={<Detail/>}/>
 
       <Route exact path="/" element={<LandingPage/>} />
+
+      <Route path="/detail" element={<Detail></Detail>}></Route>
+
+
+      <Route exact path="/Home" element={<Home/>}/>
+
       <Route path='*' element={<NotFound/>} />
+    
     </Routes>
-  );
-}
+  )}
+
 
 export default App;
 

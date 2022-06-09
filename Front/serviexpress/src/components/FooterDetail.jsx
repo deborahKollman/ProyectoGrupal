@@ -1,8 +1,8 @@
-import accordion from 'bootstrap';
+import bootstrap from 'bootstrap';
 import styles from '../pages/styles/footerDetail.module.scss';
 import facebook from '../assets/icons/facebook.png';
 import twitter from '../assets/icons/twitter.png';
-import {MDBContainer} from "mdbreact";
+
 
 
 export default function FooterDetail(){

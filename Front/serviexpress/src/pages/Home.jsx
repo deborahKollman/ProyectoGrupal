@@ -4,9 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getServices,getServicesForCategory,orderByName, orderByScore, swich_loading} from "../redux/action"
 import {Link} from 'react-router-dom';
 import Card from "../pages/components/Card/Card"
-import Pagination from "../pages/components/Pagination/Pagination";
+import PaginationRounded from "../components/Pagination/Pagination";
 import Search from "../pages/components/Search/Search";
 import Loading from '../pages/components/Loading/Loading';
+import { Navbar } from "react-bootstrap";
 import './Home.css';
 
 export default function Home(){
@@ -79,33 +80,7 @@ export default function Home(){
         return(
             <div className="wphome">
                 <div className="upperbar">
-                    <div className="divbuttonbar">
-                        <Link to='/recipe' className='link'>
-                            <button className="buttonhome" >Create Recipe</button>
-                        </Link> 
-                    </div>
-                    <div className="divbuttonbar">
-                        <select  onChange={e=> orderforName(e)}>
-                            <option key = 'default' value='default'>By name...</option>
-                            <option key = 'az' value='az'>A-Z</option>
-                            <option key = 'za' value='za'>Z-A</option>
-                        </select>
-                    </div>
-                    <div className="divbuttonbar">
-                        <select  onChange={e=> orderforScore(e)}>
-                            <option key = 'default' value='default'>By score...</option>
-                            <option key = 'best' value='best'>Best Score</option>
-                            <option key = 'worst' value='worst'>Worst Score</option>
-                        </select>
-                    </div>
-                    <div className="createornotcreate">
-                            <select  onChange={e=> selectcreate(e)}>
-                            <option key = 'all' value='all'>all</option>
-                            <option key = 'create' value='create'>create</option>
-                            <option key = 'api' value='api'>api</option>
-                            
-                        </select>
-                    </div>
+              
                     <h2 className="hometitle">Filter</h2>
                     <div className="divbuttonbar">
                         <select onChange={e=>  filterforCategory(e)}>
@@ -122,13 +97,8 @@ export default function Home(){
                             <option key = 'music & audio' value='music & audio'>music & audio</option>
                         </select>
                     </div>   
-                    <div className="divbuttonbar">
-                        <button className="buttonhome" onClick={(e)=>{handleClick(e)}}>Default</button>
-                    </div>
-                    
-                    <Search
-                        setCurrentPage={setCurrentPage}
-                    />   
+                                        
+                   
                 </div>
                 
                     <div className="divpag">
