@@ -1,6 +1,8 @@
+
 const { users } = require('../database/data.js');
 const { User } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
+
 
 exports.checkUser = (usr, password) => {
   // Chequea si el usuario existe y si la clave es correcta
