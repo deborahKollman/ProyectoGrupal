@@ -15,7 +15,7 @@ export default function Home(){
     const allServices = useSelector ((state)=>state.services);
     const SwichL = useSelector ((state)=>state.switchloading)
     const [CurrentPage, setCurrentPage] = useState(1);
-    const [ServicesPerPage, setRecipesPerPage] = useState(16);
+    const [ServicesPerPage, setServicesPerPage] = useState(16);
     const indexOfLastService = (CurrentPage * ServicesPerPage);
     const indexOfFirstService = (indexOfLastService - ServicesPerPage);
     const currentServices = allServices.slice(indexOfFirstService,indexOfLastService);
@@ -23,7 +23,7 @@ export default function Home(){
     // const [orderscore , setorderscore] = useState(1)
     const servicescreate = [];
     const pagination = (pageNumber) => {setCurrentPage(pageNumber)}
-     
+    
         useEffect(() => {
             dispatch(getServices())
         }, [dispatch]);
@@ -40,11 +40,13 @@ else if(allServices.length!==0)dispatch(swich_loading(false))
 
         return(
             <div className="wphome">
+           
             <NavBar>
                 
             </NavBar>
                 
             <div className="divpag">
+            <p>holaaaaaaaaaaaaaa</p>
             <ServicesBar>
                 
             </ServicesBar>
