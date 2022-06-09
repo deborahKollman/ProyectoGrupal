@@ -5,6 +5,7 @@ import { MyButton } from "../elements/Forms";
 import { Link } from "react-router-dom";
 import RctBoostCarousel from "../components/Carousel.jsx";
 import Footer from "../components/Footer";
+import NavigationBar from "../components/NavigationBar";
 
 const URL = require("./../assets/icons/contrato.png");
 const URL2 = require("./../assets/icons/send.png");
@@ -14,7 +15,7 @@ const Seller = () => {
   return (
     <div className="page-seller">
       <BurgerButton />
-
+      <NavigationBar />
       <figure className="seller-one">
         <img
           src="https://i.ibb.co/CmYp4Cq/bg-mobile-first-hero-x2.jpg"
