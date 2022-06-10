@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import Favorite from "@mui/icons-material/Favorite";
@@ -9,13 +9,32 @@ import { MyHeader, ListNav, StyledBurger, MyNav } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
 import AccountMenu from "./MUI-AcountMenu";
 
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../../redux/action";
+
 const logo = require("../../assets/icons/log.png");
 const BurgerButton = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
+  const [avatar, setAvatar] = useState("");
   const mReloadOpen = () => {
     setOpen(!open);
   };
+
+  const { user } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      console.log(user);
+      if (user?.photos) {
+        setAvatar(user.photos[0].value);
+      } else {
+        setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
+      }
+    } else {
+      dispatch(getUser());
+    }
+  }, [dispatch, avatar, user]);
 
   return (
     <MyHeader pOpen={open}>
@@ -57,8 +76,15 @@ const BurgerButton = () => {
             </li>
           </ol>
         </MyNav>
-
-        <AccountMenu />
+        {avatar ? (
+          <img
+            src={avatar}
+            alt={avatar}
+            style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+          ></img>
+        ) : (
+          <AccountMenu />
+        )}
       </div>
 
       <ListNav pOpen={open}>
