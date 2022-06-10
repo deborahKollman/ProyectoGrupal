@@ -19,6 +19,31 @@ export const getAllServices = () => {
     }
 }
 
+export const getAllCategories = () => {
+    return async (dispatch) => {
+        try {
+            const json = axios('urldementira')
+            return dispatch({type: 'GET_CATEGORIES', payload: json.data})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+//simulando la accion para hacer un post a la ruta y agregar informacion del usuario creado
+export const postProfileUser = (input) => {
+    return async (dispatch) => {
+        try {
+            let profileUser = await axios.post('unaurldementira', input)
+            return dispatch({type: 'POST_PROFILEUSER', profileUser})
+        } catch (error) {console.log(error)}
+    }
+}
+
+//simulando la accion para el filtro por categorias
+export function filterCategories(payload) {
+    return {type: 'FILTER_CATEGORIES', payload}
+}
 
 //Traer All services
 // export function getServices(){

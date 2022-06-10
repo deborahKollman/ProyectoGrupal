@@ -5,25 +5,9 @@ const { User } = require('../../src/database/postgres');
 const LocalStrategy = require('passport-local');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
-passport.use(
-  new LocalStrategy(async function verify(username, password, cb) {
-    const user = await User.findOne({ where: { email: username } });
-    if (!user) {
-      return cb(null, false, { message: 'Incorrect username.' });
-    }
-    if (user.password !== password) {
-      return cb(null, false, { message: 'Incorrect password.' });
-    }
-    return cb(null, {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      password: user.password
-    });
-  })
-);
-
+// Login With Google
 passport.use(
   new GoogleStrategy(
     {
@@ -49,7 +33,62 @@ router.get('/error', (req, res) => {
   res.send('Hubo algun error');
 });
 
-router.get('/success', (req, res) => {
+router.get('/success', async (req, res) => {
+  if (req.user) {
+    const {
+      emails: [{ value }]
+    } = req.user;
+    const user = await User.findOne({
+      where: {
+        email: value
+      }
+    });
+    if (user) {
+      return res.send(user);
+    } else {
+      return res.send({
+        message: 'Este usuario no existe registrate!'
+      });
+    }
+  }
+  res.redirect('http://localhost:3000');
+});
+
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get(
+  '/oauth2/redirect/google',
+  passport.authenticate('google', {
+    failureRedirect: '/login/error'
+  }),
+  function (req, res) {
+    res.redirect('http://localhost:3000/login');
+  }
+);
+
+// Login Local
+passport.use(
+  new LocalStrategy(async function verify(username, password, cb) {
+    const user = await User.findOne({
+      where: {
+        email: username
+      }
+    });
+    if (user) {
+      if (bcrypt.compareSync(password, user.password)) {
+        return cb(null, user);
+      } else {
+        return cb(null, false, { message: 'Incorrect password' });
+      }
+    }
+    return cb(null, false, { message: 'User not found' });
+  })
+);
+
+router.post('/success', (req, res) => {
   if (req.user) {
     return res.status(200).json({
       user: req.user
@@ -58,17 +97,20 @@ router.get('/success', (req, res) => {
   res.send(404);
 });
 
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.post('/error', async (req, res) => {
+  const { username } = req.body;
 
-router.get(
-  '/oauth2/redirect/google',
-  passport.authenticate('google', {
-    failureRedirect: '/login/error'
-  }),
-  function (req, res) {
-    res.redirect('http://localhost:3000');
+  const user = await User.findOne({
+    where: {
+      email: username
+    }
+  });
+  if (user) {
+    return res.send('Email or password incorrect');
+  } else {
+    return res.send('User not registered');
   }
-);
+});
 
 router.post(
   '/',
@@ -76,7 +118,7 @@ router.post(
     failureRedirect: '/login/error'
   }),
   (req, res) => {
-    res.redirect('http://localhost:3000');
+    res.redirect('http://localhost:3001/login/success');
   }
 );
 
