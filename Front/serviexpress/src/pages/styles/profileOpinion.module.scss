@@ -6,14 +6,13 @@
 
 }
 .container{
-    display: grid;
-    grid-template-columns: 1fr 2fr 6fr;
+    display: flex;
     border: 2px solid gray;
     border-radius: 10px;
     align-items: center;
     margin-bottom: 40px;
    background-color: whitesmoke;
-   
+    gap: 20px;
 
 }
 
@@ -25,6 +24,7 @@
 
 .divStars{
     display: flex;
+    width: max-content;
    
 
 }

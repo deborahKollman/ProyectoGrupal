@@ -1,5 +1,5 @@
 import axios from "axios";
-import swal from "sweetalert";
+ import swal from "sweetalert"; 
 const GET_PUBLICATIONS = "GET_PUBLICATIONS";
 const SWICH_LOADING = "SWICH_LOADING";
 const GET_PUBLICATION_ID = "GET_PUBLICATION_ID";
@@ -171,13 +171,13 @@ export function getPublicationsName(name) {
         });
       })
 
-      .catch(function () {
+       .catch(function () {
         swal({
           title: "ERROR",
           text: "Recipe not found",
           icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
           dangerMode: true,
         });
-      });
+      }); 
   };
 }
