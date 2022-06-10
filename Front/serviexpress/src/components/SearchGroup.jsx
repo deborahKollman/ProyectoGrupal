@@ -1,31 +1,43 @@
 import React, {useState} from 'react'
 // import {getVideoGameByName} from '../../redux/action'
-// import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import styled from "styled-components";
+import {getPublicationsName} from "../redux/action"
 
 const SearchGroup = () => {
-
-  // const xDispatch = useDispatch();
-  
+const dispatch = useDispatch()
+const [name, setName] = useState('')
+const publicarionname = useSelector((state)=>state.publicarionName) 
   const [crntSearch, setSearch] = useState('');
   
-  const mOnClickButton = async (e) => {
-    // xDispatch(getVideoGameByName(crntSearch));
-    console.log("DISPACHO ->",crntSearch);
+  function handleInputChange(e) {
+    e.preventDefault(); 
+    setName(e.target.value)
+    console.log(name)
+}
+  function handleSubmit(e){
+    e.preventDefault(); 
+    
+    setName("");
   }
 
+
   return (
-    <MyForm className= "header-input-container">
+   
+    <MyForm onSubmit={handleSubmit} className= "header-input-container">
         <input 
           placeholder="Search Service" 
-          onChange={(e) => {setSearch(e.target.value)}}
+          onChange={ e => handleInputChange(e)}
           className="header-input"
-          value={crntSearch}
+          type= 'text'
+          value={name}
         />
         <button 
-          onClick={mOnClickButton} 
+          onClick={getPublicationsName(name)}
           className="second-icon"/>
+         
     </MyForm>
+   
   )
 }
 

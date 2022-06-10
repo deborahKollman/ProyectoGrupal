@@ -1,24 +1,22 @@
-import {  
-    JALZ_GET_CATEGORIES
-} from "./action";
 
 const initialState = {
     rdcr_categories: [],
     rdcr_tempVariables: [1,2,3,4,5,6],
-    services: [],
+    Publications: [],
     switchloading: false,
 
     detail: {},
     profileUser: [],
     categories: [],
-    filteredCategories: []
+    filteredCategories: [],
+    publicationById: {}
 
 }
 
 const rootReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (action.type){
-        case JALZ_GET_CATEGORIES:
+        case 'JALZ_GET_CATEGORIES':
             return {
                 ...state,
                 rdcr_categories: payload,
@@ -28,15 +26,25 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 rdcr_tempVariables: action.payload,
             }
-        case 'GET_SERVICES':
+        case 'GET_PUBLICATIONS':
             return{
-                ...state,
-                services: action.payload,
-            }
-        case 'GET_CATEGORIES':
+            ...state,
+            Publications: action.payload,
+                }
+                case 'GET_PUBLICATIONS_NAME':
+                    return{
+                    ...state,
+                    Publications: action.payload,
+                        }
+        case 'GET_CATEGORIES': 
             return {
                 ...state,
                 categories: action.payload
+            }
+            case 'GET_PUBLICATION_ID': 
+            return {
+                ...state,
+                publicationById: action.payload
             }
         case 'SWICH_LOADING':
             return{
