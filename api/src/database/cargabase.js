@@ -12,7 +12,7 @@ const fx = async function() {
             province_state: 'Lima',
             rol: 'client' ,
             buyer_reputation: 3,  
-            buyer_reputation:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
             seller_reputation: 4,
             seller_opinions:[{commenter:"Fulano Perez",comment:"Que buen servicio",rating:5},{commenter:"Mengano Gomez",comment:"Trabajo decente, medio caro",rating:3}],
         })
