@@ -67,7 +67,7 @@ exports.registerUser = (usr, password) => {
 exports.updateUser = async(id,changes) => {
   const user = await User.findByPk(id)
   if(user){
-    await User.update({changes},{where:{id}})
+    await User.update({...changes},{where:{id}})
     return {message:'User updated successfully'}
   }
   return {err_msg:'User not found'}
@@ -113,7 +113,7 @@ exports.deleteUser = async(id) => {
 exports.addSellerComment = async(id,rating,comment,commenter) => {
   const user = await User.findByPk(id);
   if(user){
-    const opinion={commenter,comment};
+    const opinion={commenter,comment,rating};
     var comm=user.dataValues.seller_opinions;
     var rep=user.dataValues.seller_reputation;
     var rep=(rep*comm.length+rating)/(comm.length+1);
@@ -127,7 +127,7 @@ exports.addSellerComment = async(id,rating,comment,commenter) => {
 exports.addBuyerComment = async(id,rating,comment,commenter) => {
   const user = await User.findByPk(id);
   if(user){
-    const opinion={commenter,comment};
+    const opinion={commenter,comment,rating};
     var comm=user.dataValues.buyer_opinions
     var rep=user.dataValues.buyer_reputation;
     var rep=(rep*comm.length+rating)/(comm.length+1);

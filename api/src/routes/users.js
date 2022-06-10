@@ -24,10 +24,10 @@ router.put('/recover', updatePassword);
 router.delete('/:id', deleteUser);
 router.put('/:id/buyer_review',addBuyerOpinion);
 router.put('/:id/seller_review',addSellerOpinion);
+router.put('/:id', updateUser);
 
 /* router.post('/register', registerUser);
 router.get('/recover', recoverUserPwd);
-router.put('/:id', updateUser);
 
  */
 
