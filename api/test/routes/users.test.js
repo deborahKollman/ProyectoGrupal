@@ -128,6 +128,7 @@ describe('PUT /users:id', () => {
       province_state: 'Antioquia',
       rol: 'admin'
     });
+    expect(response.body.message).toEqual('User not found');
     expect(response.status).toBe(NOT_FOUND);
   });
   afterAll(async () => {
@@ -151,9 +152,7 @@ describe('DELETE /users:id', () => {
     const response = await request(server).delete('/users/1');
     const user = await User.findByPk(1);
     expect(user).toBeNull();
-    expect(response.body).toEqual({
-      message: 'User deleted'
-    });
+    expect(response.body.message).toEqual('User not found');
     expect(response.status).toBe(OK);
   });
   it('Debe retornar un mensaje si no existe el usuario', async () => {
