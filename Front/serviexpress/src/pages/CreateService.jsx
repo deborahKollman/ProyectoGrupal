@@ -40,8 +40,8 @@ const CreateService = () => {
       categoryId: 1,
       // subcategory,
     };
-    console.log(data);
-    // xDispatch(createPublication(data));
+    // console.log(data);
+    xDispatch(createPublication(data));
   }
   return (
     <div className="page-createService">
