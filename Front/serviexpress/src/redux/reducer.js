@@ -1,4 +1,9 @@
+import {  
+    JALZ_GET_CATEGORIES
+} from "./action";
+
 const initialState = {
+    rdcr_categories: [],
     rdcr_tempVariables: [1,2,3,4,5,6],
     services: [],
     switchloading: false,
@@ -11,7 +16,13 @@ const initialState = {
 }
 
 const rootReducer = (state = initialState, action) => {
+    const { type, payload } = action;
     switch (action.type){
+        case JALZ_GET_CATEGORIES:
+            return {
+                ...state,
+                rdcr_categories: payload,
+            }
         case 'TEMP_VARIABLES':
             return {
                 ...state,
