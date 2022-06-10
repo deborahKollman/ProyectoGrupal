@@ -23,18 +23,16 @@ server.use(
   })
 );
 server.use(express.static('public'));
-// set up session cookies
 server.use(
   cookieSession({
     name: 'session',
     keys: ['key1', 'key2']
   })
 );
-// manejador de sesión
 server.use(
   session({
     secret: 'secret',
-    resave: false, // don't save session if unmodified
+    resave: false,
     saveUninitialized: false
   })
 );
@@ -51,10 +49,11 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
+// root of routes
 server.use('/', router);
 // Endwares
 server.use(({ message }, req, res, next) => {
-  console.log(`index error: ${message}`);
+  console.log(`index error[review the 'server.js' file]: ${message}`);
   res.status(500).send({ message });
 });
 
