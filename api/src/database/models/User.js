@@ -68,8 +68,8 @@ module.exports = (sequelize) => {
         }
       },
       buyer_opinions: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        defaultValue: []
       },
       seller_reputation: {
         type: DataTypes.FLOAT,
@@ -79,8 +79,8 @@ module.exports = (sequelize) => {
         }
       },
       seller_opinions: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        defaultValue: []
       }
     },
     {
