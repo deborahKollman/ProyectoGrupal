@@ -1,12 +1,44 @@
-const axios = require("axios");
-
 export const POST_PUBLICATION = "POST_PUBLICATION";
 export const JALZ_GET_CATEGORIES = "JALZ_GET_CATEGORIES";
 export const TEMP_VARIABLES = "TEMP_VARIABLES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SERVICES = "GET_SERVICES";
-export const  GET_BY_ID = 'GET_BY_ID';
+export const GET_BY_ID = "GET_BY_ID";
+export const GET_USER = "GET_USER";
 const URL = `http://localhost:3001`;
+const axios = require("axios");
+
+export const getUser = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get("http://localhost:3001/login/success", {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+
+    dispatch({
+      type: GET_USER,
+      payload: data,
+    });
+  };
+};
+export const getUserr = (user) => {
+  return async (dispatch) => {
+    const { data } = await axios.post("http://localhost:3001/login", user, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    dispatch({
+      type: GET_USER,
+      payload: data,
+    });
+  };
+};
 
 export const createPublication = (pObjData) => {
   return async () => {
@@ -50,26 +82,16 @@ export const getAllServices = () => {
   };
 };
 
-
 export const getById = (id) => {
-   
-    return async (dispatch) => {
-         const publi = await axios.get(`${URL}/publications/${id}`);
-           
-         dispatch({
-            
-            type: GET_BY_ID,
-            payload: publi.data,
-         })
+  return async (dispatch) => {
+    const publi = await axios.get(`${URL}/publications/${id}`);
 
-    }
-
+    dispatch({
+      type: GET_BY_ID,
+      payload: publi.data,
+    });
+  };
 };
-
-
-
-
-
 
 export const getAllCategories = () => {
   return async (dispatch) => {
