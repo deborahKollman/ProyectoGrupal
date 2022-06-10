@@ -19,6 +19,15 @@ export const getAllServices = () => {
     }
 }
 
+//simulando la ruta para agregar informacion del usuario creado
+export const postProfileUser = (input) => {
+    return async (dispatch) => {
+        try {
+            let profileUser = await axios.post('unaurldementira', input)
+            return dispatch({type: 'POST_PROFILEUSER', profileUser})
+        } catch (error) {console.log(error)}
+    }
+}
 
 //Traer All services
 // export function getServices(){
