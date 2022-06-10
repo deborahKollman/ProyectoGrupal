@@ -1,8 +1,9 @@
 const axios = require('axios');
 
 export const TEMP_VARIABLES = 'TEMP_VARIABLES';
-export const GET_SERVICES = 'GET_SERVICES'
-const URL = `http://127.0.0.1:4001`;
+export const GET_SERVICES = 'GET_SERVICES';
+export const  GET_BY_ID = 'GET_BY_ID';
+const URL = `http://localhost:3001`;
 
 
 export const getAllServices = () => {
@@ -18,6 +19,27 @@ export const getAllServices = () => {
         }
     }
 }
+
+
+export const getById = (id) => {
+   
+    return async (dispatch) => {
+         const publi = await axios.get(`${URL}/publications/${id}`);
+           
+         dispatch({
+            
+            type: GET_BY_ID,
+            payload: publi.data,
+         })
+
+    }
+
+};
+
+
+
+
+
 
 export const getAllCategories = () => {
     return async (dispatch) => {

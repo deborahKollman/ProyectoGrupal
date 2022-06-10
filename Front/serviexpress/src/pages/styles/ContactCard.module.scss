@@ -8,11 +8,12 @@
     
 }
 
-.container input{
-    height: 250px;
+textarea{
     border-radius: 10px;
     border: 3px solid lightgrey;
-    align-items: flex-start;
+    resize: none;
+    height: 200px;
+
 
 }
 
@@ -63,8 +64,5 @@
     justify-content: center;
 
 }
-
-
-
 
 
