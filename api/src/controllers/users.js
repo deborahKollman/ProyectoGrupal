@@ -1,4 +1,4 @@
-const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword} = require('../services/users.js');
+const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment} = require('../services/users.js');
 const { User } = require('../database/postgres');
 const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 const {HOST,PORT}=process.env
@@ -52,9 +52,8 @@ exports.postUser = async (req, res, next) => {
 };
 
 exports.getUserDetail = async (req, res, next) => {
-  const { id } = req.params;
-
   try {
+    const {id} = req.params
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(BAD_REQUEST).send({ message: 'User not found' });
@@ -67,11 +66,31 @@ exports.getUserDetail = async (req, res, next) => {
   }
 };
 
-exports.updateUser = (req, res, next) => {
-  res.send('Listo');
+exports.updateUser = async(req, res, next) => {
+  try {
+    const {id}=req.params;
+    const {changes}=req.body
+    const r = await this.updateUser(id,changes);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg)
+    }
+    res.status(OK).send(r.message);
+  } catch (error) {
+    next(error)
+  }
 };
-exports.deleteUser = (req, res, next) => {
-  res.send('Listo');
+
+exports.deleteUser = async(req, res, next) => {
+  try {
+    const {id}=req.params;
+    const r = await deleteUser(id);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg);
+    }
+    res.status(OK).send(r.message);
+  } catch (error) {
+    next(error)
+  }
 };
 
 exports.recoverUserPwd = async(req,res,next) => {
@@ -93,6 +112,34 @@ exports.updatePassword = async(req,res,next) => {
       return res.status(BAD_REQUEST).send(r.err_msg)
     }
     return res.status(OK).send(r.message)
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.addBuyerOpinion = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const {rating,comment,commenter} = req.body;
+    const r = await addBuyerComment(id,rating,comment,commenter)
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg);
+    }
+    res.status(OK).send(r.message)
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.addSellerOpinion = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const {rating,comment,commenter} = req.body;
+    const r = await addSellerComment(id,rating,comment,commenter)
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg);
+    }
+    res.status(OK).send(r.message)
   } catch (error) {
     next(error)
   }
