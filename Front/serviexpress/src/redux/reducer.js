@@ -1,10 +1,11 @@
 const initialState = {
     rdcr_tempVariables: [1,2,3,4,5,6],
-    services: [],
+    Publications: [],
     switchloading: false,
     profileUser: [],
     categories: [],
     filteredCategories: []
+
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -14,11 +15,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 rdcr_tempVariables: action.payload,
             }
-        case 'GET_SERVICES':
+        case 'GET_PUBLICATIONS':
             return{
-                ...state,
-                services: action.payload,
-            }
+            ...state,
+            Publications: action.payload,
+                }
         case 'GET_CATEGORIES':
             return {
                 ...state,
@@ -26,8 +27,8 @@ const rootReducer = (state = initialState, action) => {
             }
         case 'SWICH_LOADING':
             return{
-            switchloading: true,  
-            }
+                switchloading: action.payload,  
+                }
         case 'POST_PROFILEUSER':
             return {
                 ...state,

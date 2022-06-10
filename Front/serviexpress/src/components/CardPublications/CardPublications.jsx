@@ -1,15 +1,13 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
 
-// import './Card.css'
 
-const CardServices = ({ id, score,summary, album, title, price}) => {
+import './CardPublications.css'
+
+const CardPublications = ({ id, score,summary, album, title, price}) => {
     
-    const dispatch = useDispatch();
- 
 
+ 
        return (
     <div className='container'>
         
@@ -24,6 +22,9 @@ const CardServices = ({ id, score,summary, album, title, price}) => {
                 
                 <div className='card-text' >
                 <h6 className="titlec">{title}</h6>
+                <p className="titlec">{summary}</p>
+                {/* <p className="titlec">{score}</p> */}
+                <p className="titlec">{price}</p>
 
 
                      </div>
@@ -39,7 +40,6 @@ const CardServices = ({ id, score,summary, album, title, price}) => {
     );
 };
 
-export default CardServices;
-
+export default CardPublications;
 
 

@@ -1,0 +1,11 @@
+.services-home {
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 2000px;
+    justify-content: center;
+    gap: 1em;
+    /* margin-left: 150px; */
+    /* grid-template-rows: auto; */
+  justify-items: center;
+  }
