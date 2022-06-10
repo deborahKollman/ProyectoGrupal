@@ -1,4 +1,4 @@
-const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment} = require('../services/users.js');
+const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment, getBuyerComments, getSellerComments} = require('../services/users.js');
 const { User } = require('../database/postgres');
 const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 const {HOST,PORT}=process.env
@@ -139,6 +139,34 @@ exports.addSellerOpinion = async(req,res,next) => {
       res.status(BAD_REQUEST).send(r.err_msg);
     }
     res.status(OK).send(r.message)
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.getBuyerOpinions = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const {count} = req.body;
+    const r = await getBuyerComments(id,count);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg)
+    }
+    res.status(OK).json(r)
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.getSellerOpinions = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const {count} = req.body;
+    const r = await getSellerComments(id,count);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg)
+    }
+    res.status(OK).json(r)
   } catch (error) {
     next(error)
   }

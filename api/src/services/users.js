@@ -110,6 +110,24 @@ exports.deleteUser = async(id) => {
   return {err_msg:'User not found'}
 }
 
+exports.getSellerComments = async(id,count=0) => {
+  const user = await User.findByPk(id);
+  if(user){
+    const comments = user.dataValues.seller_opinions.slice(-count)
+    return comments;
+  }
+  return {err_msg:'User not found'}
+}
+
+exports.getBuyerComments = async(id,count=0) => {
+  const user = await User.findByPk(id);
+  if(user){
+    const comments = user.dataValues.buyer_opinions.slice(-count)
+    return comments;
+  }
+  return {err_msg:'User not found'}
+}
+
 exports.addSellerComment = async(id,rating,comment,commenter) => {
   const user = await User.findByPk(id);
   if(user){
