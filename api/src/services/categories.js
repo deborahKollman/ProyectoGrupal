@@ -6,13 +6,12 @@ exports.getCategories = async () => {
 //Esto son algunos datos agregados
   
   const categories = await Category.findAll({
-     attributes: [
-      ['id', 'cat_id'],
-      ['name', 'cat_name']
-    ],
     include:{
       model:Service,
-      attributes:[['id','ser_id'],['name','ser_name']]}
+      through:{
+        attributes:[]
+      }
+    }
   });
   
   return categories;
@@ -21,13 +20,12 @@ exports.getCategories = async () => {
 exports.getCategorieById=async(id)=>{
   const category= await Category.findOne({
     where:{id:id},
-    attributes: [
-      ['id', 'cat_id'],
-      ['name', 'cat_name']
-    ],
     include:{
       model:Service,
-      attributes:[['id','ser_id'],['name','ser_name']]}
+      through:{
+        attributes:[]
+      }
+    }
   })
 
   return category
