@@ -1,6 +1,6 @@
 .carousel{
     height: 400px;
-    margin-top: 50px;
+   
     margin-bottom: 50px;
 
 
@@ -91,5 +91,24 @@
     padding-left: 20px;
     padding-right: 20px;
     width: 94%;
+
+}
+
+.title{
+    font-size: large;
+    font-weight: 800;
+    font-style: italic;
+    justify-content: flex-end;
+    margin-top: 50px;
+    gap: 10px;
+
+}
+
+.more{
+    border: none;
+    background-color: lightgrey;
+    color: navy;
+    margin-bottom: 50px;
+    font-size: large;
 
 }

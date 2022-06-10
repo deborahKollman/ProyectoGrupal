@@ -12,8 +12,9 @@ export default function ContactCard({name,perfil}){
           </div>
 
           <label>Write a service that you looking for:</label>
-          <input placeholder='I need a service like...'></input>
-
+         
+          <textarea type="text" placeholder='I need a service like...'></textarea>
+          
             <button>Add image</button>
 
           <label>Do you need this service urgently?</label>

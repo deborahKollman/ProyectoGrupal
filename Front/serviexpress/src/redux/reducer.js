@@ -7,9 +7,12 @@ const initialState = {
     rdcr_tempVariables: [1,2,3,4,5,6],
     services: [],
     switchloading: false,
+
+    detail: {},
     profileUser: [],
     categories: [],
     filteredCategories: []
+
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -39,6 +42,19 @@ const rootReducer = (state = initialState, action) => {
             return{
             switchloading: true,  
             }
+
+        case 'GET_BY_ID':
+            let aux = action.payload;
+            aux.date = aux.date.slice(0,10)
+
+
+            return{
+                ...state,
+                detail: aux
+            }
+
+        
+
         case 'POST_PROFILEUSER':
             return {
                 ...state,
@@ -55,6 +71,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 filteredCategories: [...filtered]
             }
+
         default:
             return state;
     }

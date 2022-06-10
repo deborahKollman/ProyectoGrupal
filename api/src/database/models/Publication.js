@@ -27,7 +27,11 @@ module.exports = (sequelize) => {
       detail: {
         type: DataTypes.TEXT
       },
+<<<<<<< HEAD
+      detail_resume:{
+=======
       detail_resume: {
+>>>>>>> development
         type: DataTypes.STRING(50)
       },
       price: {
