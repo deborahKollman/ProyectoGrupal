@@ -1,5 +1,5 @@
 import {  
-    GET_CATEGORIES
+    JALZ_GET_CATEGORIES
 } from "./action";
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (action.type){
-        case GET_CATEGORIES:
+        case JALZ_GET_CATEGORIES:
             return {
                 ...state,
                 rdcr_categories: payload,

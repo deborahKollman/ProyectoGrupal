@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MySelect, MySelectTwo } from "../elements/SelectMUI";
 import { MyButtonTwo, MyTextField } from "../elements/Forms";
 import { MultiImgs } from "../components/UploadImg";
 import BurgerButton from "../components/NavBar/NavBar";
 import "./styles/CreateService.scss";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import { useDispatch, useSelector } from 'react-redux';
+import {jalz_getAllCategories, createPublication} from '../redux/action'
 
 const CATEGORY = require("../assets/database/CATEGORY.json");
 const SUBCATEGORY = require("../assets/database/SUBCATEGORY.json");
@@ -13,12 +15,42 @@ const CreateService = () => {
   const [category, setCategory] = useState("");
   const [subcategory, setSubcategory] = useState("");
   const [price, setPrice] = useState("");
+  const [pictures, setImage] = useState(null);
 
+  
+  const xDispatch = useDispatch();
+
+  useEffect(() => {
+      xDispatch(jalz_getAllCategories());
+  }, [xDispatch])
+
+  const {rdcr_categories} = useSelector(state => state);
+
+  console.log(rdcr_categories);
+  const mSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      detail_resume: "detail test",
+      userId: 1,
+      price,
+      detail: "some detail",
+      user_id: 1,
+      pictures,
+      title: "title test",
+      categoryId: 1,
+      // subcategory,
+    };
+    console.log(data);
+    // xDispatch(createPublication(data));
+  }
   return (
     <div className="page-createService">
       <BurgerButton />
 
-      <section className="createService-content">
+      <form 
+        onSubmit={mSubmit}
+        className="createService-content">
+
         <h1>Service Info</h1>
 
         <MySelect
@@ -65,12 +97,15 @@ const CreateService = () => {
           inputProps={{ min: "0", max: "9999", inputMode: 'numeric', pattern: '[0-9]*' }}
         />
 
-        <MultiImgs />
+        <MultiImgs 
+          pStateImage= {pictures}
+          pSetStateImage= {setImage}
+        />
 
-        <MyButtonTwo variant="contained" endIcon={<LibraryAddIcon />}>
+        <MyButtonTwo type="submit" variant="contained" endIcon={<LibraryAddIcon />}>
           Save Service
         </MyButtonTwo>
-      </section>
+      </form>
     </div>
   );
 };
@@ -80,19 +115,5 @@ export default CreateService;
           onChange={() => {
             console.log("object");
           }} */
-/* 
-
-// import { useDispatch, useSelector } from 'react-redux';
-// import {getAllCategories} from '../redux/action'
 
 
-  const xDispatch = useDispatch();
-
-  useEffect(() => {
-      xDispatch(getAllCategories());
-  }, [xDispatch])
-
-  const {rdcr_categories} = useSelector(state => state);
-
-  console.log(rdcr_categories);
-*/

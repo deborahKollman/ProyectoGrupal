@@ -9,7 +9,6 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const img = require("../assets/icons/star.png");
 
 const UploadImg = () => {
-
   return (
     <section className="comp-upload_img">
       <figure>
@@ -30,35 +29,40 @@ const UploadImg = () => {
   );
 };
 
-const MultiImgs = () => {
+const MultiImgs = ({ pictures, pSetStateImage }) => {
+  const [state, setState] = useState({
+    profileImg: "https://i.ibb.co/X2bcwRM/mario.jpg",
+  });
 
-  const [state , setState] = useState({
-    profileImg: 'https://i.ibb.co/X2bcwRM/mario.jpg',
-})
   const mImgHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
-        if (reader.readyState === 2) {
-            setState({profileImg: reader.result})
-        }
-    }
-    
-    reader.readAsDataURL(e.target.files[0])
-  }
+      if (reader.readyState === 2) {
+        setState({ profileImg: reader.result });
+      }
+    };
+    pSetStateImage(e.target.files[0]);
 
-  
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  console.log(state, "============", pictures);
 
   return (
     <section className="comp-multiImgs">
-      <label htmlFor="contained-button-file" className="cmp-MultiImgs-label">
+      <label
+        htmlFor="contained-button-file"
+        className="cmp-MultiImgs-label"
+        
+      >
         <Input
           accept="image/*"
           id="contained-button-file"
           multiple
           type="file"
-          onClick={mImgHandler}
+          onChange={mImgHandler}
         />
-         
+ 
         <Button
           variant="contained"
           component="span"
@@ -67,10 +71,10 @@ const MultiImgs = () => {
           Upload Images
         </Button>
       </label>
-
-      <MediaCard 
-        pURLimg={state.profileImg}
-      />
+      {
+        
+      }
+      <MediaCard pURLimg={state.profileImg} />
     </section>
   );
 };
@@ -80,3 +84,17 @@ export { UploadImg, MultiImgs };
 const Input = styled("input")({
   display: "none",
 });
+/* 
+
+/* const file = e.target.files[0];
+
+    setState({
+      ...state,
+      profileImg: URL.createObjectURL(file)
+    })
+    
+    pSetStateImage(file); 
+    
+
+    ===================
+    */

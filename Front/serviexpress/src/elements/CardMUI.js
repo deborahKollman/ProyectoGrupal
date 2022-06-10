@@ -28,11 +28,11 @@ export default function MediaCard({pURLimg}) {
         </Typography>
       </CardContent> */}
       
-      <CardActions>
+      {/* <CardActions>
         <Button color="error" variant="outlined" startIcon={<DeleteIcon />}>
           Delete
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }
