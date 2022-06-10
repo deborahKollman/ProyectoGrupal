@@ -2,7 +2,9 @@ const initialState = {
     rdcr_tempVariables: [1,2,3,4,5,6],
     services: [],
     switchloading: false,
-    profileUser: []
+    profileUser: [],
+    categories: [],
+    filteredCategories: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -17,6 +19,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 services: action.payload,
             }
+        case 'GET_CATEGORIES':
+            return {
+                ...state,
+                categories: action.payload
+            }
         case 'SWICH_LOADING':
             return{
             switchloading: true,  
@@ -25,6 +32,17 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profileUser: [...action.payload]
+            }
+        case 'FILTER_CATEGORIES':
+            let categoriesCopy = state.categories
+            let filtered = 
+                action.payload === 'all' 
+                ? categoriesCopy
+                : categoriesCopy.filter((category) => category.name === action.payload)
+            if (filtered.length <= 0) {filtered = categoriesCopy}
+            return {
+                ...state,
+                filteredCategories: [...filtered]
             }
         default:
             return state;
