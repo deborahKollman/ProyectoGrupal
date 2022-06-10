@@ -1,12 +1,70 @@
+
 import axios from 'axios';
 import swal from 'sweetalert';
-
-const TEMP_VARIABLES = 'TEMP_VARIABLES';
 const GET_PUBLICATIONS = 'GET_PUBLICATIONS'
 const SWICH_LOADING = 'SWICH_LOADING'
 const GET_PUBLICATION_ID = 'GET_PUBLICATION_ID'
 const GET_PUBLICATIONS_NAME = 'GET_PUBLICATIONS_NAME'
-const URL = `http://127.0.0.1:4001`;
+const POST_PUBLICATION = "POST_PUBLICATION";
+const JALZ_GET_CATEGORIES = "JALZ_GET_CATEGORIES";
+const TEMP_VARIABLES = "TEMP_VARIABLES";
+const GET_CATEGORIES = "GET_CATEGORIES";
+const GET_SERVICES = "GET_SERVICES";
+ const  GET_BY_ID = 'GET_BY_ID';
+const URL = `http://localhost:3001`;
+
+
+export const createPublication = (pObjData) => {
+  return async () => {
+    try {
+      const response = await axios.post(`${URL}/publications`, pObjData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      return response;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+export const jalz_getAllCategories = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
+      dispatch({
+        type: JALZ_GET_CATEGORIES,
+        payload: data,
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
+
+
+export const getById = (id) => {
+   
+    return async (dispatch) => {
+         const publi = await axios.get(`${URL}/publications/${id}`);
+           
+         dispatch({
+            
+            type: GET_BY_ID,
+            payload: publi.data,
+         })
+
+    }
+
+};
+
+
+//simulando la accion para hacer un post a la ruta y agregar informacion del usuario creado
+
+//simulando la accion para el filtro por categorias
+export function filterCategories(payload) {
+  return { type: "FILTER_CATEGORIES", payload };
+}
 
 
 export const getAllServices = () => {
@@ -44,10 +102,8 @@ export const postProfileUser = (input) => {
     }
 }
 
-//simulando la accion para el filtro por categorias
-export function filterCategories(payload) {
-    return {type: 'FILTER_CATEGORIES', payload}
-}
+
+
 
 export const swich_loading = (e) => {
  
