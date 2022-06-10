@@ -16,3 +16,13 @@
   16 git pull orirgin development
   17 git pull origin development
   18 git pull
+
+PORT=3001
+DB_HOST="localhost"
+DB_USER="postgres"
+DB_PASSWORD="123456789"
+DB_NAME="serviexpress"
+HOST="localhost"
+GOOGLE_CLIENT_ID=501870436365-eq75i2tfr3rrabcflqjspnrb14ikg6gq.apps.googleusercontent.com
+
+GOOGLE_CLIENT_SECRET=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
