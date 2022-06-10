@@ -1,22 +1,27 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
+import React from "react";
+import './Pagination.css'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
 
-export default function PaginationRounded() {
-  const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <Pagination count={10} shape="rounded" />
-      <Pagination count={10} variant="outlined" shape="rounded" />
-    </div>
-  );
+export default function Pagination({ServicesPerPage, allServices, pagination}){
+    const pageNumbers = []
+    const reset=false
+    for(let i=1; i<=Math.ceil(allServices/ServicesPerPage); i++){
+        pageNumbers.push(i)
+    }
+ 
+    return(
+        <div className="pagination2">
+                
+                    {   
+                        
+                        pageNumbers && 
+                        pageNumbers.map(Number=>{ return(
+                            <div className="number" key={Number}>
+                            <a onClick={()=>pagination(Number)}>{Number}</a>
+                            </div>)
+                        })}
+                
+        </div>
+    )
 }

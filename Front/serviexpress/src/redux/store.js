@@ -7,20 +7,4 @@ const store = configureStore({
   middleware: [thunk],
 });
 
-
-
-/* const store = configureStore({
-
-    reducer: rootReducer,
-     middleware: applyMiddleware(thunk),
-    //devTools: composeWithDevTools(applyMiddleware(thunk)),
-
-}); */
-
 export default store;
-
-// const STORE = configureStore (
-//     rootReducer,
-//     composeWithDevTools(applyMiddleware(thunk))
-// );
- 
