@@ -1,4 +1,4 @@
-const { DataTypes, STRING } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -27,7 +27,11 @@ module.exports = (sequelize) => {
       detail: {
         type: DataTypes.TEXT
       },
+<<<<<<< HEAD
       detail_resume:{
+=======
+      detail_resume: {
+>>>>>>> development
         type: DataTypes.STRING(50)
       },
       price: {

@@ -4,10 +4,6 @@ import styles from '../pages/styles/servicesBar.module.scss'
 
 export default function ServicesBar(){
 
-
-
-
-    
     return <div className={styles.container}>
     <Pagination >
   <Pagination.First />
@@ -25,10 +21,6 @@ export default function ServicesBar(){
   <Pagination.Next />
   <Pagination.Last />
   </Pagination>
-
-
-
-
 
     </div>
 

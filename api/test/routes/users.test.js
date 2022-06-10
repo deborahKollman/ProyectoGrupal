@@ -22,9 +22,9 @@ describe('GET /users', () => {
   });
   it('deberia retornar un usuario si es que existe', async () => {
     await User.create({
-      email: 'JuanEmail@gmail.com',
+      email: 'carlos65357@gmail.com',
       password: '123456',
-      name: 'Juan',
+      name: 'Carlos',
       country: 'Colombia',
       province_state: 'Antioquia',
       role: 'admin'
@@ -72,9 +72,9 @@ describe('POST /users', () => {
       email: 'carlos65357@gmail.com',
       password: '123456',
       name: 'Carlos',
-      country: 'Bolivia',
-      province_state: 'La Paz - El Alto',
-      rol: 'client'
+      country: 'Colombia',
+      province_state: 'Antioquia',
+      role: 'admin'
     });
     const [user] = await User.findAll({
       where: {
@@ -128,6 +128,7 @@ describe('PUT /users:id', () => {
       province_state: 'Antioquia',
       rol: 'admin'
     });
+    expect(response.body.message).toEqual('User not found');
     expect(response.status).toBe(NOT_FOUND);
   });
   afterAll(async () => {
@@ -151,9 +152,7 @@ describe('DELETE /users:id', () => {
     const response = await request(server).delete('/users/1');
     const user = await User.findByPk(1);
     expect(user).toBeNull();
-    expect(response.body).toEqual({
-      message: 'User deleted'
-    });
+    expect(response.body.message).toEqual('User not found');
     expect(response.status).toBe(OK);
   });
   it('Debe retornar un mensaje si no existe el usuario', async () => {
