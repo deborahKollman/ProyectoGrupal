@@ -6,7 +6,6 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.8.2",
-    "@mui/material": "^5.8.2",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -24,6 +23,8 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.52.2",
     "styled-components": "^5.3.5",
+    "swal": "^0.1.0",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

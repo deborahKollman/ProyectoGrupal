@@ -1,8 +1,8 @@
 import stylesCardSeller from '../pages/styles/stylesCardSeller.module.scss';
 import star from '../assets/icons/star.png';
-import {Modal,Button} from 'react-bootstrap';
+/* import {Modal,Button} from 'react-bootstrap'; */
 import {useState} from 'react';
-
+import {Modal} from '@mui/material';
 import ContactCard from './ContactCard';
 
 export default function CardSellerDetail(){
@@ -11,6 +11,13 @@ export default function CardSellerDetail(){
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+
+
+
+
+
+
 
 
 
@@ -66,7 +73,7 @@ export default function CardSellerDetail(){
 
 
         
-        <Modal show={show} onHide={handleClose} className={stylesCardSeller.contact}>
+{/*         <Modal show={show} onHide={handleClose} className={stylesCardSeller.contact}>
         <Modal.Header closeButton>
           <Modal.Title>Contact</Modal.Title>
         </Modal.Header>
@@ -80,7 +87,40 @@ export default function CardSellerDetail(){
           </Button>
         </Modal.Footer>
       </Modal>
-      
+ */}
+
+
+      <Modal
+  open={show}
+  onClose={handleClose}
+  className={stylesCardSeller.modal}
+>
+{/*   <Box sx={stylesCardSeller}>
+    <Typography id="modal-modal-title" variant="h6" component="h2">
+      Text in a modal
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+    </Typography>
+  </Box>
+ */}
+
+ <ContactCard name="Electrician20" perfil="https://media.istockphoto.com/photos/headshot-portrait-of-smiling-ethnic-businessman-in-office-picture-id1300512215?k=20&m=1300512215&s=612x612&w=0&h=enNAE_K3bhFRebyOAPFdJtX9ru7Fo4S9BZUZZQD3v20="></ContactCard>
+ 
+
+</Modal>
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
 

@@ -51,7 +51,7 @@ router.get('/success', async (req, res) => {
       });
     }
   }
-  res.redirect('http://localhost:3000');
+  return res.redirect('http://localhost:3000');
 });
 
 router.get(
@@ -65,7 +65,7 @@ router.get(
     failureRedirect: '/login/error'
   }),
   function (req, res) {
-    res.redirect('http://localhost:3000/login');
+    res.redirect('http://localhost:3000');
   }
 );
 

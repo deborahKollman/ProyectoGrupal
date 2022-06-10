@@ -3,7 +3,7 @@ const server = require('../../server');
 const { User, Op, connection } = require('../../src/database/postgres');
 const { OK, CREATED, NOT_FOUND } = require('../../src/routes/helpers/status');
 
-describe('GET /users', () => {
+xdescribe('GET /users', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });
@@ -40,7 +40,7 @@ describe('GET /users', () => {
   });
 });
 
-describe('GET /users:id', () => {
+xdescribe('GET /users:id', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });
@@ -63,7 +63,7 @@ describe('GET /users:id', () => {
   });
 });
 
-describe('POST /users', () => {
+xdescribe('POST /users', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });
@@ -92,7 +92,7 @@ describe('POST /users', () => {
   });
 });
 
-describe('PUT /users:id', () => {
+xdescribe('PUT /users:id', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });
@@ -136,7 +136,7 @@ describe('PUT /users:id', () => {
   });
 });
 
-describe('DELETE /users:id', () => {
+xdescribe('DELETE /users:id', () => {
   beforeAll(async () => {
     await connection.sync({ force: true });
   });

@@ -82,12 +82,17 @@ h3{
 }
 
 @media (max-width: 600px){
-    .contact{
-        width: max-content;
-        margin: 0px;
-        padding: 0px;
+    .modal{
+        margin: 10px;
       
 
     }
+
+}
+
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
