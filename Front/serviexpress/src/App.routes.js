@@ -4,7 +4,6 @@ import LandingPage from './pages/LandingPage.jsx';
 import Login from './pages/Login.jsx';
 import Detail from './pages/Detail.jsx'
 import Register from './pages/Register.jsx';
-// import Home from './pages/Home'
 import RecoveryPassword from './pages/RecoveryPassword.jsx';
 import Seller from './pages/Seller.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
@@ -12,9 +11,7 @@ import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 import Home from './pages/Home'
 import CreateService from './pages/CreateService'
-
-
-
+import HomePage from './pages/HomePage.jsx';
 
 
 function App() {
@@ -38,6 +35,7 @@ function App() {
       <Route exact path="/" element={<LandingPage/>} />
       <Route path="/detail/:id" element={<Detail></Detail>}></Route>
       <Route exact path="/Home" element={<Home/>}/> 
+      <Route exact path='HomePage' element={<HomePage/>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
   )}
