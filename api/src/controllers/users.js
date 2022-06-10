@@ -69,14 +69,13 @@ exports.getUserDetail = async (req, res, next) => {
 exports.updateUser = async(req, res, next) => {
   try {
     const {id}=req.params;
-    const {changes}=req.body
-    const r = await this.updateUser(id,changes);
+    const r = await updateUser(id,req.body);
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg)
     }
     res.status(OK).send(r.message);
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
