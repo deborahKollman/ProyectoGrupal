@@ -64,6 +64,15 @@ exports.registerUser = (usr, password) => {
   else return { idRegistered };
 };
 
+exports.updateUser = async(id,changes) => {
+  const user = await User.findByPk(id)
+  if(user){
+    await User.update({...changes},{where:{id}})
+    return {message:'User updated successfully'}
+  }
+  return {err_msg:'User not found'}
+}
+
 exports.recoverUserPwd = async(usr) => {
   //const usrFound = users.find((u) => u.usr_email === usr);
   const usrFound = await User.findOne({
@@ -86,8 +95,45 @@ exports.updatePassword = async(email,password) => {
       return {err_msg:'Password cannot be previous password'}
     }
 
-    usrFound.update({password:hash})
+    User.update({password:hash},{where:{email}})
     return { message: 'Password has been changed' };
 
   }else return { err_msg: 'Email is not registered' };
+}
+
+exports.deleteUser = async(id) => {
+  const user = await User.findByPk(id);
+  if(user){
+    await User.destroy({where:{id}})
+    return {message:'User deleted successfully'}
+  }
+  return {err_msg:'User not found'}
+}
+
+exports.addSellerComment = async(id,rating,comment,commenter) => {
+  const user = await User.findByPk(id);
+  if(user){
+    const opinion={commenter,comment,rating};
+    var comm=user.dataValues.seller_opinions;
+    var rep=user.dataValues.seller_reputation;
+    var rep=(rep*comm.length+rating)/(comm.length+1);
+    comm.push(opinion);
+    await User.update({seller_reputation:rep,seller_opinions:comm},{where:{id}})
+    return {message:'Comment added successfully'}
+  }
+  return {err_msg:'User not found'}
+}
+
+exports.addBuyerComment = async(id,rating,comment,commenter) => {
+  const user = await User.findByPk(id);
+  if(user){
+    const opinion={commenter,comment,rating};
+    var comm=user.dataValues.buyer_opinions
+    var rep=user.dataValues.buyer_reputation;
+    var rep=(rep*comm.length+rating)/(comm.length+1);
+    comm.push(opinion);
+    await User.update({buyer_reputation:rep, buyer_opinions:comm},{where:{id}})
+    return {message:'Comment added successfully'}
+  }
+  return {err_msg:'User not found'}
 }
