@@ -22,9 +22,9 @@ describe('GET /users', () => {
   });
   it('deberia retornar un usuario si es que existe', async () => {
     await User.create({
-      email: 'JuanEmail@gmail.com',
+      email: 'carlos65357@gmail.com',
       password: '123456',
-      name: 'Juan',
+      name: 'Carlos',
       country: 'Colombia',
       province_state: 'Antioquia',
       role: 'admin'
@@ -72,9 +72,9 @@ describe('POST /users', () => {
       email: 'carlos65357@gmail.com',
       password: '123456',
       name: 'Carlos',
-      country: 'Bolivia',
-      province_state: 'La Paz - El Alto',
-      rol: 'client'
+      country: 'Colombia',
+      province_state: 'Antioquia',
+      role: 'admin'
     });
     const [user] = await User.findAll({
       where: {
