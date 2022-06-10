@@ -1,35 +1,17 @@
 import React, { useState } from "react";
-import {Link, useNavigate} from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import "./styles/SellerRegister.scss";
 import BurgerButton from "../components/NavBar/NavBar";
 import { MyButtonTwo, MyTextField } from "../elements/Forms";
 import {UploadImg} from "../components/UploadImg";
 import FormControl from '@mui/material/FormControl';
-
-const check = /\S+/;
-const regExpr = /^[a-z]+$/i;
-
-//Para controlar los inputs, check controla que no este vacio, y regExpr que sean solo caracteres
-function validate(input) {
-  let errors = {}
-  if (!check.test(input.name) || !regExpr.test(input.name) || input.name <= 2) {
-    errors.name = "Please, tell us your name!";
-  }
-  if (!check.test(input.last_name) || !regExpr.test(input.last_name) || input.last_name <= 1) {
-    errors.last_name = "Please, tell us your last name!"
-  }
-  if (!check.test(input.description) || !regExpr.test(input.description) || input.description <= 1) {
-    errors.description = "Plase, tell us a bit about you!"
-  }
-   return errors;
-}
+import { postProfileUser } from "../redux/action";
 
 const ProfileUser = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [errors, setError] = useState({})
  
   const [input, setInput] = useState({
     name: "",
@@ -43,26 +25,18 @@ const ProfileUser = () => {
       ...input,
       [e.target.name] : e.target.value
     })
-    setError(validate({
-      ...input,
-      [e.target.name] : e.target.value
-    }))
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    setError(validate(input))
-    if(!input.name && input.last_name && input.description && input.phone_number) {
-      alert('Information succesfully added!')
-      setInput({
-        name: "",
-        last_name: "",
-        description: "",
-        phone_number: ""
-      })
-      navigate('/Home')
-    }
-    else {alert('Please, fill al the fields')}
+    dispatch(postProfileUser(input))
+    setInput({
+      name: "",
+      last_name: "",
+      description: "",
+      phone_number: ""
+    })
+    navigate('/Home')
   }
 
   return (
