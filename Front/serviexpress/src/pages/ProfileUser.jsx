@@ -5,6 +5,7 @@ import "./styles/SellerRegister.scss";
 import BurgerButton from "../components/NavBar/NavBar";
 import { MyButtonTwo, MyTextField } from "../elements/Forms";
 import {UploadImg} from "../components/UploadImg";
+import FormControl from '@mui/material/FormControl';
 
 const check = /\S+/;
 const regExpr = /^[a-z]+$/i;
@@ -51,63 +52,69 @@ const ProfileUser = () => {
   function handleSubmit(e) {
     e.preventDefault();
     setError(validate(input))
-
     if(!input.name && input.last_name && input.description && input.phone_number) {
-
+      alert('Information succesfully added!')
+      setInput({
+        name: "",
+        last_name: "",
+        description: "",
+        phone_number: ""
+      })
+      navigate('/Home')
     }
+    else {alert('Please, fill al the fields')}
   }
 
   return (
     <div className="page-seller_register">
       <BurgerButton />
+      <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
       <section className="sel_reg-one">
-        <h1>Personal Info</h1>
+        <h1 className="profileUserTitle">Personal Info</h1>
+
+        <FormControl>
         <MyTextField
           required
           label="FULL NAME"
           value={input.name}
-          type="password"
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-        />
+          type="text"
+          name="name"
+          onChange={handleChange}
+          />
         <MyTextField
           required
           label="LAST NAME"
           value={input.last_name}
-          type="password"
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-        />
-        <UploadImg />
-        {/* <MyTextField
-          required
-          label="DESCRIPTION"
-          value={second}
           type="text"
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-        /> */}
+          name="last_name"
+          onChange={handleChange}
+          />
+        <UploadImg />
         <MyTextField
           id="outlined-multiline-static"
           label="DESCRIPTION"
+          required
           multiline
           rows={4}
+          name="description"
           placeholder="Tell us about your business"
-        />
+          value={input.description}
+          onChange={handleChange}
+          />
         <MyTextField
           required
           label="PHONE NUMBER"
           value={input.phone_number}
-          type="number"
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-        />
-        <MyButtonTwo variant="contained">Continue</MyButtonTwo>
+          type="tel"
+          name="phone_number"
+          minlength="9"
+          maxlength="14"
+          onChange={handleChange}
+          />
+        <MyButtonTwo variant="contained" type="submit">Continue</MyButtonTwo>
+        </FormControl>
       </section>
+    </form>
     </div>
   );
 };
