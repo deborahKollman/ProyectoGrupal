@@ -5,14 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const MySelect = () => {
-  const [Category, setCategory] = React.useState("");
-
-  const handleChange = (e) => {
-    setCategory(e.target.value);
-  };
-  const names = ["one", "two", "three"];
-
+const MySelect = (props) => {
+  const {aFirst, pHandleChange} = props;
+ 
   return (
     <Box sx={{ width: "300px", mt: "30px" }}>
       <FormControl fullWidth>
@@ -30,16 +25,18 @@ const MySelect = () => {
           }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={Category}
           label="Category"
-          onChange={handleChange}
+          onChange={pHandleChange}
         >
-          {names.map((name) => (
+          <MenuItem value={null}>
+            <em>Seleccionar Categoría</em>
+          </MenuItem>
+          {aFirst.map((pI) => (
             <MenuItem
-              key={name}
-              value={name}
+              key={pI.id}
+              value={pI.id}
             >
-              {name}
+              {pI.car_descripcion}
             </MenuItem>
           ))}
         </Select>
@@ -48,4 +45,52 @@ const MySelect = () => {
   );
 };
 
-export { MySelect };
+
+
+const MySelectTwo = ({aSecond, pHandleChange, pDad}) => {
+
+  //filter by foregin key
+  const aSecondFiltered = aSecond.filter(
+    (pI) => pI.fk_category === pDad
+  );
+
+
+  return (
+    <Box sx={{ width: "300px", mt: "30px" }}>
+      <FormControl fullWidth disabled={!pDad}>
+        <InputLabel
+          sx={{ color: "black !important" }}
+          id="demo-simple-select-label"
+        >
+          Service
+        </InputLabel>
+        <Select
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Category"
+          onChange={pHandleChange}
+        >
+          <MenuItem value={null}>
+            <em>Seleccionar Servicio</em>
+          </MenuItem>
+          {aSecondFiltered.map((pII) => (
+            <MenuItem
+              key={pII.id}
+              value={pII.car_descripcion}
+            >
+              {pII.car_descripcion}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
+  );
+};
+
+
+export { MySelect, MySelectTwo };

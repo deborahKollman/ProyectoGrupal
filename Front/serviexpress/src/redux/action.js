@@ -1,8 +1,24 @@
 const axios = require('axios');
 
 export const TEMP_VARIABLES = 'TEMP_VARIABLES';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_SERVICES = 'GET_SERVICES'
-const URL = `http://127.0.0.1:4001`;
+const URL = `http://127.0.0.1:3001`;
+
+
+export const getAllCategories = () => {
+  return async (dispatch) => {
+      try {
+          const {data} = await axios.get(`http://127.0.0.1:3001/categories`);
+            dispatch({
+                type: GET_CATEGORIES,
+                payload: data,
+            })
+      } catch (error) {
+        return error.message;
+      }
+    }
+}
 
 
 export const getAllServices = () => {
