@@ -4,7 +4,8 @@ const initialState = {
     switchloading: false,
     profileUser: [],
     categories: [],
-    filteredCategories: []
+    filteredCategories: [],
+    publicationById: {}
 
 }
 
@@ -20,10 +21,20 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             Publications: action.payload,
                 }
-        case 'GET_CATEGORIES':
+                case 'GET_PUBLICATIONS_NAME':
+                    return{
+                    ...state,
+                    Publications: action.payload,
+                        }
+        case 'GET_CATEGORIES': 
             return {
                 ...state,
                 categories: action.payload
+            }
+            case 'GET_PUBLICATION_ID': 
+            return {
+                ...state,
+                publicationById: action.payload
             }
         case 'SWICH_LOADING':
             return{

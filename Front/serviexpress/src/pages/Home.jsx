@@ -9,6 +9,11 @@ import Loading from "../components/Loading/Loading.js"
 import NavBar from '../components/NavBar/NavBar'
 import ServicesBar from "../components/ServicesBar";
 import './styles/Home.scss';
+
+import Carousel from 'react-bootstrap/Carousel';
+import stylesDetail from './styles/stylesDetail.module.scss';
+
+
 // const currentServices = [1,2,3]
 // const SwichL= false
 
@@ -54,9 +59,7 @@ export default function Home(){
                 
             <div className="divpag">
             
-            <ServicesBar>
-                
-            </ServicesBar>
+           
                     
                         <Pagination className ="pagination"
                             PublicationsPerPag={PublicationsPerPage}
@@ -64,9 +67,55 @@ export default function Home(){
                             pagination = {pagination}
                             
                         />
+                <ServicesBar className="ServicesBar">
+                
+                </ServicesBar>
+
+
                     </div>
+                    <div className="divcarousel">
+     <Carousel fade>
+       <Carousel.Item>
+       <img
+         className="d-block w-100"
+        src="https://www.ipsantotomas.cl/wp-content/uploads/sites/27/2016/02/analista-programador.jpg"
+           alt="First slide"
+         />
+     <Carousel.Caption>
+          <h3>First slide label</h3>
+       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+       </Carousel.Caption>
+     </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://conceptodefinicion.de/wp-content/uploads/2020/11/Diseno-grafico.jpg"
+      alt="Second slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </Carousel.Caption>
+     </Carousel.Item>
+      <Carousel.Item>
+       <img
+        className="d-block w-100"
+       src="https://images.unsplash.com/photo-1618947084583-07ff857ca918?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+        alt="Third slide"
+       />
+
+    <Carousel.Caption>
+         <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+
+    </div>
 
                 <div className='services-home'>
+                
                 { SwichL===true || allPublications.length===0 ? (
 					
                     <Loading></Loading>
@@ -79,7 +128,7 @@ export default function Home(){
                     <div>
                         <CardPublications  
                             id={e.id}
-                            album={e.album} 
+                            album = "https://image.jimcdn.com/app/cms/image/transf/none/path/sb00e8250327cd0a1/image/i4a413653d6352fc2/version/1604231609/funciones-de-un-electricista.png"
                             title={e.title} 
                             summary={e.detail_resume}
                             // score={e.score} 

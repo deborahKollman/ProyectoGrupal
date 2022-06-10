@@ -24,7 +24,7 @@ const CardPublications = ({ id, score,summary, album, title, price}) => {
                 <h6 className="titlec">{title}</h6>
                 <p className="titlec">{summary}</p>
                 {/* <p className="titlec">{score}</p> */}
-                <p className="titlec">{price}</p>
+                <p className="titleprice">STARTING AT: US$ {price} </p>
 
 
                      </div>

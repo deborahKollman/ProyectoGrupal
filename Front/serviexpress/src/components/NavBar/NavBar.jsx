@@ -20,9 +20,11 @@ const BurgerButton = () => {
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
+        <Link to={`/Home`}    >
         <figure>
           <img src={logo} alt="" />
         </figure>
+        </Link>
 
         <IconButton className="burgerFigure" onClick={mReloadOpen}>
           <StyledBurger pOpen={open}>
