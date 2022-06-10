@@ -42,6 +42,9 @@ const CreateService = () => {
     };
     // console.log(data);
     xDispatch(createPublication(data));
+    
+    alert("Publication created");
+
   }
   return (
     <div className="page-createService">
