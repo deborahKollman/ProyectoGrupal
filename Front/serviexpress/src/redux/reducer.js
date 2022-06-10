@@ -2,6 +2,7 @@ const initialState = {
     rdcr_tempVariables: [1,2,3,4,5,6],
     services: [],
     switchloading: false,
+    detail: {},
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -21,6 +22,17 @@ const rootReducer = (state = initialState, action) => {
             return{
             switchloading: true,  
             }
+        case 'GET_BY_ID':
+            let aux = action.payload;
+            aux.date = aux.date.slice(0,10)
+
+
+            return{
+                ...state,
+                detail: aux
+            }
+
+        
         default:
             return state;
     }

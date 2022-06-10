@@ -18,8 +18,8 @@ module.exports = (sequelize) => {
       state: {
         type: DataTypes.STRING
       },
-      title:{
-        type:STRING(50)
+      title: {
+        type: DataTypes.STRING(50)
       },
       album: {
         type: DataTypes.ARRAY(DataTypes.STRING)
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT
       },
       detail_resume:{
-        type:DataTypes.STRING(50)
+        type: DataTypes.STRING(50)
       },
       price: {
         type: DataTypes.FLOAT

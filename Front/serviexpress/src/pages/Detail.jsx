@@ -8,18 +8,36 @@ import Footer from '../components/FooterDetail';
 import NavBar from '../components/NavBar/NavBar';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import ServicesBar from '../components/ServicesBar';
-
-
+import {useDispatch,useSelector} from 'react-redux';
+import { useEffect, useState } from 'react';
+import {getById} from '../redux/action.js';
+import { useParams } from 'react-router-dom';
 
 export default function Detail(){
+    const {id} = useParams();
+
+    const dispatch = useDispatch();
+    const detail = useSelector(state => state.detail);
+
+    const [text,setText] = useState(detail.detail_resume);
 
 
+    useEffect(() => {
+        dispatch(getById(id));
 
+    },[dispatch,id]);
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        setText(detail.detail);
+    };
+
+    console.log(text);
+     
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
-            <ServicesBar></ServicesBar>
+         {/*    <ServicesBar></ServicesBar> */}
           </div>
 
 
@@ -27,23 +45,24 @@ export default function Detail(){
         <div className={stylesDetail.leftSide}>
           <div>
           <Breadcrumb className={stylesDetail.anchors} >
-          <Breadcrumb.Item href="#" >Home</Breadcrumb.Item>
+          <Breadcrumb.Item href="/home" >Home</Breadcrumb.Item>
           <Breadcrumb.Item href="#">
           Services
           </Breadcrumb.Item>
-          <Breadcrumb.Item active>Detail</Breadcrumb.Item>
+          <Breadcrumb.Item active>{detail.title}</Breadcrumb.Item>
           </Breadcrumb>
 
           </div>
-
-
-
+          <div className={stylesDetail.title}>
+                <label>Publicado el: </label>
+               <p > {detail.date}</p>
+          </div>
         <div className={stylesDetail.carousel}>
      <Carousel fade>
        <Carousel.Item>
        <img
          className="d-block w-100"
-        src="https://images.unsplash.com/photo-1508188609340-e8068b599193?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+        src={detail.album}
            alt="First slide"
          />
      <Carousel.Caption>
@@ -81,10 +100,13 @@ export default function Detail(){
 
         <div className={stylesDetail.about}>
         <h3>About Services</h3>
-           <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+{/*            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
 
-        </p>
-            <button>Ver Mas</button>
+        </p> */}
+
+          <p>{text}</p>
+
+            <button className={stylesDetail.more} onClick={handleClick}>Ver Mas</button>
         </div>
 
          <h2>We Recommend Also...</h2>
