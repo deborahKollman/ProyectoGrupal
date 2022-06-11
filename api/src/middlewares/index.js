@@ -1,17 +1,25 @@
 const fs = require("fs");
+const path = require("path");
+const { dirname } = require("path")
 const mimeTypes = require('mime-types')
 const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    //const { id } = req.body;
-    //const ruta = `./public/img/${id}`
+    
+    // solo para carga base
+    const rutatest = path.join(dirname(require.main.filename), '/public/img/test')
+    if (!fs.existsSync(rutatest)) {
+      fs.mkdirSync(rutatest,{recursive:true})
+    } 
+    // fin solo para cargabase
 
-    const ruta = `./public/img/pub`
+    const ruta = path.join(dirname(require.main.filename), '/public/img/pub')
+    
     if (!fs.existsSync(ruta)) {
-      fs.mkdirSync(ruta)
+      fs.mkdirSync(ruta,{recursive:true})
     }    
-    cb(null, ruta)
+    cb(null, './public/img/pub')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + '.' + mimeTypes.extension(file.mimetype));
