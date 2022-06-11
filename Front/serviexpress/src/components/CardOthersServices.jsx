@@ -18,7 +18,7 @@ export default function CardOthersServices({id}){
 
     },[dispatch]);
 
-    console.log(users[0]);
+   
 
 
     return <div className={cardStyle.container}>
