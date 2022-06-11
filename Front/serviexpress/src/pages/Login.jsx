@@ -10,30 +10,40 @@ import "./styles/Login.scss";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, getUserr } from "../redux/action";
+import { getUser, getUserr, fakeLogin } from "../redux/action";
+
+const HookInputValue = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (e) => { setValue(e.target.value); };
+  return { value, onChange };
+};
+
+//=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
 const Login = () => {
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const [checked, setChecked] = useState(true);
+  const xDispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
+  const email = HookInputValue("");
+  const password = HookInputValue("");
+  const checked = HookInputValue("");
 
-  const mOnClick = () => {
+
+  const mGoogleLogin = () => {
     window.open("http://localhost:3001/login/google", "_self");
   };
 
   const data = {
-    username: Email,
-    password: Password,
+    username: email.value,
+    password: password.value,
   };
 
-  const mLoggin = () => {
-    dispatch(getUserr(data));
+  const mLocalLoggin = () => {
+    xDispatch(fakeLogin(data))
   };
-  // console.log(user);
+
+  const { rdcr_isAuth, rdcr_user } = useSelector((state) => state);
+
+  console.log(rdcr_isAuth,"xdxxdxdxdxxxddd" ,rdcr_user);
+
   return (
     <div className="page-login">
       <BurgerButton />
@@ -47,7 +57,7 @@ const Login = () => {
           <MyButtonThree
             variant="contained"
             endIcon={<GoogleIcon />}
-            onClick={mOnClick}
+            onClick={mGoogleLogin}
           >
             Sing In With Google
           </MyButtonThree>
@@ -55,34 +65,27 @@ const Login = () => {
           <MyTextField
             required
             label="E-MAIL"
-            value={Email}
             type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            {...email}
           />
           <MyTextField
             label="PASSWORD"
-            value={Password}
             type="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            {...password}
           />
 
           <MyButtonTwo
             variant="contained"
             endIcon={<LockOpenIcon />}
-            // onClick={mUser}
-            onClick={mLoggin}
+            onClick={mLocalLoggin}
           >
             Login
           </MyButtonTwo>
+
           <div className="Login-3">
             <div className="Login-3remenver">
               <Checkbox
-                checked={checked}
-                onChange={handleChange}
+                {...checked}
                 sx={{
                   color: "#000000",
                   "&.Mui-checked": {
@@ -123,5 +126,5 @@ export default Login;
 //   .then((data) => {
 //     console.log(data);
 //   });
-// dispatch(getUser());
+// xDispatch(getUser());
 // };

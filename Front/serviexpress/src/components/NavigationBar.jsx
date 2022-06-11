@@ -52,7 +52,6 @@ const NavigationBar = () => {
         icon={<ShopTwoIcon fontSize="large" />}
         onClick={() => {
             mNavigation("orders");
-            console.log("orders");
         }}
       />
     </List>

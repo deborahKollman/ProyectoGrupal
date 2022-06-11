@@ -45,35 +45,50 @@ export default function Home(){
         }, [allPublications])
 
 
+// function filterforCategory(e){
+//             if(e.target.value === 'All'){ 
+//                 dispatch(getPublications())
+//             } 
+//             else{
+//                 dispatch(getServicesForCategory(e.target.value))
+//             }
+//         }
+
+
 // if(allPublications.length===0)dispatch(swich_loading(true))
 // else if(allPublications.length!==0)dispatch(swich_loading(false))
 
-
+// onChange={e=>  filterforCategory(e)}
 
         return(
             <div className="wphome">
-           
+
             <NavBar>
                 
             </NavBar>
-                
-            <div className="divpag">
-            
-           
-                    
-                        <Pagination className ="pagination"
-                            PublicationsPerPag={PublicationsPerPage}
-                            allPublications={allPublications.length}
-                            pagination = {pagination}
-                            
-                        />
-                <ServicesBar className="ServicesBar">
-                
-                </ServicesBar>
+            <div className="filterservice">
+<p className="filtername">Electrican</p>
+<p className="filtername">Plumb</p>
+<p className="filtername">Programming & Tech</p>
+<p className="filtername">Painter</p>
+<p className="filtername">Digital-Marketing</p>
+<select>
+                            <option key = 'All' value='0'>More...</option>
+                            <option key = 'plumbing' value='1'>plumbing</option>
+                            <option key = 'electricity' value='2'>electricity</option>
+                            <option key = 'carpentry' value='3'>carpentry</option>
+                            <option key = 'developers' value='4'>developers</option>
+                            <option key = 'graphic & design' value='5'>graphic & design</option>
+                            <option key = 'advocacy' value='6'>advocacy</option>
+                            <option key = 'engineering' value='7'>engineering</option>
+                            <option key = 'technical service' value='8'>technical service</option>
+                            <option key = 'digital marketing' value='9'>digital marketing</option>
+                            <option key = 'music & audio' value='10'>music & audio</option>
+                       </select> 
+</div>
 
 
-                    </div>
-                    <div className="divcarousel">
+                    {/* <div className="divcarousel">
      <Carousel fade>
        <Carousel.Item>
        <img
@@ -112,11 +127,14 @@ export default function Home(){
       </Carousel.Item>
     </Carousel>
 
-    </div>
+    </div> */}
 
                 <div className='services-home'>
+  
+                {/* SwichL===true || */}
+
                 
-                { SwichL===true || allPublications.length===0 ? (
+                {  allPublications.length===0 ? (
 					
                     <Loading></Loading>
 						
@@ -137,10 +155,22 @@ export default function Home(){
                             
                         />
                     </div>
-                    
+                  
                     )}))
 
                 }
+            
+                </div>
+                <div className="pagination">
+                <Pagination className ="pagination"
+                            allpublicationsnumber={allPublications.length}
+                            pagination = {pagination}
+                            PublicationsPerPage = {PublicationsPerPage}
+                                                    />
+                </div>
+                <div className="logos">
+                
+                  
                 </div>
 
             
@@ -151,19 +181,7 @@ export default function Home(){
 }
 
 
-        //   {/* <select onChange={e=>  filterforCategory(e)}>
-        //                     <option key = 'All' value='All'>All categories</option>
-        //                     <option key = 'plumbing' value='plumbing'>plumbing</option>
-        //                     <option key = 'electricity' value='electricity'>electricity</option>
-        //                     <option key = 'carpentry' value='carpentry'>carpentry</option>
-        //                     <option key = 'developers' value='developers'>developers</option>
-        //                     <option key = 'graphic & design' value='graphic & design'>graphic & design</option>
-        //                     <option key = 'advocacy' value='advocacy'>advocacy</option>
-        //                     <option key = 'engineering' value='engineering'>engineering</option>
-        //                     <option key = 'technical service' value='technical service'>technical service</option>
-        //                     <option key = 'digital marketing' value='digital marketing'>digital marketing</option>
-        //                     <option key = 'music & audio' value='music & audio'>music & audio</option>
-        //                 </select> */}
+    
 
 
 
@@ -187,14 +205,7 @@ export default function Home(){
         //     dispatch(getServices())
         // }
     
-        // function filterforCategory(e){
-        //     if(e.target.value === 'All'){ 
-        //         dispatch(getServices())
-        //     } 
-        //     else{
-        //         dispatch(getServicesForCategory(e.target.value))
-        //     }
-        // }
+        
 
 
 

@@ -79,12 +79,15 @@ const fx = async function() {
 
         const pub1=await Publication.create( 
             {
-                "id": 1,
                 "date": "2022-06-09T23:25:03.723Z",
                 "state": "Active",
                 "title": "Mecanico",
                 "album": [
+<<<<<<< HEAD
                 "https://images.unsplash.com/photo-1643701079732-3b1c7a797e3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+=======
+                "http://localhost:3001/public/img/test/1.jpg"
+>>>>>>> development
                 ],
                 "detail": `Autoelectrico, mecánica general, Afinaciones, cambio de aciete, fuel injection, escaneo, calibración de cuerpos de aceleración, revisión de compraventa, cambio de bombas de agua y de gasolina, bandas de accesorios y de distribución,
                 Servicio a domicilio.
@@ -103,12 +106,11 @@ const fx = async function() {
         )
         const pub2=await Publication.create( 
         {
-            "id": 2,
             "date": "2022-06-09T23:25:33.552Z",
             "state": "Active",
             "title": "Electricista matriculado",
             "album": [
-            "http://localhost:3001/public/img/pub/pictures-1654817133339.jpeg"
+            "http://localhost:3001/public/img/test/2.jpg"
             ],
             "detail": `TECNICO ELECTRICISTA  A DOMICILIO 
             REALIZO LOS SIGUIENTES TRABAJOS:
@@ -132,14 +134,17 @@ const fx = async function() {
         )
         const pub3=await Publication.create( 
             {
-                "id": 3,
                 "date": "2022-06-09T23:28:02.650Z",
                 "state": "Active",
                 "title": "Maestro mayor de obras",
                 "album": [
+<<<<<<< HEAD
                 "https://images.unsplash.com/photo-1582540730843-f4418d96ccbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1246&q=80",
                 "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29ya2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
                 "https://images.unsplash.com/photo-1594581835488-0b95b8b0bacd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29ya2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+=======
+                "http://localhost:3001/public/img/test/3.jpg"
+>>>>>>> development
                 ],
                 "detail": `Trabajos de todo tipo`,
                 "detail_resume": "Trabajo de construccion",
