@@ -81,7 +81,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
       };
-<<<<<<< HEAD
+
     case "GET_USER_BY_ID":
       
       
@@ -103,7 +103,6 @@ const rootReducer = (state = initialState, action) => {
 
 
 
-=======
     case AUTHENTICATE:
 
       window.sessionStorage.setItem("token", payload.login);
@@ -121,7 +120,7 @@ const rootReducer = (state = initialState, action) => {
         rdcr_user: {},
       };
       
->>>>>>> development
+
     default:
       return state;
   }
