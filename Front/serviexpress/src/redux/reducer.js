@@ -4,13 +4,14 @@ const initialState = {
   Publications: [],
   switchloading: false,
 
-  detail: {},
+  detail: {album: []},
   profileUser: [],
   categories: [],
   filteredCategories: [],
   publicationById: {},
-
+  userId: {seller_opinions: []},
   user: {},
+  users: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -83,6 +84,27 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
       };
+    case "GET_USER_BY_ID":
+      
+      
+      return{
+        ...state,
+        userId: action.payload,
+
+      }
+      case "GET_USERS":
+      
+      
+        return{
+          ...state,
+          users: action.payload,
+  
+        }
+
+
+
+
+
     default:
       return state;
   }

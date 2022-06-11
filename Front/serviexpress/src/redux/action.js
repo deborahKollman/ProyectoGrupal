@@ -12,6 +12,12 @@ const GET_SERVICES = "GET_SERVICES";
 const GET_USER = "GET_USER";
 const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
+const GET_USER_BY_ID = "GET_USER_BY_ID";
+const GET_USERS = "GET_USERS";
+
+
+
+
 
 export const getUser = () => {
   return async (dispatch) => {
@@ -181,3 +187,42 @@ export function getPublicationsName(name) {
       }); 
   };
 }
+
+
+export function getUserById(id) {
+    return async (dispatch) => {
+        try {
+          
+            let data = await axios.get('http://localhost:3001/users/'+id);
+            
+            dispatch({type: GET_USER_BY_ID, payload: data.data.user});
+          
+        } catch (error) {
+          console.log(error);
+        }
+
+    }
+
+
+
+};
+
+
+export function getUsers() {
+  
+  return async (dispatch) => {
+    try {
+      
+        let users = await axios.get('http://localhost:3001/users');
+        
+        dispatch({type: GET_USERS, payload: users.data.users});
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+}
+
+
+
+};

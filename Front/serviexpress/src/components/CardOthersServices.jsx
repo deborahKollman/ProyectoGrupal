@@ -1,10 +1,29 @@
 import cardStyle from '../pages/styles/cardOthersServices.module.scss'
 import Opinion from './Opinion'
+import { useEffect, useState } from 'react';
+import {getUsers} from '../redux/action.js';
+import { useDispatch,useSelector } from 'react-redux';
 
-export default function CardOthersServices(){
+
+
+export default function CardOthersServices({id}){
+
+    const dispatch = useDispatch();
+    const users = useSelector(state =>  state.users);
+
+
+    useEffect(() => {
+        dispatch(getUsers());
+
+
+    },[dispatch]);
+
+    console.log(users[0]);
+
+
     return <div className={cardStyle.container}>
-        <img src="https://images.unsplash.com/photo-1507335563142-a814078ce38c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdlbGRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="imagen"></img>
-        <h3>Welder2000</h3>
+        
+        
         <p>"Cumplido"</p>
         <p>"Responsable"</p>
         <p>"Buen Precio"</p>
