@@ -1,9 +1,17 @@
 import React from 'react'
-
-const r = () => {
+import Sidebar from '../components/Sidebar'
+import './styles/Home.scss'
+const Home = () => {
   return (
-    <div>r</div>
+    <div className='home'>
+        
+        <Sidebar/>
+        <div className="homeContainer">
+          container
+        </div>
+
+    </div>
   )
 }
 
-export default r
+export default Home
