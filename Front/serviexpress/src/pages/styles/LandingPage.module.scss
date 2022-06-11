@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Charis+SIL&display=swap');
 
+@mixin buttons {
+    height: 40px;
+    position: absolute;
+    background-color: rgb(242, 229, 206);
+}
+
 .landingctn {
     width: 100%;
     height: 100vh;
@@ -72,13 +78,18 @@ a {
     text-decoration: none;
 }
 
-.btn {
-    height: 40px;
-    position: absolute;
+.btn1 {
+    @include buttons();
     right: 10px;
-    top: 10px;
-    background-color: rgb(242, 229, 206);
+    top: 15px;
 }
+
+.btn2 {
+    @include buttons();
+    top: 15px;
+    right: 80px;
+}
+
 
 .error {
     background-image: url('../../media/error.jpg');
