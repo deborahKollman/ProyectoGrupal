@@ -30,15 +30,13 @@ const CreateService = () => {
   const mSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      detail_resume: "detail test",
-      userId: 1,
-      price,
-      detail: "some detail",
-      user_id: 1,
-      pictures,
-      title: "title test",
-      categoryId: 1,
-      // subcategory,
+      title: "first title",
+      detail: "asdfasdfasdf",
+      detail_resume: "some detail",
+      price: 123,
+      album: pictures,
+      categoryId : 1,
+      usr_id : 1
     };
     // console.log(data);
     xDispatch(createPublication(data));

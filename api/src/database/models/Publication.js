@@ -16,7 +16,8 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW
       },
       state: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: 'Active'
       },
       title: {
         type: DataTypes.STRING(50)
