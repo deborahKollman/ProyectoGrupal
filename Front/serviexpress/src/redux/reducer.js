@@ -1,6 +1,8 @@
+import {AUTHENTICATE} from "./action";
 const initialState = {
+  rdcr_isAuth: window.sessionStorage.getItem("token"),
+  rdcr_user: {}, 
   rdcr_categories: [],
-  rdcr_tempVariables: [1, 2, 3, 4, 5, 6],
   Publications: [],
   switchloading: false,
 
@@ -20,11 +22,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         rdcr_categories: payload,
-      };
-    case "TEMP_VARIABLES":
-      return {
-        ...state,
-        rdcr_tempVariables: action.payload,
       };
     case "GET_PUBLICATIONS":
       return {
@@ -83,9 +80,38 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
       };
+    case AUTHENTICATE:
+
+      window.sessionStorage.setItem("token", payload.login);
+
+      return {
+        ...state,
+        rdcr_user: payload,
+        rdcr_isAuth: true
+      };
     default:
       return state;
   }
 };
 
 export default rootReducer;
+
+
+/* 
+
+
+case AUTHENTICATE:
+      return {
+        ...state,
+        user: payload,
+        rdcr_isAuth: true,
+      };
+    case RELOAD_AUTH:
+      console.log("FIRST", window.sessionStorage.getItem("token"));
+      window.sessionStorage.setItem("token", payload);
+      return {
+        ...state,
+        rdcr_isAuth: payload
+      }
+
+*/

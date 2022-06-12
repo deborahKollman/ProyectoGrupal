@@ -12,21 +12,20 @@ import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 import Home from './pages/Home'
 import CreateService from './pages/CreateService'
+import { useSelector } from 'react-redux';
 
 
 
 
 function App() {
-
-  const isAutn = true;
-
+  const { rdcr_isAuth } = useSelector((state) => state);
+  console.log(rdcr_isAuth,"APP");
   return (
     <Routes>
 
-      {isAutn && ( <Route exact path="/orders" element={<Orders/>} /> )}
-      {isAutn && ( <Route exact path="/favorites" element={<Favorites/>} /> )}
-
-      {isAutn && ( <Route exact path="/seller/add-service" element={<CreateService/>} /> ) }
+      {rdcr_isAuth && ( <Route exact path="/orders" element={<Orders/>} /> )}
+      {rdcr_isAuth && ( <Route exact path="/favorites" element={<Favorites/>} /> )}
+      {rdcr_isAuth && ( <Route exact path="/seller/add-service" element={<CreateService/>} /> ) }
       
       <Route exact path="/seller" element={<Seller/>} />
       <Route exact path="/user" element={<ProfileUser/>} />

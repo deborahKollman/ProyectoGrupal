@@ -6,16 +6,35 @@ const GET_PUBLICATION_ID = "GET_PUBLICATION_ID";
 const GET_PUBLICATIONS_NAME = "GET_PUBLICATIONS_NAME";
 const POST_PUBLICATION = "POST_PUBLICATION";
 const JALZ_GET_CATEGORIES = "JALZ_GET_CATEGORIES";
-const TEMP_VARIABLES = "TEMP_VARIABLES";
+export const AUTHENTICATE = "AUTHENTICATE";
 const GET_CATEGORIES = "GET_CATEGORIES";
 const GET_SERVICES = "GET_SERVICES";
 const GET_USER = "GET_USER";
 const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
 
-export const getUser = () => {
+export const fakeLogin = (pO_User) => {
+  console.log(pO_User);
   return async (dispatch) => {
-    const { data } = await axios.get("http://localhost:3001/login/success", {
+    const response = {
+      "user":{
+        "id":1,
+        "email": "test@mail.com",
+        "role": "admin",
+        "avatar": "https://i.pravatar.cc/300?img=1",
+        "createAt": "2020-01-01",
+      },
+      "login": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTY1MzI1NzYxMX0.ddFBn_SeeWJJGxO303d8lRl58P4x6WADvOeTXzfVj9Q"
+    }
+    dispatch({
+      type: AUTHENTICATE,
+      payload: response
+    });
+  };
+};
+export const getUser = (pO_User) => {
+  return async (dispatch) => {
+    const { data } = await axios.get("http://localhost:3001/login/success", pO_User, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -91,19 +110,6 @@ export function filterCategories(payload) {
   return { type: "FILTER_CATEGORIES", payload };
 }
 
-export const getAllServices = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`${URL}/cat_services`);
-      dispatch({
-        type: TEMP_VARIABLES,
-        payload: data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
 
 export const getAllCategories = () => {
   return async (dispatch) => {

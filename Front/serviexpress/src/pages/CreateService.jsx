@@ -27,8 +27,8 @@ const CreateService = () => {
       xDispatch(jalz_getAllCategories());
   }, [xDispatch])
 
-  const {rdcr_categories} = useSelector(state => state);
-
+  const {rdcr_categories, rdcr_user } = useSelector(state => state);
+  console.log(rdcr_user);
   const aCategories = rdcr_categories?.map(pI => {
     return {
       id: pI.id,

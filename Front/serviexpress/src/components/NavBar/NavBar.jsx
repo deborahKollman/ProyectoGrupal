@@ -11,10 +11,14 @@ import AccountMenu from "./MUI-AcountMenu";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/action";
+import NavigationBar from "../NavigationBar";
 
 const logo = require("../../assets/icons/log.png");
+
+//=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
 const BurgerButton = () => {
-  const dispatch = useDispatch();
+
+  const xDispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
   const mReloadOpen = () => {
@@ -32,17 +36,23 @@ const BurgerButton = () => {
         setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
       }
     } else {
-      dispatch(getUser());
+      xDispatch(getUser());
     }
-  }, [dispatch, avatar, user]);
+  }, [xDispatch, avatar, user]);
+
+
+  const { rdcr_isAuth } = useSelector((state) => state);
+  const mLoginTemp = () => {
+    console.log("rdcr_isAuth",rdcr_isAuth);
+  }
 
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
-        <Link to={`/Home`}    >
-        <figure>
-          <img src={logo} alt="" />
-        </figure>
+        <Link to={`/Home`}>
+          <figure>
+            <img src={logo} alt="" />
+          </figure>
         </Link>
 
         <IconButton className="burgerFigure" onClick={mReloadOpen}>
@@ -60,7 +70,9 @@ const BurgerButton = () => {
         <MyNav>
           <ol>
             <li>
-              <IconButton aria-label="delete" size="large">
+              <IconButton aria-label="delete" size="large"
+                onClick={mLoginTemp}
+              >
                 <Favorite />
               </IconButton>
             </li>
@@ -104,9 +116,9 @@ const BurgerButton = () => {
           </Link>
         </li>
       </ListNav>
-      {/* <MyButton variant="contained" endIcon={<VolunteerActivismIcon />}>
-        Join Serviexpress
-      </MyButton> */}
+      
+      <NavigationBar/>
+
     </MyHeader>
   );
 };
