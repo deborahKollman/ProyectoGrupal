@@ -1,5 +1,5 @@
 import axios from "axios";
-import swal from "sweetalert";
+ import swal from "sweetalert"; 
 const GET_PUBLICATIONS = "GET_PUBLICATIONS";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 const SWICH_LOADING = "SWICH_LOADING";
@@ -13,6 +13,12 @@ const GET_SERVICES = "GET_SERVICES";
 const GET_USER = "GET_USER";
 const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
+const GET_USER_BY_ID = "GET_USER_BY_ID";
+const GET_USERS = "GET_USERS";
+
+
+
+
 
 export const act_logout = () => {
   return {
@@ -184,13 +190,52 @@ export function getPublicationsName(name) {
         });
       })
 
-      .catch(function () {
+       .catch(function () {
         swal({
           title: "ERROR",
           text: "Recipe not found",
           icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
           dangerMode: true,
         });
-      });
+      }); 
   };
 }
+
+
+export function getUserById(id) {
+    return async (dispatch) => {
+        try {
+          
+            let data = await axios.get('http://localhost:3001/users/'+id);
+            
+            dispatch({type: GET_USER_BY_ID, payload: data.data.user});
+          
+        } catch (error) {
+          console.log(error);
+        }
+
+    }
+
+
+
+};
+
+
+export function getUsers() {
+  
+  return async (dispatch) => {
+    try {
+      
+        let users = await axios.get('http://localhost:3001/users');
+        
+        dispatch({type: GET_USERS, payload: users.data.users});
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+}
+
+
+
+};

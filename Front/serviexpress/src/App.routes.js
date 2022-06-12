@@ -34,7 +34,7 @@ function App() {
       <Route exact path="/login" element={<Login/>} />
 
       <Route exact path="/" element={<LandingPage/>} />
-      <Route path='/detail' element={<Detail/>}/>
+      <Route path='/detail/:id' element={<Detail/>}/>
       <Route exact path="/Home" element={<Home/>}/> 
       <Route path='*' element={<NotFound/>} />
     </Routes>

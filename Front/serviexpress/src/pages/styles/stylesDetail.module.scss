@@ -99,17 +99,35 @@
     font-size: large;
     font-weight: 800;
     font-style: italic;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-top: 50px;
     gap: 10px;
+    margin-left: 40px;
 
 }
 
 .more{
     border: none;
-    background-color: lightgrey;
-    color: navy;
+    font-style: oblique;
+    color: blue;
     margin-bottom: 50px;
     font-size: large;
+    background-color: transparent;
+    text-decoration: underline;
 
+}
+
+.price{
+    font-size: large;
+    font-style: italic;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    margin-top: 20px;
+
+}
+
+.price div{
+    color: green;
+    font-weight: 700;
 }

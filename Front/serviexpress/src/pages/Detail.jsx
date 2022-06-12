@@ -7,7 +7,7 @@ import ProfileOpinion from '../components/ProfileOpinion';
 import Footer from '../components/FooterDetail';
 import NavBar from '../components/NavBar/NavBar';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import ServicesBar from '../components/ServicesBar';
+//import ServicesBar from '../components/ServicesBar';
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 import {getById} from '../redux/action.js';
@@ -19,7 +19,8 @@ export default function Detail(){
     const dispatch = useDispatch();
     const detail = useSelector(state => state.detail);
 
-    const [text,setText] = useState(detail.detail_resume);
+  
+  
 
 
     useEffect(() => {
@@ -27,13 +28,18 @@ export default function Detail(){
 
     },[dispatch,id]);
 
+
+  const [text,setText] = useState();
+
+
+
     const handleClick = (e) => {
         e.preventDefault();
         setText(detail.detail);
+
     };
 
-    console.log(text);
-     
+    
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
@@ -54,47 +60,30 @@ export default function Detail(){
 
           </div>
           <div className={stylesDetail.title}>
+                <p>{detail.title}</p>
+
+                  <div>
                 <label>Publicado el: </label>
                <p > {detail.date}</p>
+               </div>
           </div>
+
+
         <div className={stylesDetail.carousel}>
      <Carousel fade>
-       <Carousel.Item>
-       <img
-         className="d-block w-100"
-        src={detail.album}
-           alt="First slide"
-         />
-     <Carousel.Caption>
-          <h3>First slide label</h3>
-       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-       </Carousel.Caption>
-     </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="https://images.unsplash.com/photo-1608126841548-dfad1d420a0f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-      alt="Second slide"
-    />
+        {detail.album.map(e => {
+            return <Carousel.Item>
+            <img className="d-block w-100" src={e} alt="First slide"
+                   />
+            </Carousel.Item>
+       })}
 
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </Carousel.Caption>
-     </Carousel.Item>
-      <Carousel.Item>
-       <img
-        className="d-block w-100"
-       src="https://images.unsplash.com/photo-1618947084583-07ff857ca918?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt="Third slide"
-       />
-
-    <Carousel.Caption>
-         <h3>Third slide label</h3>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
     </Carousel>
+       <div className={stylesDetail.price}><p>Price: </p>
+       <div> ${detail.price} </div>
+       
+       </div>
+
 
     </div>
 
@@ -104,6 +93,8 @@ export default function Detail(){
 
         </p> */}
 
+          <p>{detail.detail_resume}</p>
+          <p></p>
           <p>{text}</p>
 
             <button className={stylesDetail.more} onClick={handleClick}>Ver Mas</button>
@@ -114,7 +105,7 @@ export default function Detail(){
  
              <Carousel>
             <Carousel.Item>
-                 <CardOthersServices></CardOthersServices>
+                 <CardOthersServices id="0"></CardOthersServices>
                  
              </Carousel.Item>
 
@@ -138,15 +129,12 @@ export default function Detail(){
 
 
         <div className={stylesDetail.opinion} >
+          <ProfileOpinion userid={detail.userId}></ProfileOpinion>
 
-          <ProfileOpinion></ProfileOpinion>
-          <ProfileOpinion></ProfileOpinion>
-          <ProfileOpinion></ProfileOpinion>
-          <ProfileOpinion></ProfileOpinion>
         </div>
        
     </div>
-    <CardSellerDetail></CardSellerDetail>
+    <CardSellerDetail userid={detail.userId}></CardSellerDetail>
 
     </div>
      <Footer></Footer>

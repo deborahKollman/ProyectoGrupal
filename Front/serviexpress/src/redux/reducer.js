@@ -6,13 +6,14 @@ const initialState = {
   Publications: [],
   switchloading: false,
 
-  detail: {},
+  detail: {album: []},
   profileUser: [],
   categories: [],
   filteredCategories: [],
   publicationById: {},
-
+  userId: {seller_opinions: []},
   user: {},
+  users: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -80,6 +81,29 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
       };
+<<<<<<< HEAD
+    case "GET_USER_BY_ID":
+      
+      
+      return{
+        ...state,
+        userId: action.payload,
+
+      }
+      case "GET_USERS":
+      
+      
+        return{
+          ...state,
+          users: action.payload,
+  
+        }
+
+
+
+
+
+=======
     case AUTHENTICATE:
 
       window.sessionStorage.setItem("token", payload.login);
@@ -97,6 +121,7 @@ const rootReducer = (state = initialState, action) => {
         rdcr_user: {},
       };
       
+>>>>>>> development
     default:
       return state;
   }
