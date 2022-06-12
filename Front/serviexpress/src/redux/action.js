@@ -1,24 +1,12 @@
 import axios from "axios";
  import swal from "sweetalert"; 
-const GET_PUBLICATIONS = "GET_PUBLICATIONS";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
-const SWICH_LOADING = "SWICH_LOADING";
-const GET_PUBLICATION_ID = "GET_PUBLICATION_ID";
-const GET_PUBLICATIONS_NAME = "GET_PUBLICATIONS_NAME";
 const POST_PUBLICATION = "POST_PUBLICATION";
 const JALZ_GET_CATEGORIES = "JALZ_GET_CATEGORIES";
 export const AUTHENTICATE = "AUTHENTICATE";
 const GET_CATEGORIES = "GET_CATEGORIES";
 const GET_SERVICES = "GET_SERVICES";
-const GET_USER = "GET_USER";
-const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
-const GET_USER_BY_ID = "GET_USER_BY_ID";
-const GET_USERS = "GET_USERS";
-
-
-
-
 
 export const act_logout = () => {
   return {
@@ -45,6 +33,7 @@ export const fakeLogin = (pO_User) => {
     });
   };
 };
+
 export const getUser = (pO_User) => {
   return async (dispatch) => {
     const { data } = await axios.get("http://localhost:3001/login/success", pO_User, {
@@ -56,11 +45,12 @@ export const getUser = (pO_User) => {
     });
 
     dispatch({
-      type: GET_USER,
+      type: "GET_USER",
       payload: data,
     });
   };
 };
+
 export const getUserr = (user) => {
   return async (dispatch) => {
     const { data } = await axios.post("http://localhost:3001/login", user, {
@@ -71,7 +61,7 @@ export const getUserr = (user) => {
       },
     });
     dispatch({
-      type: GET_USER,
+      type: "GET_USER",
       payload: data,
     });
   };
@@ -110,24 +100,22 @@ export const getById = (id) => {
     const publi = await axios.get(`${URL}/publications/${id}`);
 
     dispatch({
-      type: GET_BY_ID,
+      type: "GET_BY_ID",
       payload: publi.data,
     });
   };
 };
 
-//simulando la accion para hacer un post a la ruta y agregar informacion del usuario creado
 
 //simulando la accion para el filtro por categorias
 export function filterCategories(payload) {
   return { type: "FILTER_CATEGORIES", payload };
 }
 
-
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = axios("urldementira");
+      const json = axios(`${URL}/categories`);
       return dispatch({ type: "GET_CATEGORIES", payload: json.data });
     } catch (error) {
       console.log(error);
@@ -148,7 +136,7 @@ export const postProfileUser = (input) => {
 };
 
 export const swich_loading = (e) => {
-  return { type: SWICH_LOADING, payload: e };
+  return { type: "SWICH_LOADING", payload: e };
 };
 
 export function getPublications() {
@@ -156,7 +144,7 @@ export function getPublications() {
     try {
       const response = await axios.get("http://localhost:3001/publications");
       dispatch({
-        type: GET_PUBLICATIONS,
+        type: "GET_PUBLICATIONS",
         payload: response.data,
       });
     } catch (error) {
@@ -171,10 +159,10 @@ export const getPublicationId = (id) => {
       const publication = await axios.get(
         `http://localhost:3001/publications/${id}`,
       );
-      return dispatch({ type: GET_PUBLICATION_ID, payload: publication.data });
+      return dispatch({ type: "GET_PUBLICATION_ID", payload: publication.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_PUBLICATION_ID, payload: [] });
+      return dispatch({ type: "GET_PUBLICATION_ID", payload: [] });
     }
   };
 };
@@ -185,7 +173,7 @@ export function getPublicationsName(name) {
       .get(`http://localhost:3001/publications?title=` + name)
       .then((responese) => {
         return dispatch({
-          type: GET_PUBLICATIONS_NAME,
+          type: "GET_PUBLICATIONS_NAME",
           payload: responese.data,
         });
       })
@@ -204,38 +192,19 @@ export function getPublicationsName(name) {
 
 export function getUserById(id) {
     return async (dispatch) => {
-        try {
-          
-            let data = await axios.get('http://localhost:3001/users/'+id);
-            
-            dispatch({type: GET_USER_BY_ID, payload: data.data.user});
-          
-        } catch (error) {
-          console.log(error);
-        }
-
+        try {     
+            let data = await axios.get('http://localhost:3001/users/'+id);          
+            dispatch({type: "GET_USER_BY_ID", payload: data.data.user});     
+        } catch (error) {console.log(error)}
     }
-
-
-
 };
 
 
-export function getUsers() {
-  
+export function getUsers() { 
   return async (dispatch) => {
     try {
-      
-        let users = await axios.get('http://localhost:3001/users');
-        
-        dispatch({type: GET_USERS, payload: users.data.users});
-      
-    } catch (error) {
-      console.log(error);
-    }
-
-}
-
-
-
+        let users = await axios.get('http://localhost:3001/users');    
+        dispatch({type: "GET_USERS", payload: users.data.users}); 
+    } catch (error) {console.log(error);}
+ }
 };
