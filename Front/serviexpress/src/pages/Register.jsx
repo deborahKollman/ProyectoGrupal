@@ -8,6 +8,8 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import "./styles/Login.scss";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
+import { responsiveProperty } from "@mui/material/styles/cssUtils";
 
 
 const Register = () => {
@@ -17,6 +19,8 @@ const Register = () => {
   const [error, setErrores] = useState("");
 
   const [checked, setChecked] = useState(true);
+
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -49,7 +53,9 @@ const Register = () => {
             {headers: { "Content-Type": "application/json" }}
           );
           console.log('Button handler',response.data)
-        //return response;
+        console.log(response);
+        if (response.data.message === 0) navigate('/user')
+        else if (response.data.message === 1) alert('Usuario ya registrado')
       } catch (e) {
         console.log(e.message);
     };
