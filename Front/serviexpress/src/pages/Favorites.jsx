@@ -1,11 +1,10 @@
 import React from 'react'
-import NavigationBar from "../components/NavigationBar";
+import BurgerButton from '../components/NavBar/NavBar';
 
 const Favorites = () => {
   return (
     <div style={{height: '200vh'}}>
-      Orders
-      <NavigationBar/>
+      <BurgerButton />
     </div>
   )
 }

@@ -12,6 +12,9 @@ const CATEGORY = require("../assets/database/CATEGORY.json");
 const SUBCATEGORY = require("../assets/database/SUBCATEGORY.json");
 
 const CreateService = () => {
+  const [name, setName] = useState("");
+  const [Detail, setDetail] = useState("");
+  const [SomeDetail, setSomeDetail] = useState("");
   const [category, setCategory] = useState("");
   const [subcategory, setSubcategory] = useState("");
   const [price, setPrice] = useState("");
@@ -24,23 +27,38 @@ const CreateService = () => {
       xDispatch(jalz_getAllCategories());
   }, [xDispatch])
 
-  const {rdcr_categories} = useSelector(state => state);
+  const {rdcr_categories, rdcr_user } = useSelector(state => state);
+  console.log(rdcr_user);
+  const aCategories = rdcr_categories?.map(pI => {
+    return {
+      id: pI.id,
+      name: pI.name
+    };
+  })
 
-  console.log(rdcr_categories);
+  const aServices = (rdcr_categories?.map(pII => {
+    const x = pII.services
+    const oServices = x.map(pIII => {
+      return {
+        id: pIII.id,
+        name: pIII.name,
+        fk_category: pII.id
+      }
+    })
+    return oServices
+  })).flat();
+
   const mSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      detail_resume: "detail test",
-      userId: 1,
+      title: name,
+      detail: Detail,
+      detail_resume: SomeDetail,
       price,
-      detail: "some detail",
-      user_id: 1,
       pictures,
-      title: "title test",
-      categoryId: 1,
-      // subcategory,
+      categoryId : category,
+      usr_id : 1
     };
-    // console.log(data);
     xDispatch(createPublication(data));
     
     alert("Publication created");
@@ -55,15 +73,27 @@ const CreateService = () => {
         className="createService-content">
 
         <h1>Service Info</h1>
+        
+        <MyTextField
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          label="NAME"
+          placeholder="Name of service"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
 
         <MySelect
-          aFirst={CATEGORY}
+          aFirst={aCategories}
           pHandleChange={(e) => {
             setCategory(e.target.value);
           }}
         />
         <MySelectTwo
-          aSecond={SUBCATEGORY}
+          aSecond={aServices}
           pHandleChange={(e) => {
             setSubcategory(e.target.value);
           }}

@@ -33,12 +33,11 @@ const fx = async function() {
 
         const pub1=await Publication.create( 
             {
-                "id": 1,
                 "date": "2022-06-09T23:25:03.723Z",
                 "state": "Active",
                 "title": "Titulo de la publicacion",
                 "album": [
-                "http://localhost:3001/public/img/pub/pictures-1654817103521.jpeg"
+                "http://localhost:3001/public/img/test/1.jpg"
                 ],
                 "detail": "instalaciones sin fallas",
                 "detail_resume": "Sus necesidades son nuestro compromiso",
@@ -50,12 +49,11 @@ const fx = async function() {
         )
         const pub2=await Publication.create( 
         {
-            "id": 2,
             "date": "2022-06-09T23:25:33.552Z",
             "state": "Active",
             "title": "2da publicacion",
             "album": [
-            "http://localhost:3001/public/img/pub/pictures-1654817133339.jpeg"
+            "http://localhost:3001/public/img/test/2.jpg"
             ],
             "detail": "instalaciones sin fallas",
             "detail_resume": "Contrateme",
@@ -67,12 +65,11 @@ const fx = async function() {
         )
         const pub3=await Publication.create( 
             {
-                "id": 3,
                 "date": "2022-06-09T23:28:02.650Z",
                 "state": "Active",
                 "title": "3era publicacion",
                 "album": [
-                "http://localhost:3001/public/img/pub/pictures-1654817282324.jpeg"
+                "http://localhost:3001/public/img/test/3.jpg"
                 ],
                 "detail": "Lo mas",
                 "detail_resume": "Contrateme",

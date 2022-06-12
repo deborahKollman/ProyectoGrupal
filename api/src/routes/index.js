@@ -13,6 +13,13 @@ fs.readdirSync(__dirname).forEach((file) => {
   }
 });
 
+// solo para las imagenes de carga base de prueba
+router.get('/public/img/test/:id', (req, res)=>{
+  const file = req.params.id;
+  res.download('./public/img/test/'+file, file)
+});
+//
+
 router.get('/public/img/pub/:id', (req, res)=>{
   const file = req.params.id;
   res.download('./public/img/pub/'+file, file)

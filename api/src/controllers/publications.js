@@ -27,7 +27,7 @@ exports.getPublicationDetails = async (req, res, next) => {
 };
 
 exports.postPublication = async (req, res, next) => {
-  req.files = [
+/*   req.files = [
     {
       fieldname: 'pictures',
       originalname: 'Proyecto Final.pdf',
@@ -38,7 +38,7 @@ exports.postPublication = async (req, res, next) => {
       path: 'public\\img\\10pictures-1654731917346.pdf',
       size: 393334
     }
-  ];
+  ]; */
   try {
     const {
       title = '',
