@@ -1,4 +1,3 @@
-
 import React from 'react'
 import Styles from './styles/LandingPage.module.scss'
 import Carousel from 'react-bootstrap/Carousel'
@@ -15,7 +14,7 @@ const LandingPage = () => {
 
      <h1 className={Styles.title}>ServiExpress</h1>
 
-     <div className={Styles.btn}>
+     <div className={Styles.btn1}>
        <Button variant="text" onClick={() => navigate('/login')} 
        sx={{
          color: 'black',
@@ -23,6 +22,16 @@ const LandingPage = () => {
        }}>
          Login
        </Button>
+     </div>
+
+     <div className={Styles.btn2}>
+        <Button variant="text" onClick={() => navigate('/home')} 
+        sx={{
+          color: 'black',
+          fontSize: 16,
+        }}>
+          Home
+        </Button>
      </div>
 
 
