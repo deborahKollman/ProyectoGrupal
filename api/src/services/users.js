@@ -4,7 +4,7 @@ const { User } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
 
 
-exports.checkUser = async(usr, password) => {
+/* exports.checkUser = async(usr, password) => {
   // Chequea si el usuario existe y si la clave es correcta
   const user = await User.findOne({where:{email:usr}})
 
@@ -16,6 +16,17 @@ exports.checkUser = async(usr, password) => {
     }
   }
   return {err_msg:'Usuario no encontrado'}
+}; */
+
+exports.checkUser = async(usr) => {
+  // Chequea si el usuario existe
+  const user = await User.findOne({where:{email:usr}})
+
+  if(user){
+    return {message: 1}
+  } else {
+    return {message: 0}
+  };
 };
 
 exports.getAllUsers = async ({ page, offset, limit }) => {

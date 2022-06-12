@@ -1,17 +1,36 @@
 //const { publications } = require('../database/data.js');
-
 const { Publication, Service, User } = require('../database/postgres.js');
+const {Op} = require('sequelize');
 
-exports.getPublications = (offset, limit) => {
+exports.getPublications = (offset, limit, title) => {
   // Retorna las limit publicaciones activas a partir de la nro offset
+  if (title === '')
+      {
+      activePub = Publication.findAll({
+        where: { 
+          state:'Active'
+        },
+        include: {
+          model:Service
+        }
+      });
+  }
+  else 
+  {
     activePub = Publication.findAll({
-      where: {state:'Active'},
+      where: { 
+        state:'Active',
+        title: { 
+          [Op.iLike]: `%${title}%`
+        },
+      },  
       include: {
         model:Service
         
       }
     });
-    return activePub;
+  }  
+  return activePub;
 };
 
 
