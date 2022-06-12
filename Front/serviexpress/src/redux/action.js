@@ -1,6 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 const GET_PUBLICATIONS = "GET_PUBLICATIONS";
+export const LOGOUT_SESSION = "LOGOUT_SESSION";
 const SWICH_LOADING = "SWICH_LOADING";
 const GET_PUBLICATION_ID = "GET_PUBLICATION_ID";
 const GET_PUBLICATIONS_NAME = "GET_PUBLICATIONS_NAME";
@@ -12,6 +13,12 @@ const GET_SERVICES = "GET_SERVICES";
 const GET_USER = "GET_USER";
 const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
+
+export const act_logout = () => {
+  return {
+    type: LOGOUT_SESSION,
+  }
+}
 
 export const fakeLogin = (pO_User) => {
   console.log(pO_User);

@@ -88,7 +88,7 @@ const BurgerButton = () => {
             </li>
           </ol>
         </MyNav>
-        {avatar ? (
+        {!avatar ? (
           <img
             src={avatar}
             alt={avatar}

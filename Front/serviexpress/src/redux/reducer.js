@@ -1,4 +1,4 @@
-import {AUTHENTICATE} from "./action";
+import {AUTHENTICATE, LOGOUT_SESSION} from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
   rdcr_user: {}, 
@@ -89,6 +89,14 @@ const rootReducer = (state = initialState, action) => {
         rdcr_user: payload,
         rdcr_isAuth: true
       };
+    case LOGOUT_SESSION:
+      window.sessionStorage.removeItem("token");
+      return {
+        ...state,
+        rdcr_isAuth: false,
+        rdcr_user: {},
+      };
+      
     default:
       return state;
   }
