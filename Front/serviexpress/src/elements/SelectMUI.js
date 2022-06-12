@@ -9,7 +9,7 @@ const MySelect = (props) => {
   const {aFirst, pHandleChange} = props;
  
   return (
-    <Box sx={{ width: "300px", mt: "30px" }}>
+    <Box sx={{ width: "260px", mt: "30px" }}>
       <FormControl fullWidth>
         <InputLabel
           sx={{ color: "black !important" }}
@@ -36,7 +36,7 @@ const MySelect = (props) => {
               key={pI.id}
               value={pI.id}
             >
-              {pI.car_descripcion}
+              {pI.name}
             </MenuItem>
           ))}
         </Select>
@@ -56,7 +56,7 @@ const MySelectTwo = ({aSecond, pHandleChange, pDad}) => {
 
 
   return (
-    <Box sx={{ width: "300px", mt: "30px" }}>
+    <Box sx={{ width: "260px", mt: "30px" }}>
       <FormControl fullWidth disabled={!pDad}>
         <InputLabel
           sx={{ color: "black !important" }}
@@ -81,9 +81,9 @@ const MySelectTwo = ({aSecond, pHandleChange, pDad}) => {
           {aSecondFiltered.map((pII) => (
             <MenuItem
               key={pII.id}
-              value={pII.car_descripcion}
+              value={pII.name}
             >
-              {pII.car_descripcion}
+              {pII.name}
             </MenuItem>
           ))}
         </Select>
