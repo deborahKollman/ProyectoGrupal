@@ -32,7 +32,6 @@ function App() {
       <Route exact path="/" element={<LandingPage/>} />
       <Route path='/detail' element={<Detail/>}/>
       <Route exact path="/Home" element={<Home/>}/> 
-      <Route exact path='HomePage' element={<HomePage/>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
   )}
