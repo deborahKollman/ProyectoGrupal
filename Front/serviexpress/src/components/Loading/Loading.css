@@ -2,7 +2,7 @@
 .loadback {
     /* background-image: url('https://i.gifer.com/UcHy.gif') ; */
     /* background-image: url('https://acegif.com/wp-content/uploads/loading-25.gif') ; */
-    background-image: url('https://media0.giphy.com/media/EWqZuU1dEvc3PfWGy6/200.gif') ;
+    background-image: url('../../assets/icons/loading.gif') ;
 
     width: 300px;
     height: 300px;
