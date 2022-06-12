@@ -19,7 +19,8 @@ const {upload } = require('../middlewares/index.js')
 const router = Router();
 
 router.get('/', getUsers);
-router.get('/login', checkUser);
+//router.get('/register', checkUser);
+router.post('/register', checkUser);
 router.get('/:id', getUserDetail);
 router.post('/',upload.single('avatar_image'), postUser);
 router.put('/recover', updatePassword);
