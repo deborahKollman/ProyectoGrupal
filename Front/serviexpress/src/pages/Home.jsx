@@ -52,28 +52,22 @@ export default function Home(){
 
         return(
             <div className="wphome">
-           
+
             <NavBar>
                 
             </NavBar>
-                
-            <div className="divpag">
-            
-           
-                    
-                        <Pagination className ="pagination"
-                            PublicationsPerPag={PublicationsPerPage}
-                            allPublications={allPublications.length}
-                            pagination = {pagination}
-                            
-                        />
-                <ServicesBar className="ServicesBar">
-                
-                </ServicesBar>
+            <div className="filterservice">
+<p className="filtername">Electrican</p>
+<p className="filtername">Plumb</p>
+<p className="filtername">Programming & Tech</p>
+<p className="filtername">Painter</p>
+<p className="filtername">Digital-Marketing</p>
+<p className="filtername">More...</p>
 
+</div>
+                
 
-                    </div>
-                    <div className="divcarousel">
+                    {/* <div className="divcarousel">
      <Carousel fade>
        <Carousel.Item>
        <img
@@ -112,9 +106,12 @@ export default function Home(){
       </Carousel.Item>
     </Carousel>
 
-    </div>
+    </div> */}
 
                 <div className='services-home'>
+  
+
+            
                 
                 { SwichL===true || allPublications.length===0 ? (
 					
@@ -137,10 +134,22 @@ export default function Home(){
                             
                         />
                     </div>
-                    
+                  
                     )}))
 
                 }
+            
+                </div>
+                <div className="pagination">
+                <Pagination className ="pagination"
+                            allpublicationsnumber={allPublications.length}
+                            pagination = {pagination}
+                            PublicationsPerPage = {PublicationsPerPage}
+                                                    />
+                </div>
+                <div className="logos">
+                
+                  
                 </div>
 
             
