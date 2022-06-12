@@ -13,7 +13,6 @@ import Home from './pages/Home'
 import CreateService from './pages/CreateService'
 import HomePage from './pages/HomePage.jsx';
 
-
 function App() {
 
   const isAutn = true;
