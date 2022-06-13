@@ -12,7 +12,7 @@ import swal from "sweetalert";
 import {useNavigate} from 'react-router-dom'
 import { responsiveProperty } from "@mui/material/styles/cssUtils";
 import {useDispatch} from 'react-redux' 
-import {registerUser} from '../redux/action'
+import {registerUser} from '../redux/action';
 
 
 
@@ -29,6 +29,14 @@ const Register = () => {
     confirmPassword: "",
     confirmPasswordError: ""
   })
+
+  const [handleError,setHandleError] = useState({
+    email: "",
+    password: "",
+  })
+
+
+
 
   const handleEmailChange = (e) => {
 
@@ -71,8 +79,37 @@ const Register = () => {
     }); */
   };
 
+
+    const validate = {
+        name: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
+      
+
+
+    }
+
+
+
+
+
+
+
   
   const buttonHandler = async () => {
+      console.log(input.password.length );
+
+      if(!validate.name.test(input.email)) {
+        setHandleError({...handleError, email: "The e-mail should be a 'example@example.com' format"});
+      
+
+      }
+      
+      else if(input.password.length < 8) {
+        setHandleError({...handleError,password: "The password should have 8 characters at least",email:""});
+      }
+
+
+      else{
+        setHandleError({...handleError,password: "",email:""});
 
       try {
          const response = await axios.post('http://localhost:3001/users/register', 
@@ -116,10 +153,12 @@ const Register = () => {
     };
   };
 
+  };
 
   return (
     <div className="page-login">
       <BurgerButton />
+     
 
       <div className="login-container">
         <section className="content">
@@ -139,7 +178,12 @@ const Register = () => {
             type="email"
             onChange={(e) => handleEmailChange(e)}
           />
-
+          {
+            <div className="errorDiv">
+            <p>{handleError.email}</p>
+            </div>
+            
+          }
           <MyTextField
             required
             label="PASSWORD"
@@ -148,6 +192,14 @@ const Register = () => {
             type="password"
             onChange={(e) => handlePasswordChange(e)}
           />
+                    {
+            <div className="error-div">
+            <p>{handleError.password}</p>
+            </div>
+            
+          }
+
+
           <MyTextField
             label="CONFIRM PASSWORD"
             name='confirmPassword'

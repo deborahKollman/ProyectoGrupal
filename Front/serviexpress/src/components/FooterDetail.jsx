@@ -39,9 +39,7 @@ const [age, setAge] = useState('');
 
   }
 
-    console.log(categories);
-
-
+    
     return <div className={styles.container}>
       <div class="accordion" id="accordionPanelsStayOpenExample">
   <div class="accordion-item">
