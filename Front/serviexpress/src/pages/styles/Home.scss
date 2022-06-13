@@ -61,10 +61,18 @@ color: #000000;
 
 .logos{
   position: relative;
-  display: flex;
-  height: 150px;
-  background-color: #f4f3f3;
+  display: flexbox;
+  height: 80px;
+  margin-bottom: 10px;
+  
   justify-content: space-between ;
+  background-image: url('../../assets/icons/bottonicons.png');
+  background-size: 40%;
+  background-position-x: center;
+  background-position-y:bottom;
+  background-repeat: no-repeat;
+  background-color: aliceblue;
+  
   
 }
 .pagination{

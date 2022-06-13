@@ -5,16 +5,13 @@ const {HOST,PORT}=process.env
 
 
 exports.checkUser = async(req, res, next) => {
-  // Retorna:
-  // Si el usuario no existe: 401, msg: Usuario no registrado
-  // Si la clave es erronea: 401, msg Clave errónea
+  //Retorna {message: 1} si lo encuentra; sino  {message: 0}
   try {
-    const { email, password } = req.body;
-    const r = await checkUser(email,password);
-    if(r.err_msg){
-      res.status(BAD_REQUEST).send(r.err_msg);
-    }
-    res.status(OK).json(r);
+    const {email, password} = req.body;
+    console.log('mail:',email,'Pas:',password)
+    const r = await checkUser(email);
+    console.log('checkusr',r.message)
+    res.status(OK).send(r)
   } catch (error) {
     next(error);
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import './Pagination.scss'
+import Styles from './Pagination.scss'
 
 
 
@@ -17,7 +17,7 @@ export default function Pagination({PublicationsPerPage, allpublicationsnumber, 
         <div className="pagination2">
                 
                     {       pageNumbers.map(Number=>{ return(
-                            <div className="number" key={Number}>
+                            <div className={Styles.number} key={Number}>
                             <a onClick={()=>pagination(Number)}>{Number}</a>
                             </div>)
                         })}

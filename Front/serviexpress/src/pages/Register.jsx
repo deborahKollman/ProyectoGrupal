@@ -7,16 +7,60 @@ import GoogleIcon from '@mui/icons-material/Google';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import "./styles/Login.scss";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
+import { responsiveProperty } from "@mui/material/styles/cssUtils";
 
 
 const Register = () => {
-  const [first, setFirst] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const [error, setErrores] = useState("");
 
   const [checked, setChecked] = useState(true);
+
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+
+  const emailHandleChange = (event) => {
+    //event.target.checked
+
+    setEmail(
+      email+event.nativeEvent.data
+     )
+/*     setErrores(validacionDelFormulario({
+      ...email,
+      [event.target.name]: event.nativeEvent.data */
+  }
+
+
+  const passwordHandleChange = (event) => {
+    setPassword(password+event.nativeEvent.data)
+  }
+
+
+  const buttonHandler = async () => {
+      try {
+         const response = await axios.post('http://localhost:3001/users/register', 
+            {
+              email: email,
+              password: password
+            }, 
+            {headers: { "Content-Type": "application/json" }}
+          );
+          console.log('Button handler',response.data)
+        console.log(response);
+        if (response.data.message === 0) navigate('/user')
+        else if (response.data.message === 1) alert('Usuario ya registrado')
+      } catch (e) {
+        console.log(e.message);
+    };
+  };
+
 
   return (
     <div className="page-login">
@@ -35,32 +79,28 @@ const Register = () => {
           <MyTextField
             required
             label="E-MAIL"
-            value={first}
+            //value={email}
             type="email"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            onChange={(e) => emailHandleChange(e)}
           />
 
           <MyTextField
             required
             label="PASSWORD"
-            value={first}
+            value={password}
             type="password"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            onChange={(e) => passwordHandleChange(e)}
           />
           <MyTextField
             label="CONFIRM PASSWORD"
-            value={first}
+            value={confirmPassword}
             type="password"
             onChange={(e) => {
-              setFirst(e.target.value);
+              setconfirmPassword(e.target.value);
             }}
           />
 
-          <MyButtonTwo variant="contained" endIcon={<HowToRegIcon />}>
+          <MyButtonTwo onClick={(e)=>buttonHandler()} variant="contained" endIcon={<HowToRegIcon />}>
             Register
           </MyButtonTwo>
  

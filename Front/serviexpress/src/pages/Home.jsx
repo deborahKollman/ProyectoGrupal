@@ -45,10 +45,20 @@ export default function Home(){
         }, [allPublications])
 
 
+// function filterforCategory(e){
+//             if(e.target.value === 'All'){ 
+//                 dispatch(getPublications())
+//             } 
+//             else{
+//                 dispatch(getServicesForCategory(e.target.value))
+//             }
+//         }
+
+
 // if(allPublications.length===0)dispatch(swich_loading(true))
 // else if(allPublications.length!==0)dispatch(swich_loading(false))
 
-
+// onChange={e=>  filterforCategory(e)}
 
         return(
             <div className="wphome">
@@ -62,10 +72,21 @@ export default function Home(){
 <p className="filtername">Programming & Tech</p>
 <p className="filtername">Painter</p>
 <p className="filtername">Digital-Marketing</p>
-<p className="filtername">More...</p>
-
+<select>
+                            <option key = 'All' value='0'>More...</option>
+                            <option key = 'plumbing' value='1'>plumbing</option>
+                            <option key = 'electricity' value='2'>electricity</option>
+                            <option key = 'carpentry' value='3'>carpentry</option>
+                            <option key = 'developers' value='4'>developers</option>
+                            <option key = 'graphic & design' value='5'>graphic & design</option>
+                            <option key = 'advocacy' value='6'>advocacy</option>
+                            <option key = 'engineering' value='7'>engineering</option>
+                            <option key = 'technical service' value='8'>technical service</option>
+                            <option key = 'digital marketing' value='9'>digital marketing</option>
+                            <option key = 'music & audio' value='10'>music & audio</option>
+                       </select> 
 </div>
-                
+
 
                     {/* <div className="divcarousel">
      <Carousel fade>
@@ -110,10 +131,10 @@ export default function Home(){
 
                 <div className='services-home'>
   
+                {/* SwichL===true || */}
 
-            
                 
-                { SwichL===true || allPublications.length===0 ? (
+                {  allPublications.length===0 ? (
 					
                     <Loading></Loading>
 						
@@ -125,7 +146,7 @@ export default function Home(){
                     <div>
                         <CardPublications  
                             id={e.id}
-                            album = "https://image.jimcdn.com/app/cms/image/transf/none/path/sb00e8250327cd0a1/image/i4a413653d6352fc2/version/1604231609/funciones-de-un-electricista.png"
+                            album = {e.album[0]}
                             title={e.title} 
                             summary={e.detail_resume}
                             // score={e.score} 
@@ -160,19 +181,7 @@ export default function Home(){
 }
 
 
-        //   {/* <select onChange={e=>  filterforCategory(e)}>
-        //                     <option key = 'All' value='All'>All categories</option>
-        //                     <option key = 'plumbing' value='plumbing'>plumbing</option>
-        //                     <option key = 'electricity' value='electricity'>electricity</option>
-        //                     <option key = 'carpentry' value='carpentry'>carpentry</option>
-        //                     <option key = 'developers' value='developers'>developers</option>
-        //                     <option key = 'graphic & design' value='graphic & design'>graphic & design</option>
-        //                     <option key = 'advocacy' value='advocacy'>advocacy</option>
-        //                     <option key = 'engineering' value='engineering'>engineering</option>
-        //                     <option key = 'technical service' value='technical service'>technical service</option>
-        //                     <option key = 'digital marketing' value='digital marketing'>digital marketing</option>
-        //                     <option key = 'music & audio' value='music & audio'>music & audio</option>
-        //                 </select> */}
+    
 
 
 
@@ -196,14 +205,7 @@ export default function Home(){
         //     dispatch(getServices())
         // }
     
-        // function filterforCategory(e){
-        //     if(e.target.value === 'All'){ 
-        //         dispatch(getServices())
-        //     } 
-        //     else{
-        //         dispatch(getServicesForCategory(e.target.value))
-        //     }
-        // }
+        
 
 
 
