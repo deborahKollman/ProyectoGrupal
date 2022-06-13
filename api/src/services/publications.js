@@ -2,9 +2,9 @@
 const { Publication, Service, User } = require('../database/postgres.js');
 const {Op} = require('sequelize');
 
-exports.getPublications = (offset, limit, title) => {
+exports.getPublications = (offset, limit, title, cat_id='0') => {
   // Retorna las limit publicaciones activas a partir de la nro offset
-  if (title === '')
+  if (title === '' && cat_id === '0')
       {
       activePub = Publication.findAll({
         where: { 
@@ -14,8 +14,10 @@ exports.getPublications = (offset, limit, title) => {
           model:Service
         }
       });
+      return activePub;
   }
-  else 
+
+  if (title !== '')
   {
     activePub = Publication.findAll({
       where: { 
@@ -29,8 +31,24 @@ exports.getPublications = (offset, limit, title) => {
         
       }
     });
+    return activePub;
   }  
-  return activePub;
+ 
+  if (Number(cat_id) !== 0)
+  {
+    activePub = Publication.findAll({
+      where: { 
+        state:'Active',
+        categoryId: Number(cat_id)
+      },  
+      include: {
+        model:Service
+        
+      }
+    });
+    return activePub;
+  } 
+
 };
 
 
