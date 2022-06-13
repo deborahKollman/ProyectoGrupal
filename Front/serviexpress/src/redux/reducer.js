@@ -84,6 +84,8 @@ const rootReducer = (state = initialState, action) => {
 
       // console.log(payload.user, "REDUCER ----> GET_USER");
       return {
+
+        
         ...state,
         user: payload,
         rdcr_isAuth: true,
