@@ -78,13 +78,13 @@ const rootReducer = (state = initialState, action) => {
       };
     case "GET_USER":
       
-      window.sessionStorage.setItem("token", payload); //>>>>obs
+      // window.sessionStorage.setItem("token", payload); //>>>>obs
 
-      console.log(payload.user, "REDUCER ----> GET_USER");
+      // console.log(payload.user, "REDUCER ----> GET_USER");
       return {
         ...state,
         user: payload,
-        rdcr_isAuth: true
+        // rdcr_isAuth: true
       };
     case "REGISTER_USER":
       return {

@@ -32,7 +32,7 @@ const BurgerButton = () => {
         setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
       }
     } else {
-      xDispatch(getUserr());
+      xDispatch(getUserr()); // OJO AL PIOJO xD : POR REVISAR ::
     }
   }, [xDispatch, avatar, user]);
 
