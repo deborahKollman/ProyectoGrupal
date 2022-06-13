@@ -13,6 +13,7 @@ const initialState = {
   userId: {seller_opinions: [],buyer_opinions: []},
   user: {},
   users: [],
+  reg_user: {} // ojo al piojo xD: eliminaron por accidente creo ::
 };
 
 const rootReducer = (state = initialState, action) => {
