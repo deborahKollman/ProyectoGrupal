@@ -65,15 +65,25 @@ export default function Home(){
             <div className="filterservice">
 
 <p className="filtername">Plumbing</p>
+<p className="filtername">|</p>
 <p className="filtername">Carpentry</p>
+<p className="filtername">|</p>
 <p className="filtername">Photography & Sound</p>
+<p className="filtername">|</p>
 <p className="filtername">Computing and Information</p>
+<p className="filtername">|</p>
 <p className="filtername">Graphics & Design</p>
+<p className="filtername">|</p>
 <p className="filtername">Finance</p>
+<p className="filtername">|</p>
 <p className="filtername">Digital Marketing</p>
+<p className="filtername">|</p>
 <p className="filtername">Writing & Translation</p>
+<p className="filtername">|</p>
 <p className="filtername">Video & Animation</p>
+<p className="filtername">|</p>
 <p className="filtername">Electricity</p>
+<p className="filtername">|</p>
 <p className="filtername">Gas</p>
 
 {/* <p className="filtername">Painter</p>
