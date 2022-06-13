@@ -7,15 +7,6 @@ export const AUTHENTICATE = "AUTHENTICATE";
 const GET_CATEGORIES = "GET_CATEGORIES";
 const GET_SERVICES = "GET_SERVICES";
 const URL = `http://localhost:3001`;
-<<<<<<< HEAD
-||||||| fe8c74b
-const GET_USER_BY_ID = "GET_USER_BY_ID";
-const GET_USERS = "GET_USERS";
-
-
-
-
-=======
 const GET_USER_BY_ID = "GET_USER_BY_ID";
 const GET_USERS = "GET_USERS";
 const REGISTER_USER = "REGISTER_USER"
@@ -23,7 +14,6 @@ const REGISTER_USER = "REGISTER_USER"
 
 
 
->>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
 
 export const act_logout = () => {
   return {
@@ -193,29 +183,6 @@ export const getPublicationId = (id) => {
   };
 };
 
-<<<<<<< HEAD
-export function getPublicationsName(name) {
-  return function (dispatch) {
-    axios
-      .get(`http://localhost:3001/publications?title=` + name)
-      .then((responese) => {
-        return dispatch({
-          type: "GET_PUBLICATIONS_NAME",
-          payload: responese.data,
-        });
-      })
-||||||| fe8c74b
-export function getPublicationsName(name) {
-  return function (dispatch) {
-    axios
-      .get(`http://localhost:3001/publications?title=` + name)
-      .then((responese) => {
-        return dispatch({
-          type: GET_PUBLICATIONS_NAME,
-          payload: responese.data,
-        });
-      })
-=======
  
         export function getPublicationsName(name){
           return function(dispatch){
@@ -234,7 +201,6 @@ export function getPublicationsName(name) {
                     }))})
                   
               }}
->>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
 
 
 
@@ -245,42 +211,12 @@ export function getUserById(id) {
             dispatch({type: "GET_USER_BY_ID", payload: data.data.user});     
         } catch (error) {console.log(error)}
     }
-<<<<<<< HEAD
-||||||| fe8c74b
-
-
-
-=======
-
->>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
 };
 
 
 export function getUsers() { 
   return async (dispatch) => {
     try {
-<<<<<<< HEAD
-        let users = await axios.get('http://localhost:3001/users');    
-        dispatch({type: "GET_USERS", payload: users.data.users}); 
-    } catch (error) {console.log(error);}
- }
-};
-||||||| fe8c74b
-      
-        let users = await axios.get('http://localhost:3001/users');
-        
-        dispatch({type: GET_USERS, payload: users.data.users});
-      
-    } catch (error) {
-      console.log(error);
-    }
-
-}
-
-
-
-};
-=======
       
         let users = await axios.get('http://localhost:3001/users');
         
@@ -301,4 +237,3 @@ export function getUsers() {
 //     return { type: GET_PUBLICATIONS_BY_CATEGORIES, payload: id };
   
 // };
->>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
