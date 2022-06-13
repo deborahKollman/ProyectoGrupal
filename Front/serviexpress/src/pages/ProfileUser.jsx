@@ -7,11 +7,13 @@ import { MyButtonTwo, MyTextField } from "../elements/Forms";
 import {UploadImg} from "../components/UploadImg";
 import FormControl from '@mui/material/FormControl';
 import { postProfileUser } from "../redux/action";
+import { MultiImgs } from "../components/UploadImg";
 
 const ProfileUser = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState(null);
   const {reg_user} = useSelector((state)=> state);
  
   const [input, setInput] = useState({
@@ -19,7 +21,7 @@ const ProfileUser = () => {
     password: reg_user.password,
     name: "",
     last_name: "",
-    avatar_image:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    avatar_image: avatar,
     description: "",
     phone_number: "",
     rol: "client"
@@ -72,7 +74,11 @@ const ProfileUser = () => {
           name="last_name"
           onChange={handleChange}
           />
-        <UploadImg />
+        //<UploadImg />
+        <MultiImgs 
+          pStateImage= {avatar}
+          pSetStateImage= {setAvatar}
+        />
         <MyTextField
           id="outlined-multiline-static"
           label="DESCRIPTION"

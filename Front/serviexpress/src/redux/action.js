@@ -149,8 +149,10 @@ export const getAllCategories = () => {
 export const postProfileUser = (input) => {
   return async (dispatch) => {
     try {
-      let profileUser = await axios.post(`${URL}/users/`, input);
-      return dispatch({ type: "POST_PROFILEUSER", profileUser });
+      let profileUser = await axios.post(`${URL}/users/`, input, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      //return dispatch({ type: "POST_PROFILEUSER", profileUser });
     } catch (error) {
       console.log(error);
     }
