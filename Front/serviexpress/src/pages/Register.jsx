@@ -144,6 +144,8 @@ const Register = () => {
         else
          if (response.data.message === 1)
         swal({
+
+          
           title: "ERROR",
           text: "Email ya registrado",
           dangerMode: true,
