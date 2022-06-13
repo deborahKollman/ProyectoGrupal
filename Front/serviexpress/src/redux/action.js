@@ -3,9 +3,6 @@ import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
 const URL = `http://localhost:3001`;
-const GET_USER_BY_ID = "GET_USER_BY_ID";
-const GET_USERS = "GET_USERS";
-const REGISTER_USER = "REGISTER_USER"
 
 // Para desloguearse
 export const act_logout = () => {
