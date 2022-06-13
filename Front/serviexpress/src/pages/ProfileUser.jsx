@@ -85,7 +85,7 @@ const ProfileUser = () => {
           maxlength="14"
           onChange={handleChange}
           />
-        <MyButtonTwo variant="contained" type="submit">Continue</MyButtonTwo>
+        <MyButtonTwo variant="contained" type="submit" onChange={(e)=>{handleSubmit(e)}}>Continue</MyButtonTwo>
         </FormControl>
       </section>
     </form>
