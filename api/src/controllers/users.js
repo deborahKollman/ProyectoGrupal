@@ -1,4 +1,4 @@
-const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment, getBuyerComments, getSellerComments} = require('../services/users.js');
+const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment, getBuyerComments, getSellerComments, getFavorites, addFavorite, removeFavorite} = require('../services/users.js');
 const { User } = require('../database/postgres');
 const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 const {HOST,PORT}=process.env
@@ -66,7 +66,12 @@ exports.getUserDetail = async (req, res, next) => {
 exports.updateUser = async(req, res, next) => {
   try {
     const {id}=req.params;
-    const r = await updateUser(id,req.body);
+    const changes = req.body;
+    if(req.file){
+      const avatar_image = 'http://' + HOST + ':' + PORT + req.file.destination.slice(1) + '/' + req.file.filename;
+      changes={...changes,avatar_image}
+    }
+    const r = await updateUser(id,changes);
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg)
     }
@@ -168,3 +173,44 @@ exports.getSellerOpinions = async(req,res,next) => {
     next(error)
   }
 }
+
+exports.getFavorites = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const r = await getFavorites(id);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg);
+    }
+    res.status(OK).json(r);
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.addFavorite = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const {publication} = req.body;
+    const r = await addFavorite(id,publication);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg);
+    }
+    res.status(OK).send(r.message);
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.removeFavorite = async(req,res,next) => {
+  try {
+    const {id} = req.params;
+    const {publication} = req.body;
+    const r = await removeFavorite(id, publication);
+    if(r.err_msg){
+      res.status(BAD_REQUEST).send(r.err_msg);
+    }
+    res.status(OK).send(r.message);
+  } catch (error) {
+    next(error)
+  }
+} 

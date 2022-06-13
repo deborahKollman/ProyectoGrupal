@@ -12,7 +12,10 @@ const {
   addBuyerOpinion,
   addSellerOpinion,
   getBuyerOpinions,
-  getSellerOpinions
+  getSellerOpinions,
+  getFavorites,
+  addFavorite,
+  removeFavorite
 } = require('../controllers/users.js');
 const {upload } = require('../middlewares/index.js')
 
@@ -29,7 +32,11 @@ router.get('/:id/buyer_review',getBuyerOpinions);
 router.get('/:id/seller_review',getSellerOpinions);
 router.put('/:id/buyer_review',addBuyerOpinion);
 router.put('/:id/seller_review',addSellerOpinion);
-router.put('/:id', updateUser);
+router.put('/:id',upload.single('avatar_image'), updateUser);
+
+router.get('/:id/favorites',getFavorites);
+router.put('/:id/favorites',addFavorite);
+router.delete('/:id/favorites',removeFavorite);
 
 /* router.post('/register', registerUser);
 router.get('/recover', recoverUserPwd);
