@@ -32,7 +32,7 @@ exports.postService=async(req,res,next)=>{
 exports.updateService=async(req,res,next)=>{
   try {
     //req.body.categories: array de ids de categories
-    const r = await updateService(req.query.id,req.body.name);
+    const r = await updateService(req.params.id,req.body.name);
     if(r.err_message){
       res.status(BAD_REQUEST).send(r.err_message)
     }
@@ -45,7 +45,7 @@ exports.updateService=async(req,res,next)=>{
 exports.deleteService=async(req,res,next)=>{
   try {
     //req.body.categories: array de ids de categories
-    const r = await deleteService(req.query.id);
+    const r = await deleteService(req.params.id);
     if(r.err_message){
       res.status(BAD_REQUEST).send(r.err_message)
     }
