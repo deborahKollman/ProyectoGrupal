@@ -86,21 +86,7 @@ function filterforCategory10(){dispatch(getPublicationsByCategory(10))}
 <p className="filtername">|</p>
 <p className="filtername">Gas</p>
 
-{/* <p className="filtername">Painter</p>
-<p className="filtername">Digital-Marketing</p> */}
-{/* <select>
-                            <option key = 'All' value='0'>More...</option>
-                            <option key = 'plumbing' value='1'>plumbing</option>
-                            <option key = 'electricity' value='3'>electricity</option>
-                            <option key = 'carpentgasry' value='2'>gas</option>
-                            <option key = 'developers' value='4'>developers</option>
-                            <option key = 'graphic & design' value='5'>graphic & design</option>
-                            <option key = 'advocacy' value='6'>advocacy</option>
-                            <option key = 'engineering' value='7'>engineering</option>
-                            <option key = 'technical service' value='8'>technical service</option>
-                            <option key = 'digital marketing' value='9'>digital marketing</option>
-                            <option key = 'music & audio' value='10'>music & audio</option>
-</select>  */}
+
 </div>
 
 
