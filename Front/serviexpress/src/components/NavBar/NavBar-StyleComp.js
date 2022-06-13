@@ -42,11 +42,11 @@ const MyHeader = styled.header`
       display: flex;
     }
     z-index: 3;
-    height: ${({ pOpen }) => (!pOpen ? "12vh" : "100%")};
+    height: ${({ pOpen }) => (!pOpen ? "12vh" : "100vh")};
     clip-path: ${({ pOpen }) =>
       !pOpen ? "none" : "polygon(0 0, 100% 0, 100% 100%, 30% 100%);"};
-
-    position: ${({ pOpen }) => (!pOpen ? "inherit" : "absolute")};
+    position: ${({ pOpen }) => (!pOpen ? "inherit" : "fixed")};
+    top: 0;
   }
 `;
 //===============================================================

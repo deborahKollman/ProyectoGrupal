@@ -81,7 +81,6 @@ export const List = styled.ul`
         padding: 5px;
         position: fixed;
         right: 0;
-        bottom: 20px;
         transform: scale(0.7);
         z-index: 1;
       }

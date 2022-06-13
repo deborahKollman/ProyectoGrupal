@@ -5,8 +5,8 @@ import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "../../redux/action";
-import NavigationBar from "../NavigationBar";
+import { getUserr } from "../../redux/action";
+import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
 import { IconButton } from "@mui/material";
 
@@ -32,7 +32,7 @@ const BurgerButton = () => {
         setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
       }
     } else {
-      xDispatch(getUser());
+      xDispatch(getUserr());
     }
   }, [xDispatch, avatar, user]);
 

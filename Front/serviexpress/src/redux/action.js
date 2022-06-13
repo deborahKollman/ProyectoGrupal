@@ -40,6 +40,7 @@ export const getUser = (pO_User) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
+    console.log(data,"ACTIONNNNNNNNNNNNN");
     dispatch({
       type: "GET_USER",
       payload: data,
