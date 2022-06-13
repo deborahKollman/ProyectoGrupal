@@ -9,7 +9,7 @@ const CardPublications = ({ id, score, summary, album, title, price }) => {
       <div className="card">
         {/* <p className='butonX'>{buttonx()}</p>        */}
 
-        <Link className="link" to={`/detail`}>
+        <Link className="link" to={`/detail/${id}`}>
           <div className="card-image">
             <img src={album} alt="not found" />
           </div>
