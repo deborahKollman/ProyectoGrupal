@@ -81,6 +81,13 @@ const rootReducer = (state = initialState, action) => {
         user: payload,
       };
 
+    case "REGISTER_USER":
+      return {
+        ...state,
+        reg_user:payload
+      }
+
+
     case "GET_USER_BY_ID":
       
       
@@ -125,7 +132,7 @@ const rootReducer = (state = initialState, action) => {
         rdcr_isAuth: false,
         rdcr_user: {},
       };
-      
+
 
     default:
       return state;

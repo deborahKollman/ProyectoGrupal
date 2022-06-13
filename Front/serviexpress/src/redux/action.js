@@ -15,7 +15,7 @@ const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
 const GET_USER_BY_ID = "GET_USER_BY_ID";
 const GET_USERS = "GET_USERS";
-const GET_PUBLICATIONS_BY_CATEGORIES = "GET_PUBLICATIONS_BY_CATEGORIES"
+const REGISTER_USER = "REGISTER_USER"
 
 
 
@@ -77,6 +77,15 @@ export const getUserr = (user) => {
     });
   };
 };
+
+export const registerUser = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type: REGISTER_USER,
+      payload: user
+    })
+  }
+}
 
 export const createPublication = (pObjData) => {
   return async () => {
@@ -140,7 +149,7 @@ export const getAllCategories = () => {
 export const postProfileUser = (input) => {
   return async (dispatch) => {
     try {
-      let profileUser = await axios.post("unaurldementira", input);
+      let profileUser = await axios.post(`${URL}/users/`, input);
       return dispatch({ type: "POST_PROFILEUSER", profileUser });
     } catch (error) {
       console.log(error);
@@ -236,9 +245,9 @@ export function getUsers() {
 
 
 
-export const getPublicationsByCategory = (id) => {
+// export const getPublicationsByCategory = (id) => {
    
   
-    return { type: GET_PUBLICATIONS_BY_CATEGORIES, payload: id };
+//     return { type: GET_PUBLICATIONS_BY_CATEGORIES, payload: id };
   
-};
+// };
