@@ -11,6 +11,7 @@ const fx = async function() {
             country: 'Peru',
             province_state: 'Lima',
             rol: 'client' ,
+            description: "Mecanico de todo tipo de vehiculo, presupuesto sin compromiso, y disponibilidad para ir a domicilio por alguna emergencia",
             avatar_image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
             buyer_reputation: 3,  
             buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
@@ -25,6 +26,7 @@ const fx = async function() {
             country: 'Argentina',
             province_state: 'Buenos Aires',
             rol: 'client' ,
+            description: "Soy electricista matriculado, puedo trabajar en instalaciones indistriales o instalaciones del hogar",
             avatar_image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
             buyer_reputation: 4,  
             buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
@@ -37,6 +39,7 @@ const fx = async function() {
             name: 'Damian', 
             last_name: 'Dominguez',
             country: 'Uruguay',
+            description: "Mas de 20 Años en el rubro de construccion y arquitectura, presentame tu proyecto y yo lo hago realidad.",
             avatar_image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
             province_state: 'Montevideo',
             rol: 'client' ,
@@ -52,6 +55,7 @@ const fx = async function() {
             last_name: 'Juarez',
             avatar_image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
             country: 'Colombia',
+            description: "Presupuesto sin compromiso",
             province_state: 'Bogota',
             rol: 'client' ,
             buyer_reputation: 3,  
@@ -137,10 +141,8 @@ const fx = async function() {
                 "https://images.unsplash.com/photo-1582540730843-f4418d96ccbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1246&q=80",
                 "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29ya2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
                 "https://images.unsplash.com/photo-1594581835488-0b95b8b0bacd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29ya2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+
                 ],
-                "detail": `Trabajos de todo tipo`,
-                "detail_resume": "Trabajo de construccion",
-                "price": 200,
                 "userId": 3,
                 "categoryId": 3,
                 "services": []
