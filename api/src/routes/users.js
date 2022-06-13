@@ -34,6 +34,7 @@ router.put('/:id/buyer_review',addBuyerOpinion);
 router.put('/:id/seller_review',addSellerOpinion);
 router.put('/:id',upload.single('avatar_image'), updateUser);
 
+//Por body enviar id de publicacion
 router.get('/:id/favorites',getFavorites);
 router.put('/:id/favorites',addFavorite);
 router.delete('/:id/favorites',removeFavorite);

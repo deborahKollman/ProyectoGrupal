@@ -2,6 +2,7 @@
 const { users } = require('../database/data.js');
 const { User, Favorite, Publication } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
+const fs = require('fs')
 
 
 /* exports.checkUser = async(usr, password) => {
@@ -79,6 +80,9 @@ exports.registerUser = (usr, password) => {
 exports.updateUser = async(id,changes) => {
   const user = await User.findByPk(id)
   if(user){
+    if(user.dataValues.avatar_image){
+      fs.unlinkSync(user.dataValues.avatar_image);
+    }
     await User.update({...changes},{where:{id}})
     return {message:'User updated successfully'}
   }
@@ -116,6 +120,9 @@ exports.updatePassword = async(email,password) => {
 exports.deleteUser = async(id) => {
   const user = await User.findByPk(id);
   if(user){
+    if(user.dataValues.avatar_image){
+      fs.unlinkSync(user.dataValues.avatar_image);
+    }
     await User.destroy({where:{id}})
     return {message:'User deleted successfully'}
   }
@@ -187,7 +194,7 @@ exports.getFavorites = async(id) => {
 exports.addFavorite = async(id, publication) => {
   const fav = await Favorite.findOne({where:{userId:id}});
   if(fav){
-    fav.addPublication(publication.id);
+    fav.addPublication(publication);
     return {message:'Publication added to Favorites'}
   }
   return {err_msg:'User not found'}
@@ -196,7 +203,7 @@ exports.addFavorite = async(id, publication) => {
 exports.removeFavorite = async(id, publication) => {
   const fav = await Favorite.findOne({where:{userId:id}});
   if(fav){
-    fav.removePublication(publication.id);
+    fav.removePublication(publication);
     return {message:'Publication removed from Favorites'}
   }
   return {err_msg:'User not found'}

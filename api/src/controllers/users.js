@@ -190,8 +190,7 @@ exports.getFavorites = async(req,res,next) => {
 exports.addFavorite = async(req,res,next) => {
   try {
     const {id} = req.params;
-    const {publication} = req.body;
-    const r = await addFavorite(id,publication);
+    const r = await addFavorite(id,req.body.id);
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
@@ -204,8 +203,7 @@ exports.addFavorite = async(req,res,next) => {
 exports.removeFavorite = async(req,res,next) => {
   try {
     const {id} = req.params;
-    const {publication} = req.body;
-    const r = await removeFavorite(id, publication);
+    const r = await removeFavorite(id, req.body.id);
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
