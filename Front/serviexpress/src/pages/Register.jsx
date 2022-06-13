@@ -11,11 +11,15 @@ import axios from 'axios';
 import swal from "sweetalert"; 
 import {useNavigate} from 'react-router-dom'
 import { responsiveProperty } from "@mui/material/styles/cssUtils";
+import {useDispatch} from 'react-redux' 
+import {registerUser} from '../redux/action'
+
 
 
 const Register = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   const [input, setInput] = useState({
     email: "",
@@ -23,47 +27,53 @@ const Register = () => {
     password: "",
     passwordError: "",
     confirmPassword: "",
-    confirmPasswordError: "",
+    confirmPasswordError: ""
   })
 
   const handleEmailChange = (e) => {
 
     setInput({
       ...input,
-      'email' : e.target.value
+     [e.target.name] : e.target.value
     })
+
   };
 
   const handlePasswordChange = (e) => {
 
     setInput({
       ...input,
-      'password' : e.target.value
+      [e.target.name] : e.target.value
     })
-    if (input.password.length<6) setInput({
-      ...input,
-      PasswordError: 'Password length must have at least 6 characteres'
-    });
 
-    if (input.confirmPassword !== input.password) setInput({
+/*      if (input.password.length<6) {
+      setInput({
+        ...input,
+        passwordError: 'Password length must have at least 6 characteres'
+      });
+    } */
+
+/*     if (input.confirmPassword !== input.password) setInput({
       ...input,
-      confirmPasswordError: 'Keys do not match'
-    });
+      'confirmPasswordError': 'Keys do not match'
+    }); */
 
   };
 
   const handleConfirmPasswordChange = (e) => {
     setInput({
       ...input,
-      'confirmPassword' : e.target.value
+      [e.target.name] : e.target.value
     })
-    if (input.confirmPassword !== input.password) setInput({
+/*     if (input.confirmPassword !== input.password) setInput({
       ...input,
       confirmPasswordError: 'Keys do not match'
-    });
+    }); */
   };
 
+  
   const buttonHandler = async () => {
+
       try {
          const response = await axios.post('http://localhost:3001/users/register', 
             {
@@ -72,14 +82,33 @@ const Register = () => {
             }, 
             {headers: { "Content-Type": "application/json" }}
           );
-          console.log('Button handler',response.data)
-        console.log(response);
-        if (response.data.message === 0) navigate('/user')
-        else if (response.data.message === 1) 
+
+        if (response.data.message === 0) {
+          if (input.password !== input.confirmPassword) 
+          {
+            swal({
+              title: "ERROR",
+              text: "Passwords does not match",
+              dangerMode: true,
+            });
+            setInput({
+              ...input,
+              password: "",
+              confirmPassword: ""
+            })
+            return
+          } 
+          else 
+          {
+            dispatch(registerUser({'email': input.email, 'password': input.password}))
+            navigate('/user')
+          }
+        }
+        else
+         if (response.data.message === 1)
         swal({
           title: "ERROR",
           text: "Email ya registrado",
-          //icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
           dangerMode: true,
         });
       } catch (e) {
@@ -106,7 +135,7 @@ const Register = () => {
             required
             label="E-MAIL"
             name='email'
-            //value={email}
+            value={input.email}
             type="email"
             onChange={(e) => handleEmailChange(e)}
           />
@@ -124,8 +153,7 @@ const Register = () => {
             name='confirmPassword'
             //value={confirmPassword}
             type="password"
-            onChange={(e) => {handleConfirmPasswordChange(e);
-            }}
+            onChange={(e) => handleConfirmPasswordChange(e)}
           />
 
           <MyButtonTwo onClick={(e)=>buttonHandler()} variant="contained" endIcon={<HowToRegIcon />}>

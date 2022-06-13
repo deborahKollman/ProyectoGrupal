@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import "./styles/SellerRegister.scss";
 import BurgerButton from "../components/NavBar/NavBar";
 import { MyButtonTwo, MyTextField } from "../elements/Forms";
@@ -12,12 +12,17 @@ const ProfileUser = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {reg_user} = useSelector((state)=> state);
  
   const [input, setInput] = useState({
+    email: reg_user.email,
+    password: reg_user.password,
     name: "",
     last_name: "",
+    avatar_image:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description: "",
-    phone_number: ""
+    phone_number: "",
+    rol: "client"
   })
 
   function handleChange(e) {
@@ -31,10 +36,14 @@ const ProfileUser = () => {
     e.preventDefault();
     dispatch(postProfileUser(input))
     setInput({
+      email:"",
+      password: "",
       name: "",
       last_name: "",
+      avatar_image: "",
       description: "",
-      phone_number: ""
+      phone_number: "",
+      rol: ""
     })
     navigate('/Home')
   }
