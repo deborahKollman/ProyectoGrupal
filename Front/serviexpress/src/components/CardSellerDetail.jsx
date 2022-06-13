@@ -43,9 +43,9 @@ export default function CardSellerDetail({userid}){
         <div className={stylesCardSeller.opinion}>
             <div>
             <img src={star} alt="star"></img>
-            <label>{user.seller_reputation}</label>
+            <label>{user.buyer_reputation}</label>
             </div>
-            <label>({user.seller_opinions.length} Opinions)</label>
+            <label>({user.buyer_opinions.length} Opinions)</label>
         </div>
 
         <p className={stylesCardSeller.descrip}>{user.description}</p>
