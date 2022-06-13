@@ -7,11 +7,29 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from 'react';
+import {useDispatch,useSelector} from 'react-redux';
+import { useEffect, useState } from 'react';
+import {getAllCategories} from '../redux/action.js';
 
 
 
 export default function FooterDetail(){
+
+
+
+  const dispatch = useDispatch();
+  const categories = useSelector(state => state.categories);
+
+
+
+  useEffect(() => {
+      dispatch(getAllCategories());
+
+
+  },[dispatch]);
+
+
+
 
 
 const [age, setAge] = useState('');
@@ -20,6 +38,8 @@ const [age, setAge] = useState('');
     setAge(event.target.value);
 
   }
+
+    console.log(categories);
 
 
     return <div className={styles.container}>
@@ -42,9 +62,11 @@ const [age, setAge] = useState('');
           label="Services"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+            {categories.map(e => {
+             return  e.services.map(element => {
+                return <MenuItem value={element.name}>{element.name}</MenuItem>
+              })
+            })}
         </Select>
       </FormControl>
     </Box>
