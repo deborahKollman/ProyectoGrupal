@@ -1,33 +1,16 @@
 import cardStyle from '../pages/styles/cardOthersServices.module.scss'
-import Opinion from './Opinion'
-import { useEffect, useState } from 'react';
-import {getUsers} from '../redux/action.js';
-import { useDispatch,useSelector } from 'react-redux';
+import {Rating} from '@mui/material';
 
 
-
-export default function CardOthersServices({id}){
-
-    const dispatch = useDispatch();
-    const users = useSelector(state =>  state.users);
-
-
-    useEffect(() => {
-        dispatch(getUsers());
-
-
-    },[dispatch]);
-
+export default function CardOthersServices({user}){
    
 
 
     return <div className={cardStyle.container}>
-        
-        
-        <p>"Cumplido"</p>
-        <p>"Responsable"</p>
-        <p>"Buen Precio"</p>
-        <Opinion></Opinion>
+        <img src={user.avatar_image} alt="perfil"></img>
+        <h3>{user.name}</h3>
+        {user.seller_opinions.map(e => <p>"{e.comment}"</p>  )}
+        <Rating name="read-only" value={user.seller_reputation} readOnly/>
       </div>
 
 
