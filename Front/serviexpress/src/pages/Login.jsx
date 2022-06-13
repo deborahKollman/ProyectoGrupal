@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
 
 import "./styles/Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, getUserr, fakeLogin } from "../redux/action";
@@ -36,8 +36,11 @@ const Login = () => {
     password: password.value,
   };
 
+  const xNavigate = useNavigate();
+
   const mLocalLoggin = () => {
     xDispatch(fakeLogin(data))
+    xNavigate(`/home`);
   };
 
   const { rdcr_isAuth, rdcr_user } = useSelector((state) => state);

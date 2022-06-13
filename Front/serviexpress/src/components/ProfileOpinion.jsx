@@ -18,10 +18,10 @@ export default function ProfileOpinion({userid}){
     },[dispatch,userid])
 
     return <div>
-        {user.seller_opinions.map(e => {
+        {user.buyer_opinions.map(e => {
             return (
                 <div className={style.container}>
-                <img className={style.profile} src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="profile"></img>
+                <img className={style.profile} src={e.buyer_avatar} alt="profile"></img>
         <div>
             <h3>{e.name}</h3>
             <div className={style.divStars}>

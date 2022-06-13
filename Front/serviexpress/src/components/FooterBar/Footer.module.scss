@@ -1,0 +1,17 @@
+.footerctn {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    background-color: rgb(242, 229, 206);
+}
+
+.footerlogos {
+    position: relative;
+    align-items: center;
+    width: 150px;
+    margin-left: 150px;
+}
+.footerlogos:hover{cursor: pointer;}

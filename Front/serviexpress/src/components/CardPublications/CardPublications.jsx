@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+
 import "./CardPublications.scss";
 
 const CardPublications = ({ id, score, summary, album, title, price }) => {
@@ -9,20 +13,29 @@ const CardPublications = ({ id, score, summary, album, title, price }) => {
       <div className="card">
         {/* <p className='butonX'>{buttonx()}</p>        */}
 
-        <Link className="link" to={`/detail/${id}`}>
+        
           <div className="card-image">
+          <Link className="link" to={`/detail/${id}`}>
             <img src={album} alt="not found" />
+            </Link>
           </div>
 
           <div className="card-text">
             <h6 className="titlec">{title}</h6>
-            <p className="titlec">{summary}</p>
-            {/* <p className="titlec">{score}</p> */}
-            <p className="titleprice">STARTING AT: US$ {price} </p>
+            <p className="titlesummary">{summary}</p>
+            <p className="titlestar">⭐⭐⭐⭐⭐(5)</p>
+            <div className="UL">
+            <div className="pricebox">
+            <p className="titleprice">Starting at : USD {price} </p>
+            </div>
+            <div className="like">
+            <Checkbox  icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
+            </div>
+           </div>
           </div>
 
           <div className="card-stats"></div>
-        </Link>
+        
       </div>
     </div>
   );

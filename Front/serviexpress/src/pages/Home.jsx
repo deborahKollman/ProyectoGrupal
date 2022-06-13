@@ -9,7 +9,7 @@ import Loading from "../components/Loading/Loading.js"
 import NavBar from '../components/NavBar/NavBar'
 import ServicesBar from "../components/ServicesBar";
 import './styles/Home.scss';
-
+import PaginationHome from '../components/PaginationHome';
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 
@@ -32,7 +32,7 @@ export default function Home(){
     // const [orderscore , setorderscore] = useState(1)
     // const servicescreate = [];
     const pagination = (pageNumber) => {setCurrentPage(pageNumber)}
-    
+
         useEffect(() => {
            
             setTimeout(() => {
@@ -78,8 +78,6 @@ function filterforCategory10(){dispatch(getPublicationsByCategory(10))}
 <p className="filtername">|</p>
 <p onClick={filterforCategory7}  className="filtername">Digital Marketing</p>
 <p className="filtername">|</p>
-<p onClick={filterforCategory8}  className="filtername">Writing & Translation</p>
-<p className="filtername">|</p>
 <p onClick={filterforCategory9}  className="filtername">Video & Animation</p>
 <p className="filtername">|</p>
 <p onClick={filterforCategory10}  className="filtername">Electricity</p>
@@ -123,13 +121,19 @@ function filterforCategory10(){dispatch(getPublicationsByCategory(10))}
                 }
             
                 </div>
-                <div className="pagination">
+{/*                 <div className="pagination">
                 <Pagination className ="pagination"
                             allpublicationsnumber={allPublications.length}
                             pagination = {pagination}
                             PublicationsPerPage = {PublicationsPerPage}
                                                     />
+                </div> */}
+                
+                <div className="paginationHome">
+                      <PaginationHome value={allPublications.length} pagination={pagination} items={PublicationsPerPage}></PaginationHome>
                 </div>
+
+
                 <div className="logos">
                 
                   

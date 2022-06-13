@@ -10,9 +10,10 @@ const initialState = {
   categories: [],
   filteredCategories: [],
   publicationById: {},
-  userId: {seller_opinions: []},
+  userId: {seller_opinions: [],buyer_opinions: []},
   user: {},
   users: [],
+  reg_user: {} // ojo al piojo xD: eliminaron por accidente creo ::
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -34,6 +35,7 @@ const rootReducer = (state = initialState, action) => {
         Publications: action.payload,
       };
     case "GET_CATEGORIES":
+      console.log("red",action.payload);
       return {
         ...state,
         categories: action.payload,
@@ -76,9 +78,14 @@ const rootReducer = (state = initialState, action) => {
         filteredCategories: [...filtered],
       };
     case "GET_USER":
+      
+      // window.sessionStorage.setItem("token", payload); //>>>>obs
+
+      // console.log(payload.user, "REDUCER ----> GET_USER");
       return {
         ...state,
         user: payload,
+        // rdcr_isAuth: true
       };
     case "REGISTER_USER":
       return {
@@ -104,6 +111,10 @@ const rootReducer = (state = initialState, action) => {
           users: action.payload,
   
         }
+
+
+
+
 
     case AUTHENTICATE:
 

@@ -5,8 +5,8 @@ import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "../../redux/action";
-import NavigationBar from "../NavigationBar";
+import { getUserr } from "../../redux/action";
+import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
 import { IconButton } from "@mui/material";
 
@@ -32,14 +32,14 @@ const BurgerButton = () => {
         setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
       }
     } else {
-      xDispatch(getUser());
+      xDispatch(getUserr()); // OJO AL PIOJO xD : POR REVISAR ::
     }
   }, [xDispatch, avatar, user]);
 
   const { rdcr_isAuth } = useSelector((state) => state);
   console.log(rdcr_isAuth, "I'M IN THE NAVBAR");
   
-
+  console.log(open, "open");
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
@@ -80,7 +80,10 @@ const BurgerButton = () => {
         </li>
       </ListNav>
 
-      <NavigationBar />
+      {
+        !open && <NavigationBar />
+      }
+
     </MyHeader>
   );
 };
