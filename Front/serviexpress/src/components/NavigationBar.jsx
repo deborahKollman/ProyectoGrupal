@@ -6,7 +6,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import ShopTwoIcon from "@mui/icons-material/ShopTwo";
+
 const NavigationBar = () => {
+  
   const [showFixed, setShowFixed] = useState(false);
 
   const handleScroll = () => {
@@ -35,15 +37,15 @@ const NavigationBar = () => {
         label="seller"
         icon={<VolunteerActivismIcon fontSize="large" />}
         onClick={() => {
-            mNavigation("seller");
-          }}  
+          mNavigation("seller");
+        }}
       />
 
       <BottomNavigationAction
         label="Favorites"
         icon={<FavoriteIcon fontSize="large" />}
         onClick={() => {
-            mNavigation("favorites");
+          mNavigation("favorites");
         }}
       />
 
@@ -51,7 +53,7 @@ const NavigationBar = () => {
         label="Orders"
         icon={<ShopTwoIcon fontSize="large" />}
         onClick={() => {
-            mNavigation("orders");
+          mNavigation("orders");
         }}
       />
     </List>
@@ -74,7 +76,7 @@ export const List = styled.ul`
         border-radius: 60px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         left: 0;
-        margin: 0 auto;
+        margin: 0 auto !important;
         max-width: 400px;
         padding: 5px;
         position: fixed;

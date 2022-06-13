@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import Favorite from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 
-import { MyHeader, ListNav, StyledBurger, MyNav } from "./NavBar-StyleComp";
+import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
-import AccountMenu from "./MUI-AcountMenu";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/action";
 import NavigationBar from "../NavigationBar";
+import { InitialSession, LoginSession } from "./SubComponents";
+import { IconButton } from "@mui/material";
 
 const logo = require("../../assets/icons/log.png");
 
 //=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
 const BurgerButton = () => {
-
   const xDispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
@@ -40,11 +36,9 @@ const BurgerButton = () => {
     }
   }, [xDispatch, avatar, user]);
 
-
   const { rdcr_isAuth } = useSelector((state) => state);
-  const mLoginTemp = () => {
-    console.log("rdcr_isAuth",rdcr_isAuth);
-  }
+  console.log(rdcr_isAuth, "I'M IN THE NAVBAR");
+  
 
   return (
     <MyHeader pOpen={open}>
@@ -66,38 +60,7 @@ const BurgerButton = () => {
 
       <SearchGroup />
 
-      <div className="NavBar-login_user">
-        <MyNav>
-          <ol>
-            <li>
-              <IconButton aria-label="delete" size="large"
-                onClick={mLoginTemp}
-              >
-                <Favorite />
-              </IconButton>
-            </li>
-            <li>
-              <IconButton aria-label="delete" size="large">
-                <NotificationsActiveIcon />
-              </IconButton>
-            </li>
-            <li>
-              <IconButton aria-label="delete" size="large">
-                <LocalMallIcon />
-              </IconButton>
-            </li>
-          </ol>
-        </MyNav>
-        {!avatar ? (
-          <img
-            src={avatar}
-            alt={avatar}
-            style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-          ></img>
-        ) : (
-          <AccountMenu />
-        )}
-      </div>
+      {!rdcr_isAuth ? <InitialSession /> : <LoginSession pAvatar={avatar}/>}
 
       <ListNav pOpen={open}>
         <li>
@@ -116,19 +79,10 @@ const BurgerButton = () => {
           </Link>
         </li>
       </ListNav>
-      
-      <NavigationBar/>
 
+      <NavigationBar />
     </MyHeader>
   );
 };
 
 export default BurgerButton;
-
-//---------------------------------------------------------------------------
-//-----------------------------STYLED COMPONENTS-----------------------------
-//---------------------------------------------------------------------------
-/* 
-            <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            
-            */
