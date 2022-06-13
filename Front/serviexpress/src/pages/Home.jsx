@@ -17,6 +17,10 @@ import "./styles/Home.scss";
 import PaginationHome from "../components/PaginationHome";
 import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
+import Alert from '@mui/material/Alert';
+import { flexbox } from "@mui/system";
+
+
 
 // const currentServices = [1,2,3]
 // const SwichL= false
@@ -35,6 +39,14 @@ export default function Home() {
     indexOfFirstPublication,
     indexOfLastPublication,
   );
+
+    const [msgSearch, SetMsgSearch] = useState("");
+
+
+    const msg = (text) => {
+        SetMsgSearch(text);
+    };
+ 
   // const [order,setorder] = useState ("")
   // const [orderscore , setorderscore] = useState(1)
   // const servicescreate = [];
@@ -86,7 +98,10 @@ export default function Home() {
 
   return (
     <div className="wphome">
-      <NavBar></NavBar>
+      
+      <NavBar msg={msg}></NavBar>
+       {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
+
       <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername">
           Plumbing
@@ -126,6 +141,9 @@ export default function Home() {
         <p className="filtername">|</p>
         <p className="filtername">Gas</p>
       </div>
+
+
+
 
       <div className="services-home">
         {SwichL === true || allPublications.length === 0 ? (

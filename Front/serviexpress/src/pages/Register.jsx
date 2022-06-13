@@ -176,7 +176,7 @@ const Register = () => {
             onChange={(e) => handleEmailChange(e)}
           />
           {
-            <div className="errorDiv">
+            <div className="error-div">
             <p>{handleError.email}</p>
             </div>
             
