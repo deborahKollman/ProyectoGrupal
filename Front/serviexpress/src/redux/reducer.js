@@ -7,7 +7,9 @@ const initialState = {
   switchloading: false,
   detail: { album: [] },
   profileUser: [],
+
   categories: [],
+
   filteredCategories: [],
   publicationById: {},
   userId: { seller_opinions: [], buyer_opinions: [] },
@@ -78,7 +80,7 @@ const rootReducer = (state = initialState, action) => {
         filteredCategories: [...filtered],
       };
     case "GET_USER":
-      console.log(payload);
+     
       window.sessionStorage.setItem("token", payload.id); //>>>>obs
 
       // console.log(payload.user, "REDUCER ----> GET_USER");

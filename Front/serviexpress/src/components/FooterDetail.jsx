@@ -60,11 +60,7 @@ const [age, setAge] = useState('');
           label="Services"
           onChange={handleChange}
         >
-            {categories.map(e => {
-             return  e.services.map(element => {
-                return <MenuItem value={element.name}>{element.name}</MenuItem>
-              })
-            })}
+            {categories ? categories.map(e =>  e.services ? e.map(element =>  <MenuItem value={element.name}>{element.name}</MenuItem>) : null) :null}
         </Select>
       </FormControl>
     </Box>
