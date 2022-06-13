@@ -17,11 +17,6 @@ export default function ProfileOpinion({userid}){
 
     },[dispatch,userid])
 
-
-    console.log(user);
-
-
-
     return <div>
         {user.seller_opinions.map(e => {
             return (

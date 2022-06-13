@@ -1,7 +1,7 @@
 .services-home {
     
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     position: relative;
     justify-content: center;
     gap: 1em;
@@ -36,6 +36,7 @@ color: #000000;
 
 .filtername{
   cursor: pointer;
+  font-size: 17px;
 
 }
 .filtername:hover{
@@ -44,7 +45,7 @@ color: #000000;
 
   .divpag{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     height: 100px;
     justify-content: center;
     gap: 1em;
