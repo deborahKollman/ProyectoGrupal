@@ -146,7 +146,7 @@ export default function Home(){
                     <div>
                         <CardPublications  
                             id={e.id}
-                            album = "https://image.jimcdn.com/app/cms/image/transf/none/path/sb00e8250327cd0a1/image/i4a413653d6352fc2/version/1604231609/funciones-de-un-electricista.png"
+                            album = {e.album[0]}
                             title={e.title} 
                             summary={e.detail_resume}
                             // score={e.score} 
