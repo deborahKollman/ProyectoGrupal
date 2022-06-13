@@ -45,16 +45,11 @@ export default function Home(){
         }, [allPublications])
 
 
-// function filterforCategory(a){
-         
-//                 dispatch(getPublicationsByCategory(a))
+function filterforCategory(e){
+        //  e.preventDefault()
+        dispatch(getPublicationsByCategory(e.value))
             
-//         }
-     
-// if(allPublications.length===0)dispatch(swich_loading(true))
-// else if(allPublications.length!==0)dispatch(swich_loading(false))
-
-// onChange={e=>  filterforCategory(e)}
+        }
 
         return(
             <div className="wphome">
@@ -64,7 +59,7 @@ export default function Home(){
             </NavBar>
             <div className="filterservice">
 
-<p className="filtername">Plumbing</p>
+<p onClick={e=> filterforCategory(e)} value={1} className="filtername">Plumbing</p>
 <p className="filtername">|</p>
 <p className="filtername">Carpentry</p>
 <p className="filtername">|</p>
@@ -104,46 +99,6 @@ export default function Home(){
 </div>
 
 
-                    {/* <div className="divcarousel">
-     <Carousel fade>
-       <Carousel.Item>
-       <img
-         className="d-block w-100"
-        src="https://www.ipsantotomas.cl/wp-content/uploads/sites/27/2016/02/analista-programador.jpg"
-           alt="First slide"
-         />
-     <Carousel.Caption>
-          <h3>First slide label</h3>
-       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-       </Carousel.Caption>
-     </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="https://conceptodefinicion.de/wp-content/uploads/2020/11/Diseno-grafico.jpg"
-      alt="Second slide"
-    />
-
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </Carousel.Caption>
-     </Carousel.Item>
-      <Carousel.Item>
-       <img
-        className="d-block w-100"
-       src="https://images.unsplash.com/photo-1618947084583-07ff857ca918?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt="Third slide"
-       />
-
-    <Carousel.Caption>
-         <h3>Third slide label</h3>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-
-    </div> */}
 
                 <div className='services-home'>
   
@@ -200,39 +155,3 @@ export default function Home(){
     
 
 
-
-
-                        // function orderforName(e){
-                        //     if(e.target.value === 'default'){
-                        //         dispatch(getServices())
-                        //     } 
-                        //     else{
-                        //         e.preventDefault();
-                        //         dispatch(orderByName(e.target.value))
-                        //         setorder(`ordenado ${e.target.value}`)
-                        //         setCurrentPage((pag)=> pag = 1)
-                        //     }
-                        // }
-
-
-
-                            // function handleClick(e){
-        //     e.preventDefault(); //evita que se recargue y se rompa la pagina
-        //     dispatch(getServices())
-        // }
-    
-        
-
-
-
-        // function orderforScore(e){
-        //     if(e.target.value === 'default'){
-        //         dispatch(getServices())
-        //     } 
-        //     else {
-        //         e.preventDefault();
-        //         dispatch(orderByScore(e.target.value))
-        //         setorderscore(`ordenadopscore ${e.target.value}`)
-        //         setCurrentPage((pag)=> pag = 1)
-        //     }
-        // }nc.

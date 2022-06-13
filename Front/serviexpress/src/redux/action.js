@@ -16,6 +16,7 @@ const URL = `http://localhost:3001`;
 const GET_USER_BY_ID = "GET_USER_BY_ID";
 const GET_USERS = "GET_USERS";
 const REGISTER_USER = "REGISTER_USER"
+const GET_PUBLICATIONS_BY_CATEGORIES= "GET_PUBLICATIONS_BY_CATEGORIES"
 
 
 
@@ -243,11 +244,20 @@ export function getUsers() {
 }
 };
 
+export function getPublicationsByCategory(a) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/publications?cat_id=` + a);
+    //  console.log(response.data)
+      dispatch({
+        type: GET_PUBLICATIONS_BY_CATEGORIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log("SERVICES NO FOUND");
+    }
+  };
+}
 
 
-// export const getPublicationsByCategory = (id) => {
-   
-  
-//     return { type: GET_PUBLICATIONS_BY_CATEGORIES, payload: id };
-  
-// };
+
