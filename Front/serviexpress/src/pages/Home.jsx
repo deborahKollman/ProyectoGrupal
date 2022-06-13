@@ -78,8 +78,6 @@ function filterforCategory10(){dispatch(getPublicationsByCategory(10))}
 <p className="filtername">|</p>
 <p onClick={filterforCategory7}  className="filtername">Digital Marketing</p>
 <p className="filtername">|</p>
-<p onClick={filterforCategory8}  className="filtername">Writing & Translation</p>
-<p className="filtername">|</p>
 <p onClick={filterforCategory9}  className="filtername">Video & Animation</p>
 <p className="filtername">|</p>
 <p onClick={filterforCategory10}  className="filtername">Electricity</p>

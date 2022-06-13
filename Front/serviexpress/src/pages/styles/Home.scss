@@ -1,5 +1,5 @@
 .services-home {
-    
+    zoom: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     position: relative;
@@ -22,6 +22,7 @@ margin-top: 30px;
 margin-bottom: 30px;
 justify-content: space-between ;
 text-align: center;
+
 margin-inline: 3%;
 background: #FCDC3C;
 // border: 1px solid #0c0c0c;
@@ -30,7 +31,7 @@ border-radius: 20px;
 padding: 0.8em 1.5em;
 font-family: "Roboto","Helvetica","Arial",sans-serif;;
 font-style: normal;
-font-size: 25px;
+font-size: 10px;
 color: #000000;
 }
 
