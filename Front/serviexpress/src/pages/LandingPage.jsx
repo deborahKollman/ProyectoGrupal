@@ -2,8 +2,8 @@ import React from 'react'
 import Styles from './styles/LandingPage.module.scss'
 import Carousel from 'react-bootstrap/Carousel'
 import {useNavigate} from 'react-router-dom'
-import {MDBContainer} from "mdbreact";
 import Button from '@mui/material/Button';
+import FooterBar from '../components/FooterBar/FooterBar';
 
 const LandingPage = () => {
 
@@ -80,11 +80,7 @@ const LandingPage = () => {
 
   </div>
    
-     <div className={Styles.footer}>
-        <MDBContainer fluid>
-          &copy; 2022 Copyright: ServiExpress 
-        </MDBContainer>
-      </div>
+   <FooterBar/>
 
     </div>
   )
