@@ -33,7 +33,7 @@ exports.postCategory=async(req,res,next)=>{
 exports.deleteCategory = async (req, res, next) => {
   try {
     //req.body.categories: array de ids de services
-    const r = await deleteCategory(req.query.id);
+    const r = await deleteCategory(req.params.id);
     if(r.err_message){
       res.status(BAD_REQUEST).send(r.err_message)
     }
@@ -45,7 +45,7 @@ exports.deleteCategory = async (req, res, next) => {
 exports.updateCategory = async (req, res, next) => {
   try {
     //req.body.categories: array de ids de services
-    const r = await updateCategory(req.query.id,req.body.name);
+    const r = await updateCategory(req.params.id,req.body.name);
     if(r.err_message){
       res.status(BAD_REQUEST).send(r.err_message)
     }

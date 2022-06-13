@@ -1,49 +1,50 @@
 import axios from "axios";
-import swal from "sweetalert"; 
+import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
 const URL = `http://localhost:3001`;
 
 // Para desloguearse
 export const act_logout = () => {
-  return { type: LOGOUT_SESSION}
-}
+  return { type: LOGOUT_SESSION };
+};
 
 // Para simular un login
 export const fakeLogin = (pO_User) => {
   console.log(pO_User);
   return async (dispatch) => {
     const response = {
-      "user":{
-        "id":1,
-        "email": "test@mail.com",
-        "role": "admin",
-        "avatar": "https://i.pravatar.cc/300?img=1",
-        "createAt": "2020-01-01",
+      user: {
+        id: 1,
+        email: "test@mail.com",
+        role: "admin",
+        avatar: "https://i.pravatar.cc/300?img=1",
+        createAt: "2020-01-01",
       },
-      "login": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTY1MzI1NzYxMX0.ddFBn_SeeWJJGxO303d8lRl58P4x6WADvOeTXzfVj9Q"
-    }
+      login:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTY1MzI1NzYxMX0.ddFBn_SeeWJJGxO303d8lRl58P4x6WADvOeTXzfVj9Q",
+    };
     dispatch({
       type: AUTHENTICATE,
-      payload: response
+      payload: response,
     });
   };
 };
 
 // Para traer un usuario
-export const getUser = (pO_User) => {
+export const getUser = () => {
   return async (dispatch) => {
-    const { data } = await axios.get("http://localhost:3001/login/success", pO_User, {
+    const { data } = await axios.get("http://localhost:3001/login/success", {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
     });
-    console.log(data,"ACTIONNNNNNNNNNNNN");
+    console.log(data, "ACTIONNNNNNNNNNNNN");
     dispatch({
       type: "GET_USER",
-      payload: data,
+      payload: data.user,
     });
   };
 };
@@ -60,7 +61,7 @@ export const getUserr = (user) => {
     });
     dispatch({
       type: "GET_USER",
-      payload: data,
+      payload: data.user,
     });
   };
 };
@@ -70,10 +71,10 @@ export const registerUser = (user) => {
   return (dispatch) => {
     dispatch({
       type: "REGISTER_USER",
-      payload: user
-    })
-  }
-}
+      payload: user,
+    });
+  };
+};
 
 // Action para crear una publicacion
 export const createPublication = (pObjData) => {
@@ -115,7 +116,6 @@ export const getById = (id) => {
   };
 };
 
-
 //simulando la accion para el filtro por categorias
 export function filterCategories(payload) {
   return { type: "FILTER_CATEGORIES", payload };
@@ -125,8 +125,8 @@ export function filterCategories(payload) {
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = await axios.get(`${URL}/categories`);
-       dispatch({ type: "GET_CATEGORIES", payload: json.data });
+      const json = axios(`${URL}/categories`);
+      return dispatch({ type: "GET_CATEGORIES", payload: json.data });
     } catch (error) {
       console.log(error);
     }
@@ -139,7 +139,9 @@ export const postProfileUser = (input) => {
     try {
       let profileUser = await axios.post(`${URL}/users/`, input);
       return dispatch({ type: "POST_PROFILEUSER", profileUser });
-    } catch (error) { console.log(error)}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -157,7 +159,9 @@ export function getPublications() {
         type: "GET_PUBLICATIONS",
         payload: response.data,
       });
-    } catch (error) { console.log("SERVICES NO FOUND")}
+    } catch (error) {
+      console.log("SERVICES NO FOUND");
+    }
   };
 }
 
@@ -168,7 +172,10 @@ export const getPublicationId = (id) => {
       const publication = await axios.get(
         `http://localhost:3001/publications/${id}`,
       );
-      return dispatch({ type: "GET_PUBLICATION_ID", payload: publication.data });
+      return dispatch({
+        type: "GET_PUBLICATION_ID",
+        payload: publication.data,
+      });
     } catch (e) {
       console.log(e);
       return dispatch({ type: "GET_PUBLICATION_ID", payload: [] });
@@ -177,49 +184,58 @@ export const getPublicationId = (id) => {
 };
 
 // Para el search bar, nos trae la publicacion buscada por nombre
-export function getPublicationsName(name){
-  return function(dispatch){    
-          axios.get(`http://localhost:3001/publications?title=` + name) 
-                  .then(responese=>{return dispatch({
-                      type: "GET_PUBLICATIONS_NAME", 
-                      payload: responese.data
-                  })})
-                  .catch(function(){
-                   ( swal({
-                      title: "ERROR",
-                      text: "Not Found",
-                      icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
-                      dangerMode: true,
-                    }))})
-                  
-              }}
-
+export function getPublicationsName(name) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/publications?title=` + name)
+      .then((responese) => {
+        return dispatch({
+          type: "GET_PUBLICATIONS_NAME",
+          payload: responese.data,
+        });
+      })
+      .catch(function () {
+        swal({
+          title: "ERROR",
+          text: "Not Found",
+          icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
+          dangerMode: true,
+        });
+      });
+  };
+}
 
 // Busca un usuario en particular
 export function getUserById(id) {
-    return async (dispatch) => {
-        try {     
-            let data = await axios.get('http://localhost:3001/users/'+id);          
-            dispatch({type: "GET_USER_BY_ID", payload: data.data.user});     
-        } catch (error) {console.log(error)}
+  return async (dispatch) => {
+    try {
+      let data = await axios.get("http://localhost:3001/users/" + id);
+      dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
+    } catch (error) {
+      console.log(error);
     }
-};
+  };
+}
 
 // Trae todos los usuarios
-export function getUsers() { 
+export function getUsers() {
   return async (dispatch) => {
-    try { 
-        let users = await axios.get('http://localhost:3001/users');   
-        dispatch({type: "GET_USERS", payload: users.data.users});   
-    } catch (error) {console.log(error);}
-  }
-};
+    try {
+      let users = await axios.get("http://localhost:3001/users");
+      dispatch({ type: "GET_USERS", payload: users.data.users });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function getPublicationsByCategory(a) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:3001/publications?cat_id=` + a);
-    //  console.log(response.data)
+      const response = await axios.get(
+        `http://localhost:3001/publications?cat_id=` + a,
+      );
+      //  console.log(response.data)
       dispatch({
         type: "GET_PUBLICATIONS_BY_CATEGORIES",
         payload: response.data,

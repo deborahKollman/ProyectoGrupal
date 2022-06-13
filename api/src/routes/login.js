@@ -44,7 +44,7 @@ router.get('/success', async (req, res) => {
       }
     });
     if (user) {
-      return res.send(user);
+      return res.send({ user: req.user });
     } else {
       return res.send({
         message: 'Este usuario no existe registrate!'
@@ -65,7 +65,7 @@ router.get(
     failureRedirect: '/login/error'
   }),
   function (req, res) {
-    res.redirect('http://localhost:3000');
+    res.redirect('http://localhost:3000/home');
   }
 );
 
@@ -88,13 +88,18 @@ passport.use(
   })
 );
 
-router.post('/success', (req, res) => {
-  if (req.user) {
-    return res.status(200).json({
-      user: req.user
-    });
-  }
-  res.send(404);
+router.get('/cookies', (req, res) => {
+  // console.log(req.user);
+  // if (req.user) {
+  //   return res.status(200).send({
+  //     user: req.user
+  //   });
+  // }
+  // res.send(404);
+  console.log(req.cookies);
+  req.cookies = {};
+  console.log(req.cookies);
+  res.send('Cookie deleted');
 });
 
 router.post('/error', async (req, res) => {
@@ -118,7 +123,12 @@ router.post(
     failureRedirect: '/login/error'
   }),
   (req, res) => {
-    res.redirect('http://localhost:3001/login/success');
+    if (req.user) {
+      return res.status(200).send({
+        user: req.user
+      });
+    }
+    res.send(404);
   }
 );
 

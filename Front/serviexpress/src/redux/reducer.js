@@ -1,18 +1,19 @@
-import {AUTHENTICATE, LOGOUT_SESSION} from "./action";
+import { AUTHENTICATE, LOGOUT_SESSION } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
-  rdcr_user: {}, 
+  rdcr_user: {},
   rdcr_categories: [],
   Publications: [],
   switchloading: false,
-  detail: {album: []},
+  detail: { album: [] },
   profileUser: [],
   categories: [],
   filteredCategories: [],
   publicationById: {},
-  userId: {seller_opinions: [],buyer_opinions: []},
+  userId: { seller_opinions: [], buyer_opinions: [] },
   user: {},
   users: [],
+  reg_user: {}, // ojo al piojo xD: eliminaron por accidente creo ::
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -34,7 +35,7 @@ const rootReducer = (state = initialState, action) => {
         Publications: action.payload,
       };
     case "GET_CATEGORIES":
-      console.log("red",action.payload);
+      console.log("red", action.payload);
       return {
         ...state,
         categories: action.payload,
@@ -77,52 +78,44 @@ const rootReducer = (state = initialState, action) => {
         filteredCategories: [...filtered],
       };
     case "GET_USER":
-      
-      // window.sessionStorage.setItem("token", payload); //>>>>obs
+      console.log(payload);
+      window.sessionStorage.setItem("token", payload.id); //>>>>obs
 
       // console.log(payload.user, "REDUCER ----> GET_USER");
       return {
         ...state,
         user: payload,
-        // rdcr_isAuth: true
+        rdcr_isAuth: true,
       };
     case "REGISTER_USER":
       return {
         ...state,
-        reg_user:payload
-      }
+        reg_user: payload,
+      };
     case "GET_USER_BY_ID":
-      return{
+      return {
         ...state,
         userId: action.payload,
-      }
-      case "GET_PUBLICATIONS_BY_CATEGORIES":
-          return{
-          ...state,
-          Publications: action.payload,
-        }
-        
-      case "GET_USERS":
-      
-      
-        return{
-          ...state,
-          users: action.payload,
-  
-        }
+      };
+    case "GET_PUBLICATIONS_BY_CATEGORIES":
+      return {
+        ...state,
+        Publications: action.payload,
+      };
 
-
-
-
+    case "GET_USERS":
+      return {
+        ...state,
+        users: action.payload,
+      };
 
     case AUTHENTICATE:
-
       window.sessionStorage.setItem("token", payload.login);
 
       return {
         ...state,
         rdcr_user: payload,
-        rdcr_isAuth: true
+        rdcr_isAuth: true,
       };
     case LOGOUT_SESSION:
       window.sessionStorage.removeItem("token");
@@ -137,7 +130,6 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
-
 
 /* 
 

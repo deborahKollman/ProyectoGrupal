@@ -3,13 +3,13 @@ import { MyButtonThree, MyButtonTwo, MyTextField } from "../elements/Forms";
 import BurgerButton from "../components/NavBar/NavBar.jsx";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import GoogleIcon from '@mui/icons-material/Google';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
+import GoogleIcon from "@mui/icons-material/Google";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./styles/Login.scss";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import swal from "sweetalert"; 
-import {useNavigate} from 'react-router-dom'
+import axios from "axios";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 import { responsiveProperty } from "@mui/material/styles/cssUtils";
 import {useDispatch} from 'react-redux' 
 import {registerUser} from '../redux/action';
@@ -17,8 +17,7 @@ import {registerUser} from '../redux/action';
 
 
 const Register = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [input, setInput] = useState({
@@ -27,8 +26,8 @@ const Register = () => {
     password: "",
     passwordError: "",
     confirmPassword: "",
-    confirmPasswordError: ""
-  })
+    confirmPasswordError: "",
+  });
 
   const [handleError,setHandleError] = useState({
     email: "",
@@ -39,45 +38,42 @@ const Register = () => {
 
 
   const handleEmailChange = (e) => {
-
     setInput({
       ...input,
-     [e.target.name] : e.target.value
-    })
-
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handlePasswordChange = (e) => {
-
     setInput({
       ...input,
-      [e.target.name] : e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
 
-/*      if (input.password.length<6) {
+    /*      if (input.password.length<6) {
       setInput({
         ...input,
         passwordError: 'Password length must have at least 6 characteres'
       });
     } */
 
-/*     if (input.confirmPassword !== input.password) setInput({
+    /*     if (input.confirmPassword !== input.password) setInput({
       ...input,
       'confirmPasswordError': 'Keys do not match'
     }); */
-
   };
 
   const handleConfirmPasswordChange = (e) => {
     setInput({
       ...input,
-      [e.target.name] : e.target.value
-    })
-/*     if (input.confirmPassword !== input.password) setInput({
+      [e.target.name]: e.target.value,
+    });
+    /*     if (input.confirmPassword !== input.password) setInput({
       ...input,
       confirmPasswordError: 'Keys do not match'
     }); */
   };
+
 
 
     const validate = {
@@ -95,7 +91,7 @@ const Register = () => {
 
   
   const buttonHandler = async () => {
-      console.log(input.password.length );
+      
 
       if(!validate.name.test(input.email)) {
         setHandleError({...handleError, email: "The e-mail should be a 'example@example.com' format"});
@@ -118,31 +114,30 @@ const Register = () => {
               password: input.password
             }, 
             {headers: { "Content-Type": "application/json" }}
-          );
 
-        if (response.data.message === 0) {
-          if (input.password !== input.confirmPassword) 
-          {
-            swal({
-              title: "ERROR",
-              text: "Passwords does not match",
-              dangerMode: true,
-            });
-            setInput({
-              ...input,
-              password: "",
-              confirmPassword: ""
-            })
-            return
-          } 
-          else 
-          {
-            dispatch(registerUser({'email': input.email, 'password': input.password}))
-            navigate('/user')
-          }
+
+      );
+      if (response.data.message === 0) {
+        if (input.password !== input.confirmPassword) {
+          swal({
+            title: "ERROR",
+            text: "Passwords does not match",
+            dangerMode: true,
+          });
+          setInput({
+            ...input,
+            password: "",
+            confirmPassword: "",
+          });
+          return;
+        } else {
+          dispatch(
+            registerUser({ email: input.email, password: input.password }),
+
+          );
+          navigate("/user");
         }
-        else
-         if (response.data.message === 1)
+      } else if (response.data.message === 1)
         swal({
 
           
@@ -150,9 +145,9 @@ const Register = () => {
           text: "Email ya registrado",
           dangerMode: true,
         });
-      } catch (e) {
-        console.log(e.message);
-    };
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   };
@@ -175,7 +170,7 @@ const Register = () => {
           <MyTextField
             required
             label="E-MAIL"
-            name='email'
+            name="email"
             value={input.email}
             type="email"
             onChange={(e) => handleEmailChange(e)}
@@ -189,7 +184,7 @@ const Register = () => {
           <MyTextField
             required
             label="PASSWORD"
-            name='password'
+            name="password"
             //value={password}
             type="password"
             onChange={(e) => handlePasswordChange(e)}
@@ -204,22 +199,23 @@ const Register = () => {
 
           <MyTextField
             label="CONFIRM PASSWORD"
-            name='confirmPassword'
+            name="confirmPassword"
             //value={confirmPassword}
             type="password"
             onChange={(e) => handleConfirmPasswordChange(e)}
           />
 
-          <MyButtonTwo onClick={(e)=>buttonHandler()} variant="contained" endIcon={<HowToRegIcon />}>
+          <MyButtonTwo
+            onClick={(e) => buttonHandler()}
+            variant="contained"
+            endIcon={<HowToRegIcon />}
+          >
             Register
           </MyButtonTwo>
- 
         </section>
-
       </div>
     </div>
   );
 };
 
-
-export default Register
+export default Register;
