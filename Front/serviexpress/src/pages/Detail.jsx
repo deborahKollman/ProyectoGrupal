@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import {MDBContainer} from "mdbreact";
 
 
 export default function Detail(){
@@ -144,6 +145,14 @@ export default function Detail(){
 
     </div>
      <Footer></Footer>
+
+
+     <div className={stylesDetail.footer}>
+        <MDBContainer fluid>
+          &copy; 2022 Copyright: ServiExpress 
+        </MDBContainer>
+      </div>
     </div>
 
+   
 };

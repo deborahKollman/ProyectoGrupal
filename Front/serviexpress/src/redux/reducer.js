@@ -10,7 +10,7 @@ const initialState = {
   categories: [],
   filteredCategories: [],
   publicationById: {},
-  userId: {seller_opinions: []},
+  userId: {seller_opinions: [],buyer_opinions: []},
   user: {},
   users: [],
 };
@@ -34,6 +34,7 @@ const rootReducer = (state = initialState, action) => {
         Publications: action.payload,
       };
     case "GET_CATEGORIES":
+      console.log("red",action.payload);
       return {
         ...state,
         categories: action.payload,
@@ -109,6 +110,10 @@ const rootReducer = (state = initialState, action) => {
           users: action.payload,
   
         }
+
+
+
+
 
     case AUTHENTICATE:
 

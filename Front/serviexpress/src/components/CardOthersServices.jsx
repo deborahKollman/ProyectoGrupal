@@ -9,8 +9,8 @@ export default function CardOthersServices({user}){
     return <div className={cardStyle.container}>
         <img src={user.avatar_image} alt="perfil"></img>
         <h3>{user.name}</h3>
-        {user.seller_opinions.map(e => <p>"{e.comment}"</p>  )}
-        <Rating name="read-only" value={user.seller_reputation} readOnly/>
+        {user.buyer_opinions.map(e => <p>"{e.comment}"</p>  )}
+        <Rating name="read-only" value={user.buyer_reputation} readOnly/>
       </div>
 
 
