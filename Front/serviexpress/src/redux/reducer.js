@@ -80,7 +80,6 @@ const rootReducer = (state = initialState, action) => {
         filteredCategories: [...filtered],
       };
     case "GET_USER":
-     
       window.sessionStorage.setItem("token", payload.id); //>>>>obs
 
       // console.log(payload.user, "REDUCER ----> GET_USER");
