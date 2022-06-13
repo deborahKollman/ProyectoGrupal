@@ -103,7 +103,10 @@ const rootReducer = (state = initialState, action) => {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     case AUTHENTICATE:
 
       window.sessionStorage.setItem("token", payload.login);
@@ -120,6 +123,10 @@ const rootReducer = (state = initialState, action) => {
         rdcr_isAuth: false,
         rdcr_user: {},
       };
+<<<<<<< HEAD
+=======
+      
+>>>>>>> development
 
     default:
       return state;
