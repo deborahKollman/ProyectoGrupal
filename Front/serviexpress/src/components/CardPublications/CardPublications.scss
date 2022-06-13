@@ -30,9 +30,10 @@
   }
 
   .titlec {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;;;
     font-size: 20px;
     margin-bottom: 20px;
-    color: rgb(69, 12, 104);
+    color: rgb(5, 5, 5);
   }
 
   .card-text {
@@ -69,7 +70,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    background: #ece008f4;
     align-items: center;
     padding-top: 20px;
   }
@@ -105,6 +105,12 @@
 
   .titleprice {
     color: rgba(0, 0, 0, 0.35);
+    text-align: left;
   }
-
+  .titlestar{
+    text-align: left;
+  }
+  .titlesummary{
+    text-align: left;
+  }
 }
