@@ -5,7 +5,6 @@ const initialState = {
   rdcr_categories: [],
   Publications: [],
   switchloading: false,
-
   detail: {album: []},
   profileUser: [],
   categories: [],
@@ -97,6 +96,12 @@ const rootReducer = (state = initialState, action) => {
         userId: action.payload,
 
       }
+      case "GET_PUBLICATIONS_BY_CATEGORIES":
+        let publicopy = state.Publications;
+          return{
+          ...state,
+          // Publications: publicopy.filter(e=>e.categoryId===action.payload)
+        }
       case "GET_USERS":
       
       

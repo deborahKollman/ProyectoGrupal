@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getPublications, swich_loading} from "../redux/action"
+import {getPublications, swich_loading, getPublicationsByCategory} from "../redux/action"
 // import {Link} from 'react-router-dom';
 import CardPublications from "../components/CardPublications/CardPublications"
 import Pagination from "../components/Pagination/Pagination";
@@ -24,7 +24,7 @@ export default function Home(){
     console.log(SwichL)
     console.log(allPublications)
     const [CurrentPage, setCurrentPage] = useState(1);
-    const [PublicationsPerPage, setPublicationsPerPage] = useState(6);
+    const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
     const indexOfLastPublication = (CurrentPage *PublicationsPerPage);
     const indexOfFirstPublication = (indexOfLastPublication - PublicationsPerPage);
     const currentServices = allPublications.slice(indexOfFirstPublication,indexOfLastPublication);
@@ -37,7 +37,7 @@ export default function Home(){
            
             setTimeout(() => {
 				dispatch(getPublications());
-			}, 3000);
+			}, 1000);
         }, [dispatch]);
 
         useEffect(()=>{
@@ -45,16 +45,12 @@ export default function Home(){
         }, [allPublications])
 
 
-// function filterforCategory(e){
-//             if(e.target.value === 'All'){ 
-//                 dispatch(getPublications())
-//             } 
-//             else{
-//                 dispatch(getServicesForCategory(e.target.value))
-//             }
+// function filterforCategory(a){
+         
+//                 dispatch(getPublicationsByCategory(a))
+            
 //         }
-
-
+     
 // if(allPublications.length===0)dispatch(swich_loading(true))
 // else if(allPublications.length!==0)dispatch(swich_loading(false))
 
@@ -67,16 +63,26 @@ export default function Home(){
                 
             </NavBar>
             <div className="filterservice">
-<p className="filtername">Electrican</p>
-<p className="filtername">Plumb</p>
-<p className="filtername">Programming & Tech</p>
-<p className="filtername">Painter</p>
-<p className="filtername">Digital-Marketing</p>
-<select>
+
+<p className="filtername">Plumbing</p>
+<p className="filtername">Carpentry</p>
+<p className="filtername">Photography & Sound</p>
+<p className="filtername">Computing and Information</p>
+<p className="filtername">Graphics & Design</p>
+<p className="filtername">Finance</p>
+<p className="filtername">Digital Marketing</p>
+<p className="filtername">Writing & Translation</p>
+<p className="filtername">Video & Animation</p>
+<p className="filtername">Electricity</p>
+<p className="filtername">Gas</p>
+
+{/* <p className="filtername">Painter</p>
+<p className="filtername">Digital-Marketing</p> */}
+{/* <select>
                             <option key = 'All' value='0'>More...</option>
                             <option key = 'plumbing' value='1'>plumbing</option>
-                            <option key = 'electricity' value='2'>electricity</option>
-                            <option key = 'carpentry' value='3'>carpentry</option>
+                            <option key = 'electricity' value='3'>electricity</option>
+                            <option key = 'carpentgasry' value='2'>gas</option>
                             <option key = 'developers' value='4'>developers</option>
                             <option key = 'graphic & design' value='5'>graphic & design</option>
                             <option key = 'advocacy' value='6'>advocacy</option>
@@ -84,7 +90,7 @@ export default function Home(){
                             <option key = 'technical service' value='8'>technical service</option>
                             <option key = 'digital marketing' value='9'>digital marketing</option>
                             <option key = 'music & audio' value='10'>music & audio</option>
-                       </select> 
+</select>  */}
 </div>
 
 
@@ -131,10 +137,10 @@ export default function Home(){
 
                 <div className='services-home'>
   
-                {/* SwichL===true || */}
+               
 
                 
-                {  allPublications.length===0 ? (
+                { SwichL===true ||  allPublications.length===0 ? (
 					
                     <Loading></Loading>
 						

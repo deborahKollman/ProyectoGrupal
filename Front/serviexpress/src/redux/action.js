@@ -189,27 +189,25 @@ export const getPublicationId = (id) => {
   };
 };
 
-export function getPublicationsName(name) {
-  return function (dispatch) {
-    axios
-      .get(`http://localhost:3001/publications?title=` + name)
-      .then((responese) => {
-        return dispatch({
-          type: GET_PUBLICATIONS_NAME,
-          payload: responese.data,
-        });
-      })
+ 
+        export function getPublicationsName(name){
+          return function(dispatch){
+                  
+                  axios.get(`http://localhost:3001/publications?title=` + name) 
+                  .then(responese=>{return dispatch({
+                      type: GET_PUBLICATIONS_NAME, 
+                      payload: responese.data
+                  })})
+                  .catch(function(){
+                   ( swal({
+                      title: "ERROR",
+                      text: "Not Found",
+                      icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
+                      dangerMode: true,
+                    }))})
+                  
+              }}
 
-       .catch(function () {
-        swal({
-          title: "ERROR",
-          text: "Recipe not found",
-          icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
-          dangerMode: true,
-        });
-      }); 
-  };
-}
 
 
 export function getUserById(id) {
@@ -225,8 +223,6 @@ export function getUserById(id) {
         }
 
     }
-
-
 
 };
 
@@ -245,7 +241,13 @@ export function getUsers() {
     }
 
 }
-
-
-
 };
+
+
+
+// export const getPublicationsByCategory = (id) => {
+   
+  
+//     return { type: GET_PUBLICATIONS_BY_CATEGORIES, payload: id };
+  
+// };
