@@ -91,12 +91,14 @@ const rootReducer = (state = initialState, action) => {
         userId: action.payload,
       }
       case "GET_PUBLICATIONS_BY_CATEGORIES":
-        let publicopy = state.Publications;
           return{
           ...state,
-          // Publications: publicopy.filter(e=>e.categoryId===action.payload)
+          Publications: action.payload,
         }
-      case "GET_USERS":    
+        
+      case "GET_USERS":
+      
+      
         return{
           ...state,
           users: action.payload,

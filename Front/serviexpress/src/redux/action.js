@@ -3,6 +3,9 @@ import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
 const URL = `http://localhost:3001`;
+const GET_USER_BY_ID = "GET_USER_BY_ID";
+const GET_USERS = "GET_USERS";
+const REGISTER_USER = "REGISTER_USER"
 
 // Para desloguearse
 export const act_logout = () => {
@@ -213,3 +216,18 @@ export function getUsers() {
     } catch (error) {console.log(error);}
   }
 };
+
+export function getPublicationsByCategory(a) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/publications?cat_id=` + a);
+    //  console.log(response.data)
+      dispatch({
+        type: "GET_PUBLICATIONS_BY_CATEGORIES",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log("SERVICES NO FOUND");
+    }
+  };
+}
