@@ -14,7 +14,7 @@ const fx = async function() {
             description: "Mecanico de todo tipo de vehiculo, presupuesto sin compromiso, y disponibilidad para ir a domicilio por alguna emergencia",
             avatar_image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
             buyer_reputation: 3,  
-            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3, buyer_avatar:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"}],
             seller_reputation: 4,
             seller_opinions:[{commenter:"Fulano Perez",comment:"Que buen servicio",rating:5},{commenter:"Mengano Gomez",comment:"Trabajo decente, medio caro",rating:3}],
         })
@@ -29,7 +29,7 @@ const fx = async function() {
             description: "Soy electricista matriculado, puedo trabajar en instalaciones indistriales o instalaciones del hogar",
             avatar_image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
             buyer_reputation: 4,  
-            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3, buyer_avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}],
             seller_reputation: 4,
             seller_opinions:[{commenter:"Jorge Juarez",comment:"Mal Servicio",rating:1},{commenter:"Jhonatan Perez",comment:"Muy puntual y responsable",rating:5}],
         })
@@ -44,7 +44,7 @@ const fx = async function() {
             province_state: 'Montevideo',
             rol: 'client' ,
             buyer_reputation: 3,  
-            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3, buyer_avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}],
             seller_reputation: 3,
             seller_opinions:[{commenter:"Armando Paredes",comment:"Se desempeño muy bien y termino antes de tiempo",rating:5},{commenter:"Juan Lopez",comment:"Se tardo mucho en terminar",rating:3}],
         })
@@ -59,7 +59,7 @@ const fx = async function() {
             province_state: 'Bogota',
             rol: 'client' ,
             buyer_reputation: 3,  
-            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3}],
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3,buyer_avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}],
             seller_reputation: 4,
             seller_opinions:[{commenter:"Fulano Perez",comment:"Cumplido y bien hecho",rating:5},{commenter:"Fernando Vazquez",comment:"Me gusto su trabajo",rating:4}],
         })
@@ -87,7 +87,10 @@ const fx = async function() {
                 "state": "Active",
                 "title": "Mecanico",
                 "album": [
+
                 "https://images.unsplash.com/photo-1643701079732-3b1c7a797e3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+
+
                 ],
                 "detail": `Autoelectrico, mecánica general, Afinaciones, cambio de aciete, fuel injection, escaneo, calibración de cuerpos de aceleración, revisión de compraventa, cambio de bombas de agua y de gasolina, bandas de accesorios y de distribución,
                 Servicio a domicilio.
