@@ -39,7 +39,7 @@ const BurgerButton = () => {
   const { rdcr_isAuth } = useSelector((state) => state);
   console.log(rdcr_isAuth, "I'M IN THE NAVBAR");
   
-
+  console.log(open, "open");
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
@@ -80,7 +80,10 @@ const BurgerButton = () => {
         </li>
       </ListNav>
 
-      <NavigationBar />
+      {
+        !open && <NavigationBar />
+      }
+
     </MyHeader>
   );
 };
