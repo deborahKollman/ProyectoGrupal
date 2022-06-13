@@ -1,33 +1,15 @@
 import axios from "axios";
- import swal from "sweetalert"; 
-const GET_PUBLICATIONS = "GET_PUBLICATIONS";
+import swal from "sweetalert"; 
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
-const SWICH_LOADING = "SWICH_LOADING";
-const GET_PUBLICATION_ID = "GET_PUBLICATION_ID";
-const GET_PUBLICATIONS_NAME = "GET_PUBLICATIONS_NAME";
-const POST_PUBLICATION = "POST_PUBLICATION";
-const JALZ_GET_CATEGORIES = "JALZ_GET_CATEGORIES";
 export const AUTHENTICATE = "AUTHENTICATE";
-const GET_CATEGORIES = "GET_CATEGORIES";
-const GET_SERVICES = "GET_SERVICES";
-const GET_USER = "GET_USER";
-const GET_BY_ID = "GET_BY_ID";
 const URL = `http://localhost:3001`;
-const GET_USER_BY_ID = "GET_USER_BY_ID";
-const GET_USERS = "GET_USERS";
-const REGISTER_USER = "REGISTER_USER"
-const GET_PUBLICATIONS_BY_CATEGORIES= "GET_PUBLICATIONS_BY_CATEGORIES"
 
-
-
-
-
+// Para desloguearse
 export const act_logout = () => {
-  return {
-    type: LOGOUT_SESSION,
-  }
+  return { type: LOGOUT_SESSION}
 }
 
+// Para simular un login
 export const fakeLogin = (pO_User) => {
   console.log(pO_User);
   return async (dispatch) => {
@@ -47,6 +29,8 @@ export const fakeLogin = (pO_User) => {
     });
   };
 };
+
+// Para traer un usuario
 export const getUser = (pO_User) => {
   return async (dispatch) => {
     const { data } = await axios.get("http://localhost:3001/login/success", pO_User, {
@@ -56,13 +40,14 @@ export const getUser = (pO_User) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
-
     dispatch({
-      type: GET_USER,
+      type: "GET_USER",
       payload: data,
     });
   };
 };
+
+// Para traer un usuario, esta repetida
 export const getUserr = (user) => {
   return async (dispatch) => {
     const { data } = await axios.post("http://localhost:3001/login", user, {
@@ -73,21 +58,23 @@ export const getUserr = (user) => {
       },
     });
     dispatch({
-      type: GET_USER,
+      type: "GET_USER",
       payload: data,
     });
   };
 };
 
+// Para cuando se registra un usuario
 export const registerUser = (user) => {
   return (dispatch) => {
     dispatch({
-      type: REGISTER_USER,
+      type: "REGISTER_USER",
       payload: user
     })
   }
 }
 
+// Action para crear una publicacion
 export const createPublication = (pObjData) => {
   return async () => {
     try {
@@ -102,12 +89,13 @@ export const createPublication = (pObjData) => {
   };
 };
 
+// Action creada por James
 export const jalz_getAllCategories = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
       dispatch({
-        type: JALZ_GET_CATEGORIES,
+        type: "JALZ_GET_CATEGORIES",
         payload: data,
       });
     } catch (error) {
@@ -119,26 +107,24 @@ export const jalz_getAllCategories = () => {
 export const getById = (id) => {
   return async (dispatch) => {
     const publi = await axios.get(`${URL}/publications/${id}`);
-
     dispatch({
-      type: GET_BY_ID,
+      type: "GET_BY_ID",
       payload: publi.data,
     });
   };
 };
 
-//simulando la accion para hacer un post a la ruta y agregar informacion del usuario creado
 
 //simulando la accion para el filtro por categorias
 export function filterCategories(payload) {
   return { type: "FILTER_CATEGORIES", payload };
 }
 
-
+// Trae todas las categorias
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = axios("urldementira");
+      const json = axios(`${URL}/categories`);
       return dispatch({ type: "GET_CATEGORIES", payload: json.data });
     } catch (error) {
       console.log(error);
@@ -152,51 +138,49 @@ export const postProfileUser = (input) => {
     try {
       let profileUser = await axios.post(`${URL}/users/`, input);
       return dispatch({ type: "POST_PROFILEUSER", profileUser });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) { console.log(error)}
   };
 };
 
+// Action para utilizar los loaders
 export const swich_loading = (e) => {
-  return { type: SWICH_LOADING, payload: e };
+  return { type: "SWICH_LOADING", payload: e };
 };
 
+//Nos trae las publicaciones para renderizar en el home
 export function getPublications() {
   return async (dispatch) => {
     try {
       const response = await axios.get("http://localhost:3001/publications");
       dispatch({
-        type: GET_PUBLICATIONS,
+        type: "GET_PUBLICATIONS",
         payload: response.data,
       });
-    } catch (error) {
-      console.log("SERVICES NO FOUND");
-    }
+    } catch (error) { console.log("SERVICES NO FOUND")}
   };
 }
 
+// Nos trae el detalle de una publicacion
 export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
       const publication = await axios.get(
         `http://localhost:3001/publications/${id}`,
       );
-      return dispatch({ type: GET_PUBLICATION_ID, payload: publication.data });
+      return dispatch({ type: "GET_PUBLICATION_ID", payload: publication.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_PUBLICATION_ID, payload: [] });
+      return dispatch({ type: "GET_PUBLICATION_ID", payload: [] });
     }
   };
 };
 
- 
-        export function getPublicationsName(name){
-          return function(dispatch){
-                  
-                  axios.get(`http://localhost:3001/publications?title=` + name) 
+// Para el search bar, nos trae la publicacion buscada por nombre
+export function getPublicationsName(name){
+  return function(dispatch){    
+          axios.get(`http://localhost:3001/publications?title=` + name) 
                   .then(responese=>{return dispatch({
-                      type: GET_PUBLICATIONS_NAME, 
+                      type: "GET_PUBLICATIONS_NAME", 
                       payload: responese.data
                   })})
                   .catch(function(){
@@ -210,38 +194,24 @@ export const getPublicationId = (id) => {
               }}
 
 
-
+// Busca un usuario en particular
 export function getUserById(id) {
     return async (dispatch) => {
-        try {
-          
-            let data = await axios.get('http://localhost:3001/users/'+id);
-            
-            dispatch({type: GET_USER_BY_ID, payload: data.data.user});
-          
-        } catch (error) {
-          console.log(error);
-        }
-
+        try {     
+            let data = await axios.get('http://localhost:3001/users/'+id);          
+            dispatch({type: "GET_USER_BY_ID", payload: data.data.user});     
+        } catch (error) {console.log(error)}
     }
-
 };
 
-
-export function getUsers() {
-  
+// Trae todos los usuarios
+export function getUsers() { 
   return async (dispatch) => {
-    try {
-      
-        let users = await axios.get('http://localhost:3001/users');
-        
-        dispatch({type: GET_USERS, payload: users.data.users});
-      
-    } catch (error) {
-      console.log(error);
-    }
-
-}
+    try { 
+        let users = await axios.get('http://localhost:3001/users');   
+        dispatch({type: "GET_USERS", payload: users.data.users});   
+    } catch (error) {console.log(error);}
+  }
 };
 
 export function getPublicationsByCategory(a) {
@@ -250,7 +220,7 @@ export function getPublicationsByCategory(a) {
       const response = await axios.get(`http://localhost:3001/publications?cat_id=` + a);
     //  console.log(response.data)
       dispatch({
-        type: GET_PUBLICATIONS_BY_CATEGORIES,
+        type: "GET_PUBLICATIONS_BY_CATEGORIES",
         payload: response.data,
       });
     } catch (error) {
@@ -258,6 +228,3 @@ export function getPublicationsByCategory(a) {
     }
   };
 }
-
-
-
