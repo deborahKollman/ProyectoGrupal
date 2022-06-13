@@ -3,6 +3,8 @@ import styles from '../pages/styles/ContactCard.module.scss';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import {Button} from '@mui/material'
+import SendIcon from '@mui/icons-material/Send';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 
 const Input = styled('input')({
@@ -21,6 +23,15 @@ export default function ContactCard({name,perfil}){
           </div>
           </div>
 
+          <div className={styles.imgButton}>
+          <IconButton color="success" component="button" >
+          <WhatsAppIcon sx={{ fontSize: 30  }}/>
+        </IconButton>
+        </div>
+
+
+
+
           <label>Write a service that you looking for:</label>
          
           <textarea type="text" placeholder='I need a service like...'></textarea>
@@ -30,7 +41,7 @@ export default function ContactCard({name,perfil}){
           <label htmlFor="icon-button-file">
         <Input accept="image/*" id="icon-button-file" type="file" />
         <IconButton color="primary" aria-label="upload picture" component="span">
-          <PhotoCamera className={styles.photo} />
+          <PhotoCamera sx={{ fontSize: 24  }}/>
         </IconButton>
          </label>
         </div>
@@ -38,13 +49,16 @@ export default function ContactCard({name,perfil}){
           <label>Do you need this service urgently?</label>
 
           <div className={styles.btns}>
-          <button>No, I dont</button>
-          <button>Yes, it's Urgent!</button>
+          <Button color="primary" sx={{ fontSize: 12  }} >No, I dont</Button>
+          <Button color="primary" sx={{ fontSize: 12  }} >Yes, it's Urgent!</Button>
 
 
           
           </div>
-        <Button color='primary' className={styles.btnSend}>Enviar</Button>
+      
+        <Button variant="contained" endIcon={<SendIcon />}  sx={{ fontSize: 16  }}>
+             Send
+        </Button>
     </div>
 
 

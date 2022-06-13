@@ -7,6 +7,23 @@ export const AUTHENTICATE = "AUTHENTICATE";
 const GET_CATEGORIES = "GET_CATEGORIES";
 const GET_SERVICES = "GET_SERVICES";
 const URL = `http://localhost:3001`;
+<<<<<<< HEAD
+||||||| fe8c74b
+const GET_USER_BY_ID = "GET_USER_BY_ID";
+const GET_USERS = "GET_USERS";
+
+
+
+
+=======
+const GET_USER_BY_ID = "GET_USER_BY_ID";
+const GET_USERS = "GET_USERS";
+const REGISTER_USER = "REGISTER_USER"
+
+
+
+
+>>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
 
 export const act_logout = () => {
   return {
@@ -66,6 +83,15 @@ export const getUserr = (user) => {
     });
   };
 };
+
+export const registerUser = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type: REGISTER_USER,
+      payload: user
+    })
+  }
+}
 
 export const createPublication = (pObjData) => {
   return async () => {
@@ -127,7 +153,7 @@ export const getAllCategories = () => {
 export const postProfileUser = (input) => {
   return async (dispatch) => {
     try {
-      let profileUser = await axios.post("unaurldementira", input);
+      let profileUser = await axios.post(`${URL}/users/`, input);
       return dispatch({ type: "POST_PROFILEUSER", profileUser });
     } catch (error) {
       console.log(error);
@@ -167,6 +193,7 @@ export const getPublicationId = (id) => {
   };
 };
 
+<<<<<<< HEAD
 export function getPublicationsName(name) {
   return function (dispatch) {
     axios
@@ -177,17 +204,38 @@ export function getPublicationsName(name) {
           payload: responese.data,
         });
       })
-
-       .catch(function () {
-        swal({
-          title: "ERROR",
-          text: "Recipe not found",
-          icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
-          dangerMode: true,
+||||||| fe8c74b
+export function getPublicationsName(name) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/publications?title=` + name)
+      .then((responese) => {
+        return dispatch({
+          type: GET_PUBLICATIONS_NAME,
+          payload: responese.data,
         });
-      }); 
-  };
-}
+      })
+=======
+ 
+        export function getPublicationsName(name){
+          return function(dispatch){
+                  
+                  axios.get(`http://localhost:3001/publications?title=` + name) 
+                  .then(responese=>{return dispatch({
+                      type: GET_PUBLICATIONS_NAME, 
+                      payload: responese.data
+                  })})
+                  .catch(function(){
+                   ( swal({
+                      title: "ERROR",
+                      text: "Not Found",
+                      icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
+                      dangerMode: true,
+                    }))})
+                  
+              }}
+>>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
+
 
 
 export function getUserById(id) {
@@ -197,14 +245,60 @@ export function getUserById(id) {
             dispatch({type: "GET_USER_BY_ID", payload: data.data.user});     
         } catch (error) {console.log(error)}
     }
+<<<<<<< HEAD
+||||||| fe8c74b
+
+
+
+=======
+
+>>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
 };
 
 
 export function getUsers() { 
   return async (dispatch) => {
     try {
+<<<<<<< HEAD
         let users = await axios.get('http://localhost:3001/users');    
         dispatch({type: "GET_USERS", payload: users.data.users}); 
     } catch (error) {console.log(error);}
  }
 };
+||||||| fe8c74b
+      
+        let users = await axios.get('http://localhost:3001/users');
+        
+        dispatch({type: GET_USERS, payload: users.data.users});
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+}
+
+
+
+};
+=======
+      
+        let users = await axios.get('http://localhost:3001/users');
+        
+        dispatch({type: GET_USERS, payload: users.data.users});
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+}
+};
+
+
+
+// export const getPublicationsByCategory = (id) => {
+   
+  
+//     return { type: GET_PUBLICATIONS_BY_CATEGORIES, payload: id };
+  
+// };
+>>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b

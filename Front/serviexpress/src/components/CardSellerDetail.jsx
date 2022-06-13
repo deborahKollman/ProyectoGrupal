@@ -48,7 +48,7 @@ export default function CardSellerDetail({userid}){
             <label>({user.seller_opinions.length} Opinions)</label>
         </div>
 
-        <p>{user.description}</p>
+        <p className={stylesCardSeller.descrip}>{user.description}</p>
 
         <Button variant='outlined' color="primary" onClick={handleShow} >Contact</Button>;
         
@@ -77,15 +77,7 @@ export default function CardSellerDetail({userid}){
   onClose={handleClose}
   className={stylesCardSeller.modal}
 >
-{/*   <Box sx={stylesCardSeller}>
-    <Typography id="modal-modal-title" variant="h6" component="h2">
-      Text in a modal
-    </Typography>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-    </Typography>
-  </Box>
- */}
+
 
  <ContactCard name={user.name} perfil={user.avatar_image}></ContactCard>
  

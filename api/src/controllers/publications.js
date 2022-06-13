@@ -6,9 +6,12 @@ const {
 
 exports.getPublications = async (req, res, next) => {
   // Recibe offset y nros de registros a devolver x body
+  // Recibe title por query
   try {
     const { offset = 0, limit = 0 } = req.body;
-    const r = await getPublications(offset, limit);
+    const { title = '' } = req.query;
+    const { cat_id} = req.query;
+    const r = await getPublications(offset, limit, title, cat_id);
     res.json(r);
   } catch (error) {
     next(error);

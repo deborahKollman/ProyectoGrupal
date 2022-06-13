@@ -5,7 +5,6 @@ const initialState = {
   rdcr_categories: [],
   Publications: [],
   switchloading: false,
-
   detail: {album: []},
   profileUser: [],
   categories: [],
@@ -81,6 +80,69 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
       };
+<<<<<<< HEAD
+||||||| fe8c74b
+<<<<<<< HEAD
+    case "GET_USER_BY_ID":
+      
+      
+      return{
+        ...state,
+        userId: action.payload,
+
+      }
+      case "GET_USERS":
+      
+      
+        return{
+          ...state,
+          users: action.payload,
+  
+        }
+
+
+
+
+
+=======
+=======
+
+    case "REGISTER_USER":
+      return {
+        ...state,
+        reg_user:payload
+      }
+
+
+    case "GET_USER_BY_ID":
+      
+      
+      return{
+        ...state,
+        userId: action.payload,
+
+      }
+      case "GET_PUBLICATIONS_BY_CATEGORIES":
+        let publicopy = state.Publications;
+          return{
+          ...state,
+          // Publications: publicopy.filter(e=>e.categoryId===action.payload)
+        }
+      case "GET_USERS":
+      
+      
+        return{
+          ...state,
+          users: action.payload,
+  
+        }
+
+
+
+
+
+
+>>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
     case AUTHENTICATE:
 
       window.sessionStorage.setItem("token", payload.login);
@@ -97,7 +159,15 @@ const rootReducer = (state = initialState, action) => {
         rdcr_isAuth: false,
         rdcr_user: {},
       };
+<<<<<<< HEAD
       
+||||||| fe8c74b
+      
+>>>>>>> development
+=======
+
+
+>>>>>>> 2e46765aeba7344db1e96bfbbce1dabfef7d7d2b
     default:
       return state;
   }

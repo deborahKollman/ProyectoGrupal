@@ -11,7 +11,8 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux";
 import { act_logout } from "../../redux/action";
-
+import { useNavigate } from "react-router-dom";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,11 +23,14 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   
+  const xNavigate = useNavigate();
+
   const xDispatch = useDispatch();
   const mLogout = () => {
     xDispatch(act_logout());
-  }
+  };
 
   return (
     <React.Fragment>
@@ -81,10 +85,17 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+
         <MenuItem>
           <Avatar /> Profile
         </MenuItem>
         <Divider />
+        <MenuItem onClick={()=>{xNavigate('/seller/add-service')}}>
+          <ListItemIcon>
+            <AttachMoneyIcon fontSize="small" sx={{ color: "#fff" }} />
+          </ListItemIcon>
+          Sell Service
+        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" sx={{ color: "#fff" }} />
@@ -98,6 +109,7 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
       </Menu>
+      
     </React.Fragment>
   );
 }
