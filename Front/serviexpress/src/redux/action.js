@@ -2,8 +2,8 @@ import axios from "axios";
 import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
-export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
-export const GET_FAVOURITES = "GET_FAVOURITES";
+export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
+export const GET_FAVORITES = "GET_FAVORITES";
 
 
 
@@ -253,12 +253,16 @@ export function getPublicationsByCategory(a) {
 
 
 //FUNCION PARA AGREGAR A FAV
-export function addToFavourites(data){
+export function addToFavorites(id,user){
     return async(dispatch) =>{
       try {
-            const fav = await axios.post(`${URL}/:${data.id}/favorites`,data);
+            const fav = await axios.put(`${URL}/:${user}/favorites`,id);
 
+        dispatch({
+            type: ADD_TO_FAVORITES,
+            payload: fav,
 
+        })
 
 
       } catch (error) {
@@ -270,7 +274,7 @@ export function addToFavourites(data){
     }
 };
 //FUNCION PARA TRAER FAVORITOS
-export function getFavourites(id){
+export function getFavorites(id){
   return async(dispatch) =>{
     try {
           const fav = await axios.post(`${URL}/:${id}/favorites`);

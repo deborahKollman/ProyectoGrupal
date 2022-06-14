@@ -1,4 +1,4 @@
-import { AUTHENTICATE, LOGOUT_SESSION, ADD_TO_FAVOURITES, GET_FAVOURITES } from "./action";
+import { AUTHENTICATE, LOGOUT_SESSION, ADD_TO_FAVORITES, GET_FAVORITES } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
   rdcr_user: {},
@@ -7,7 +7,7 @@ const initialState = {
   switchloading: false,
   detail: { album: [] },
   profileUser: [],
-  favourites: [],
+  favorites: [],
   categories: [],
 
   filteredCategories: [],
@@ -128,17 +128,17 @@ const rootReducer = (state = initialState, action) => {
         rdcr_user: {},
       };
 
-    case ADD_TO_FAVOURITES:
+    case ADD_TO_FAVORITES:
       return {
           ...state,
-          favourites: action.payload
+          favorites: action.payload
 
       }
     
-    case GET_FAVOURITES:
+    case GET_FAVORITES:
         return {
           ...state,
-          favourites: action.payload,
+          favorites: action.payload,
         };
 
     default:
