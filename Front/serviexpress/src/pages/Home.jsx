@@ -13,14 +13,14 @@ import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
 import ServicesBar from "../components/ServicesBar";
-import "./styles/Home.scss";
+import Styles from "./styles/Home.module.scss";
 import PaginationHome from "../components/PaginationHome";
 import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from '@mui/material/Alert';
 import { flexbox } from "@mui/system";
-
-
+import FooterBar from '../components/FooterBar/FooterBar'
+import FilterByCategories from '../components/Filters/FilterByCategories'
 
 // const currentServices = [1,2,3]
 // const SwichL= false
@@ -65,44 +65,46 @@ export default function Home() {
     setCurrentPage((pag) => (pag = 1));
   }, [allPublications]);
 
-  function filterforCategory1() {
-    dispatch(getPublicationsByCategory(1));
-  }
-  function filterforCategory2() {
-    dispatch(getPublicationsByCategory(2));
-  }
-  function filterforCategory3() {
-    dispatch(getPublicationsByCategory(3));
-  }
-  function filterforCategory4() {
-    dispatch(getPublicationsByCategory(4));
-  }
-  function filterforCategory5() {
-    dispatch(getPublicationsByCategory(5));
-  }
-  function filterforCategory6() {
-    dispatch(getPublicationsByCategory(6));
-  }
-  function filterforCategory7() {
-    dispatch(getPublicationsByCategory(7));
-  }
-  function filterforCategory8() {
-    dispatch(getPublicationsByCategory(8));
-  }
-  function filterforCategory9() {
-    dispatch(getPublicationsByCategory(9));
-  }
-  function filterforCategory10() {
-    dispatch(getPublicationsByCategory(10));
-  }
+  // function filterforCategory1() {
+  //   dispatch(getPublicationsByCategory(1));
+  // }
+  // function filterforCategory2() {
+  //   dispatch(getPublicationsByCategory(2));
+  // }
+  // function filterforCategory3() {
+  //   dispatch(getPublicationsByCategory(3));
+  // }
+  // function filterforCategory4() {
+  //   dispatch(getPublicationsByCategory(4));
+  // }
+  // function filterforCategory5() {
+  //   dispatch(getPublicationsByCategory(5));
+  // }
+  // function filterforCategory6() {
+  //   dispatch(getPublicationsByCategory(6));
+  // }
+  // function filterforCategory7() {
+  //   dispatch(getPublicationsByCategory(7));
+  // }
+  // function filterforCategory8() {
+  //   dispatch(getPublicationsByCategory(8));
+  // }
+  // function filterforCategory9() {
+  //   dispatch(getPublicationsByCategory(9));
+  // }
+  // function filterforCategory10() {
+  //   dispatch(getPublicationsByCategory(10));
+  // }
 
   return (
-    <div className="wphome">
+    <div className={Styles.container}>
       
       <NavBar msg={msg}></NavBar>
        {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
-
-      <div className="filterservice">
+      
+      <FilterByCategories/>
+      
+      {/* <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername">
           Plumbing
         </p>
@@ -140,12 +142,17 @@ export default function Home() {
         </p>
         <p className="filtername">|</p>
         <p className="filtername">Gas</p>
+      </div> */}
+
+      <div className={Styles.homepaginate}>
+        <PaginationHome
+          value={allPublications.length}
+          pagination={pagination}
+          items={PublicationsPerPage}
+        ></PaginationHome>
       </div>
-
-
-
-
-      <div className="services-home">
+      
+      <div className={Styles.allCards}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
@@ -173,16 +180,7 @@ export default function Home() {
                             PublicationsPerPage = {PublicationsPerPage}
                                                     />
                 </div> */}
-
-      <div className="paginationHome">
-        <PaginationHome
-          value={allPublications.length}
-          pagination={pagination}
-          items={PublicationsPerPage}
-        ></PaginationHome>
-      </div>
-
-      <div className="logos"></div>
+     <FooterBar/>
     </div>
   );
 }

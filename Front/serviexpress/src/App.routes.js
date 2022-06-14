@@ -28,7 +28,6 @@ function App() {
       <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />
       <Route exact path="/register" element={<Register/>} />
       <Route exact path="/login" element={<Login/>} />
-
       <Route exact path="/" element={<LandingPage/>} />
       <Route path='/detail/:id' element={<Detail/>}/>
       <Route exact path="/Home" element={<Home/>}/> 

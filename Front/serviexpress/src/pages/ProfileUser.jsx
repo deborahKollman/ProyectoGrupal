@@ -37,9 +37,7 @@ const ProfileUser = () => {
     last: "",
     descrip: "",
     phone: "",
-    
-
-
+  
 });
 
 
@@ -48,9 +46,6 @@ const ProfileUser = () => {
     number: /^[0-9]+$/
 
 }
-
-
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -90,10 +85,6 @@ const ProfileUser = () => {
 
   }
   }
-
-
-
-
 
   return (
     <div className="page-seller_register">
