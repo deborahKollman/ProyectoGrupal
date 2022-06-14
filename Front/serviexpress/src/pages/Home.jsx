@@ -141,7 +141,7 @@ export default function Home() {
         <p className="filtername">Gas</p>
       </div> */}
 
-      <div className="paginationHome">
+      <div className={Styles.homepaginate}>
         <PaginationHome
           value={allPublications.length}
           pagination={pagination}
