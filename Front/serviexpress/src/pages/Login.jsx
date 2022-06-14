@@ -39,8 +39,8 @@ const Login = () => {
   const xNavigate = useNavigate();
 
   const mLocalLoggin = () => {
-    xDispatch(fakeLogin(data))
-    xNavigate(`/home`);
+    xDispatch(getUserr(data))
+    // xNavigate(`/home`);
   };
 
   const { rdcr_isAuth, rdcr_user } = useSelector((state) => state);

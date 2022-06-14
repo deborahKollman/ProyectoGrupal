@@ -51,13 +51,14 @@ export const getUser = (pO_User) => {
 // Para traer un usuario, esta repetida
 export const getUserr = (user) => {
   return async (dispatch) => {
-    const { data } = await axios.post("http://localhost:3001/login", user, {
+    const { data } = await axios.post("http://localhost:3001/login", user /* , {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-    });
+    } */);
+    console.log(data,"ACTIONNNNNNNNNNNNN");
     dispatch({
       type: "GET_USER",
       payload: data,

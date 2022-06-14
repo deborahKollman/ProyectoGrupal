@@ -31,10 +31,10 @@ const BurgerButton = () => {
       } else {
         setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
       }
-    } else {
+    } /* else {
       xDispatch(getUserr()); // OJO AL PIOJO xD : POR REVISAR ::
-    }
-  }, [xDispatch, avatar, user]);
+    } */
+  }, [ avatar, user, /* xDispatch */]);
 
   const { rdcr_isAuth } = useSelector((state) => state);
   console.log(rdcr_isAuth, "I'M IN THE NAVBAR");
