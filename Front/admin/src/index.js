@@ -9,3 +9,9 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+/* 
+npm i react-circular-progressbar
+npm install react-bootstrap bootstrap
+
+*/
