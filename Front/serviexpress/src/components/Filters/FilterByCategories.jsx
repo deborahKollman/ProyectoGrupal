@@ -6,33 +6,35 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Styles from './Filter.module.scss'
 
 //El filtro esta todo hecho, solo le falta la funcionalidad usando redux
 const FilterByCategories = () => {
 
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.categories)
+  const allCategories = useSelector((state) => state.rdcr_categories)
 
   useEffect(() => { 
     dispatch(getAllCategories())
   }, [dispatch])
 
-  function handleFilterCategories(e) {
+  function handleChange(e) {
     e.preventDefault();
     dispatch(filterCategories(e.target.value))
   } 
 
   return (
     <>
-    <select onChange={handleFilterCategories}>
+    <div className={Styles.filter}>
+
+    </div>
+    {/* <select onChange={(e) => handleChange(e)}>
     <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
       <InputLabel id="demo-select-small">Age</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
-        value={input}
         label="Categories"
-        onChange={handleChange}
       >
         <MenuItem value="all"><em>All</em></MenuItem>
 
@@ -42,7 +44,7 @@ const FilterByCategories = () => {
 
       </Select>
     </FormControl>
-    </select>
+    </select> */}
     </>
   )
 }
