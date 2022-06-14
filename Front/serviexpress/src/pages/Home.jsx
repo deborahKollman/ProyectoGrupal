@@ -18,6 +18,7 @@ import PaginationHome from "../components/PaginationHome";
 import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
 
+
 // const currentServices = [1,2,3]
 // const SwichL= false
 
