@@ -20,6 +20,7 @@ import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from '@mui/material/Alert';
 import { flexbox } from "@mui/system";
 import FooterBar from '../components/FooterBar/FooterBar'
+import FilterByCategories from '../components/Filters/FilterByCategories'
 
 // const currentServices = [1,2,3]
 // const SwichL= false
@@ -100,7 +101,9 @@ export default function Home() {
       
       <NavBar msg={msg}></NavBar>
        {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
-
+      
+      <FilterByCategories/>
+      
       {/* <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername">
           Plumbing
@@ -148,6 +151,7 @@ export default function Home() {
           items={PublicationsPerPage}
         ></PaginationHome>
       </div>
+      
       <div className={Styles.allCards}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
@@ -176,8 +180,6 @@ export default function Home() {
                             PublicationsPerPage = {PublicationsPerPage}
                                                     />
                 </div> */}
-
-
      <FooterBar/>
     </div>
   );
