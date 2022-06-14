@@ -1,7 +1,12 @@
 const {
   getPublications,
   getPublicationDetails,
-  postPublication
+  postPublication,
+  deletePublication,
+  updatePublication,
+  getPublicationById,
+  getPublicationsByTitle,
+  getPublicationsByCategory
 } = require('../services/publications.js');
 
 exports.getPublications = async (req, res, next) => {
@@ -10,7 +15,7 @@ exports.getPublications = async (req, res, next) => {
   try {
     const { offset = 0, limit = 0 } = req.body;
     const { title = '' } = req.query;
-    const { cat_id} = req.query;
+    const { cat_id } = req.query;
     const r = await getPublications(offset, limit, title, cat_id);
     res.json(r);
   } catch (error) {
@@ -30,7 +35,7 @@ exports.getPublicationDetails = async (req, res, next) => {
 };
 
 exports.postPublication = async (req, res, next) => {
-/*   req.files = [
+  /*   req.files = [
     {
       fieldname: 'pictures',
       originalname: 'Proyecto Final.pdf',
@@ -76,5 +81,52 @@ exports.postPublication = async (req, res, next) => {
   }
 };
 
-exports.deletePublication = (req, res, next) => {};
-exports.updatePublication = (req, res, next) => {};
+exports.getPublicationById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await getPublicationById(id);
+    res.send(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getPublicationsByTitle = async (req, res, next) => {
+  try {
+    const { title } = req.params;
+    const response = await getPublicationsByTitle(title);
+    res.send(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getPublicationsByCategory = async (req, res, next) => {
+  try {
+    const { cat_id } = req.params;
+    const response = await getPublicationsByCategory(cat_id);
+    res.send(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deletePublication = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await deletePublication(id);
+    res.status(200).send(response);
+  } catch (error) {
+    next({ message: error.name });
+  }
+};
+
+exports.updatePublication = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const update = await updatePublication(id, req.body);
+    res.status(200).send(update);
+  } catch (error) {
+    next(error);
+  }
+};
