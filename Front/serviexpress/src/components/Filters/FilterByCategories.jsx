@@ -2,6 +2,7 @@ import React from 'react'
 import {filterCategories, getAllCategories} from '../../redux/action'
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect } from 'react'
+import Form from 'react-bootstrap/Form'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -12,7 +13,8 @@ import Styles from './Filter.module.scss'
 const FilterByCategories = () => {
 
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.rdcr_categories)
+  const allCategories = useSelector((state) => state.categories)
+  console.log(allCategories)
 
   useEffect(() => { 
     dispatch(getAllCategories())
@@ -25,8 +27,13 @@ const FilterByCategories = () => {
 
   return (
     <>
-    <div className={Styles.filter}>
-
+    <div className={Styles.filterctn}>
+      <Form.Select size="lg">
+        <option disabled>Filter by categories</option>
+        {allCategories?.map((category) => {
+          return <option>{category.name}</option>
+        } )}
+      </Form.Select>
     </div>
     {/* <select onChange={(e) => handleChange(e)}>
     <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
