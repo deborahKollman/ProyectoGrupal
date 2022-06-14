@@ -54,36 +54,16 @@ export default function Home() {
     setCurrentPage((pag) => (pag = 1));
   }, [allPublications]);
 
-  // function filterforCategory1() {
-  //   dispatch(getPublicationsByCategory(1));
-  // }
-  // function filterforCategory2() {
-  //   dispatch(getPublicationsByCategory(2));
-  // }
-  // function filterforCategory3() {
-  //   dispatch(getPublicationsByCategory(3));
-  // }
-  // function filterforCategory4() {
-  //   dispatch(getPublicationsByCategory(4));
-  // }
-  // function filterforCategory5() {
-  //   dispatch(getPublicationsByCategory(5));
-  // }
-  // function filterforCategory6() {
-  //   dispatch(getPublicationsByCategory(6));
-  // }
-  // function filterforCategory7() {
-  //   dispatch(getPublicationsByCategory(7));
-  // }
-  // function filterforCategory8() {
-  //   dispatch(getPublicationsByCategory(8));
-  // }
-  // function filterforCategory9() {
-  //   dispatch(getPublicationsByCategory(9));
-  // }
-  // function filterforCategory10() {
-  //   dispatch(getPublicationsByCategory(10));
-  // }
+  // function filterforCategory1() {dispatch(getPublicationsByCategory(1))}
+  // function filterforCategory2() {dispatch(getPublicationsByCategory(2))}
+  // function filterforCategory3() {dispatch(getPublicationsByCategory(3))}
+  // function filterforCategory4() {dispatch(getPublicationsByCategory(4))}
+  // function filterforCategory5() {dispatch(getPublicationsByCategory(5))}
+  // function filterforCategory6() {dispatch(getPublicationsByCategory(6))}
+  // function filterforCategory7() {dispatch(getPublicationsByCategory(7))}
+  // function filterforCategory8() {dispatch(getPublicationsByCategory(8))}
+  // function filterforCategory9() {dispatch(getPublicationsByCategory(9))}
+  // function filterforCategory10() {dispatch(getPublicationsByCategory(10))}
 
   return (
     <div className={Styles.container}>
@@ -92,44 +72,25 @@ export default function Home() {
         {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
 
       {/* <div className="filterservice">
-        <p onClick={filterforCategory1} className="filtername">
-          Plumbing
-        </p>
+        <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory2} className="filtername">
-          Carpentry
-        </p>
+        <p onClick={filterforCategory2} className="filtername"> Carpentry </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory3} className="filtername">
-          Photography & Sound
-        </p>
+        <p onClick={filterforCategory3} className="filtername"> Photography & Sound </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory4} className="filtername">
-          Computing and Information
-        </p>
+        <p onClick={filterforCategory4} className="filtername"> Computing and Information </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory5} className="filtername">
-          Graphics & Design
-        </p>
+        <p onClick={filterforCategory5} className="filtername"> Graphics & Design </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory6} className="filtername">
-          Finance
-        </p>
+        <p onClick={filterforCategory6} className="filtername"> Finance </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory7} className="filtername">
-          Digital Marketing
-        </p>
+        <p onClick={filterforCategory7} className="filtername"> Digital Marketing </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory9} className="filtername">
-          Video & Animation
-        </p>
+        <p onClick={filterforCategory9} className="filtername"> Video & Animation </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory10} className="filtername">
-          Electricity
-        </p>
+        <p onClick={filterforCategory10} className="filtername"> Electricity </p>
         <p className="filtername">|</p>
-        <p className="filtername">Gas</p>
-      </div>  */}
+        <p className="filtername">Gas</p></div>  */}
 
       <div className={Styles.homepaginate}>
         <PaginationHome
