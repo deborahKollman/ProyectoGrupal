@@ -22,6 +22,7 @@ const fx = async function() {
             seller_reputation: 4,
             seller_opinions:[{commenter:"Fulano Perez",comment:"Que buen servicio",rating:5},{commenter:"Mengano Gomez",comment:"Trabajo decente, medio caro",rating:3}],
         })
+        juan.createFavorite()
         const fernando=await User.create(
             {email:'fer@hotmail.com', 
             password: '123456', 
@@ -41,6 +42,7 @@ const fx = async function() {
             seller_reputation: 4,
             seller_opinions:[{commenter:"Jorge Juarez",comment:"Mal Servicio",rating:1},{commenter:"Jhonatan Perez",comment:"Muy puntual y responsable",rating:5}],
         })
+        fernando.createFavorite()
         const damian=await User.create(
             {email:'damian@hotmail.com', 
             password: '123456', 
@@ -57,6 +59,7 @@ const fx = async function() {
             seller_reputation: 3,
             seller_opinions:[{commenter:"Armando Paredes",comment:"Se desempeño muy bien y termino antes de tiempo",rating:5},{commenter:"Juan Lopez",comment:"Se tardo mucho en terminar",rating:3}],
         })
+        damian.createFavorite()
         const lucas=await User.create(
             {email:'lucas@hotmail.com', 
             password: '123456', 
@@ -76,7 +79,7 @@ const fx = async function() {
             seller_reputation: 4,
             seller_opinions:[{commenter:"Fulano Perez",comment:"Cumplido y bien hecho",rating:5},{commenter:"Fernando Vazquez",comment:"Me gusto su trabajo",rating:4}],
         })
-
+        lucas.createFavorite()
 
 
         const asesoramiento=await Service.create({name:'Asesoramiento'})
