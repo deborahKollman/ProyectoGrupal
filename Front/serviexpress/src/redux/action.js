@@ -2,6 +2,11 @@ import axios from "axios";
 import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
+export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
+export const GET_FAVOURITES = "GET_FAVOURITES";
+
+
+
 const URL = `http://localhost:3001`;
 
 // Para desloguearse
@@ -245,3 +250,39 @@ export function getPublicationsByCategory(a) {
     }
   };
 }
+
+
+//FUNCION PARA AGREGAR A FAV
+export function addToFavourites(data){
+    return async(dispatch) =>{
+      try {
+            const fav = await axios.post(`${URL}/:${data.id}/favorites`,data);
+
+
+
+
+      } catch (error) {
+        console.log(error);
+      }
+
+
+
+    }
+};
+//FUNCION PARA TRAER FAVORITOS
+export function getFavourites(id){
+  return async(dispatch) =>{
+    try {
+          const fav = await axios.post(`${URL}/:${id}/favorites`);
+
+
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+  }
+};

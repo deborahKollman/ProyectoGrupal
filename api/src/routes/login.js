@@ -36,7 +36,7 @@ router.get('/error', (req, res) => {
 router.get('/success', async (req, res) => {
   if (req.user) {
     const {
-      emails: [{ value }]
+      emails: { value }
     } = req.user;
     const user = await User.findOne({
       where: {
