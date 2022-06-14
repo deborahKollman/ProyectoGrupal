@@ -1,11 +1,14 @@
-.allCards{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-flow: wrap;
-  gap: 20px;
-  margin-top: 90px;
-  justify-content: center;
+.services-home {
+    zoom: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 0.1fr);
+    position: relative;
+    justify-content: center;
+    gap: 1em;
+    // top: 70px;
+    /* margin-left: 150px; */
+    /* grid-template-rows: auto; */
+  justify-items: center;
   }
 
 .container{

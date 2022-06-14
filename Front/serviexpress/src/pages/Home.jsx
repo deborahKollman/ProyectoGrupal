@@ -1,13 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUser,
-  getPublications,
-  swich_loading,
-  getPublicationsByCategory,
-} from "../redux/action";
-// import {Link} from 'react-router-dom';
+import {getUser,getPublications,swich_loading,getPublicationsByCategory,} from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
@@ -19,11 +13,6 @@ import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from '@mui/material/Alert';
 import { flexbox } from "@mui/system";
-import FooterBar from '../components/FooterBar/FooterBar'
-import FilterByCategories from '../components/Filters/FilterByCategories'
-
-// const currentServices = [1,2,3]
-// const SwichL= false
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -46,7 +35,7 @@ export default function Home() {
     const msg = (text) => {
         SetMsgSearch(text);
     };
- 
+
   // const [order,setorder] = useState ("")
   // const [orderscore , setorderscore] = useState(1)
   // const servicescreate = [];
@@ -100,10 +89,8 @@ export default function Home() {
     <div className={Styles.container}>
       
       <NavBar msg={msg}></NavBar>
-       {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
-      
-      <FilterByCategories/>
-      
+        {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
+
       {/* <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername">
           Plumbing
@@ -142,7 +129,7 @@ export default function Home() {
         </p>
         <p className="filtername">|</p>
         <p className="filtername">Gas</p>
-      </div> */}
+      </div>  */}
 
       <div className={Styles.homepaginate}>
         <PaginationHome
@@ -151,8 +138,9 @@ export default function Home() {
           items={PublicationsPerPage}
         ></PaginationHome>
       </div>
-      
-      <div className={Styles.allCards}>
+
+
+      <div className="services-home">
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
@@ -161,7 +149,7 @@ export default function Home() {
               <div>
                 <CardPublications
                   id={e.id}
-                  album={e.album[0]}
+                  album={e.album}
                   title={e.title}
                   summary={e.detail_resume}
                   // score={e.score}
@@ -173,14 +161,16 @@ export default function Home() {
           })
         )}
       </div>
-      {/*                 <div className="pagination">
-                <Pagination className ="pagination"
-                            allpublicationsnumber={allPublications.length}
-                            pagination = {pagination}
-                            PublicationsPerPage = {PublicationsPerPage}
-                                                    />
-                </div> */}
-     <FooterBar/>
+    
+      <div className="paginationHome">
+        <PaginationHome
+          value={allPublications.length}
+          pagination={pagination}
+          items={PublicationsPerPage}
+        ></PaginationHome>
+      </div>
+
+      <div className="logos"></div>
     </div>
   );
 }
