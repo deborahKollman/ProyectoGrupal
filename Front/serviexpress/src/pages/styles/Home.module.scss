@@ -60,30 +60,11 @@ color: #000000;
  margin: 30px;
   }
 
-.logos{
-  position: relative;
-  display: flexbox;
-  height: 80px;
-  margin-bottom: 10px;
-  
-  justify-content: space-between ;
-  background-image: url('../../assets/icons/bottonicons.png');
-  background-size: 40%;
-  background-position-x: center;
-  background-position-y:bottom;
-  background-repeat: no-repeat;
-  background-color: aliceblue;
-  
-  
-}
-.pagination{
-  position: relative;
-  justify-content: center;
-}
-
-.paginationHome{
-  display: flex;
-  justify-content: center;
-
-
+.homepaginate {
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 35px;
 }
