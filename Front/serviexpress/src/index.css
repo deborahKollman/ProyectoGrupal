@@ -11,7 +11,4 @@ html{
 }
 body{
     background-color: rgba(246, 255, 0, 0.242);
-    position: relative;
-    min-height: 100vh;
-    padding-bottom: 3rem;
 }
