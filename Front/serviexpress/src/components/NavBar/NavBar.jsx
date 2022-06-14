@@ -24,7 +24,7 @@ const BurgerButton = () => {
   const { user } = useSelector((state) => state);
 
   useEffect(() => {
-    if (Object.keys(user).length > 0) {
+    if (Object.keys(user)?.length > 0) {
       console.log(user);
       if (user?.photos) {
         setAvatar(user.photos[0].value);
@@ -38,7 +38,7 @@ const BurgerButton = () => {
 
   const { rdcr_isAuth } = useSelector((state) => state);
   console.log(rdcr_isAuth, "I'M IN THE NAVBAR");
-  
+
   console.log(open, "open");
   return (
     <MyHeader pOpen={open}>
@@ -60,7 +60,7 @@ const BurgerButton = () => {
 
       <SearchGroup />
 
-      {!rdcr_isAuth ? <InitialSession /> : <LoginSession pAvatar={avatar}/>}
+      {!rdcr_isAuth ? <InitialSession /> : <LoginSession pAvatar={avatar} />}
 
       <ListNav pOpen={open}>
         <li>
@@ -80,10 +80,7 @@ const BurgerButton = () => {
         </li>
       </ListNav>
 
-      {
-        !open && <NavigationBar />
-      }
-
+      {!open && <NavigationBar />}
     </MyHeader>
   );
 };

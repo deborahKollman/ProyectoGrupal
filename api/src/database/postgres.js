@@ -49,7 +49,7 @@ Contract.belongsTo(User);
 Publication.hasMany(Contract);
 Contract.belongsTo(Publication);
 
-User.hasMany(Favorite);
+User.hasOne(Favorite);
 Favorite.belongsTo(User);
 Favorite.belongsToMany(Publication, { through: 'FavoritePublications' });
 Publication.belongsToMany(Favorite, { through: 'FavoritePublications' });
