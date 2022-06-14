@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -15,13 +16,14 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser('secret'));
 server.use(morgan('dev'));
 server.use(express.json());
-server.use(
+process.env.NODE_ENV?(server.use(cors()))
+:(server.use(
   cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   })
-);
+));
 server.use(express.static('public'));
 server.use(
   cookieSession({
