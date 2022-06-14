@@ -1,4 +1,4 @@
-
+import * as React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 import CardSellerDetail from '../components/CardSellerDetail';
@@ -16,6 +16,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {MDBContainer} from "mdbreact";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 export default function Detail(){
@@ -46,12 +48,38 @@ export default function Detail(){
         document.getElementById("btnVerMas").style.display = 'none';
 
     };
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const [open, setOpen] = useState(false);
+
+    const favClicked = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+
+      }
+
+      setOpen(false);
+    };
+  
     
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
          {/*    <ServicesBar></ServicesBar> */}
           </div>
+
+          <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="info" sx={{ width: '100%' , fontSize: 12}}>
+            Added to Favourites
+         </Alert>
+         </Snackbar>
 
 
         <div className={stylesDetail.division}>
@@ -81,7 +109,7 @@ export default function Detail(){
 
           <div>
               
-              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} icon={<FavoriteBorder />} onClick={favClicked} checkedIcon={<Favorite />} />
           </div>
         </div>
 
