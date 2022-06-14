@@ -134,8 +134,8 @@ exports.updatePassword = async(req,res,next) => {
 exports.addBuyerOpinion = async(req,res,next) => {
   try {
     const {id} = req.params;
-    const {rating,comment,commenter} = req.body;
-    const r = await addBuyerComment(id,rating,comment,commenter)
+    const {rating,comment,commenter,buyer_avatar} = req.body;
+    const r = await addBuyerComment(id,rating,comment,commenter,buyer_avatar)
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
