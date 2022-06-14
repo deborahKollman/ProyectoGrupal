@@ -1,19 +1,18 @@
-.services-home {
-    zoom: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    position: relative;
-    justify-content: center;
-    gap: 1em;
-    // top: 70px;
-    /* margin-left: 150px; */
-    /* grid-template-rows: auto; */
-  justify-items: center;
+.allCards{
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-around;
+  margin-top: 70px;
   }
-.wphome{
-  position: relative;
-  gap: 2em;
+
+.container{
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
+  justify-content: center;
 }
+
 .filterservice{
 // box-sizing: border-box;
 position: relative;
