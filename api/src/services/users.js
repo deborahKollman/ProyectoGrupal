@@ -123,6 +123,7 @@ exports.deleteUser = async(id) => {
     if(user.dataValues.avatar_image){
       fs.unlinkSync(user.dataValues.avatar_image);
     }
+    await Favorite.destroy({where:{userId:id}});
     await User.destroy({where:{id}})
     return {message:'User deleted successfully'}
   }
@@ -161,10 +162,10 @@ exports.addSellerComment = async(id,rating,comment,commenter) => {
   return {err_msg:'User not found'}
 }
 
-exports.addBuyerComment = async(id,rating,comment,commenter) => {
+exports.addBuyerComment = async(id,rating,comment,commenter,buyer_avatar) => {
   const user = await User.findByPk(id);
   if(user){
-    const opinion={commenter,comment,rating};
+    const opinion={commenter,comment,rating,buyer_avatar};
     var comm=user.dataValues.buyer_opinions
     var rep=user.dataValues.buyer_reputation;
     var rep=(rep*comm.length+rating)/(comm.length+1);

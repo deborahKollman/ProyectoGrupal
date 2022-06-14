@@ -10,10 +10,16 @@
     /* grid-template-rows: auto; */
   justify-items: center;
   }
-.wphome{
-  position: relative;
-  gap: 2em;
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
+  justify-content: center;
 }
+
 .filterservice{
 // box-sizing: border-box;
 position: relative;
@@ -61,30 +67,11 @@ color: #000000;
  margin: 30px;
   }
 
-.logos{
-  position: relative;
-  display: flexbox;
-  height: 80px;
-  margin-bottom: 10px;
-  
-  justify-content: space-between ;
-  background-image: url('../../assets/icons/bottonicons.png');
-  background-size: 40%;
-  background-position-x: center;
-  background-position-y:bottom;
-  background-repeat: no-repeat;
-  background-color: aliceblue;
-  
-  
-}
-.pagination{
-  position: relative;
-  justify-content: center;
-}
-
-.paginationHome{
-  display: flex;
-  justify-content: center;
-
-
+.homepaginate {
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 35px;
 }
