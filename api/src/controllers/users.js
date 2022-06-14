@@ -19,9 +19,16 @@ exports.checkUser = async(req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
   if (!req.query.limit || !req.query.offset) {
-    return res.redirect(
+    var avatar_image;
+    if(!process.env.API){
+        return res.redirect(
       'http://localhost:3001/users?page=1&offset=10&limit=10'
-    );
+    )
+  }else{
+    return res.redirect(
+      `http://${process.env.API}/users?page=1&offset=10&limit=10`
+      )
+  };
   }
   try {
     const response = await getAllUsers(req.query);
@@ -35,7 +42,10 @@ exports.postUser = async (req, res, next) => {
   try {
     var newUser=req.body;
     if(req.file){
-      const avatar_image = 'http://' + HOST + ':' + PORT + req.file.destination.slice(1) + '/' + req.file.filename;
+      var avatar_image;
+      process.env.API?
+      (avatar_image = 'http://' + process.env.API + req.file.destination.slice(1) + '/' + req.file.filename):
+      (avatar_image = 'http://' + HOST + ':' + PORT + req.file.destination.slice(1) + '/' + req.file.filename);
       newUser={...newUser,avatar_image}
     }
     const [user,created] = await createUser(newUser);
@@ -68,7 +78,10 @@ exports.updateUser = async(req, res, next) => {
     const {id}=req.params;
     const changes = req.body;
     if(req.file){
-      const avatar_image = 'http://' + HOST + ':' + PORT + req.file.destination.slice(1) + '/' + req.file.filename;
+      var avatar_image;
+      process.env.API?
+      (avatar_image = 'http://' + process.env.API + req.file.destination.slice(1) + '/' + req.file.filename):
+      (avatar_image = 'http://' + HOST + ':' + PORT + req.file.destination.slice(1) + '/' + req.file.filename);
       changes={...changes,avatar_image}
     }
     const r = await updateUser(id,changes);

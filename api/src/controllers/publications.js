@@ -56,6 +56,7 @@ exports.postPublication = async (req, res, next) => {
       usr_id,
       categoryId
     } = req.body;
+    if(!process.env.API){
     const album = req.files.map(
       (e) =>
         'http://' +
@@ -65,7 +66,17 @@ exports.postPublication = async (req, res, next) => {
         e.destination.slice(1) +
         '/' +
         e.filename
-    );
+    );}
+    else{
+      const album = req.files.map(
+        (e) =>
+          'http://' +
+          process.env.API +
+          e.destination.slice(1) +
+          '/' +
+          e.filename
+      );
+    }
     const r = await postPublication(
       title,
       detail,
