@@ -1,13 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUser,
-  getPublications,
-  swich_loading,
-  getPublicationsByCategory,
-} from "../redux/action";
-// import {Link} from 'react-router-dom';
+import {getUser,getPublications,swich_loading,getPublicationsByCategory,} from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
@@ -20,11 +14,6 @@ import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from '@mui/material/Alert';
 import { flexbox } from "@mui/system";
 
-
-
-
-// const currentServices = [1,2,3]
-// const SwichL= false
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -47,7 +36,7 @@ export default function Home() {
     const msg = (text) => {
         SetMsgSearch(text);
     };
- 
+
   // const [order,setorder] = useState ("")
   // const [orderscore , setorderscore] = useState(1)
   // const servicescreate = [];
@@ -101,7 +90,7 @@ export default function Home() {
     <div className="wphome">
       
       <NavBar msg={msg}></NavBar>
-       {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
+        {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
 
       <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername">
@@ -144,8 +133,6 @@ export default function Home() {
       </div>
 
 
-
-
       <div className="services-home">
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
@@ -155,7 +142,7 @@ export default function Home() {
               <div>
                 <CardPublications
                   id={e.id}
-                  album={e.album[0]}
+                  album={e.album}
                   title={e.title}
                   summary={e.detail_resume}
                   // score={e.score}
@@ -167,14 +154,7 @@ export default function Home() {
           })
         )}
       </div>
-      {/*                 <div className="pagination">
-                <Pagination className ="pagination"
-                            allpublicationsnumber={allPublications.length}
-                            pagination = {pagination}
-                            PublicationsPerPage = {PublicationsPerPage}
-                                                    />
-                </div> */}
-
+    
       <div className="paginationHome">
         <PaginationHome
           value={allPublications.length}
