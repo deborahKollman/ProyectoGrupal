@@ -189,7 +189,7 @@ export function getPublicationsName(name) {
     axios
       .get(`http://localhost:3001/publications?title=` + name)
       .then((responese) => {
-        return dispatch({
+         dispatch({
           type: "GET_PUBLICATIONS_NAME",
           payload: responese.data,
         });

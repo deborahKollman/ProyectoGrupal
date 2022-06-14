@@ -32,8 +32,49 @@ const ProfileUser = () => {
     })
   }
 
+  const [errorAuth,setErrorAuth] = useState({
+    name: "",
+    last: "",
+    descrip: "",
+    phone: "",
+    
+
+
+});
+
+
+  const validate = {
+    text: /^[a-zA-z]+$/,
+    number: /^[0-9]+$/
+
+}
+
+
+
+
   function handleSubmit(e) {
     e.preventDefault();
+    if(!validate.text.test(input.name)){
+        setErrorAuth({...errorAuth,name:"This input only takes words.."})
+        
+
+    }
+    else if(!validate.text.test(input.last_name)) {
+      setErrorAuth({...errorAuth,last:"This input only takes words..",name:""})
+      
+
+    }
+    else if(!validate.text.test(input.description)) {
+      setErrorAuth({...errorAuth,descrip:"This input only takes words..",last:""})
+  
+
+    }
+    else if(!validate.number.test(input.phone_number)) {
+      setErrorAuth({...errorAuth,phone:"This input only takes numbers..",descrip:""})
+   
+    }
+
+    else {
     dispatch(postProfileUser(input))
     setInput({
       email:"",
@@ -46,7 +87,13 @@ const ProfileUser = () => {
       rol: ""
     })
     navigate('/Home')
+
   }
+  }
+
+
+
+
 
   return (
     <div className="page-seller_register">
@@ -64,6 +111,8 @@ const ProfileUser = () => {
           name="name"
           onChange={handleChange}
           />
+        {<p  className="error-div">{errorAuth.name}</p>}
+
         <MyTextField
           required
           label="LAST NAME"
@@ -72,6 +121,7 @@ const ProfileUser = () => {
           name="last_name"
           onChange={handleChange}
           />
+           {<p className="error-div">{errorAuth.last}</p>}
         <UploadImg />
         <MyTextField
           id="outlined-multiline-static"
@@ -84,6 +134,8 @@ const ProfileUser = () => {
           value={input.description}
           onChange={handleChange}
           />
+           {<p className="error-div">{errorAuth.descrip}</p>}
+
         <MyTextField
           required
           label="PHONE NUMBER"
@@ -94,6 +146,7 @@ const ProfileUser = () => {
           maxlength="14"
           onChange={handleChange}
           />
+           {<p className="error-div">{errorAuth.phone}</p>}
         <MyButtonTwo variant="contained" type="submit" onChange={(e)=>{handleSubmit(e)}}>Continue</MyButtonTwo>
         </FormControl>
       </section>

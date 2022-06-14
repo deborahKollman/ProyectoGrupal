@@ -1,28 +1,42 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 // import {getVideoGameByName} from '../../redux/action'
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getPublicationsName } from "../redux/action";
 
-const SearchGroup = () => {
+
+
+const SearchGroup = ({msg}) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const publicarionname = useSelector((state) => state.publicarionName);
+  const publication = useSelector((state) => state.Publications);
   const [crntSearch, setSearch] = useState("");
 
   function handleInputChange(e) {
     e.preventDefault();
     setName(e.target.value);
-    console.log(name);
+    
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getPublicationsName(name));
+    
+    if(name === "") msg("Empty field");
+    else {
+       
+        dispatch(getPublicationsName(name));
+        publication.length < 1 ? msg("No match found") : msg("");
+     }
+       
     setName("");
+    
   }
+
+
 
   return (
     <MyForm onSubmit={handleSubmit} className="header-input-container">
+
       <input
         placeholder="Search Service"
         onChange={(e) => handleInputChange(e)}
