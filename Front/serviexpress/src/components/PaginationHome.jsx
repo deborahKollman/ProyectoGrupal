@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 
 
 
-export default function PaginationHome({value,pagination}){
+export default function PaginationHome({value,pagination,items}){
 
         const handle = (event, value) => {
                        
@@ -11,10 +11,10 @@ export default function PaginationHome({value,pagination}){
 
         }
 
-
+        console.log(value,items);
         return <div>
       
-           <Pagination count={value} defaultPage={1} size="large" color='primary' onChange={handle}/>
+           <Pagination count={1} defaultPage={1} size="large" color='primary' onChange={handle}/>
           
 
         </div>
