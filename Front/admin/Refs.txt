@@ -1,0 +1,2 @@
+https://recharts.org/en-US/examples/SimpleLineChart
+Graphical representation of the data.

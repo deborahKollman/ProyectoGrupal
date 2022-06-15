@@ -2,16 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.routes';
+import { DarkModeContextProvider } from './context/darkModeReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <DarkModeContextProvider>
     <App />
-  </React.StrictMode>
+  </DarkModeContextProvider>
 );
 
 /* 
-npm i react-circular-progressbar
+
+npm i react-circular-progressbar --force
 npm install react-bootstrap bootstrap
+npm install recharts --force
+$ npm i @mui/x-data-grid --force
 
 */

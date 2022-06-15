@@ -1,86 +1,91 @@
 import "./styles/Sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import StoreIcon from '@mui/icons-material/Store';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import StoreIcon from "@mui/icons-material/Store";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
+import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { Link } from "react-router-dom";
+import { DarkModeContext } from "../context/darkModeReducer";
+import { useContext } from "react";
 
 const Sidebar = () => {
+  const {dispatch} = useContext(DarkModeContext);
+
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">lamadmin</span>
+        <Link to="/" style={{ textDecoration: "none", textAlign: "center" }}>
+          <img className="logo" src="https://i.ibb.co/sbkstqQ/log.png" alt="serviexpress"/>
+        </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
           <li>
-            <DashboardIcon className='icon'/>
+            <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
           <p className="title">LISTS</p>
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineOutlinedIcon className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
+          <Link to="/products" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Products</span>
+            </li>
+          </Link>
           <li>
-            <PersonOutlineOutlinedIcon className='icon'/>
-            <span>Users</span>
-          </li>
-          <li>
-            <StoreIcon className='icon'/>
-            <span>Products</span>
-          </li>
-          <li>
-            <CreditCardIcon className='icon'/>
+            <CreditCardIcon className="icon" />
             <span>Orders</span>
-          </li>
-          <li>
-            <LocalShippingIcon className='icon'/>
-            <span>Delivery</span>
           </li>
           <p className="title">USEFUL</p>
           <li>
-            <QueryStatsIcon className='icon'/>
+            <QueryStatsIcon className="icon" />
             <span>Stats</span>
           </li>
           <li>
-            <NotificationsNoneIcon className='icon'/>
+            <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li>
           <p className="title">SERVICE</p>
           <li>
-            <SettingsSystemDaydreamIcon className='icon'/>
+            <SettingsSystemDaydreamIcon className="icon" />
             <span>System Health</span>
           </li>
           <li>
-            <DisplaySettingsIcon className='icon'/>
+            <DisplaySettingsIcon className="icon" />
             <span>Logs</span>
           </li>
           <li>
-            <SettingsIcon className='icon'/>
+            <SettingsIcon className="icon" />
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
           <li>
-            <ManageAccountsIcon className='icon'/>
+            <ManageAccountsIcon className="icon" />
             <span>Profile</span>
           </li>
           <li>
-            <ExitToAppIcon className='icon'/>
+            <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
         </ul>
       </div>
 
       <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
-        {/* <div className="colorOptions"></div> */}
+        <div className="colorOption" onClick={()=> dispatch({type: "LIGHT"})}></div>
+        <div className="colorOption" onClick={()=> dispatch({type: "DARK"})}></div>
       </div>
     </div>
   );
