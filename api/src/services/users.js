@@ -2,7 +2,6 @@
 const { users } = require('../database/data.js');
 const { User, Favorite, Publication } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
-const fs = require('fs')
 
 
 /* exports.checkUser = async(usr, password) => {
@@ -31,7 +30,9 @@ exports.checkUser = async(usr) => {
 };
 
 exports.getAllUsers = async ({ page, offset, limit }) => {
+  
   const users = await User.findAll({
+    where:{rol:'client'},
     offset: (page - 1) * offset,
     limit,
     order: [['id', 'ASC']]
@@ -59,6 +60,7 @@ exports.getAllUsers = async ({ page, offset, limit }) => {
 exports.createUser = async (newUser) => {
   var hash = bcrypt.hashSync(newUser.password, 10);
   newUser={...newUser,password:hash};
+  newUser={...newUser,rol:'client'}
   const [user,created] = await User.findOrCreate({
     where:{email:newUser.email},
     defaults:{...newUser}
@@ -80,9 +82,7 @@ exports.registerUser = (usr, password) => {
 exports.updateUser = async(id,changes) => {
   const user = await User.findByPk(id)
   if(user){
-    if(user.dataValues.avatar_image){
-      fs.unlinkSync(user.dataValues.avatar_image);
-    }
+    
     await User.update({...changes},{where:{id}})
     return {message:'User updated successfully'}
   }
