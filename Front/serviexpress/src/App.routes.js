@@ -32,6 +32,7 @@ function App() {
       <Route path='/detail/:id' element={<Detail/>}/>
       <Route exact path="/Home" element={<Home/>}/> 
       <Route path='*' element={<NotFound/>} />
+      <Route path="/prueba" element={<Orders/>}/>
     </Routes>
   )}
 
