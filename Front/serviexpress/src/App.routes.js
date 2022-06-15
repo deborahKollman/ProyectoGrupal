@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
-  console.log(rdcr_isAuth,"APP");
+
   return (
     <Routes>
 

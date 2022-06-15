@@ -4,7 +4,7 @@ export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
 export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
-
+export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
 
 const URL = `http://localhost:3001`;
@@ -253,14 +253,14 @@ export function getPublicationsByCategory(a) {
 
 
 //FUNCION PARA AGREGAR A FAV
-export function addToFavorites(id,user){
+export function addToFavorites(user,publication){
     return async(dispatch) =>{
       try {
-            const fav = await axios.put(`${URL}/:${user}/favorites`,id);
-
+           let fav = await axios.put(`${URL}/users/${user}/favorites`,publication);
+           console.log(user,publication);
         dispatch({
             type: ADD_TO_FAVORITES,
-            payload: fav,
+            payload: fav.data
 
         })
 
@@ -274,12 +274,38 @@ export function addToFavorites(id,user){
     }
 };
 //FUNCION PARA TRAER FAVORITOS
-export function getFavorites(id){
+export function getFavorites(user){
   return async(dispatch) =>{
     try {
-          const fav = await axios.post(`${URL}/:${id}/favorites`);
+          const fav = await axios.get(`${URL}/users/${user}/favorites`);
+
+          dispatch({
+            type: GET_FAVORITES,
+            payload: fav.data,
+
+        })
 
 
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+  }
+};
+
+// PARA BORRAR
+export function removeFavorites(user,publication){
+  return async(dispatch) =>{
+    try {
+           await axios.delete(`${URL}/users/${user}/favorites`,publication);
+          console.log(publication);
+          dispatch({
+            type: REMOVE_FAVORITES,
+            
+
+        })
 
 
     } catch (error) {

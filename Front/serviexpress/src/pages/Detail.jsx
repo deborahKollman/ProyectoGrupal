@@ -10,7 +10,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 //import ServicesBar from '../components/ServicesBar';
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
-import {getById,getUserById,getUsers} from '../redux/action.js';
+import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites} from '../redux/action.js';
 import { useParams } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
@@ -25,15 +25,15 @@ export default function Detail(){
 
     const dispatch = useDispatch();
     const detail = useSelector(state => state.detail);
-    const user = useSelector(state => state.userId);
-    const moreUsers = useSelector(state => state.users)
-  
+    const moreUsers = useSelector(state => state.users);
+    const favorites = useSelector(state => state.favorites);
 
 
     useEffect(() => {
         dispatch(getById(id));
         dispatch(getUserById(detail.userId));
         dispatch(getUsers());
+        dispatch(getFavorites(detail.userId));
 
     },[dispatch,id,detail.userId]);
 
@@ -56,6 +56,18 @@ export default function Detail(){
     const [open, setOpen] = useState(false);
 
     const favClicked = () => {
+
+       favorites.publications.forEach(e => {
+        console.log(e);
+        if(e.id === parseInt(id)) { 
+         
+          dispatch(removeFavorites(detail.userId)); 
+        }
+       });
+       //dispatch(getFavorites);
+     
+       //dispatch(addToFavorites(detail.userId, {id: id}));
+
       setOpen(true);
     };
   
@@ -67,7 +79,8 @@ export default function Detail(){
 
       setOpen(false);
     };
-  
+    
+    //console.log(favorites,detail.userId);
     
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
@@ -77,7 +90,7 @@ export default function Detail(){
 
           <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="info" sx={{ width: '100%' , fontSize: 12}}>
-            Added to Favourites
+            Added to Favorites
          </Alert>
          </Snackbar>
 
