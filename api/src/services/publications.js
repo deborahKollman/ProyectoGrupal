@@ -94,11 +94,6 @@ exports.postPublication = async (
   }
 };
 
-exports.getPublicationById = (id) => {
-  const publication = Publication.findByPk(id);
-  return publication;
-};
-
 exports.getPublicationsByTitle = (title) => {
   const publication = Publication.findAll({
     where: {

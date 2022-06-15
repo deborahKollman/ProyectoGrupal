@@ -44,7 +44,7 @@ const LandingPage = () => {
           one place.
         </p>
       </div>
-      <h3 className={Styles.subtitle}>Popular professional services</h3>
+      <div className={Styles.subtitle}>Popular professional services</div>
 
       <div className={Styles.carousel}>
         <Carousel>

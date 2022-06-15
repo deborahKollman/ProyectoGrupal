@@ -7,7 +7,8 @@ const { Category, Service, Publication } = require('../../src/database/postgres'
 
 const fx = async function() {
     try {
-        fxuser()
+
+        //fxuser()
         //Categorias
         
         const c1=await Category.create({name:'Home and Construction'});
@@ -106,6 +107,84 @@ const fx = async function() {
         const s105=await Service.create({name:'Insurance'})
         const s106=await Service.create({name:'Warranty'})
         const s107=await Service.create({name:'Taxes'})  
+
+        const juan=await User.create(
+            {email:'nnxx@hotmail.com', 
+            password: '123456', 
+            name: 'Juan', 
+            last_name: 'Perez',
+            country: 'Peru',
+            province_state: 'Lima',
+            rol: 'client' ,
+            description: "Mecanico de todo tipo de vehiculo, presupuesto sin compromiso, y disponibilidad para ir a domicilio por alguna emergencia",
+            avatar_image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+            buyer_reputation: 3,  
+            buyer_opinions:[{commenter:"Fernando Fernandez",comment:"Muy cumplido",rating:5,buyer_avatar: "https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Carlos Perez",comment:"Bien",rating:4,buyer_avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjR8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Nicolas Garcia",comment:"No se pudo completar el trabajo por un problema mio",rating:4,buyer_avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+  
+        ],
+            seller_reputation: 4,
+            seller_opinions:[{commenter:"Fulano Perez",comment:"Que buen servicio",rating:5},{commenter:"Mengano Gomez",comment:"Trabajo decente, medio caro",rating:3}],
+        })
+        juan.createFavorite()
+        const fernando=await User.create(
+            {email:'fer@hotmail.com', 
+            password: '123456', 
+            name: 'Fernando', 
+            last_name: 'Fernandez',
+            country: 'Argentina',
+            province_state: 'Buenos Aires',
+            rol: 'client' ,
+            description: "Soy electricista matriculado, puedo trabajar en instalaciones indistriales o instalaciones del hogar",
+            avatar_image: "https://images.unsplash.com/photo-1595856619767-ab739fa7daae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGVsZWN0cmljaWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            buyer_reputation: 4,  
+            buyer_opinions:[
+            {commenter:"Jorge Fernandez",comment:"Actitud negativa y muy caro",rating:2,buyer_avatar: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Alicia Sanchez",comment:"Buen trabajo",rating:4,buyer_avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Damian Juarez",comment:"Lo recomiendo muchisimo",rating:5,buyer_avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}
+        ],
+            seller_reputation: 4,
+            seller_opinions:[{commenter:"Jorge Juarez",comment:"Mal Servicio",rating:1},{commenter:"Jhonatan Perez",comment:"Muy puntual y responsable",rating:5}],
+        })
+        fernando.createFavorite()
+        const damian=await User.create(
+            {email:'damian@hotmail.com', 
+            password: '123456', 
+            name: 'Damian', 
+            last_name: 'Dominguez',
+            country: 'Uruguay',
+            description: "Mas de 20 Años en el rubro de construccion y arquitectura, presentame tu proyecto y yo lo hago realidad.",
+            avatar_image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+            province_state: 'Montevideo',
+            rol: 'client' ,
+            buyer_reputation: 3,  
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3, buyer_avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Jorge Flores",comment:"Lo recomiendo",rating:5,buyer_avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjZ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}],
+            seller_reputation: 3,
+            seller_opinions:[{commenter:"Armando Paredes",comment:"Se desempeño muy bien y termino antes de tiempo",rating:5},{commenter:"Juan Lopez",comment:"Se tardo mucho en terminar",rating:3}],
+        })
+        damian.createFavorite()
+        const lucas=await User.create(
+            {email:'lucas@hotmail.com', 
+            password: '123456', 
+            name: 'Lucas', 
+            last_name: 'Juarez',
+            avatar_image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+            country: 'Colombia',
+            description: "Presupuesto sin compromiso",
+            province_state: 'Bogota',
+            rol: 'client' ,
+            buyer_reputation: 3,  
+            buyer_opinions:[{commenter:"Alicia Sanchez",comment:"Que agradable sujeto",rating:3,buyer_avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Jorge Fernandez",comment:"Actitud negativa y muy caro",rating:2,buyer_avatar: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Alicia Sanchez",comment:"Buen trabajo",rating:4,buyer_avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Damian Juarez",comment:"Lo recomiendo muchisimo",rating:5,buyer_avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}
+        ],
+            seller_reputation: 4,
+            seller_opinions:[{commenter:"Fulano Perez",comment:"Cumplido y bien hecho",rating:5},{commenter:"Fernando Vazquez",comment:"Me gusto su trabajo",rating:4}],
+        })
+        lucas.createFavorite()
 
 
         const c11=await Category.create({name:'Music photography and film'});
