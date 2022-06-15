@@ -1,6 +1,6 @@
 
 const { users } = require('../database/data.js');
-const { User, Favorite, Publication } = require('../database/postgres.js');
+const { User, Favorite, Publication, Op } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
 
 
@@ -177,16 +177,20 @@ exports.addBuyerComment = async(id,rating,comment,commenter,buyer_avatar) => {
 }
 
 exports.getFavorites = async(id) => {
-  
+  const user = await User.findOne({where:{id}})
   const favorites = await Favorite.findOne({
     where:{userId:id},
     include: {
       model:Publication,
+      where:{
+        state:'Active'
+      },
+      required:false,
       through:{
         attributes:[]
       }}
   });
-  if(!favorites){
+  if(!user){
     return {err_msg:'User not found'}
   }
   return favorites
@@ -195,8 +199,16 @@ exports.getFavorites = async(id) => {
 exports.addFavorite = async(id, publication) => {
   const fav = await Favorite.findOne({where:{userId:id}});
   if(fav){
-    fav.addPublication(publication);
-    return {message:'Publication added to Favorites'}
+    const pub = await Publication.findOne({
+      where:{
+      [Op.and]:[{id:publication},{state:'Active'}]
+    }
+    })
+    if(pub){
+      fav.addPublication(publication);
+      return {message:'Publication added to Favorites'}
+    }
+    return {err_msg:'Publication not found or inactive'}
   }
   return {err_msg:'User not found'}
 }
@@ -204,8 +216,14 @@ exports.addFavorite = async(id, publication) => {
 exports.removeFavorite = async(id, publication) => {
   const fav = await Favorite.findOne({where:{userId:id}});
   if(fav){
-    fav.removePublication(publication);
-    return {message:'Publication removed from Favorites'}
+    const pub = await Publication.findOne({
+      where:{id:publication}
+    })
+    if(pub){
+      fav.removePublication(publication);
+      return {message:'Publication removed from Favorites'}
+    }
+    return {err_msg:'Publication not found'}
   }
   return {err_msg:'User not found'}
 }
