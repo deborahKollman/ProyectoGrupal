@@ -12,6 +12,8 @@ import Orders from './pages/Orders';
 import Home from './pages/Home'
 import CreateService from './pages/CreateService'
 import { useSelector } from 'react-redux';
+import Edit from './pages/edit.jsx';
+
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -32,6 +34,8 @@ function App() {
       <Route path='/detail/:id' element={<Detail/>}/>
       <Route exact path="/Home" element={<Home/>}/> 
       <Route path='*' element={<NotFound/>} />
+      <Route path="/prueba" element={<Orders/>}/>
+      <Route exact path="/edit" element={<Edit/>}/>
     </Routes>
   )}
 

@@ -1,13 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUser,
-  getPublications,
-  swich_loading,
-  getPublicationsByCategory,
-} from "../redux/action";
-// import {Link} from 'react-router-dom';
+import {getUser,getPublications,swich_loading,getPublicationsByCategory,} from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
@@ -19,11 +13,6 @@ import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from '@mui/material/Alert';
 import { flexbox } from "@mui/system";
-import FooterBar from '../components/FooterBar/FooterBar'
-import FilterByCategories from '../components/Filters/FilterByCategories'
-
-// const currentServices = [1,2,3]
-// const SwichL= false
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -46,7 +35,7 @@ export default function Home() {
     const msg = (text) => {
         SetMsgSearch(text);
     };
- 
+
   // const [order,setorder] = useState ("")
   // const [orderscore , setorderscore] = useState(1)
   // const servicescreate = [];
@@ -65,84 +54,43 @@ export default function Home() {
     setCurrentPage((pag) => (pag = 1));
   }, [allPublications]);
 
-  // function filterforCategory1() {
-  //   dispatch(getPublicationsByCategory(1));
-  // }
-  // function filterforCategory2() {
-  //   dispatch(getPublicationsByCategory(2));
-  // }
-  // function filterforCategory3() {
-  //   dispatch(getPublicationsByCategory(3));
-  // }
-  // function filterforCategory4() {
-  //   dispatch(getPublicationsByCategory(4));
-  // }
-  // function filterforCategory5() {
-  //   dispatch(getPublicationsByCategory(5));
-  // }
-  // function filterforCategory6() {
-  //   dispatch(getPublicationsByCategory(6));
-  // }
-  // function filterforCategory7() {
-  //   dispatch(getPublicationsByCategory(7));
-  // }
-  // function filterforCategory8() {
-  //   dispatch(getPublicationsByCategory(8));
-  // }
-  // function filterforCategory9() {
-  //   dispatch(getPublicationsByCategory(9));
-  // }
-  // function filterforCategory10() {
-  //   dispatch(getPublicationsByCategory(10));
-  // }
+  // function filterforCategory1() {dispatch(getPublicationsByCategory(1))}
+  // function filterforCategory2() {dispatch(getPublicationsByCategory(2))}
+  // function filterforCategory3() {dispatch(getPublicationsByCategory(3))}
+  // function filterforCategory4() {dispatch(getPublicationsByCategory(4))}
+  // function filterforCategory5() {dispatch(getPublicationsByCategory(5))}
+  // function filterforCategory6() {dispatch(getPublicationsByCategory(6))}
+  // function filterforCategory7() {dispatch(getPublicationsByCategory(7))}
+  // function filterforCategory8() {dispatch(getPublicationsByCategory(8))}
+  // function filterforCategory9() {dispatch(getPublicationsByCategory(9))}
+  // function filterforCategory10() {dispatch(getPublicationsByCategory(10))}
 
   return (
     <div className={Styles.container}>
       
       <NavBar msg={msg}></NavBar>
-       {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
-      
-      <FilterByCategories/>
-      
+        {msgSearch && <Alert severity="error" sx={{fontSize: 16, display: flexbox, justifyContent: "center"}} >{msgSearch}</Alert>}
+
       {/* <div className="filterservice">
-        <p onClick={filterforCategory1} className="filtername">
-          Plumbing
-        </p>
+        <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory2} className="filtername">
-          Carpentry
-        </p>
+        <p onClick={filterforCategory2} className="filtername"> Carpentry </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory3} className="filtername">
-          Photography & Sound
-        </p>
+        <p onClick={filterforCategory3} className="filtername"> Photography & Sound </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory4} className="filtername">
-          Computing and Information
-        </p>
+        <p onClick={filterforCategory4} className="filtername"> Computing and Information </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory5} className="filtername">
-          Graphics & Design
-        </p>
+        <p onClick={filterforCategory5} className="filtername"> Graphics & Design </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory6} className="filtername">
-          Finance
-        </p>
+        <p onClick={filterforCategory6} className="filtername"> Finance </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory7} className="filtername">
-          Digital Marketing
-        </p>
+        <p onClick={filterforCategory7} className="filtername"> Digital Marketing </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory9} className="filtername">
-          Video & Animation
-        </p>
+        <p onClick={filterforCategory9} className="filtername"> Video & Animation </p>
         <p className="filtername">|</p>
-        <p onClick={filterforCategory10} className="filtername">
-          Electricity
-        </p>
+        <p onClick={filterforCategory10} className="filtername"> Electricity </p>
         <p className="filtername">|</p>
-        <p className="filtername">Gas</p>
-      </div> */}
+        <p className="filtername">Gas</p></div>  */}
 
       <div className={Styles.homepaginate}>
         <PaginationHome
@@ -151,8 +99,9 @@ export default function Home() {
           items={PublicationsPerPage}
         ></PaginationHome>
       </div>
-      
-      <div className={Styles.allCards}>
+
+
+      <div className={Styles.serviceshome}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
@@ -161,7 +110,7 @@ export default function Home() {
               <div>
                 <CardPublications
                   id={e.id}
-                  album={e.album[0]}
+                  album={e.album}
                   title={e.title}
                   summary={e.detail_resume}
                   // score={e.score}
@@ -173,14 +122,16 @@ export default function Home() {
           })
         )}
       </div>
-      {/*                 <div className="pagination">
-                <Pagination className ="pagination"
-                            allpublicationsnumber={allPublications.length}
-                            pagination = {pagination}
-                            PublicationsPerPage = {PublicationsPerPage}
-                                                    />
-                </div> */}
-     <FooterBar/>
+    
+      <div className="paginationHome">
+        <PaginationHome
+          value={allPublications.length}
+          pagination={pagination}
+          items={PublicationsPerPage}
+        ></PaginationHome>
+      </div>
+
+      <div className="logos"></div>
     </div>
   );
 }
