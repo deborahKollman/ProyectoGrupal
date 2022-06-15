@@ -101,7 +101,7 @@ export default function Home() {
       </div>
 
 
-      <div className="services-home">
+      <div className={Styles.serviceshome}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
