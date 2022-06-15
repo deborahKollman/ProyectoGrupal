@@ -57,6 +57,7 @@ exports.getPublicationDetails = (id) => {
 };
 
 exports.postPublication = async (
+  state,
   title,
   detail,
   detail_resume,
@@ -94,11 +95,6 @@ exports.postPublication = async (
   }
 };
 
-exports.getPublicationById = (id) => {
-  const publication = Publication.findByPk(id);
-  return publication;
-};
-
 exports.getPublicationsByTitle = (title) => {
   const publication = Publication.findAll({
     where: {
@@ -118,9 +114,19 @@ exports.updatePublication = (id, publicationChanges) => {
 };
 
 exports.deletePublication = (id) => {
-  const publicationDelete = Publication.destroy({
+/*   const publicationDelete = Publication.destroy({
     where: { id }
-  });
+  }); */
+  const publicationDelete = Publication.update (
+    {
+      state: 'Inactive',
+    },
+    {
+      where: {
+        id: id,
+      }
+    }
+  )
   return publicationDelete;
 };
 
