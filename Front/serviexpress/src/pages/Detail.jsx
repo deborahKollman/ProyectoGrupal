@@ -56,11 +56,11 @@ export default function Detail(){
     const [open, setOpen] = useState(false);
 
     const favClicked = () => {
-
+     
        favorites.publications.forEach(e => {
-        dispatch(removeFavorites(detail.userId,{id: id})); 
+       
         if(e.id === parseInt(id)) { 
-         
+           dispatch(removeFavorites(detail.userId,{id: parseInt(id)})); 
           
         }
        });

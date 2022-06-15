@@ -257,7 +257,7 @@ export function addToFavorites(user,publication){
     return async(dispatch) =>{
       try {
            let fav = await axios.put(`${URL}/users/${user}/favorites`,publication);
-           console.log(user,publication);
+           
         dispatch({
             type: ADD_TO_FAVORITES,
             payload: fav.data
@@ -299,8 +299,8 @@ export function getFavorites(user){
 export function removeFavorites(user,publication){
   return async(dispatch) =>{
     try {
-           const fav = await axios.delete('http://localhost:3001/users/1/favorites',publication);
-          console.log(publication);
+           const fav = await axios.delete(`${URL}/users/${user}/favorites`,publication, { widthCredentials: true, "ContentType": "aplicatión/json"});
+         
           dispatch({
             type: REMOVE_FAVORITES,
             payload: fav.data,
