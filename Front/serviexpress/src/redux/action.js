@@ -299,11 +299,11 @@ export function getFavorites(user){
 export function removeFavorites(user,publication){
   return async(dispatch) =>{
     try {
-           await axios.delete(`${URL}/users/${user}/favorites`,publication);
+           const fav = await axios.delete('http://localhost:3001/users/1/favorites',publication);
           console.log(publication);
           dispatch({
             type: REMOVE_FAVORITES,
-            
+            payload: fav.data,
 
         })
 

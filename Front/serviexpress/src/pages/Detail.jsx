@@ -58,10 +58,10 @@ export default function Detail(){
     const favClicked = () => {
 
        favorites.publications.forEach(e => {
-        console.log(e);
+        dispatch(removeFavorites(detail.userId,{id: id})); 
         if(e.id === parseInt(id)) { 
          
-          dispatch(removeFavorites(detail.userId)); 
+          
         }
        });
        //dispatch(getFavorites);
