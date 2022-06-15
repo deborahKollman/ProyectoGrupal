@@ -59,7 +59,7 @@ const fxuser = async function() {
             seller_reputation: 3,
             seller_opinions:[{commenter:"Armando Paredes",comment:"Se desempeño muy bien y termino antes de tiempo",rating:5},{commenter:"Juan Lopez",comment:"Se tardo mucho en terminar",rating:3}],
         })
-        damiasn.createFavorite()
+        damian.createFavorite()
         const lucas=await User.create(
             {email:'lucas@hotmail.com', 
             password: '123456', 
