@@ -8,7 +8,7 @@ const { Category, Service, Publication } = require('../../src/database/postgres'
 const fx = async function() {
     try {
 
-        //fxuser()
+        fxuser()
         //Categorias
         
         const c1=await Category.create({name:'Home and Construction'});
@@ -107,8 +107,8 @@ const fx = async function() {
         const s105=await Service.create({name:'Insurance'})
         const s106=await Service.create({name:'Warranty'})
         const s107=await Service.create({name:'Taxes'})  
-
-        const juan=await User.create(
+// Se paso a cargabseusers
+ /*        const juan=await User.create(
             {email:'nnxx@hotmail.com', 
             password: '123456', 
             name: 'Juan', 
@@ -186,7 +186,7 @@ const fx = async function() {
         })
         lucas.createFavorite()
 
-
+ */
         const c11=await Category.create({name:'Music photography and film'});
         const s111=await Service.create({name:'Photography'})
         const s112=await Service.create({name:'Music'})
