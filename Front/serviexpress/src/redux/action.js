@@ -2,6 +2,11 @@ import axios from "axios";
 import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
+export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
+export const GET_FAVORITES = "GET_FAVORITES";
+export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
+
+
 const URL = `http://localhost:3001`;
 export const types = {
   ADD_TO_CART: 'ADD_TO_CART',
@@ -10,6 +15,12 @@ export const types = {
   CLEAR_CART: 'CLEAR_CART'
 }
 
+export const myLocalStorage = () => {
+  let productsInLocalStorage = localStorage.getItem('itemCar')
+  productsInLocalStorage = JSON.parse(productsInLocalStorage)
+  console.log(productsInLocalStorage)
+  return productsInLocalStorage
+}
 // Para desloguearse
 export const act_logout = () => {
   return { type: LOGOUT_SESSION };
@@ -58,13 +69,14 @@ export const getUser = () => {
 // Para traer un usuario, esta repetida
 export const getUserr = (user) => {
   return async (dispatch) => {
-    const { data } = await axios.post("http://localhost:3001/login", user, {
+    const { data } = await axios.post("http://localhost:3001/login", user /* , {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-    });
+    } */);
+    console.log(data,"ACTIONNNNNNNNNNNNN");
     dispatch({
       type: "GET_USER",
       payload: data.user,
@@ -114,7 +126,7 @@ export const jalz_getAllCategories = () => {
       const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
       dispatch({
         type: "JALZ_GET_CATEGORIES",
-        payload: data.map,
+        payload: data,
       });
     } catch (error) {
       return error.message;
@@ -265,6 +277,75 @@ export function getPublicationsByCategory(a) {
   };
 }
 
+
+
+//FUNCION PARA AGREGAR A FAV
+export function addToFavorites(user,publication){
+    return async(dispatch) =>{
+      try {
+           await axios.put(`${URL}/users/${user}/favorites`,publication);
+          let fav = await axios.get(`${URL}/users/${user}/favorites`);
+           
+        dispatch({
+            type: ADD_TO_FAVORITES,
+            payload: fav.data
+
+        })
+
+
+      } catch (error) {
+        console.log(error);
+      }
+
+
+
+    }
+};
+//FUNCION PARA TRAER FAVORITOS
+export function getFavorites(user){
+  return async(dispatch) =>{
+    try {
+          const fav = await axios.get(`${URL}/users/${user}/favorites`);
+
+          dispatch({
+            type: GET_FAVORITES,
+            payload: fav.data,
+
+        })
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+  }
+};
+
+// PARA BORRAR
+export function removeFavorites(user,publication){
+  return async(dispatch) =>{
+    try {
+           
+           await axios.delete(`${URL}/users/${user}/favorites`,{data:publication});
+           const fav = await axios.get(`${URL}/users/${user}/favorites`);
+          dispatch({
+            type: REMOVE_FAVORITES,
+            payload: fav.data,
+
+        })
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+  }
+};
+
 export function confirmPassword(form) {
   return async (dispatch) => {
     try {
@@ -283,12 +364,12 @@ export function confirmPassword(form) {
     } catch (e) {
       console.log(e.message);
     }
-  };
+  }; 
 }
-  
-export function myLocalStorage (){
+
+export function myLocalStorageTwo(){ //Ojo al piojo:: hay 2 de estas cuidado se cruzen
   let productsInLocalStorage = localStorage.getItem('itemCar');
   productsInLocalStorage = JSON.parse(productsInLocalStorage);
   console.log(productsInLocalStorage)
-  return (productsInLocalStorage)
+  return productsInLocalStorage
 }

@@ -78,12 +78,10 @@
   }
 
   .card-stats {
-    display:flex;
-   justify-content: center;
-    color: rgb(171, 145, 29);
-    border-color: black;
-    margin-top: -20px;
-    margin-bottom: 20px;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(243, 19, 19);
+    padding: 13px;
   }
 
   .stat1 {
@@ -97,7 +95,7 @@
   .stat2 {
     justify-content: center;
     flex-direction: column;
-    color: rgb(218, 233, 4);
+    color: rgb(233, 4, 4);
     text-shadow: 3px 3px 3px black;
     padding: 13px;
   }

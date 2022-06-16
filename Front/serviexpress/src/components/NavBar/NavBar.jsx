@@ -25,14 +25,19 @@ const BurgerButton = ({ msg }) => {
 
   useEffect(() => {
     if (Object.keys(user)?.length > 0) {
-      setAvatar(user.avatar);
-    }
-  }, [avatar, user]);
+      console.log(user);
+      if (user?.photos) {
+        setAvatar(user.photos[0].value);
+      } else {
+        setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
+      }
+    } /* else {
+      xDispatch(getUserr()); // OJO AL PIOJO xD : POR REVISAR ::
+    } */
+  }, [ avatar, user, /* xDispatch */]);
 
   const { rdcr_isAuth } = useSelector((state) => state);
-  console.log(rdcr_isAuth, "I'M IN THE NAVBAR");
 
-  console.log(open, "open");
   return (
     <MyHeader pOpen={open}>
       <div className="initial">

@@ -17,7 +17,6 @@ import MyPublications from "./pages/MyPublications"
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
-  console.log(rdcr_isAuth, "APP");
   return (
     <Routes>
       {rdcr_isAuth && <Route exact path="/orders" element={<Orders />} />}
@@ -34,6 +33,7 @@ function App() {
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
+      <Route path="/favorites" element={<Favorites />} />
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/prueba" element={<Orders />} />
