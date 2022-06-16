@@ -1,23 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Single from "./pages/Single";
 import New from "./pages/New";
 import List from "./pages/List";
 import { aUserInputs, aProductInputs } from "./assets/sources/FormOne.js";
-import './styles/dark.scss'
-import { useContext, useState } from "react";
-import { DarkModeContext } from "./context/darkModeReducer";
+import './styles/dark.scss';
+import { useSelector } from 'react-redux';
 
 function App() {
-
-  // const [dark, setDark] = useState(false);
-
-  const {darkMode} = useContext(DarkModeContext);
+  
+  const { rdcr_darkMode } = useSelector((state) => state);
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
-    <BrowserRouter>
+    <div className={rdcr_darkMode ? "app dark" : "app"}>
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
@@ -34,10 +30,23 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
     </div>
 
   );
 }
 
 export default App;
+
+
+
+// import { useContext, useState } from "react";
+// import { DarkModeContext } from "./context/darkModeReducer";
+
+/* 
+
+function App() {
+
+  const [dark, setDark] = useState(false);
+
+  const {darkMode} = useContext(DarkModeContext);
+*/

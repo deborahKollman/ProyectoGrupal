@@ -11,14 +11,17 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../context/darkModeReducer";
-import { useContext } from "react";
+// import { DarkModeContext } from "../context/darkModeReducer";
+// import { useContext } from "react";
+import { act_themeDark, act_themeLight } from "../redux/action";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
-  const {dispatch} = useContext(DarkModeContext);
+  // const {dispatch} = useContext(DarkModeContext);
+  const xDispatch = useDispatch();
 
   return (
-    <div className="sidebar">
+    <div className="sidebarr">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none", textAlign: "center" }}>
           <img className="logo" src="https://i.ibb.co/sbkstqQ/log.png" alt="serviexpress"/>
@@ -84,8 +87,8 @@ const Sidebar = () => {
       </div>
 
       <div className="bottom">
-        <div className="colorOption" onClick={()=> dispatch({type: "LIGHT"})}></div>
-        <div className="colorOption" onClick={()=> dispatch({type: "DARK"})}></div>
+        <div className="colorOption" onClick={()=> xDispatch(act_themeLight())}></div>
+        <div className="colorOption" onClick={()=> xDispatch(act_themeDark())}></div>
       </div>
     </div>
   );
