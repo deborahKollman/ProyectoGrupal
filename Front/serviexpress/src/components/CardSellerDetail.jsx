@@ -22,17 +22,9 @@ export default function CardSellerDetail({userid}){
     const user = useSelector(state => state.userId);
 
 
-    
-
     useEffect(() => {
         dispatch(getUserById(userid));
-
-
-
     },[dispatch,userid]);
-
-
-
 
 
     return <div className={stylesCardSeller.containerCard}>
