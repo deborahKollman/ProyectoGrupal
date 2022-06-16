@@ -7,28 +7,28 @@ import FooterBar from '../components/FooterBar/FooterBar'
 import Styles from './styles/Orders.module.scss'
 
 
-const Orders = () => {
+const Orders = ({title}) => {
 
   function handleDelete() {}
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-  }
   return (
     <div className={Styles.container}>
       <BurgerButton/>
-    
-      <form onSubmit={(e) => handleSubmit(e)}>
+       
        <div className={Styles.orders}>
-
-
-        <div className={Styles.checkout}>
           <h3>SHOPPING CART</h3>
+
+        <div className={Styles.rows}>
+          <div>
+            <img />
+          </div>
+            {title}
+          <div>
+
+          </div>
         </div>
         
         <div className={Styles.buttons}>
-
           <Stack spacing={2}>
             <Button type='submit' variant="contained" color="success">Continue</Button>
             <Button onClick={() => handleDelete()} variant="outlined" startIcon={<DeleteIcon />}>Delete</Button>
@@ -37,7 +37,6 @@ const Orders = () => {
 
       
         </div>
-      </form>
       <FooterBar/>
     </div>
   )
