@@ -3,6 +3,12 @@ import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
 const URL = `http://localhost:3001`;
+export const types = {
+  ADD_TO_CART: 'ADD_TO_CART',
+  REMOVE_ONE_FROM_CART: 'REMOVE_ONE_FROM_CART',
+  REMOVE_ALL_FROM_CART: 'V',
+  CLEAR_CART: 'CLEAR_CART'
+}
 
 // Para desloguearse
 export const act_logout = () => {
@@ -278,4 +284,10 @@ export function confirmPassword(form) {
       console.log(e.message);
     }
   };
+  
+export function myLocalStorage (){
+  let productsInLocalStorage = localStorage.getItem('itemCar')
+  productsInLocalStorage = JSON.parse(productsInLocalStorage)
+  console.log(productsInLocalStorage)
+  return productsInLocalStorage
 }

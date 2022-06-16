@@ -1,4 +1,5 @@
 import { AUTHENTICATE, LOGOUT_SESSION } from "./action";
+import { types } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
   rdcr_user: {},
@@ -15,6 +16,7 @@ const initialState = {
   user: {},
   users: [],
   reg_user: {}, // ojo al piojo xD: eliminaron por accidente creo ::
+  cart: []
 };
 
 const rootReducer = (state = initialState, action) => {
