@@ -10,6 +10,12 @@ export const types = {
   CLEAR_CART: 'CLEAR_CART'
 }
 
+export const myLocalStorage = () => {
+  let productsInLocalStorage = localStorage.getItem('itemCar')
+  productsInLocalStorage = JSON.parse(productsInLocalStorage)
+  console.log(productsInLocalStorage)
+  return productsInLocalStorage
+}
 // Para desloguearse
 export const act_logout = () => {
   return { type: LOGOUT_SESSION };
@@ -285,9 +291,4 @@ export function confirmPassword(form) {
     }
   };
   
-export function myLocalStorage (){
-  let productsInLocalStorage = localStorage.getItem('itemCar')
-  productsInLocalStorage = JSON.parse(productsInLocalStorage)
-  console.log(productsInLocalStorage)
-  return productsInLocalStorage
 }
