@@ -2,6 +2,11 @@ import axios from "axios";
 import swal from "sweetalert";
 export const LOGOUT_SESSION = "LOGOUT_SESSION";
 export const AUTHENTICATE = "AUTHENTICATE";
+export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
+export const GET_FAVORITES = "GET_FAVORITES";
+export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
+
+
 const URL = `http://localhost:3001`;
 export const types = {
   ADD_TO_CART: 'ADD_TO_CART',
@@ -272,6 +277,75 @@ export function getPublicationsByCategory(a) {
   };
 }
 
+
+
+//FUNCION PARA AGREGAR A FAV
+export function addToFavorites(user,publication){
+    return async(dispatch) =>{
+      try {
+           await axios.put(`${URL}/users/${user}/favorites`,publication);
+          let fav = await axios.get(`${URL}/users/${user}/favorites`);
+           
+        dispatch({
+            type: ADD_TO_FAVORITES,
+            payload: fav.data
+
+        })
+
+
+      } catch (error) {
+        console.log(error);
+      }
+
+
+
+    }
+};
+//FUNCION PARA TRAER FAVORITOS
+export function getFavorites(user){
+  return async(dispatch) =>{
+    try {
+          const fav = await axios.get(`${URL}/users/${user}/favorites`);
+
+          dispatch({
+            type: GET_FAVORITES,
+            payload: fav.data,
+
+        })
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+  }
+};
+
+// PARA BORRAR
+export function removeFavorites(user,publication){
+  return async(dispatch) =>{
+    try {
+           
+           await axios.delete(`${URL}/users/${user}/favorites`,{data:publication});
+           const fav = await axios.get(`${URL}/users/${user}/favorites`);
+          dispatch({
+            type: REMOVE_FAVORITES,
+            payload: fav.data,
+
+        })
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+  }
+};
+
 export function confirmPassword(form) {
   return async (dispatch) => {
     try {
@@ -293,9 +367,9 @@ export function confirmPassword(form) {
   }; 
 }
 
-export function myLocalStorage (){
+export function myLocalStorageTwo(){ //Ojo al piojo:: hay 2 de estas cuidado se cruzen
   let productsInLocalStorage = localStorage.getItem('itemCar');
   productsInLocalStorage = JSON.parse(productsInLocalStorage);
   console.log(productsInLocalStorage)
-  return (productsInLocalStorage)
+  return productsInLocalStorage
 }
