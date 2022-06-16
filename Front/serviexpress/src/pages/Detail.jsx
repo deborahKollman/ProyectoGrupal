@@ -142,8 +142,6 @@ export default function Detail(){
                 <label>Publicado el:</label>
                <p> {detail.date}</p>
 
-
-
            </div>
 
           <div>
@@ -212,7 +210,6 @@ export default function Detail(){
 
     </div>
      <Footer></Footer>
-
 
      <div className={stylesDetail.footer}>
         <MDBContainer fluid>

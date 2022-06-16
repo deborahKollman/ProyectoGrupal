@@ -36,7 +36,7 @@ router.put('/:id',upload.single('avatar_image'), updateUser);
 
 //Por body enviar id de publicacion
 router.get('/:id/favorites',getFavorites);
-router.put('/:id/favorites',addFavorite);
+router.post('/:id/favorites',addFavorite);
 router.delete('/:id/favorites',removeFavorite);
 
 /* router.post('/register', registerUser);

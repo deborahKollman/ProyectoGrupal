@@ -8,6 +8,12 @@ export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
 
 const URL = `http://localhost:3001`;
+export const types = {
+  ADD_TO_CART: 'ADD_TO_CART',
+  REMOVE_ONE_FROM_CART: 'REMOVE_ONE_FROM_CART',
+  REMOVE_ALL_FROM_CART: 'V',
+  CLEAR_CART: 'CLEAR_CART'
+}
 
 // Para desloguearse
 export const act_logout = () => {
@@ -73,11 +79,21 @@ export const getUserr = (user) => {
 
 // Para cuando se registra un usuario
 export const registerUser = (user) => {
-  return (dispatch) => {
-    dispatch({
-      type: "REGISTER_USER",
-      payload: user,
-    });
+  return async (dispatch) => {
+    try {
+      const { email, password } = user;
+      const { data } = await axios.post("http://localhost:3001/users", {
+        email,
+        password,
+      });
+      console.log(data);
+      dispatch({
+        type: "REGISTER_USER",
+        payload: user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -131,7 +147,10 @@ export const getAllCategories = () => {
   return async (dispatch) => {
     try {
       const json = axios.get(`${URL}/categories`);
-      return dispatch({ type: "GET_CATEGORIES", payload: json.data.map((el) => el.name) });
+      return dispatch({
+        type: "GET_CATEGORIES",
+        payload: json.data.map((el) => el.name),
+      });
     } catch (error) {
       console.log(error);
     }
@@ -194,7 +213,7 @@ export function getPublicationsName(name) {
     axios
       .get(`http://localhost:3001/publications?title=` + name)
       .then((responese) => {
-         dispatch({
+        dispatch({
           type: "GET_PUBLICATIONS_NAME",
           payload: responese.data,
         });
@@ -250,6 +269,7 @@ export function getPublicationsByCategory(a) {
     }
   };
 }
+
 
 
 //FUNCION PARA AGREGAR A FAV
@@ -318,3 +338,32 @@ export function removeFavorites(user,publication){
 
   }
 };
+
+export function confirmPassword(form) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL}/login/success`, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+      const { data } = await axios.put(`${URL}/login/confirm`, {
+        ...form,
+        ...response.data,
+      });
+      console.log(data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}
+  
+export function myLocalStorage (){
+  let productsInLocalStorage = localStorage.getItem('itemCar');
+  productsInLocalStorage = JSON.parse(productsInLocalStorage);
+  console.log(productsInLocalStorage)
+  return (productsInLocalStorage)
+}
+

@@ -1,26 +1,30 @@
-import { Route, Routes } from 'react-router-dom';
-import NotFound from './pages/NotFound.jsx';
-import LandingPage from './pages/LandingPage.jsx';
-import Login from './pages/Login.jsx';
-import Detail from './pages/Detail.jsx'
-import Register from './pages/Register.jsx';
-import RecoveryPassword from './pages/RecoveryPassword.jsx';
-import Seller from './pages/Seller.jsx';
-import ProfileUser from './pages/ProfileUser.jsx';
-import Favorites from './pages/Favorites';
-import Orders from './pages/Orders';
-import Home from './pages/Home'
-import CreateService from './pages/CreateService'
-import { useSelector } from 'react-redux';
-import Edit from './pages/edit.jsx';
-
+import { Route, Routes } from "react-router-dom";
+import NotFound from "./pages/NotFound.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import Login from "./pages/Login.jsx";
+import Detail from "./pages/Detail.jsx";
+import Register from "./pages/Register.jsx";
+import ConfirmPassword from "./pages/ConfirmPassword.jsx";
+import RecoveryPassword from "./pages/RecoveryPassword.jsx";
+import Seller from "./pages/Seller.jsx";
+import ProfileUser from "./pages/ProfileUser.jsx";
+import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
+import Home from "./pages/Home";
+import CreateService from "./pages/CreateService";
+import { useSelector } from "react-redux";
+import Edit from "./pages/edit.jsx";
 
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
-
   return (
     <Routes>
+      {rdcr_isAuth && <Route exact path="/orders" element={<Orders />} />}
+      {rdcr_isAuth && <Route exact path="/favorites" element={<Favorites />} />}
+      {rdcr_isAuth && (
+        <Route exact path="/seller/add-service" element={<CreateService />} />
+      )}
 
       {rdcr_isAuth && ( <Route exact path="/orders" element={<Orders/>} /> )}
       {rdcr_isAuth && ( <Route exact path="/favorites" element={<Favorites/>} /> )}
@@ -39,8 +43,8 @@ function App() {
       <Route path="/prueba" element={<Orders/>}/>
       <Route exact path="/edit" element={<Edit/>}/>
     </Routes>
-  )}
-
+  );
+}
 
 export default App;
 

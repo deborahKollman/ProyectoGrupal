@@ -91,44 +91,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2016/alena.jpg',
-            buyer_reputation:4,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/guido.jpg',
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Mala atencion',
+            rating:5,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
             },
-            {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/cesar.jpg',
-            },
-            {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
-            }],
-            seller_reputation:4,
-            seller_opinions:[,
             {
             commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
+            comment:'Mala atencion',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
+            },
+            {
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'Recomendable 10%',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/ruben.png',
+            }],
+            seller_reputation:4,
+            seller_opinions:[
+            {
+            commenter:'CATALINA RAYA GARCIA',
+            comment:'No cumplio con lo prometido',
             rating:5,
             },
             {
-            commenter:'DANIEL ANDREU CRUZ',
-            comment:'',
-            rating:4,
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'Brinda buena atención',
+            rating:3,
             },
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
+            commenter:'ALMENDRA ANGUERA VILAFRANCA',
+            comment:'Precio adecuado',
             rating:2,
             }]
             })
+            a.createFavorite()
             
             
             
@@ -142,45 +143,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
-            buyer_reputation:4,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/cesar.jpg',
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/felipe.png',
             },
             {
-            commenter:'CATALINA VISO GILABERT',
-            comment:'',
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'Siempre nos brindan la mejor atención y el mejor servicio. Muchas gracias por ser una empresa de excelencia.',
             rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/catalina.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
             },
             {
-            commenter:'KUYEN BERENGUERAS CULLERÉS',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
+            commenter:'SOL BIOSCA FONTANET',
+            comment:'Brinda buena atención',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
             }],
             seller_reputation:3,
-            seller_opinions:[,
+            seller_opinions:[
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
+            commenter:'PAULETTE RAYA GAVILAN',
+            comment:'Inpuntuales.',
+            rating:5,
+            },
+            {
+            commenter:'GUIDO MORALES GESE',
+            comment:'Trabajo con ellos aproximadamente desde 2013, nunca tuve ningún problema. Su soporte siempre muy rápido y eficiente!',
             rating:2,
             },
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
-            rating:4,
-            },
-            {
-            commenter:'AMANDA PASCUAL ALOY',
-            comment:'',
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'No me gusto la actitud',
             rating:1,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -193,45 +194,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/amanda.png',
-            buyer_reputation:3,
+            buyer_reputation:4,
             buyer_opinions:[
             {
-            commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
-            rating:1,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/antonia.png',
-            },
-            {
-            commenter:'AMANDA PASCUAL ALOY',
-            comment:'',
+            commenter:'SOL BIOSCA FONTANET',
+            comment:'Brinda buena atención',
             rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/amanda.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
             },
             {
             commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
-            rating:5,
+            comment:'No me gusto la actitud',
+            rating:3,
             buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/antonia.png',
+            },
+            {
+            commenter:'ALMENDRA ANGUERA VILAFRANCA',
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
             }],
-            seller_reputation:2,
-            seller_opinions:[,
+            seller_reputation:3,
+            seller_opinions:[
             {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Siempre nos brindan la mejor atención y el mejor servicio. Muchas gracias por ser una empresa de excelencia.',
             rating:2,
             },
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Precio adecuado',
             rating:2,
             },
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:2,
+            commenter:'FERNANDA BARALDÉS COMAS',
+            comment:'El servicios es bueno. Pero un poco caro',
+            rating:3,
             }]
             })
-            
+            a.createFavorite()
             
             
             
@@ -248,42 +249,42 @@ const fxuser = async function() {
             buyer_reputation:2,
             buyer_opinions:[
             {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
-            },
-            {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
+            commenter:'SOL BIOSCA FONTANET',
+            comment:'Me arrepiento de haberlo elegido',
             rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
             },
             {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Despacha sus productos a tiempo',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
+            },
+            {
+            commenter:'DANIEL ANDREU CRUZ',
+            comment:'Me arrepiento de haberlo elegido',
             rating:1,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/daniel.png',
             }],
-            seller_reputation:5,
-            seller_opinions:[,
+            seller_reputation:3,
+            seller_opinions:[
             {
             commenter:'ESTEFANIA AROCAS PASADAS',
-            comment:'',
-            rating:5,
+            comment:'Mala atencion',
+            rating:2,
             },
             {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:3,
+            commenter:'FERNANDA BARALDÉS COMAS',
+            comment:'No me gusto la actitud',
+            rating:4,
             },
             {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
-            rating:5,
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'Excelente!!! super recomendable!.',
+            rating:2,
             }]
             })
-            
+            a.createFavorite()
             
             
             
@@ -297,45 +298,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
-            buyer_reputation:5,
+            buyer_reputation:4,
             buyer_opinions:[
             {
-            commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Todo bien',
             rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
             },
             {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
+            commenter:'PEDRO ZAMBUDIO FIGULS',
+            comment:'No volveria a contratarlos',
             rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/pedro.png',
             },
             {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
-            }],
-            seller_reputation:2,
-            seller_opinions:[,
-            {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Me arrepiento de haberlo elegido',
             rating:1,
-            },
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
+            }],
+            seller_reputation:4,
+            seller_opinions:[
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
+            commenter:'DANIEL ANDREU CRUZ',
+            comment:'Barato',
             rating:2,
             },
             {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
-            rating:1,
+            commenter:'ESTEFANIA AROCAS PASADAS',
+            comment:'Despacha sus productos a tiempo',
+            rating:5,
+            },
+            {
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
+            rating:4,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -348,45 +349,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2022/catalina.png',
-            buyer_reputation:4,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'No cumplio con lo prometido',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/felipe.png',
             },
-            {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
-            },
-            {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
-            }],
-            seller_reputation:3,
-            seller_opinions:[,
             {
             commenter:'PAULETTE RAYA GAVILAN',
-            comment:'',
-            rating:2,
+            comment:'Excelente soporto en rapidez y solución!',
+            rating:5,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
             },
             {
-            commenter:'SOL BIOSCA FONTANET',
-            comment:'',
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'No cumplio con lo prometido',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
+            }],
+            seller_reputation:2,
+            seller_opinions:[
+            {
+            commenter:'FERNANDA BARALDÉS COMAS',
+            comment:'Me arrepiento de haberlo elegido',
+            rating:4,
+            },
+            {
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Barato',
             rating:1,
             },
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
-            rating:5,
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Son muy puntuales y respetuosos. Quedamos muy conformes con el trabajo realizado en esta oportunidad.',
+            rating:1,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -402,42 +403,42 @@ const fxuser = async function() {
             buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/cesar.jpg',
-            },
-            {
-            commenter:'PAULETTE RAYA GAVILAN',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Recomiendo sus servicios',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
             },
             {
             commenter:'GUIDO MORALES GESE',
-            comment:'',
-            rating:2,
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
+            rating:4,
             buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/guido.jpg',
-            }],
-            seller_reputation:2,
-            seller_opinions:[,
+            },
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Me arrepiento de haberlo elegido',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
+            }],
+            seller_reputation:5,
+            seller_opinions:[
+            {
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
+            rating:5,
+            },
+            {
+            commenter:'SOL BIOSCA FONTANET',
+            comment:'Despacha sus productos a tiempo',
             rating:3,
             },
             {
-            commenter:'DANIEL ANDREU CRUZ',
-            comment:'',
-            rating:1,
-            },
-            {
-            commenter:'RUBEN BIDAULT CULLERÉS',
-            comment:'',
-            rating:2,
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'No volveria a contratarlos',
+            rating:5,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -450,45 +451,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
-            buyer_reputation:5,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'PALOMA ARNAU MORENO',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
-            },
-            {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
-            },
-            {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
-            }],
-            seller_reputation:4,
-            seller_opinions:[,
-            {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
-            rating:4,
-            },
-            {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
+            commenter:'CATALINA VISO GILABERT',
+            comment:'Excelente!!! super recomendable!.',
             rating:3,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/catalina.png',
+            },
+            {
+            commenter:'CATALINA RAYA GARCIA',
+            comment:'Despacha sus productos a tiempo',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
             },
             {
             commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
+            comment:'Excelente atención y profesionalismo, seriedad y oportunidad en las respuestas y apoyo tanto en soporte técnico como vía whatsapp.',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
+            }],
+            seller_reputation:4,
+            seller_opinions:[
+            {
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Barato',
+            rating:3,
+            },
+            {
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Me arrepiento de haberlo elegido',
             rating:5,
+            },
+            {
+            commenter:'CATALINA RAYA GARCIA',
+            comment:'Volveria a contratarlo',
+            rating:4,
             }]
             })
-            
+            a.createFavorite()
             
             
             
@@ -505,42 +506,42 @@ const fxuser = async function() {
             buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'PALOMA ARNAU MORENO',
-            comment:'',
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
             rating:5,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
+            },
+            {
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Excelente!!! super recomendable!.',
+            rating:2,
             buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
             },
             {
-            commenter:'CATALINA VISO GILABERT',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/catalina.png',
-            },
-            {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:1,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
-            }],
-            seller_reputation:4,
-            seller_opinions:[,
-            {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
-            rating:5,
-            },
-            {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Son muy puntuales y respetuosos. Quedamos muy conformes con el trabajo realizado en esta oportunidad.',
             rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
+            }],
+            seller_reputation:3,
+            seller_opinions:[
+            {
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Recomendable 10%',
+            rating:3,
             },
             {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:5,
+            commenter:'CATALINA RAYA GARCIA',
+            comment:'Excelente servicio y atención !!!,Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría. Muy agradecido con su servicio.',
+            rating:3,
+            },
+            {
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'No me gusto la actitud',
+            rating:3,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -553,45 +554,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2022/antonia.png',
-            buyer_reputation:5,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'SOL BIOSCA FONTANET',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
-            },
-            {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
-            },
-            {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
-            }],
-            seller_reputation:3,
-            seller_opinions:[,
-            {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:4,
+            commenter:'PAULETTE RAYA GAVILAN',
+            comment:'Excelente servicio y trato.',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
             },
             {
             commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
-            rating:1,
+            comment:'No volveria a contratarlos',
+            rating:5,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
             },
             {
             commenter:'FELIPE BAEZ TEJADO',
-            comment:'',
-            rating:4,
+            comment:'Inpuntuales.',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/felipe.png',
+            }],
+            seller_reputation:3,
+            seller_opinions:[
+            {
+            commenter:'FERNANDA BARALDÉS COMAS',
+            comment:'Barato',
+            rating:3,
+            },
+            {
+            commenter:'PAULETTE RAYA GAVILAN',
+            comment:'Mala atencion',
+            rating:2,
+            },
+            {
+            commenter:'GUIDO MORALES GESE',
+            comment:'Excelente servicio y atención al cliente. 100% recomendable!»',
+            rating:2,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -604,45 +605,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2022/felipe.png',
-            buyer_reputation:2,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'PEDRO ZAMBUDIO FIGULS',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/pedro.png',
-            },
-            {
-            commenter:'KUYEN BERENGUERAS CULLERÉS',
-            comment:'',
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'Inpuntuales.',
             rating:1,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/ruben.png',
             },
             {
-            commenter:'GUIDO MORALES GESE',
-            comment:'',
+            commenter:'PAULETTE RAYA GAVILAN',
+            comment:'Excelente servicio y atención al cliente. 100% recomendable!»',
             rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/guido.jpg',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
+            },
+            {
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'Poco serio y mala atención al cliente',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
             }],
-            seller_reputation:4,
-            seller_opinions:[,
+            seller_reputation:3,
+            seller_opinions:[
             {
             commenter:'PALOMA ARNAU MORENO',
-            comment:'',
+            comment:'Mala atencion',
             rating:3,
             },
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:4,
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Precio adecuado',
+            rating:2,
             },
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
-            rating:5,
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Brinda buena atención',
+            rating:2,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -655,45 +656,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
-            buyer_reputation:2,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Barato',
             rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/antonia.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
+            },
+            {
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Barato',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
+            },
+            {
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Recomiendo sus servicios',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
+            }],
+            seller_reputation:5,
+            seller_opinions:[
+            {
+            commenter:'CESAR BADIA TORNÉ',
+            comment:'Excelente atención y profesionalismo, seriedad y oportunidad en las respuestas y apoyo tanto en soporte técnico como vía whatsapp.',
+            rating:5,
             },
             {
             commenter:'SOL BIOSCA FONTANET',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
-            },
-            {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
-            }],
-            seller_reputation:4,
-            seller_opinions:[,
-            {
-            commenter:'CATALINA VISO GILABERT',
-            comment:'',
+            comment:'Brinda buena atención',
             rating:4,
             },
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
+            commenter:'VICTORIA BASTARDES SOTO',
+            comment:'Barato',
             rating:4,
-            },
-            {
-            commenter:'ESTEFANIA AROCAS PASADAS',
-            comment:'',
-            rating:3,
             }]
             })
-            
+            a.createFavorite()
             
             a =await User.create({
             email:'pipila@anet.com.es',
@@ -705,45 +706,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2016/guido.jpg',
-            buyer_reputation:4,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'PALOMA ARNAU MORENO',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
-            },
-            {
-            commenter:'PEDRO ZAMBUDIO FIGULS',
-            comment:'',
+            commenter:'ANTONIA VALLÉS GIRVENT',
+            comment:'Despacha sus productos a tiempo',
             rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/pedro.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/antonia.png',
             },
             {
-            commenter:'PEDRO ZAMBUDIO FIGULS',
-            comment:'',
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Siempre nos brindan la mejor atención y el mejor servicio.  Muchas gracias por ser una empresa de excelencia.',
             rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/pedro.png',
-            }],
-            seller_reputation:4,
-            seller_opinions:[,
-            {
-            commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
-            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/amanda.png',
             },
             {
-            commenter:'PAULETTE RAYA GAVILAN',
-            comment:'',
-            rating:4,
-            },
-            {
-            commenter:'CATALINA VISO GILABERT',
-            comment:'',
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Recomiendo sus servicios',
             rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
+            }],
+            seller_reputation:3,
+            seller_opinions:[
+            {
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Excelente servicio y trato.',
+            rating:1,
+            },
+            {
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'Positivo: Calidad, Capacidad de respuesta, Precio, Profesionalismo.   El servicio es excelente.',
+            rating:3,
+            },
+            {
+            commenter:'CESAR BADIA TORNÉ',
+            comment:'Brinda buena atención',
+            rating:3,
             }]
             })
-            
+            a.createFavorite()
             
             a =await User.create({
             email:'barbilla@hotmail.com',
@@ -755,45 +756,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
-            buyer_reputation:5,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/cesar.jpg',
-            },
-            {
-            commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
-            },
-            {
-            commenter:'FELIPE BAEZ TEJADO',
-            comment:'',
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Excelente servicio y atención al cliente. 100% recomendable!»',
             rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/felipe.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
+            },
+            {
+            commenter:'ALMENDRA ANGUERA VILAFRANCA',
+            comment:'Caro',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
+            },
+            {
+            commenter:'DANIEL ANDREU CRUZ',
+            comment:'Excelente servicio y atención al cliente. 100% recomendable!»',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/daniel.png',
             }],
             seller_reputation:4,
-            seller_opinions:[,
+            seller_opinions:[
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:3,
+            commenter:'CATALINA VISO GILABERT',
+            comment:'No cumplio con lo prometido',
+            rating:5,
             },
             {
-            commenter:'SOL BIOSCA FONTANET',
-            comment:'',
-            rating:3,
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Excelente servicio y atención !!!  Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría.            Muy agradecido con su servicio.',
+            rating:1,
             },
             {
-            commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
+            commenter:'ANTONIA VALLÉS GIRVENT',
+            comment:'Volveria a contratarlo',
             rating:4,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -809,42 +810,42 @@ const fxuser = async function() {
             buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
-            },
-            {
-            commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
+            commenter:'CRISTOBAL AYALA FERRERAS',
+            comment:'Buena eleccion',
             rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
             },
             {
-            commenter:'SOL BIOSCA FONTANET',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
+            commenter:'PAULETTE RAYA GAVILAN',
+            comment:'Recomiendo sus servicios',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
+            },
+            {
+            commenter:'ESTEFANIA AROCAS PASADAS',
+            comment:'Mala atencion',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/antonia.png',
             }],
-            seller_reputation:4,
-            seller_opinions:[,
+            seller_reputation:2,
+            seller_opinions:[
+            {
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Despacha sus productos a tiempo',
+            rating:3,
+            },
+            {
+            commenter:'GUIDO MORALES GESE',
+            comment:'Recomendable 10%',
+            rating:2,
+            },
             {
             commenter:'FELIPE BAEZ TEJADO',
-            comment:'',
-            rating:5,
-            },
-            {
-            commenter:'SOL BIOSCA FONTANET',
-            comment:'',
-            rating:5,
-            },
-            {
-            commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
-            rating:2,
+            comment:'Me arrepiento de haberlo elegido',
+            rating:1,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -857,45 +858,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
-            buyer_reputation:5,
+            buyer_reputation:2,
             buyer_opinions:[
             {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
-            },
-            {
-            commenter:'KUYEN BERENGUERAS CULLERÉS',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
-            },
-            {
-            commenter:'PALOMA ARNAU MORENO',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
-            }],
-            seller_reputation:3,
-            seller_opinions:[,
-            {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Excelente servicio y atención al cliente. 100% recomendable!',
             rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/amanda.png',
             },
             {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:5,
+            commenter:'CATALINA RAYA GARCIA',
+            comment:'El servicios es bueno. Pero un poco caro',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
             },
             {
             commenter:'PAULETTE RAYA GAVILAN',
-            comment:'',
+            comment:'Volveria a contratarlo',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
+            }],
+            seller_reputation:4,
+            seller_opinions:[
+            {
+            commenter:'FERNANDA BARALDÉS COMAS',
+            comment:'El servicios es bueno. Pero un poco caro',
+            rating:3,
+            },
+            {
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Excelente servicio y atención !!!   Lo recomiendo ampliamente, me resolvió todas mis dudas además de soporte técnico y asesoría.        Muy agradecido con su servicio.',
+            rating:5,
+            },
+            {
+            commenter:'ANTONIA VALLÉS GIRVENT',
+            comment:'Volveria a contratarlo',
             rating:2,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -908,45 +909,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
-            buyer_reputation:4,
+            buyer_reputation:3,
             buyer_opinions:[
             {
-            commenter:'KUYEN BERENGUERAS CULLERÉS',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/kuyen.jpg',
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'No volveria a contratarlos',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/ruben.png',
             },
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Precio adecuado',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
             },
             {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/fernanda.png',
+            commenter:'PEDRO ZAMBUDIO FIGULS',
+            comment:'Caro',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/pedro.png',
             }],
-            seller_reputation:3,
-            seller_opinions:[,
+            seller_reputation:4,
+            seller_opinions:[
             {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
+            commenter:'PEDRO ZAMBUDIO FIGULS',
+            comment:'Todo bien',
+            rating:3,
+            },
+            {
+            commenter:'CESAR BADIA TORNÉ',
+            comment:'Excelente atención y profesionalismo, seriedad y oportunidad en las respuestas y apoyo tanto en soporte técnico como vía whatsapp.',
+            rating:3,
+            },
+            {
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Siempre nos brindan la mejor atención y el mejor servicio.  Muchas gracias por ser una empresa de excelencia.',
             rating:5,
-            },
-            {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:2,
-            },
-            {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
-            rating:2,
             }]
             })
-            
+            a.createFavorite()
             
             a =await User.create({
             email:'terra@deprice.com',
@@ -961,42 +962,42 @@ const fxuser = async function() {
             buyer_reputation:3,
             buyer_opinions:[
             {
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Precio adecuado',
+            rating:1,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/felipe.png',
+            },
+            {
             commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:2,
+            comment:'Excelente soporto en rapidez y solución!',
+            rating:4,
             buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
             },
             {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/cesar.jpg',
-            },
-            {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
-            rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Son muy puntuales y respetuosos. Quedamos muy conformes con el trabajo realizado en esta oportunidad.',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
             }],
             seller_reputation:3,
-            seller_opinions:[,
+            seller_opinions:[
             {
-            commenter:'PALOMA ARNAU MORENO',
-            comment:'',
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Me arrepiento de haberlo elegido',
             rating:3,
             },
             {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
-            rating:4,
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Recomiendo sus servicios',
+            rating:3,
             },
             {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:2,
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Barato',
+            rating:1,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -1009,45 +1010,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/ruben.png',
-            buyer_reputation:3,
+            buyer_reputation:2,
             buyer_opinions:[
             {
-            commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/antonia.png',
-            },
-            {
-            commenter:'DANIEL ANDREU CRUZ',
-            comment:'',
-            rating:1,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/daniel.png',
-            },
-            {
-            commenter:'RUBEN BIDAULT CULLERÉS',
-            comment:'',
-            rating:4,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/ruben.png',
-            }],
-            seller_reputation:3,
-            seller_opinions:[,
-            {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Despacha sus productos a tiempo',
             rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/amanda.png',
+            },
+            {
+            commenter:'CATALINA VISO GILABERT',
+            comment:'Son muy puntuales y respetuosos. Quedamos muy conformes con el trabajo realizado en esta oportunidad.',
+            rating:2,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/catalina.png',
+            },
+            {
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Excelente!!! super recomendable!.',
+            rating:3,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
+            }],
+            seller_reputation:4,
+            seller_opinions:[
+            {
+            commenter:'ANTONIA VALLÉS GIRVENT',
+            comment:'No volveria a contratarlos',
+            rating:5,
             },
             {
             commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
+            comment:'Brinda buena atención',
             rating:3,
             },
             {
-            commenter:'ANTONIA VALLÉS GIRVENT',
-            comment:'',
-            rating:4,
+            commenter:'GUIDO MORALES GESE',
+            comment:'Excelente atención y profesionalismo, seriedad y oportunidad en las respuestas y apoyo tanto en soporte técnico como vía whatsapp.',
+            rating:3,
             }]
             })
-            
+            a.createFavorite()
             
             
             
@@ -1062,45 +1063,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
-            buyer_reputation:2,
+            buyer_reputation:4,
             buyer_opinions:[
             {
-            commenter:'PAULETTE RAYA GAVILAN',
-            comment:'',
-            rating:1,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
+            commenter:'CATALINA VISO GILABERT',
+            comment:'Me arrepiento de haberlo elegido',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/catalina.png',
             },
             {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Excelente!!! super recomendable!.',
             rating:3,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
             },
             {
             commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:2,
+            comment:'Excelente servicio y trato.',
+            rating:3,
             buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
             }],
-            seller_reputation:4,
-            seller_opinions:[,
+            seller_reputation:5,
+            seller_opinions:[
             {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:2,
-            },
-            {
-            commenter:'SOL BIOSCA FONTANET',
-            comment:'',
+            commenter:'FELIPE BAEZ TEJADO',
+            comment:'Recomiendo sus servicios',
             rating:5,
             },
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
-            rating:4,
+            commenter:'FERNANDA BARALDÉS COMAS',
+            comment:'Siempre nos brindan la mejor atención y el mejor servicio. Muchas gracias por ser una empresa de excelencia.',
+            rating:3,
+            },
+            {
+            commenter:'TOMAS ZAFRA FIGULS',
+            comment:'Inpuntuales.',
+            rating:5,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -1113,45 +1114,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2021/tomas.png',
-            buyer_reputation:2,
+            buyer_reputation:5,
             buyer_opinions:[
             {
-            commenter:'PALOMA ARNAU MORENO',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paloma.png',
+            commenter:'RUBEN BIDAULT CULLERÉS',
+            comment:'Siempre nos brindan la mejor atención y el mejor servicio.  Muchas gracias por ser una empresa de excelencia.',
+            rating:5,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/ruben.png',
             },
             {
-            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/nicolas.png',
+            commenter:'PAULETTE RAYA GAVILAN',
+            comment:'Excelente soporto en rapidez y solución!',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/paulette.png',
             },
             {
-            commenter:'ALMENDRA ANGUERA VILAFRANCA',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/almendra.png',
+            commenter:'VICTORIA BASTARDES SOTO',
+            comment:'Recomiendo sus servicios',
+            rating:5,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/victoria.png',
             }],
             seller_reputation:3,
-            seller_opinions:[,
+            seller_opinions:[
             {
-            commenter:'CATALINA VISO GILABERT',
-            comment:'',
-            rating:5,
+            commenter:'CATALINA RAYA GARCIA',
+            comment:'Barato',
+            rating:2,
             },
             {
-            commenter:'TOMAS ZAFRA FIGULS',
-            comment:'',
-            rating:1,
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Barato',
+            rating:4,
             },
             {
-            commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:1,
+            commenter:'KUYEN BERENGUERAS CULLERÉS',
+            comment:'Precio adecuado',
+            rating:3,
             }]
             })
-            
+            a.createFavorite()
             
             
             a =await User.create({
@@ -1164,48 +1165,45 @@ const fxuser = async function() {
             rol:'client',
             description:'Seller',
             avatar_image:'http://www.fpp.uchile.cl/content/perfil/2022/victoria.png',
-            buyer_reputation:3,
+            buyer_reputation:4,
             buyer_opinions:[
             {
-            commenter:'CRISTOBAL AYALA FERRERAS',
-            comment:'',
-            rating:5,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2022/cristobal.png',
+            commenter:'AMANDA PASCUAL ALOY',
+            comment:'Recomiendo sus servicios',
+            rating:3,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/amanda.png',
             },
             {
-            commenter:'CATALINA RAYA GARCIA',
-            comment:'',
-            rating:2,
-            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/catalina.png',
+            commenter:'SOL BIOSCA FONTANET',
+            comment:'Volveria a contratarlo',
+            rating:4,
+            buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2021/sol.png',
             },
             {
             commenter:'CESAR BADIA TORNÉ',
-            comment:'',
-            rating:2,
+            comment:'Brinda buena atención',
+            rating:4,
             buyer_avatar:'http://www.fpp.uchile.cl/content/perfil/2016/cesar.jpg',
             }],
-            seller_reputation:4,
-            seller_opinions:[,
+            seller_reputation:3,
+            seller_opinions:[
             {
-            commenter:'VICTORIA BASTARDES SOTO',
-            comment:'',
+            commenter:'PALOMA ARNAU MORENO',
+            comment:'Positivo: Calidad, Capacidad de respuesta, Precio, Profesionalismo   El servicio es excelente.',
+            rating:1,
+            },
+            {
+            commenter:'DANIEL ANDREU CRUZ',
+            comment:'Excelente servicio y trato.',
             rating:3,
             },
             {
-            commenter:'CATALINA VISO GILABERT',
-            comment:'',
-            rating:4,
-            },
-            {
-            commenter:'FERNANDA BARALDÉS COMAS',
-            comment:'',
+            commenter:'NICOLAS LÓPEZ DE PABLO GARCIA UCEDA',
+            comment:'Todo bien',
             rating:4,
             }]
             })
-            
-            
-             
-
+            a.createFavorite()
 
     }
     catch (error) {
