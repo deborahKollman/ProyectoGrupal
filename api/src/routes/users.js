@@ -2,6 +2,7 @@ const { Router } = require('express');
 const {
   checkUser,
   getUsers,
+  getActiveUsers,
   getUserDetail,
   postUser,
   deleteUser,
@@ -21,7 +22,8 @@ const {upload } = require('../middlewares/index.js')
 
 const router = Router();
 
-router.get('/', getUsers);
+router.get('/',getActiveUsers);
+router.get('/all', getUsers);
 //router.get('/register', checkUser);
 router.post('/register', checkUser);
 router.get('/:id', getUserDetail);
