@@ -1,11 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import BurgerButton from '../components/NavBar/NavBar'
-import { Stack } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import FooterBar from '../components/FooterBar/FooterBar'
 import Styles from './styles/Orders.module.scss'
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -18,7 +15,6 @@ import tres from '../media/tres.jpg'
 const Orders = ({title}) => {
 
   const navigate = useNavigate()
-  function handleDelete() {}
 
   return (
     <div className={Styles.container}>
@@ -65,25 +61,6 @@ const Orders = ({title}) => {
         </Card>
         </div>
 
-          {/* <h3>SHOPPING CART</h3>
-
-        <div className={Styles.rows}>
-          <div>
-            <img />
-          </div>
-            {title}
-          <div>
-
-          </div>
-        </div>
-        
-        <div className={Styles.buttons}>
-          <Stack spacing={2}>
-            <Button type='submit' variant="contained" color="success">Continue</Button>
-            <Button onClick={() => handleDelete()} variant="outlined" startIcon={<DeleteIcon />}>Delete</Button>
-          </Stack>
-        </div> */}
-       
       <FooterBar/>
     </div>
   )
