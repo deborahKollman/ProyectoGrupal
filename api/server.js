@@ -16,14 +16,13 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser('secret'));
 server.use(morgan('dev'));
 server.use(express.json());
-process.env.NODE_ENV?(server.use(cors()))
-:(server.use(
+server.use(
   cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   })
-));
+);
 server.use(express.static('public'));
 server.use(
   cookieSession({
