@@ -9,12 +9,31 @@
 }
 
 .orders {
-    width: 80%;
-    height: 550px;
-    background-color: rgba(0, 0, 0, 0.111);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 600px;
     margin: 0 auto;
-    margin-top: 15px;
     display: grid;
+}
+
+<<<<<<< HEAD
+||||||| 41b563b
+.rows {
+    
+}
+=======
+.column {
+    width: 300px;
+    margin-top: 20px;
+    line-height: 3.5;
+}
+>>>>>>> da2c47bdb8136a2e3b0fed3121b4ac3f655c2769
+
+.buttons {
+   justify-content: center;
+   position: relative;
+   top: 100px;
 }
 
 
