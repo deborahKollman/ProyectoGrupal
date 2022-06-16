@@ -26,8 +26,6 @@ export default function Detail(){
     const user = useSelector(state => state.userId);
     const moreUsers = useSelector(state => state.users)
   
-
-
     useEffect(() => {
         dispatch(getById(id));
         dispatch(getUserById(detail.userId));
@@ -46,6 +44,7 @@ export default function Detail(){
         document.getElementById("btnVerMas").style.display = 'none';
 
     };
+
     
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
@@ -74,8 +73,6 @@ export default function Detail(){
            <div className={stylesDetail.date}>
                 <label>Publicado el:</label>
                <p> {detail.date}</p>
-
-
 
            </div>
 
@@ -145,7 +142,6 @@ export default function Detail(){
 
     </div>
      <Footer></Footer>
-
 
      <div className={stylesDetail.footer}>
         <MDBContainer fluid>
