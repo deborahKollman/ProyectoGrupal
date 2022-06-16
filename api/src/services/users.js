@@ -1,7 +1,6 @@
 const { users } = require('../database/data.js');
-const { User, Favorite, Publication } = require('../database/postgres.js');
+const { User, Favorite, Publication, Op } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
-const fs = require('fs');
 
 /* exports.checkUser = async(usr, password) => {
   // Chequea si el usuario existe y si la clave es correcta
@@ -30,6 +29,7 @@ exports.checkUser = async (usr) => {
 
 exports.getAllUsers = async ({ page, offset, limit }) => {
   const users = await User.findAll({
+    where: { rol: 'client' },
     offset: (page - 1) * offset,
     limit,
     order: [['id', 'ASC']]
@@ -57,6 +57,7 @@ exports.getAllUsers = async ({ page, offset, limit }) => {
 exports.createUser = async (newUser) => {
   const hash = bcrypt.hashSync(newUser.password, 10);
   newUser = { ...newUser, password: hash };
+  newUser = { ...newUser, rol: 'client' };
   const [user, created] = await User.findOrCreate({
     where: { email: newUser.email },
     defaults: { ...newUser }
@@ -78,9 +79,6 @@ exports.registerUser = (usr, password) => {
 exports.updateUser = async (id, changes) => {
   const user = await User.findByPk(id);
   if (user) {
-    if (user.dataValues.avatar_image) {
-      fs.unlinkSync(user.dataValues.avatar_image);
-    }
     await User.update({ ...changes }, { where: { id } });
     return { message: 'User updated successfully' };
   }
@@ -185,36 +183,54 @@ exports.addBuyerComment = async (
 };
 
 exports.getFavorites = async (id) => {
-  const favorites = await Favorite.findAll({
+  const user = await User.findOne({ where: { id } });
+  const favorites = await Favorite.findOne({
     where: { userId: id },
-    include: [{ model: Publication }]
+    include: {
+      model: Publication,
+      where: {
+        state: 'Active'
+      },
+      required: false,
+      through: {
+        attributes: []
+      }
+    }
   });
-  if (!favorites.length) {
-    return { err_msg: 'Favorites of user not found' };
+  if (!user) {
+    return { err_msg: 'User not found' };
   }
   return favorites;
 };
 
 exports.addFavorite = async (id, publication) => {
-  const user = await User.findByPk(id);
-  const favorite = await Favorite.create();
-
-  await favorite.setUser(user);
-  if (favorite) {
-    await favorite.addPublication(publication);
-    return { message: 'Publication added to Favorites' };
+  const fav = await Favorite.findOne({ where: { userId: id } });
+  if (fav) {
+    const pub = await Publication.findOne({
+      where: {
+        [Op.and]: [{ id: publication }, { state: 'Active' }]
+      }
+    });
+    if (pub) {
+      fav.addPublication(publication);
+      return { message: 'Publication added to Favorites' };
+    }
+    return { err_msg: 'Publication not found or inactive' };
   }
-  return { err_msg: 'Favorite already exists' };
+  return { err_msg: 'User not found' };
 };
 
 exports.removeFavorite = async (id, publication) => {
-  const fav = await Favorite.findOne({
-    where: { userId: id },
-    include: [{ model: Publication, where: { id: publication } }]
-  });
+  const fav = await Favorite.findOne({ where: { userId: id } });
   if (fav) {
-    await fav.destroy();
-    return { message: 'Publication removed from Favorites' };
+    const pub = await Publication.findOne({
+      where: { id: publication }
+    });
+    if (pub) {
+      fav.removePublication(publication);
+      return { message: 'Publication removed from Favorites' };
+    }
+    return { err_msg: 'Publication not found' };
   }
   return { err_msg: 'Favorite of user not found' };
 };
