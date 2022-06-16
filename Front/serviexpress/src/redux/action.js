@@ -284,10 +284,11 @@ export function confirmPassword(form) {
       console.log(e.message);
     }
   };
+}
   
 export function myLocalStorage (){
-  let productsInLocalStorage = localStorage.getItem('itemCar')
-  productsInLocalStorage = JSON.parse(productsInLocalStorage)
+  let productsInLocalStorage = localStorage.getItem('itemCar');
+  productsInLocalStorage = JSON.parse(productsInLocalStorage);
   console.log(productsInLocalStorage)
-  return productsInLocalStorage
+  return (productsInLocalStorage)
 }
