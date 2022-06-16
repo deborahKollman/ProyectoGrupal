@@ -23,6 +23,16 @@ const NavigationBar = () => {
     xNavigate(`/${pPath}`);
   };
 
+
+  const handleFav = () =>{
+      console.log("hola");
+      
+  };
+
+
+
+
+
   const renderList = (fixed) => (
     <List fixed={fixed}>
       <BottomNavigationAction
@@ -44,9 +54,8 @@ const NavigationBar = () => {
       <BottomNavigationAction
         label="Favorites"
         icon={<FavoriteIcon fontSize="large" />}
-        onClick={() => {
-          mNavigation("favorites");
-        }}
+        onChange={handleFav}
+        
       />
 
       <BottomNavigationAction
@@ -82,7 +91,7 @@ export const List = styled.ul`
         position: fixed;
         right: 0;
         transform: scale(0.7);
-        z-index: 1;
+        z-index: 7;
       }
     `}
 `;

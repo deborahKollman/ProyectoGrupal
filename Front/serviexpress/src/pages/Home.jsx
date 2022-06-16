@@ -23,8 +23,8 @@ export default function Home() {
   const dispatch = useDispatch();
   const allPublications = useSelector((state) => state.Publications);
   const SwichL = useSelector((state) => state.switchloading);
-  // console.log(SwichL);
-  // console.log(allPublications);
+  console.log(SwichL);
+  console.log(allPublications);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
@@ -106,13 +106,13 @@ export default function Home() {
         )}
       </div>
 
-      <div className="paginationHome">
+      {/* <div className="paginationHome">
         <PaginationHome
           value={allPublications.length}
           pagination={pagination}
           items={PublicationsPerPage}
         ></PaginationHome>
-      </div>
+      </div> */}
 
       <div className="logos"></div>
     </div>
