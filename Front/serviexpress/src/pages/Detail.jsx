@@ -26,7 +26,22 @@ export default function Detail(){
     const dispatch = useDispatch();
     const detail = useSelector(state => state.detail);
     const moreUsers = useSelector(state => state.users);
-    const favorites = useSelector(state => state.favorites);
+    const fav = useSelector(state => state.favorites);
+ 
+  const [checked, setChecked] = useState(false);
+
+
+  const heart = () => {
+    fav.publications && fav.publications.forEach(e => {
+        if(e.id === parseInt(id)) {
+          setChecked(true);
+        }
+
+      })
+
+  };
+   
+
 
 
     useEffect(() => {
@@ -34,14 +49,17 @@ export default function Detail(){
         dispatch(getUserById(detail.userId));
         dispatch(getUsers());
         dispatch(getFavorites(detail.userId));
+        heart();
+
 
     },[dispatch,id,detail.userId]);
 
 
   const [text,setText] = useState();
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  
     const handleClick = (e) => {
         e.preventDefault();
         setText(detail.detail);
@@ -55,19 +73,22 @@ export default function Detail(){
 
     const [open, setOpen] = useState(false);
 
-    const favClicked = () => {
-     
-       favorites.publications.forEach(e => {
-       
-        if(e.id === parseInt(id)) { 
-           dispatch(removeFavorites(detail.userId,{id: parseInt(id)})); 
-          
-        }
-       });
-       //dispatch(getFavorites);
-     
-       //dispatch(addToFavorites(detail.userId, {id: id}));
+    const [msgAlert, setMsg] = useState("");
 
+
+
+    const favClicked = () => {   
+        if(checked) {
+          dispatch(removeFavorites(detail.userId, {id: id}));
+          setMsg("Removed from favorites")
+        } 
+        else {
+          dispatch(addToFavorites(detail.userId, {id: id}));
+          setMsg("Added to favorites")
+        }
+
+
+       
       setOpen(true);
     };
   
@@ -80,8 +101,13 @@ export default function Detail(){
       setOpen(false);
     };
     
-    //console.log(favorites,detail.userId);
     
+
+    const heartChange = (event) => {
+      setChecked(event.target.checked);
+    };
+
+   
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
@@ -90,7 +116,7 @@ export default function Detail(){
 
           <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="info" sx={{ width: '100%' , fontSize: 12}}>
-            Added to Favorites
+            {msgAlert}
          </Alert>
          </Snackbar>
 
@@ -122,7 +148,7 @@ export default function Detail(){
 
           <div>
               
-              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} icon={<FavoriteBorder />} onClick={favClicked} checkedIcon={<Favorite />} />
+              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
           </div>
         </div>
 

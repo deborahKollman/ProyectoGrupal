@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import Edit from './pages/edit.jsx';
 
 
+
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
 
@@ -32,6 +33,7 @@ function App() {
       <Route exact path="/login" element={<Login/>} />
       <Route exact path="/" element={<LandingPage/>} />
       <Route path='/detail/:id' element={<Detail/>}/>
+      <Route path='/favorites' element={<Favorites/>}/>
       <Route exact path="/Home" element={<Home/>}/> 
       <Route path='*' element={<NotFound/>} />
       <Route path="/prueba" element={<Orders/>}/>

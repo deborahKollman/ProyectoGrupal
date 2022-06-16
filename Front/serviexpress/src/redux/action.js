@@ -256,7 +256,8 @@ export function getPublicationsByCategory(a) {
 export function addToFavorites(user,publication){
     return async(dispatch) =>{
       try {
-           let fav = await axios.put(`${URL}/users/${user}/favorites`,publication);
+           await axios.put(`${URL}/users/${user}/favorites`,publication);
+          let fav = await axios.get(`${URL}/users/${user}/favorites`);
            
         dispatch({
             type: ADD_TO_FAVORITES,
@@ -299,8 +300,9 @@ export function getFavorites(user){
 export function removeFavorites(user,publication){
   return async(dispatch) =>{
     try {
-           const fav = await axios.delete(`${URL}/users/${user}/favorites`,publication, { widthCredentials: true, "ContentType": "aplicatión/json"});
-         
+           
+           await axios.delete(`${URL}/users/${user}/favorites`,{data:publication});
+           const fav = await axios.get(`${URL}/users/${user}/favorites`);
           dispatch({
             type: REMOVE_FAVORITES,
             payload: fav.data,

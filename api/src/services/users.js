@@ -202,10 +202,12 @@ exports.addFavorite = async(id, publication) => {
 }
 
 exports.removeFavorite = async(id, publication) => {
+  
   const fav = await Favorite.findOne({where:{userId:id}});
   if(fav){
     fav.removePublication(publication);
     return {message:'Publication removed from Favorites'}
   }
+  
   return {err_msg:'User not found'}
 }
