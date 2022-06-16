@@ -1,12 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUser,
-  getPublications,
-  swich_loading,
-  getPublicationsByCategory,
-} from "../redux/action";
+import { getUser,getUsers, getPublications, swich_loading, getPublicationsByCategory,} from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
@@ -49,6 +44,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getUsers());
     setTimeout(() => {
       dispatch(getPublications());
     }, 1000);
@@ -96,7 +92,7 @@ export default function Home() {
                   album={e.album}
                   title={e.title}
                   summary={e.detail_resume}
-                  // score={e.score}
+                  userId={e.userId}
                   price={e.price}
                   // opinions= {e.opinions}
                 />
