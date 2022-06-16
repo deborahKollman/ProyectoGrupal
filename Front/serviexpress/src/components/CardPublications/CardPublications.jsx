@@ -4,13 +4,23 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import "./CardPublications.scss";
+import { BsStarFill, BsStar } from 'react-icons/bs'
 import Carousel from 'react-bootstrap/Carousel';
 
 
 
 
-
-const CardPublications = ({ id, score, summary, album, title, price }) => {
+const CardPublications = ({ id, summary, album, title, price }) => {
+  const score=3
+  const scoreStar = [];
+  const scoreStarTotal = [];
+  const totalStar = 5-score;
+  for (let i = 0; i < score; i++) {
+    scoreStar.push(i);
+  };
+  for (let i = 0; i < totalStar; i++) {
+    scoreStarTotal.push(i);
+  };
   return (
     <div className="comp_card_publication">
       <div className="card">
@@ -36,7 +46,13 @@ const CardPublications = ({ id, score, summary, album, title, price }) => {
           <div className="card-text">
             <h6 className="titlec">{title}</h6>
             <p className="titlesummary">{summary}</p>
-            <p className="titlestar">⭐⭐⭐⭐⭐(5)</p>
+            <div className='card-stats'>
+                    <div className='stat'>
+                        {scoreStar.map(e => <BsStarFill/>)}
+                        {scoreStarTotal.map(e => <BsStar/>)}
+                                              
+                    </div>
+                </div>
             <div className="UL">
             <div className="pricebox">
             <p className="titleprice">Starting at : USD {price} </p>
