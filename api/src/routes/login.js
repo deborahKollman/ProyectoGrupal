@@ -84,7 +84,7 @@ router.get('/error', (req, res) => {
 });
 
 router.get('/success', async (req, res) => {
-  if (Object.keys(req.user).length !== 0) {
+  if (Object.keys(req?.user).length !== 0) {
     return res.status(200).send(req.user);
   }
 });
