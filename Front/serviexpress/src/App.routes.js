@@ -14,7 +14,7 @@ import Home from "./pages/Home";
 import CreateService from "./pages/CreateService";
 import { useSelector } from "react-redux";
 import Edit from "./pages/edit.jsx";
-
+import Payment from "./components/Payment.jsx";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -26,22 +26,20 @@ function App() {
         <Route exact path="/seller/add-service" element={<CreateService />} />
       )}
 
-      {rdcr_isAuth && ( <Route exact path="/orders" element={<Orders/>} /> )}
-      {rdcr_isAuth && ( <Route exact path="/favorites" element={<Favorites/>} /> )}
-      {rdcr_isAuth && ( <Route exact path="/seller/add-service" element={<CreateService/>} /> ) }
-      
-      <Route exact path="/seller" element={<Seller/>} />
-      <Route exact path="/user" element={<ProfileUser/>} />
-      <Route exact path="/recoverypass/:token" element={<RecoveryPassword/>} />
-      <Route exact path="/register" element={<Register/>} />
-      <Route exact path="/login" element={<Login/>} />
-      <Route exact path="/" element={<LandingPage/>} />
-      <Route path='/detail/:id' element={<Detail/>}/>
-      <Route path='/favorites' element={<Favorites/>}/>
-      <Route exact path="/Home" element={<Home/>}/> 
-      <Route path='*' element={<NotFound/>} />
-      <Route path="/prueba" element={<Orders/>}/>
-      <Route exact path="/edit" element={<Edit/>}/>
+      <Route exact path="/seller" element={<Seller />} />
+      <Route exact path="/user" element={<ProfileUser />} />
+      <Route exact path="/recoverypass/:token" element={<RecoveryPassword />} />
+      <Route exact path="/register" element={<Register />} />
+      <Route exact path="/confirm" element={<ConfirmPassword />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/" element={<LandingPage />} />
+      <Route path="/detail/:id" element={<Detail />} />
+      <Route path="/favorites" element={<Favorites />} />
+      <Route path="/payment" element={<Payment />} />
+      <Route exact path="/Home" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
+      <Route path="/prueba" element={<Orders />} />
+      <Route exact path="/edit" element={<Edit />} />
     </Routes>
   );
 }
