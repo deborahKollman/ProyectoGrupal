@@ -1,4 +1,4 @@
-const {createAdmin, getAllAdmins, getAdminById, updateAdmin, deleteAdmin} = require('../services/admin.js');
+const {createAdmin, getAllAdmins, getAdminById, updateAdmin, deleteAdmin, getAllActiveAdmins} = require('../services/admin.js');
 const {BAD_REQUEST, CREATED, OK} = require('../routes/helpers/status.js')
 const {HOST,PORT}= process.env
 
@@ -19,6 +19,15 @@ exports.postAdmin = async(req,res,next) => {
         else{
             res.status(CREATED).json(admin)
         }
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.getAllActiveAdmins = async(req,res,next) => {
+    try {
+        const r = await getAllActiveAdmins();
+        res.status(OK).json(r)
     } catch (error) {
         next(error)
     }
