@@ -1,4 +1,3 @@
-const { users } = require('../database/data.js');
 const { User, Favorite, Publication, Op } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
 
@@ -29,7 +28,7 @@ exports.checkUser = async (usr) => {
 
 exports.getAllUsers = async ({ page, offset, limit }) => {
   const users = await User.findAll({
-    where: { rol: 'client' },
+    where: {[Op.and]:[{ rol: 'client'},{state:'Active'}] },
     offset: (page - 1) * offset,
     limit,
     order: [['id', 'ASC']]
@@ -57,7 +56,6 @@ exports.getAllUsers = async ({ page, offset, limit }) => {
 exports.createUser = async (newUser) => {
   const hash = bcrypt.hashSync(newUser.password, 10);
   newUser = { ...newUser, password: hash };
-  newUser = { ...newUser, rol: 'client' };
   const [user, created] = await User.findOrCreate({
     where: { email: newUser.email },
     defaults: { ...newUser }
@@ -114,11 +112,7 @@ exports.updatePassword = async (email, password) => {
 exports.deleteUser = async (id) => {
   const user = await User.findByPk(id);
   if (user) {
-    if (user.dataValues.avatar_image) {
-      // fs.unlinkSync(user.dataValues.avatar_image);
-    }
-    await Favorite.destroy({ where: { userId: id } });
-    await User.destroy({ where: { id } });
+    await User.update({state:'Deactivated'}, { where: { id } });
     return { message: 'User deleted successfully' };
   }
   return { err_msg: 'User not found' };
