@@ -26,7 +26,35 @@ exports.checkUser = async (usr) => {
   }
 };
 
-exports.getAllUsers = async ({ page, offset, limit }) => {
+exports.getAllUsers = async ({page, offset, limit}) => {
+  const users = await User.findAll({
+    where: { rol: 'client'},
+    offset: (page - 1) * offset,
+    limit,
+    order: [['id', 'ASC']]
+  });
+  const count = await User.count();
+
+  return {
+    count,
+    page: +page,
+    next:
+      +page >= Math.ceil(count / limit)
+        ? null
+        : `http://localhost:3001/users?page=${
+            +page + 1
+          }&offset=${offset}&limit=${limit}`,
+    previous:
+      +page <= 1
+        ? null
+        : `http://localhost:3001/users?page=${
+            +page - 1
+          }&offset=${offset}&limit=${limit}`,
+    users
+  };
+}
+
+exports.getAllActiveUsers = async ({ page, offset, limit }) => {
   const users = await User.findAll({
     where: {[Op.and]:[{ rol: 'client'},{state:'Active'}] },
     offset: (page - 1) * offset,

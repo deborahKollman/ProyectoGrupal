@@ -1,4 +1,4 @@
-const { checkUser, createUser, getAllUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment, getBuyerComments, getSellerComments, getFavorites, addFavorite, removeFavorite} = require('../services/users.js');
+const { checkUser, createUser, getAllUsers, getAllActiveUsers ,recoverUserPwd, updatePassword,updateUser, deleteUser, addBuyerComment, addSellerComment, getBuyerComments, getSellerComments, getFavorites, addFavorite, removeFavorite} = require('../services/users.js');
 const { User } = require('../database/postgres');
 const { OK, BAD_REQUEST, CREATED } = require('../routes/helpers/status');
 const {HOST,PORT}=process.env
@@ -33,6 +33,28 @@ exports.getUsers = async (req, res, next) => {
   }
   try {
     const response = await getAllUsers(req.query);
+    res.status(OK).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getActiveUsers = async (req, res, next) => {
+  if (!req.query.limit || !req.query.offset) {
+    var avatar_image;
+    if(process.env.API){
+      return res.redirect(
+        `http://${process.env.API}/users?page=1&offset=10&limit=10`
+      )
+    }else{
+      return res.redirect(
+        'http://localhost:3001/users?page=1&offset=10&limit=10'
+      )
+    }
+    
+  }
+  try {
+    const response = await getAllActiveUsers(req.query);
     res.status(OK).json(response);
   } catch (error) {
     next(error);
