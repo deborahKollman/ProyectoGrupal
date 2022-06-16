@@ -20,15 +20,16 @@ exports.checkUser = async(req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   if (!req.query.limit || !req.query.offset) {
     var avatar_image;
-    if(!process.env.API){
-        return res.redirect(
-      'http://localhost:3001/users?page=1&offset=10&limit=10'
-    )
-  }else{
-    return res.redirect(
-      `http://${process.env.API}/users?page=1&offset=10&limit=10`
+    if(process.env.API){
+      return res.redirect(
+        `http://${process.env.API}/users?page=1&offset=10&limit=10`
       )
-  };
+    }else{
+      return res.redirect(
+        'http://localhost:3001/users?page=1&offset=10&limit=10'
+      )
+    }
+    
   }
   try {
     const response = await getAllUsers(req.query);
@@ -52,7 +53,9 @@ exports.postUser = async (req, res, next) => {
     if(created){
       return res.status(CREATED).json(user);
     }
-    return res.status(BAD_REQUEST).json({message:'User not created'})
+    else{
+      return res.status(BAD_REQUEST).json({message:'User not created'})
+    }
   } catch (error) {
     next(error);
   }
@@ -64,10 +67,12 @@ exports.getUserDetail = async (req, res, next) => {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(BAD_REQUEST).send({ message: 'User not found' });
+    }else{
+      return res.status(OK).send({
+        user
+      });
     }
-    return res.status(OK).send({
-      user
-    });
+    
   } catch (error) {
     next(error);
   }
@@ -88,7 +93,10 @@ exports.updateUser = async(req, res, next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg)
     }
-    res.status(OK).send(r.message);
+    else{
+      res.status(OK).send(r.message);
+    }
+    
   } catch (error) {
     next(error);
   }
@@ -101,7 +109,10 @@ exports.deleteUser = async(req, res, next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
-    res.status(OK).send(r.message);
+    else{
+      res.status(OK).send(r.message);
+    }
+    
   } catch (error) {
     next(error)
   }
@@ -113,7 +124,10 @@ exports.recoverUserPwd = async(req,res,next) => {
     if(r.err_msg){
       return res.status(BAD_REQUEST).send(r.err_msg)
     }
-    return res.status(OK).send(r.message)
+    else{
+      return res.status(OK).send(r.message)
+    }
+    
   } catch (error) {
     next(error);
   }
@@ -125,7 +139,10 @@ exports.updatePassword = async(req,res,next) => {
     if(r.err_msg){
       return res.status(BAD_REQUEST).send(r.err_msg)
     }
-    return res.status(OK).send(r.message)
+    else{
+      return res.status(OK).send(r.message)
+    }
+   
   } catch (error) {
     next(error)
   }
@@ -139,7 +156,10 @@ exports.addBuyerOpinion = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
-    res.status(OK).send(r.message)
+    else{
+      res.status(OK).send(r.message)
+    }
+    
   } catch (error) {
     next(error)
   }
@@ -153,7 +173,10 @@ exports.addSellerOpinion = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
-    res.status(OK).send(r.message)
+    else{
+      res.status(OK).send(r.message)
+    }
+    
   } catch (error) {
     next(error)
   }
@@ -167,7 +190,10 @@ exports.getBuyerOpinions = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg)
     }
-    res.status(OK).json(r)
+    else{
+      res.status(OK).json(r)
+    }
+   
   } catch (error) {
     next(error)
   }
@@ -181,7 +207,10 @@ exports.getSellerOpinions = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg)
     }
-    res.status(OK).json(r)
+    else{
+      res.status(OK).json(r)
+    }
+    
   } catch (error) {
     next(error)
   }
@@ -194,7 +223,10 @@ exports.getFavorites = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
-    res.status(OK).json(r);
+    else{
+      res.status(OK).json(r);
+    }
+   
   } catch (error) {
     next(error)
   }
@@ -207,7 +239,10 @@ exports.addFavorite = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
-    res.status(OK).send(r.message);
+    else{
+      res.status(OK).send(r.message);
+    }
+    
   } catch (error) {
     next(error)
   }
@@ -220,7 +255,10 @@ exports.removeFavorite = async(req,res,next) => {
     if(r.err_msg){
       res.status(BAD_REQUEST).send(r.err_msg);
     }
+    else{
     res.status(OK).send(r.message);
+
+    }
   } catch (error) {
     next(error)
   }
