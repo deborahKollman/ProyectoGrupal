@@ -69,13 +69,14 @@ export const getUser = () => {
 // Para traer un usuario, esta repetida
 export const getUserr = (user) => {
   return async (dispatch) => {
-    const { data } = await axios.post("http://localhost:3001/login", user, {
+    const { data } = await axios.post("http://localhost:3001/login", user /* , {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-    });
+    } */);
+    console.log(data,"ACTIONNNNNNNNNNNNN");
     dispatch({
       type: "GET_USER",
       payload: data.user,
@@ -125,7 +126,7 @@ export const jalz_getAllCategories = () => {
       const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
       dispatch({
         type: "JALZ_GET_CATEGORIES",
-        payload: data.map,
+        payload: data,
       });
     } catch (error) {
       return error.message;
@@ -363,6 +364,12 @@ export function confirmPassword(form) {
     } catch (e) {
       console.log(e.message);
     }
-  };
+  }; 
+}
 
+export function myLocalStorageTwo(){ //Ojo al piojo:: hay 2 de estas cuidado se cruzen
+  let productsInLocalStorage = localStorage.getItem('itemCar');
+  productsInLocalStorage = JSON.parse(productsInLocalStorage);
+  console.log(productsInLocalStorage)
+  return productsInLocalStorage
 }

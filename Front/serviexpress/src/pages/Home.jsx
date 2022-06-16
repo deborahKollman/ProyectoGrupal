@@ -106,13 +106,13 @@ export default function Home() {
         )}
       </div>
 
-      <div className="paginationHome">
+      {/* <div className="paginationHome">
         <PaginationHome
           value={allPublications.length}
           pagination={pagination}
           items={PublicationsPerPage}
         ></PaginationHome>
-      </div>
+      </div> */}
 
       <div className="logos"></div>
     </div>

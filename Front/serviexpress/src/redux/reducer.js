@@ -125,6 +125,13 @@ const rootReducer = (state = initialState, action) => {
       };
     case LOGOUT_SESSION:
       window.sessionStorage.removeItem("token");
+      //delete all cokies
+      document.cookie.split(";").forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, "")
+          .replace(/=.*/, "=;expires=" + new Date().toUTCString());
+      });
+      
       return {
         ...state,
         rdcr_isAuth: false,
