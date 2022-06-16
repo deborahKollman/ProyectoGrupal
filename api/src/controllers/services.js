@@ -36,7 +36,10 @@ exports.updateService=async(req,res,next)=>{
     if(r.err_message){
       res.status(BAD_REQUEST).send(r.err_message)
     }
-    res.status(OK).send(r.message);
+    else{
+      res.status(OK).send(r.message);
+
+    }
   } catch (error) {
     next(error);
   }
@@ -49,7 +52,10 @@ exports.deleteService=async(req,res,next)=>{
     if(r.err_message){
       res.status(BAD_REQUEST).send(r.err_message)
     }
-    res.status(OK).send(r.message);
+    else{
+      res.status(OK).send(r.message);
+
+    }
   } catch (error) {
     next(error);
   }
