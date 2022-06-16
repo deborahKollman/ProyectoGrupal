@@ -11,19 +11,17 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import tres from '../media/tres.jpg'
 
-
 const Orders = ({title}) => {
 
   const navigate = useNavigate()
 
   return (
     <div className={Styles.container}>
-      <BurgerButton/>
-       
+      <BurgerButton/>   
        
       <div className={Styles.orders}>
 
-       <Card sx={{ maxWidth: 800, maxHeight: 450, display: 'flex' }}>
+       <Card sx={{ maxWidth: 800, maxHeight: 450, display: 'flex'}}>
       <CardMedia
         component="img"
         maxWidth="100"
@@ -59,7 +57,7 @@ const Orders = ({title}) => {
 
         </div>
         </Card>
-        </div>
+        </div> 
 
       <FooterBar/>
     </div>
