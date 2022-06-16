@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./styles/edit.scss";
 import NavBar from "../components/NavBar/NavBar"
 import { useParams } from "react-router-dom";
-import CardPublications from "../components/CardPublications/CardPublications";
+import CardPublications from "../components/CardPublicationsEdit/CardPublicationsEdit";
 // import styles from "./styles/edit.module.scss";
 
 export default function MyPublications() {
