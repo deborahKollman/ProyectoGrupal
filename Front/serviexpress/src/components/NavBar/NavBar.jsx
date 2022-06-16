@@ -13,7 +13,7 @@ import { IconButton } from "@mui/material";
 const logo = require("../../assets/icons/log.png");
 
 //=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
-const BurgerButton = ({msg}) => {
+const BurgerButton = ({ msg }) => {
   const xDispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");

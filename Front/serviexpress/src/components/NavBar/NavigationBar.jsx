@@ -82,7 +82,7 @@ export const List = styled.ul`
         position: fixed;
         right: 0;
         transform: scale(0.7);
-        z-index: 1;
+        z-index: 7;
       }
     `}
 `;
