@@ -1,4 +1,4 @@
-
+import * as React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 import CardSellerDetail from '../components/CardSellerDetail';
@@ -10,12 +10,14 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 //import ServicesBar from '../components/ServicesBar';
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
-import {getById,getUserById,getUsers} from '../redux/action.js';
+import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites} from '../redux/action.js';
 import { useParams } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {MDBContainer} from "mdbreact";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 export default function Detail(){
@@ -23,21 +25,41 @@ export default function Detail(){
 
     const dispatch = useDispatch();
     const detail = useSelector(state => state.detail);
-    const user = useSelector(state => state.userId);
-    const moreUsers = useSelector(state => state.users)
-  
+    const moreUsers = useSelector(state => state.users);
+    const fav = useSelector(state => state.favorites);
+ 
+  const [checked, setChecked] = useState(false);
+
+
+  const heart = () => {
+    fav.publications && fav.publications.forEach(e => {
+        if(e.id === parseInt(id)) {
+          setChecked(true);
+        }
+
+      })
+
+  };
+   
+
+
+
     useEffect(() => {
         dispatch(getById(id));
         dispatch(getUserById(detail.userId));
         dispatch(getUsers());
+        dispatch(getFavorites(detail.userId));
+        heart();
+
 
     },[dispatch,id,detail.userId]);
 
 
   const [text,setText] = useState();
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  
     const handleClick = (e) => {
         e.preventDefault();
         setText(detail.detail);
@@ -45,12 +67,58 @@ export default function Detail(){
 
     };
 
+    const Alert = React.forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const [open, setOpen] = useState(false);
+
+    const [msgAlert, setMsg] = useState("");
+
+
+
+    const favClicked = () => {   
+        if(checked) {
+          dispatch(removeFavorites(detail.userId, {id: id}));
+          setMsg("Removed from favorites")
+        } 
+        else {
+          dispatch(addToFavorites(detail.userId, {id: id}));
+          setMsg("Added to favorites")
+        }
+
+
+       
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+
+      }
+
+      setOpen(false);
+    };
     
+    
+
+    const heartChange = (event) => {
+      setChecked(event.target.checked);
+    };
+
+   
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
          {/*    <ServicesBar></ServicesBar> */}
           </div>
+
+          <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="info" sx={{ width: '100%' , fontSize: 12}}>
+            {msgAlert}
+         </Alert>
+         </Snackbar>
 
 
         <div className={stylesDetail.division}>
@@ -78,7 +146,7 @@ export default function Detail(){
 
           <div>
               
-              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
           </div>
         </div>
 

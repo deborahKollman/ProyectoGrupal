@@ -23,6 +23,16 @@ const NavigationBar = () => {
     xNavigate(`/${pPath}`);
   };
 
+
+  const handleFav = () =>{
+      console.log("hola");
+      
+  };
+
+
+
+
+
   const renderList = (fixed) => (
     <List fixed={fixed}>
       <BottomNavigationAction
@@ -44,9 +54,8 @@ const NavigationBar = () => {
       <BottomNavigationAction
         label="Favorites"
         icon={<FavoriteIcon fontSize="large" />}
-        onClick={() => {
-          mNavigation("favorites");
-        }}
+        onChange={handleFav}
+        
       />
 
       <BottomNavigationAction
