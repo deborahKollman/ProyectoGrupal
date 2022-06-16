@@ -115,7 +115,7 @@ export const jalz_getAllCategories = () => {
       const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
       dispatch({
         type: "JALZ_GET_CATEGORIES",
-        payload: data.map,
+        payload: data,
       });
     } catch (error) {
       return error.message;
