@@ -13,7 +13,7 @@ import { IconButton } from "@mui/material";
 const logo = require("../../assets/icons/log.png");
 
 //=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
-const BurgerButton = ({msg}) => {
+const BurgerButton = ({ msg }) => {
   const xDispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
@@ -25,12 +25,7 @@ const BurgerButton = ({msg}) => {
 
   useEffect(() => {
     if (Object.keys(user)?.length > 0) {
-      console.log(user);
-      if (user?.photos) {
-        setAvatar(user.photos[0].value);
-      } else {
-        setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
-      }
+      setAvatar(user.avatar);
     }
   }, [avatar, user]);
 
