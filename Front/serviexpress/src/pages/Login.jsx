@@ -41,16 +41,31 @@ const Login = () => {
     password: password.value,
   };
 
+  const [error, setError] = useState({
+    text: "",
+    
+}); 
+
+
   const xNavigate = useNavigate();
 
   const mLocalLoggin = () => {
+    if(data.username === "" || data.password === "") setError({text: "Empty fields"}) ;
+    else{
     xDispatch(getUserr(data));
-    // xNavigate(`/home`);
+    xNavigate(`/home`);
+
+    setError({text: "Incorrect user or password"});
+    }
+
   };
 
   const { rdcr_isAuth, rdcr_user } = useSelector((state) => state);
 
   console.log(rdcr_isAuth, "xdxxdxdxdxxxddd", rdcr_user);
+
+
+
 
   return (
     <div className="page-login">
@@ -73,6 +88,8 @@ const Login = () => {
           <MyTextField required label="E-MAIL" type="email" {...email} />
           <MyTextField label="PASSWORD" type="password" {...password} />
 
+            {<p className="error-div">{error.text}</p>}
+            
           <MyButtonTwo
             variant="contained"
             endIcon={<LockOpenIcon />}

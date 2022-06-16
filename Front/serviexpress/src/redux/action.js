@@ -99,7 +99,7 @@ export const jalz_getAllCategories = () => {
       const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
       dispatch({
         type: "JALZ_GET_CATEGORIES",
-        payload: data,
+        payload: data.map,
       });
     } catch (error) {
       return error.message;
@@ -126,8 +126,8 @@ export function filterCategories(payload) {
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = axios(`${URL}/categories`);
-      return dispatch({ type: "GET_CATEGORIES", payload: json.data });
+      const json = axios.get(`${URL}/categories`);
+      return dispatch({ type: "GET_CATEGORIES", payload: json.data.map((el) => el.name) });
     } catch (error) {
       console.log(error);
     }
@@ -190,7 +190,7 @@ export function getPublicationsName(name) {
     axios
       .get(`http://localhost:3001/publications?title=` + name)
       .then((responese) => {
-        return dispatch({
+         dispatch({
           type: "GET_PUBLICATIONS_NAME",
           payload: responese.data,
         });

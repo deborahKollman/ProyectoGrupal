@@ -88,19 +88,19 @@ passport.use(
   })
 );
 
-router.get('/cookies', (req, res) => {
-  // console.log(req.user);
-  // if (req.user) {
-  //   return res.status(200).send({
-  //     user: req.user
-  //   });
-  // }
-  // res.send(404);
-  console.log(req.cookies);
-  req.cookies = {};
-  console.log(req.cookies);
-  res.send('Cookie deleted');
-});
+// router.get('/cookies', (req, res) => {
+//   console.log(req.user);
+//   if (req.user) {
+//     return res.status(200).send({
+//       user: req.user
+//     });
+//   }
+//   res.send(404);
+//   console.log(req.cookies);
+//   req.cookies = {};
+//   console.log(req.cookies);
+//   res.send('Cookie deleted');
+// });
 
 router.post('/error', async (req, res) => {
   const { username } = req.body;
