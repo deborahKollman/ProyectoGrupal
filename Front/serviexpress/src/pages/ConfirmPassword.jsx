@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./styles/Login.scss";
 import swal from "sweetalert";
+import sweetalert from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { confirmPassword } from "../redux/action";
@@ -53,7 +54,8 @@ const ConfirmPassword = () => {
       });
       navigate("/home");
     } else {
-      swal("Error", "Por favor, revisa los errores", "error");
+      // swal("Error", "Por favor, revisa los errores", "error");
+      sweetalert("Error", "Por favor, revisa los errores", "error");
     }
   };
 
