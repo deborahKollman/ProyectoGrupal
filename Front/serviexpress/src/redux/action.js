@@ -290,17 +290,12 @@ export function confirmPassword(form) {
     } catch (e) {
       console.log(e.message);
     }
-  };
-<<<<<<< HEAD
+  }; 
 }
 
 export function myLocalStorage (){
-  let productsInLocalStorage = localStorage.getItem('itemCar')
-  productsInLocalStorage = JSON.parse(productsInLocalStorage)
+  let productsInLocalStorage = localStorage.getItem('itemCar');
+  productsInLocalStorage = JSON.parse(productsInLocalStorage);
   console.log(productsInLocalStorage)
-  return productsInLocalStorage
+  return (productsInLocalStorage)
 }
-=======
-  
-}
->>>>>>> 301766b1df8246656fcbb44be8093e849439712d
