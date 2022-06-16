@@ -2,19 +2,38 @@ import React, { useState } from "react";
 import { MyButtonThree, MyButtonTwo, MyTextField } from "../elements/Forms";
 import BurgerButton from "../components/NavBar/NavBar.jsx";
 import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./styles/Login.scss";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import { responsiveProperty } from "@mui/material/styles/cssUtils";
-import {useDispatch} from 'react-redux' 
-import {registerUser} from '../redux/action';
+import { useDispatch } from "react-redux";
+import { registerUser } from "../redux/action";
 
+const validate = (form) => {
+  const errors = {};
+  const validate = {
+    name: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
+  };
 
+  if (!form.email) {
+    errors.email = "Por favor, ingresa un correo electrónico";
+  }
+
+  if (!validate.name.test(form.email)) {
+    errors.email = "The e-mail should be a 'example@example.com' format";
+  }
+
+  if (form.password.length < 8) {
+    errors.password = "The password should have 8 characters at least";
+  }
+
+  if (form.password !== form.confirmPassword) {
+    errors.confirmPassword = "The password should match";
+  }
+
+  return errors;
+};
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,13 +48,11 @@ const Register = () => {
     confirmPasswordError: "",
   });
 
-  const [handleError,setHandleError] = useState({
+  const [handleError, setHandleError] = useState({
     email: "",
     password: "",
-  })
-
-
-
+    confirmPassword: "",
+  });
 
   const handleEmailChange = (e) => {
     setInput({
@@ -49,18 +66,6 @@ const Register = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
-
-    /*      if (input.password.length<6) {
-      setInput({
-        ...input,
-        passwordError: 'Password length must have at least 6 characteres'
-      });
-    } */
-
-    /*     if (input.confirmPassword !== input.password) setInput({
-      ...input,
-      'confirmPasswordError': 'Keys do not match'
-    }); */
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -68,94 +73,26 @@ const Register = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
-    /*     if (input.confirmPassword !== input.password) setInput({
-      ...input,
-      confirmPasswordError: 'Keys do not match'
-    }); */
   };
 
-
-
-    const validate = {
-        name: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
-      
-
-
-    }
-
-
-
-
-
-
-
-  
   const buttonHandler = async () => {
-      
-
-      if(!validate.name.test(input.email)) {
-        setHandleError({...handleError, email: "The e-mail should be a 'example@example.com' format"});
-      
-
-      }
-      
-      else if(input.password.length < 8) {
-        setHandleError({...handleError,password: "The password should have 8 characters at least",email:""});
-      }
-
-
-      else{
-        setHandleError({...handleError,password: "",email:""});
-
-      try {
-         const response = await axios.post('http://localhost:3001/users/register', 
-            {
-              email: input.email,
-              password: input.password
-            }, 
-            {headers: { "Content-Type": "application/json" }}
-
-
-      );
-      if (response.data.message === 0) {
-        if (input.password !== input.confirmPassword) {
-          swal({
-            title: "ERROR",
-            text: "Passwords does not match",
-            dangerMode: true,
-          });
-          setInput({
-            ...input,
-            password: "",
-            confirmPassword: "",
-          });
-          return;
-        } else {
-          dispatch(
-            registerUser({ email: input.email, password: input.password }),
-
-          );
-          navigate("/user");
-        }
-      } else if (response.data.message === 1)
-        swal({
-
-          
-          title: "ERROR",
-          text: "Email ya registrado",
-          dangerMode: true,
-        });
-    } catch (e) {
-      console.log(e.message);
+    setHandleError(validate(input));
+    if (Object.keys(handleError).length === 0) {
+      dispatch(registerUser(input));
+      swal("Success", "You have successfully registered", "success");
+      navigate("/home");
+    } else {
+      swal("Error", "Por favor, revisa los errores", "error");
     }
   };
 
+  const mGoogleRegister = () => {
+    window.open("http://localhost:3001/login/register", "_self");
   };
 
   return (
     <div className="page-login">
       <BurgerButton />
-     
 
       <div className="login-container">
         <section className="content">
@@ -163,7 +100,11 @@ const Register = () => {
             Register
           </Typography>
 
-          <MyButtonThree variant="contained" endIcon={<GoogleIcon />}>
+          <MyButtonThree
+            variant="contained"
+            endIcon={<GoogleIcon />}
+            onClick={mGoogleRegister}
+          >
             Register With Google
           </MyButtonThree>
 
@@ -177,9 +118,8 @@ const Register = () => {
           />
           {
             <div className="error-div">
-            <p>{handleError.email}</p>
+              <p>{handleError.email}</p>
             </div>
-            
           }
           <MyTextField
             required
@@ -189,13 +129,11 @@ const Register = () => {
             type="password"
             onChange={(e) => handlePasswordChange(e)}
           />
-                    {
+          {
             <div className="error-div">
-            <p>{handleError.password}</p>
+              <p>{handleError.password}</p>
             </div>
-            
           }
-
 
           <MyTextField
             label="CONFIRM PASSWORD"
@@ -204,6 +142,11 @@ const Register = () => {
             type="password"
             onChange={(e) => handleConfirmPasswordChange(e)}
           />
+          {
+            <div className="error-div">
+              <p>{handleError.confirmPassword}</p>
+            </div>
+          }
 
           <MyButtonTwo
             onClick={(e) => buttonHandler()}

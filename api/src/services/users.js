@@ -117,7 +117,7 @@ exports.deleteUser = async (id) => {
   const user = await User.findByPk(id);
   if (user) {
     if (user.dataValues.avatar_image) {
-      fs.unlinkSync(user.dataValues.avatar_image);
+      // fs.unlinkSync(user.dataValues.avatar_image);
     }
     await Favorite.destroy({ where: { userId: id } });
     await User.destroy({ where: { id } });

@@ -7,7 +7,6 @@ const initialState = {
   switchloading: false,
   detail: { album: [] },
   profileUser: [],
-
   categories: [],
 
   filteredCategories: [],
@@ -81,14 +80,13 @@ const rootReducer = (state = initialState, action) => {
       };
     case "GET_USER":
       window.sessionStorage.setItem("token", payload.id); //>>>>obs
+      const x = payload.hasOwnProperty("id");
 
-      // console.log(payload.user, "REDUCER ----> GET_USER");
+      console.log({ x }, "uwu");
       return {
-
-        
         ...state,
         user: payload,
-        rdcr_isAuth: true,
+        rdcr_isAuth: !!payload.id,
       };
     case "REGISTER_USER":
       return {

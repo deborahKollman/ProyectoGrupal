@@ -15,8 +15,52 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/login/oauth2/redirect/google'
     },
-    function (accessToken, refreshToken, profile, cb) {
-      cb(null, profile);
+    async (accessToken, refreshToken, profile, cb) => {
+      const { emails } = profile;
+      const user = await User.findOne({
+        where: {
+          email: emails[0].value
+        }
+      });
+
+      if (user) {
+        console.log('Login success');
+        return cb(null, user);
+      }
+      return cb(null, false);
+    }
+  )
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/login/oauth2/redirect/register'
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+      const { emails } = profile;
+      const [user, created] = await User.findOrCreate({
+        where: {
+          email: emails[0].value
+        },
+        defaults: {
+          email: emails[0].value,
+          name: profile.name.givenName,
+          last_name: profile.name.familyName,
+          avatar_image: profile.photos[0].value
+        }
+      });
+
+      if (created) {
+        console.log(user.toJSON());
+        console.log('Register success');
+        return cb(null, user);
+      } else {
+        console.log('Register fail');
+        return cb(null, false);
+      }
     }
   )
 );
@@ -30,33 +74,51 @@ passport.deserializeUser(function (user, cb) {
 });
 
 router.get('/error', (req, res) => {
-  res.send('Hubo algun error');
+  if (Object.keys(req.user).length === 0) {
+    console.log('Este usuario no existe');
+    res.redirect('http://localhost:3000/register');
+  } else {
+    console.log('Este usuario ya existe');
+    // res.redirect('http://localhost:3000/login');
+  }
 });
 
 router.get('/success', async (req, res) => {
-  if (req.user) {
-    const {
-      emails: [{ value }]
-    } = req.user;
-    const user = await User.findOne({
-      where: {
-        email: value
-      }
-    });
-    if (user) {
-      return res.send({ user: req.user });
-    } else {
-      return res.send({
-        message: 'Este usuario no existe registrate!'
-      });
-    }
+  if (Object.keys(req.user).length !== 0) {
+    return res.status(200).send(req.user);
   }
-  return res.redirect('http://localhost:3000');
+});
+
+router.put('/confirm', async (req, res) => {
+  const { confirmPassword, id } = req.body;
+
+  const user = await User.findByPk(id);
+
+  await user.update({
+    password: bcrypt.hashSync(confirmPassword, 10)
+  });
+
+  return res.status(200).send(user);
 });
 
 router.get(
   '/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get(
+  '/register',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get(
+  '/oauth2/redirect/register',
+  passport.authenticate('google', {
+    failureRedirect: '/login/error'
+  }),
+  (req, res) => {
+    res.redirect('http://localhost:3000/confirm');
+  }
 );
 
 router.get(
