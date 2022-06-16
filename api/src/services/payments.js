@@ -20,7 +20,7 @@ exports.postPayment= async(stripeid, amount)=>{
             confirm:true
         });
         const r = await Payment.create({stripeid,amount})
-        console.log('El payment',payment)
+        console.log('El payment', payment)
         return payment;
     }
     catch(error) {
