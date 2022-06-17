@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, ENUM } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -80,6 +80,10 @@ module.exports = (sequelize) => {
       seller_opinions: {
         type: DataTypes.ARRAY(DataTypes.JSON),
         defaultValue: []
+      },
+      state:{
+        type: DataTypes.STRING,
+        defaultValue: 'Active'
       }
     },
     {

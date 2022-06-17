@@ -1,27 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import "./CardPublications.scss";
+import "./CardPublicationsEdit.scss";
 import { BsStarFill, BsStar } from 'react-icons/bs'
 import Carousel from 'react-bootstrap/Carousel';
-import { useDispatch, useSelector } from "react-redux";
 
 
- 
 
-
-const CardPublications = ({ id, summary, album, title, price, userId }) => {
-const dispatch = useDispatch()
-
-const users = useSelector((state) => state.users);
-const user = users.find((u)=>u.id===userId)
-
-const score = user.seller_reputation
-const scoreStar = [];
-const scoreStarTotal = [];
-const totalStar = 5-score;
+const CardPublications = ({ id, summary, album, title, price }) => {
+  const score=3
+  const scoreStar = [];
+  const scoreStarTotal = [];
+  const totalStar = 5-score;
   for (let i = 0; i < score; i++) {
     scoreStar.push(i);
   };
@@ -33,7 +22,7 @@ const totalStar = 5-score;
       <div className="card">
        
 
-        <Link className="link" to={`/Detail/${id}`}>
+        <Link className="link" to={`/DetailEdit`}>
           <div className="card-image">
           
             <div>
@@ -64,9 +53,7 @@ const totalStar = 5-score;
             <div className="pricebox">
             <p className="titleprice">Starting at : USD {price} </p>
             </div>
-            <div className="like">
-            <Checkbox  icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
-            </div>
+           
            </div>
           </div>
 
