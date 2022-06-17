@@ -11,7 +11,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites} from '../redux/action.js';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -164,10 +164,10 @@ export default function Detail(){
        <div> ${detail.price} </div>
        
        </div>
-
+       
 
     </div>
-
+        <Link to={`/payment/${id}`}>Buy</Link>
         <div className={stylesDetail.about}>
         <h3>About Services</h3>
           <p>{detail.detail_resume}</p>

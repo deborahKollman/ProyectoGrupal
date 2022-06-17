@@ -10,17 +10,19 @@ exports.getPayments=async()=>{
 }
 
 exports.postPayment= async(stripeid, amount)=>{
+    
     try {
         
         console.log('Grabo el Stripe Id:', stripeid, ' y el monto:',amount)
         const payment = await stripe.paymentIntents.create({
             amount,
-            currency: 'U$S',
+            currency: 'USD',
             payment_method: stripeid,
-            confirm:true
+            confirm: true
         });
-        const r = await Payment.create({stripeid,amount})
-        console.log('El payment', payment)
+/*         const r = await Payment.create({stripeid,amount})
+        console.log('El payment',payment)
+        return payment; */
         return payment;
     }
     catch(error) {
