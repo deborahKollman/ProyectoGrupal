@@ -1,9 +1,18 @@
-import { LIGHT, DARK, TOGGLE } from "./action";
+import { 
+  LIGHT, 
+  DARK, 
+  TOGGLE, 
+  GET_ALL_USERS,
+  GET_USER_BY_ID
+} from "./action";
+
 const initialState = {
   rdcr_darkMode: false,
+  rdcr_users: [],
+  rdcr_user: {},
 };
 const rootReducer = (state = initialState, action) => {
-  const { type } = action;
+  const { type, payload } = action;
   const { rdcr_darkMode } = state;
   switch (type) {
     case LIGHT: {
@@ -20,6 +29,18 @@ const rootReducer = (state = initialState, action) => {
     case TOGGLE: {
       return {
         rdcr_darkMode: !rdcr_darkMode,
+      };
+    }
+    case GET_ALL_USERS: {
+      return {
+        ...state,
+        rdcr_users: payload,
+      };
+    }
+    case GET_USER_BY_ID: {
+      return {
+        ...state,
+        rdcr_user: payload,
       };
     }
     default: {

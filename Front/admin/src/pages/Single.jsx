@@ -2,9 +2,23 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import "./styles/Single.scss";
 import Chart from "../components/Chart";
-import Datatable from "../components/Datatable";
+import Datatable from "../components/DataTable/Datatable";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { act_getUserById } from "../redux/action";
 
 const Single = () => {
+
+  const {userId} = useParams();
+  const xDispatch = useDispatch();
+  useEffect(() => {
+    xDispatch(act_getUserById(userId));
+  }, [xDispatch, userId]);
+  const {rdcr_user} = useSelector(state => state);
+
+  console.log(rdcr_user);
+
   return (
     <div className="single">
       <Sidebar />
