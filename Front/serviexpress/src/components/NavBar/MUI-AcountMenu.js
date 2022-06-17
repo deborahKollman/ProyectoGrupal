@@ -9,12 +9,12 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { act_logout } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
-export default function AccountMenu() {
+export default function AccountMenu({ avatar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -23,13 +23,25 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  
   const xNavigate = useNavigate();
 
   const xDispatch = useDispatch();
   const mLogout = () => {
-    xDispatch(act_logout());
+    fetch("http://localhost:3001/login/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ data: 1 }),
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        window.sessionStorage.removeItem("token");
+        xDispatch(act_logout());
+      });
   };
 
   return (
@@ -44,7 +56,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar src={avatar} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -85,12 +97,16 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-
         <MenuItem>
-          <Avatar /> Profile
+          <Avatar src={avatar} />
+          Profile
         </MenuItem>
         <Divider />
-        <MenuItem onClick={()=>{xNavigate('/seller/add-service')}}>
+        <MenuItem
+          onClick={() => {
+            xNavigate("/seller/add-service");
+          }}
+        >
           <ListItemIcon>
             <AttachMoneyIcon fontSize="small" sx={{ color: "#fff" }} />
           </ListItemIcon>
@@ -109,7 +125,6 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
       </Menu>
-      
     </React.Fragment>
   );
 }
