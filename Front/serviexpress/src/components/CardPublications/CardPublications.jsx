@@ -9,8 +9,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import { useDispatch, useSelector } from "react-redux";
 
 
- 
-
 
 const CardPublications = ({ id, summary, album, title, price, userId }) => {
 const dispatch = useDispatch()
