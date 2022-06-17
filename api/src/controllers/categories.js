@@ -1,4 +1,4 @@
-const { getCategories , getCategorieById, postCategory, deleteCategory, updateCategory} = require('../services/categories.js');
+const { getCategories , getCategoriesOnly, getCategorieById, postCategory, deleteCategory, updateCategory} = require('../services/categories.js');
 const {BAD_REQUEST, CREATED, OK} =require('../routes/helpers/status.js')
 
 exports.getCategories = async (req, res, next) => {
@@ -10,7 +10,16 @@ exports.getCategories = async (req, res, next) => {
   }
 };
 
- exports.getCategorieById =async (req, res, next) => {
+exports.getCategoriesOnly = async (req,res,next) => {
+  try {
+    const r = await getCategoriesOnly();
+    res.status(OK).json(r);
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.getCategorieById =async (req, res, next) => {
   try {
     const r = await getCategorieById(req.params.id);
     res.status(OK).json(r);
