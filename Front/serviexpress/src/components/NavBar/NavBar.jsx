@@ -5,16 +5,16 @@ import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getUserr } from "../../redux/action";
 import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
 import { IconButton } from "@mui/material";
+import { getUser } from "../../redux/action";
 
 const logo = require("../../assets/icons/log.png");
 
 //=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
 const BurgerButton = ({ msg }) => {
-  const xDispatch = useDispatch();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
   const mReloadOpen = () => {
@@ -22,21 +22,16 @@ const BurgerButton = ({ msg }) => {
   };
 
   const { user } = useSelector((state) => state);
+  const { rdcr_isAuth } = useSelector((state) => state);
 
   useEffect(() => {
     if (Object.keys(user)?.length > 0) {
-      console.log(user);
-      if (user?.photos) {
-        setAvatar(user.photos[0].value);
-      } else {
-        setAvatar("https://cdn-icons-png.flaticon.com/512/107/107831.png");
-      }
-    } /* else {
-      xDispatch(getUserr()); // OJO AL PIOJO xD : POR REVISAR ::
-    } */
-  }, [ avatar, user, /* xDispatch */]);
-
-  const { rdcr_isAuth } = useSelector((state) => state);
+      setAvatar(user.avatar_image);
+    }
+    if (!rdcr_isAuth && user.password) {
+      dispatch(getUser());
+    }
+  }, [avatar, rdcr_isAuth]);
 
   return (
     <MyHeader pOpen={open}>
@@ -57,8 +52,7 @@ const BurgerButton = ({ msg }) => {
       </div>
 
       <SearchGroup msg={msg} />
-
-      {!rdcr_isAuth ? <InitialSession /> : <LoginSession pAvatar={avatar} />}
+      {!rdcr_isAuth ? <InitialSession /> : <LoginSession avatar={avatar} />}
 
       <ListNav pOpen={open}>
         <li>

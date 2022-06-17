@@ -10,10 +10,11 @@ import "./styles/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, getUserr, fakeLogin } from "../redux/action";
-import axios from "axios";
-
-
+import {
+  getUserr,
+  getErrorRegister,
+  clearErrorRegister,
+} from "../redux/action";
 
 const HookInputValue = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -41,31 +42,33 @@ const Login = () => {
     password: password.value,
   };
 
+  const { errorLogin, rdcr_isAuth } = useSelector((state) => state);
   const [error, setError] = useState({
     text: "",
-    
-}); 
-
+  });
 
   const xNavigate = useNavigate();
 
   const mLocalLoggin = () => {
-    if(data.username === "" || data.password === "") setError({text: "Empty fields"}) ;
-    else{
-    xDispatch(getUserr(data));
-    xNavigate(`/home`);
-
-    setError({text: "Incorrect user or password"});
+    if (data.username === "" || data.password === "")
+      setError({ text: "Empty fields" });
+    else {
+      xDispatch(getUserr(data));
+      xDispatch(clearErrorRegister());
     }
-
   };
 
-  const { rdcr_isAuth, rdcr_user } = useSelector((state) => state);
-
-  console.log(rdcr_isAuth, "xdxxdxdxdxxxddd", rdcr_user);
-
-
-
+  useEffect(() => {
+    xDispatch(getErrorRegister());
+    if (Object.keys(errorLogin).length > 0) {
+      setError({ text: errorLogin });
+    } else {
+      setError({ text: "" });
+    }
+    if (rdcr_isAuth) {
+      xNavigate("/home");
+    }
+  }, [errorLogin, rdcr_isAuth]);
 
   return (
     <div className="page-login">
@@ -88,8 +91,8 @@ const Login = () => {
           <MyTextField required label="E-MAIL" type="email" {...email} />
           <MyTextField label="PASSWORD" type="password" {...password} />
 
-            {<p className="error-div">{error.text}</p>}
-            
+          {<p className="error-div">{error.text}</p>}
+
           <MyButtonTwo
             variant="contained"
             endIcon={<LockOpenIcon />}
