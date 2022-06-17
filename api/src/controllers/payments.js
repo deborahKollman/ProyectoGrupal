@@ -13,7 +13,7 @@ exports.getPayments = async (req, res, next) => {
 exports.postPayment = async (req, res, next) => {
     try {
         const r = await postPayment(req.body.stripeid, req.body.amount);
-        res.status(CREATED).send(r);
+        res.status(CREATED).send({message: r});
       } catch (error) {
         next(error);
       }

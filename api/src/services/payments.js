@@ -23,11 +23,12 @@ exports.postPayment= async(stripeid, amount)=>{
 /*         const r = await Payment.create({stripeid,amount})
         console.log('El payment',payment)
         return payment; */
-        return payment;
+        console.log(payment);
+        return "Service purchased";
     }
     catch(error) {
         console.log(error)
-        return (error)
+        return (error.raw.message)
     }
 }
 

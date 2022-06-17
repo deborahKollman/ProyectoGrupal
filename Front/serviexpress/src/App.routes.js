@@ -14,7 +14,7 @@ import Home from "./pages/Home";
 import CreateService from "./pages/CreateService";
 import { useSelector } from "react-redux";
 
-import Edit from "./pages/edit.jsx";
+
 import Payment from "./components/Payment.jsx";
 
 import MyPublications from "./pages/MyPublications";
