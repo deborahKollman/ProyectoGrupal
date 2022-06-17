@@ -62,6 +62,9 @@ const CardPublications = ({ id, summary, album, title, price }) => {
             <div className="pricebox">
             <p className="titleprice">Starting at : USD {price} </p>
             </div>
+            <div>
+              <p className="delete">❌</p>
+            </div>
            
            </div>
           </div>
