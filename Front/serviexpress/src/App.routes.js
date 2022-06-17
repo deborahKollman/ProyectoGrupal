@@ -17,7 +17,6 @@ import { useSelector } from "react-redux";
 
 // import Edit from "./pages/edit.jsx";
 import Payment from "./components/Payment.jsx";
-
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
 

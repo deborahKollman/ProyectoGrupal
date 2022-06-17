@@ -22,11 +22,9 @@ const { HOST, PORT } = process.env;
 exports.checkUser = async (req, res, next) => {
   // Retorna {message: 1} si lo encuentra; sino  {message: 0}
   try {
-    const { email, password } = req.body;
-    console.log('mail:', email, 'Pas:', password);
+    const {email, password} = req.body;
     const r = await checkUser(email);
-    console.log('checkusr', r.message);
-    res.status(OK).send(r);
+    res.status(OK).send(r)
   } catch (error) {
     next(error);
   }
@@ -37,12 +35,12 @@ exports.getUsers = async (req, res, next) => {
     let avatar_image;
     if (process.env.API) {
       return res.redirect(
-        `http://${process.env.API}/users?page=1&offset=10&limit=10`
-      );
-    } else {
+        `http://${process.env.API}/users/all?page=1&offset=10&limit=10`
+      )
+    }else{
       return res.redirect(
-        'http://localhost:3001/users?page=1&offset=10&limit=10'
-      );
+        'http://localhost:3001/users/all?page=1&offset=10&limit=10'
+      )
     }
   }
   try {
