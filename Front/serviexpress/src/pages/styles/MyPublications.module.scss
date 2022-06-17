@@ -1,0 +1,22 @@
+
+
+  .conteineredit {
+    font-size: 50px;
+    zoom: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    justify-content: center;
+    gap: 1em;
+    // top: 70px;
+    /* margin-left: 150px; */
+    /* grid-template-rows: auto; */
+  justify-items: center;
+  }
+
+  .title{
+    display: grid;
+    grid-column: 1/4;
+    text-align: left;
+    margin: 50px;
+  }
