@@ -6,7 +6,6 @@ export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
-
 const URL = `http://localhost:3001`;
 export const types = {
   ADD_TO_CART: 'ADD_TO_CART',
@@ -16,7 +15,7 @@ export const types = {
 }
 
 export const myLocalStorage = () => {
-  let productsInLocalStorage = localStorage.getItem('itemCar')
+  let productsInLocalStorage = localStorage.getItem('service')
   productsInLocalStorage = JSON.parse(productsInLocalStorage)
   console.log(productsInLocalStorage)
   return productsInLocalStorage
