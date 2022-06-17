@@ -5,6 +5,7 @@ import Login from "./pages/Login.jsx";
 import Detail from "./pages/Detail.jsx";
 import Register from "./pages/Register.jsx";
 import ConfirmPassword from "./pages/ConfirmPassword.jsx";
+import SendEmail from "./pages/SendEmail.jsx";
 import RecoveryPassword from "./pages/RecoveryPassword.jsx";
 import Seller from "./pages/Seller.jsx";
 import ProfileUser from "./pages/ProfileUser.jsx";
@@ -31,9 +32,10 @@ function App() {
 
       <Route exact path="/seller" element={<Seller />} />
       <Route exact path="/user" element={<ProfileUser />} />
-      <Route exact path="/recoverypass/:token" element={<RecoveryPassword />} />
+      <Route exact path="/recoverypass" element={<RecoveryPassword />} />
       <Route exact path="/register" element={<Register />} />
       <Route exact path="/confirm" element={<ConfirmPassword />} />
+      <Route exact path="/sendEmail/:type" element={<SendEmail />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />

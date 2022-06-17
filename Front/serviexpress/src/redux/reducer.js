@@ -25,6 +25,7 @@ const initialState = {
   cart: [],
   errorLogin: {},
   errorRegister: {},
+  mailSend: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -168,7 +169,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_ERROR_REGISTER":
       return {
         ...state,
-        errorRegister: action.payload.message,
+        errorLogin: action.payload.message,
       };
     case "CLEAR_ERROR_REGISTER":
       return {
@@ -184,6 +185,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         reg_user: {},
+      };
+    case "SEND_MAIL":
+      return {
+        ...state,
+        mailSend: action.payload,
       };
     default:
       return state;
