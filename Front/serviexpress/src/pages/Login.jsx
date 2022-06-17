@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
+import Alert from '@mui/material/Alert';
 
 import "./styles/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -50,7 +51,7 @@ const Login = () => {
   const xNavigate = useNavigate();
 
   const mLocalLoggin = () => {
-    if(data.username === "" || data.password === "") setError({text: "Empty fields"}) ;
+    if(data.username === "" || data.password === "") setError({text: "Please,complet the empty field"}) ;
     else{
     xDispatch(getUserr(data));
     xNavigate(`/home`);
@@ -88,8 +89,9 @@ const Login = () => {
           <MyTextField required label="E-MAIL" type="email" {...email} />
           <MyTextField label="PASSWORD" type="password" {...password} />
 
-            {<p className="error-div">{error.text}</p>}
-            
+
+          {error.text ? <Alert severity="error" sx={{width: '260px', m: 0.5}} >{error.text}</Alert> : null}
+
           <MyButtonTwo
             variant="contained"
             endIcon={<LockOpenIcon />}
