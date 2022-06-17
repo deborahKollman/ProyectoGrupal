@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CardPublicationsEdit.scss";
-import { BsStarFill, BsStar } from 'react-icons/bs'
+import { BsStarFill, BsStar, BsTypeH2 } from 'react-icons/bs'
 import Carousel from 'react-bootstrap/Carousel';
 
 
@@ -22,7 +22,7 @@ const CardPublications = ({ id, summary, album, title, price }) => {
       <div className="card">
        
 
-        <Link className="link" to={`/DetailEdit`}>
+        
           <div className="card-image">
           
             <div>
@@ -38,9 +38,18 @@ const CardPublications = ({ id, summary, album, title, price }) => {
     
           </div>
           </div>
-          </Link>
+          
           <div className="card-text">
-            <h6 className="titlec">{title}</h6>
+          <div className="divtitlec">
+            <div className="divtitlee">
+            <h6 className="titlec">{title}</h6> 
+            </div>
+            <div>
+            <Link className="link" to={`/DetailEdit`}>
+            <p className="editt">(edit publication)✏️</p>
+            </Link>
+            </div>
+            </div>
             <p className="titlesummary">{summary}</p>
             <div className='card-stats'>
                     <div className='stat'>
@@ -52,6 +61,9 @@ const CardPublications = ({ id, summary, album, title, price }) => {
             <div className="UL">
             <div className="pricebox">
             <p className="titleprice">Starting at : USD {price} </p>
+            </div>
+            <div>
+              <p className="delete">❌</p>
             </div>
            
            </div>
