@@ -61,7 +61,9 @@ exports.getAllActiveUsers = async ({ page, offset, limit }) => {
     limit,
     order: [['id', 'ASC']]
   });
-  const count = await User.count();
+  const count = await User.count({
+    where:{state:'Active'}
+  });
 
   return {
     count,
