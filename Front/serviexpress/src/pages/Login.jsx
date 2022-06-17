@@ -51,20 +51,11 @@ const Login = () => {
   const xNavigate = useNavigate();
 
   const mLocalLoggin = () => {
-<<<<<<< HEAD
     if (data.username === "" || data.password === "")
       setError({ text: "Empty fields" });
     else {
       xDispatch(getUserr(data));
       xDispatch(clearErrorRegister());
-=======
-    if(data.username === "" || data.password === "") setError({text: "Please,complet the empty field"}) ;
-    else{
-    xDispatch(getUserr(data));
-    xNavigate(`/home`);
-
-    setError({text: "Incorrect user or password"});
->>>>>>> eac6cc932310a2797a62b80c6b4d360c421221c4
     }
   };
 
