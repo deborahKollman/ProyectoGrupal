@@ -17,6 +17,13 @@ exports.getCategories = async () => {
   return categories;
 };
 
+exports.getCategoriesOnly = async () => {
+  //Esta funcion solo retorna categorias
+  const categories = await Category.findAll();
+  
+  return categories;
+}
+
 exports.getCategorieById=async(id)=>{
   const category= await Category.findOne({
     where:{id:id},
