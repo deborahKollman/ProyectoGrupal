@@ -9,7 +9,7 @@
     font-family: roboto;
     text-align: center;
     transition: 0.5s ease;
-    cursor: pointer;
+    
     /* margin:30px; */
     box-shadow: 0 0 6px 2px rgba(135, 122, 83, 0.75),
       0 40px 25px -15px rgba(0, 0, 0, 0.35);
@@ -129,3 +129,31 @@
     
 }
 
+.divtitlec{
+ display: flex;
+gap: 10px;
+//  background-color: aqua;
+ width: 270px;
+}
+
+
+.editt{
+  display: flex;
+  zoom: 100%;
+  text-align: right;
+  color: rgb(255, 0, 93);
+  margin-right: 5px;
+
+  cursor: pointer;
+  
+  // background-color: aqua;
+}
+
+.editt:hover{
+  transform: scale(1.1);
+}
+
+.divtitlee{
+  // background-color: aqua;
+  text-align: left;
+}

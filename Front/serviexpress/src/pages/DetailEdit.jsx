@@ -8,7 +8,8 @@ export default function DetailEdit(){
 
 return(
     <div>
-    <h1>Hello word</h1>
+     <NavBar></NavBar>
+    <h1>AQUI SE VA A EDITAR LA PUBLICATION</h1>
     </div>
 )
 
