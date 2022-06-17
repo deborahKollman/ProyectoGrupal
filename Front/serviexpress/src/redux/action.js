@@ -369,6 +369,7 @@ export function getErrorRegister() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`${URL}/register/error`);
+      console.log(data);
       dispatch({
         type: "GET_ERROR_REGISTER",
         payload: data,
@@ -394,5 +395,22 @@ export function clearUserRegister() {
     dispatch({
       type: "CLEAR_USER_REGISTER",
     });
+  };
+}
+
+export function sendEmail({ email, type }) {
+  return async (dispatch) => {
+    try {
+      console.log(type);
+      const { data } = await axios.post(`${URL}/email?type=${type}`, {
+        email,
+      });
+      dispatch({
+        type: "SEND_MAIL",
+        payload: !!data.state,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

@@ -60,11 +60,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // xDispatch(getErrorRegister());
     if (Object.keys(errorLogin).length > 0) {
       setError({ text: errorLogin });
-      // xDispatch(clearErrorRegister());
     } else {
+      xDispatch(getErrorRegister());
       setError({ text: "" });
     }
     if (rdcr_isAuth) {
@@ -94,7 +93,10 @@ const Login = () => {
           <MyTextField label="PASSWORD" type="password" {...password} />
 
           {error.text ? (
-            <Alert severity="error" sx={{ width: "260px", m: 0.5 }}>
+            <Alert
+              severity="error"
+              sx={{ width: "260px", m: 0.5, fontSize: "1.3rem" }}
+            >
               {error.text}
             </Alert>
           ) : null}
@@ -122,7 +124,7 @@ const Login = () => {
                 Remember me
               </Typography>
             </div>
-            <Link to="/#">Forgot Password</Link>
+            <Link to="/sendEmail/recovery">Forgot Password</Link>
           </div>
 
           <Typography variant="body1" color="initial">
