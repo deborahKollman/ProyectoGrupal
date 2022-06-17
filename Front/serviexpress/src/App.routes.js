@@ -40,7 +40,7 @@ function App() {
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/favorites" element={<Favorites />} />
-      <Route path="/payment" element={<Payment />} />
+      <Route path="/payment/:id" element={<Payment />} />
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/prueba" element={<Orders />} />
