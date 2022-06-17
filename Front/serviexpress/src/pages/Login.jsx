@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
 import "./styles/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -60,9 +60,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    xDispatch(getErrorRegister());
+    // xDispatch(getErrorRegister());
     if (Object.keys(errorLogin).length > 0) {
       setError({ text: errorLogin });
+      // xDispatch(clearErrorRegister());
     } else {
       setError({ text: "" });
     }
@@ -92,12 +93,11 @@ const Login = () => {
           <MyTextField required label="E-MAIL" type="email" {...email} />
           <MyTextField label="PASSWORD" type="password" {...password} />
 
-<<<<<<< HEAD
-          {<p className="error-div">{error.text}</p>}
-=======
-
-          {error.text ? <Alert severity="error" sx={{width: '260px', m: 0.5}} >{error.text}</Alert> : null}
->>>>>>> eac6cc932310a2797a62b80c6b4d360c421221c4
+          {error.text ? (
+            <Alert severity="error" sx={{ width: "260px", m: 0.5 }}>
+              {error.text}
+            </Alert>
+          ) : null}
 
           <MyButtonTwo
             variant="contained"

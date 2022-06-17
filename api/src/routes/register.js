@@ -42,7 +42,6 @@ passport.serializeUser((user, cb) => cb(null, user));
 passport.deserializeUser((user, cb) => cb(null, user));
 
 router.get('/error', (req, res) => {
-  console.log(req.sessionStore.sessions);
   if (Object.keys(req.sessionStore.sessions).length > 0) {
     res.send({ message: 'User already registered' });
   } else {

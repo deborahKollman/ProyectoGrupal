@@ -168,7 +168,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_ERROR_REGISTER":
       return {
         ...state,
-        errorLogin: action.payload.message,
+        errorRegister: action.payload.message,
       };
     case "CLEAR_ERROR_REGISTER":
       return {
