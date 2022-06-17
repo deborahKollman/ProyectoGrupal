@@ -5,6 +5,7 @@ export const DARK = "DARK";
 export const TOGGLE = "TOGGLE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 
 // const URL = "http://localhost:3001/";
 
@@ -49,6 +50,22 @@ export function act_getUserById(pIdentity) {
       dispatch({ 
         type: GET_USER_BY_ID, 
         payload: data.user 
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function act_getAllCategories() {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/categories`
+      );
+      dispatch({ 
+        type: GET_ALL_CATEGORIES, 
+        payload: data
       });
     } catch (error) {
       console.log(error);

@@ -19,12 +19,12 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="users">
-            <Route index element={<List />} />
+            <Route index element={<List pType={"USER"} />} />
             <Route path=":userId" element={<Single />} />
             <Route path="new" element={<New inputs={aUserInputs} />} />
           </Route>
           <Route path="categories">
-            <Route index element={<List />} />
+            <Route index element={<List pType={"CATEGORY"} />} />
             <Route path=":productId" element={<Single />} />
             <Route path="new" element={<New inputs={aProductInputs} />} />
           </Route>

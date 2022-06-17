@@ -3,13 +3,40 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import { userColumns } from "./FormatTable";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FeedIcon from '@mui/icons-material/Feed';
+import { useEffect } from "react";
+import { act_getAllCategories, act_getAllUsers } from "../../redux/action";
 
-const Datatable = () => {
-  const { rdcr_users } = useSelector((state) => state);
+const Datatable = ({pType}) => {
+
+  let fAction;
+  let aRows = [];
+  let aPersonalColumns = [];
+
+  const oStatesOfRdcr = useSelector((state) => state);
+
+  switch(pType){
+    case "USER":
+      fAction = act_getAllUsers;
+      aRows = oStatesOfRdcr.rdcr_users;
+      aPersonalColumns = userColumns;
+      break;
+    case "CATEGORY":
+      fAction = act_getAllCategories;
+      aRows = oStatesOfRdcr.rdcr_categories;
+      break;
+    default: break;
+  }
+  
+  const xDispatch = useDispatch()
+  useEffect(() => {
+    xDispatch(fAction());
+  }, [xDispatch], [pType], [fAction])
+
+  console.log(aRows,"AAAAAAAAAAAAAAAAAAAAAA")
 
   const actionColumn = [
     {
@@ -56,8 +83,8 @@ const Datatable = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={rdcr_users}
-        columns={userColumns.concat(actionColumn)}
+        rows={aRows}
+        columns={aPersonalColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
