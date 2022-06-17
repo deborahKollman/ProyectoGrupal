@@ -24,17 +24,21 @@ server.use(
   })
 );
 server.use(express.static('public'));
-server.use(
-  cookieSession({
-    name: 'session',
-    keys: ['key1', 'key2']
-  })
-);
+// server.use(
+//   cookieSession({
+//     name: 'session',
+//     keys: ['key1', 'key2'],
+//     maxAge: 24 * 60 * 60 * 1000
+//   })
+// );
 server.use(
   session({
     secret: 'secret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000
+    }
   })
 );
 server.use(passport.initialize());
@@ -50,6 +54,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
+
 // root of routes
 server.use('/', router);
 // Endwares
