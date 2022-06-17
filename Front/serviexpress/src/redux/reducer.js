@@ -13,9 +13,7 @@ const initialState = {
   switchloading: false,
   detail: { album: [] },
   profileUser: [],
-
   favorites: [],
-
   categories: [],
 
   filteredCategories: [],

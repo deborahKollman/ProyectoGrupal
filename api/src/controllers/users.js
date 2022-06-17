@@ -2,6 +2,7 @@ const {
   checkUser,
   createUser,
   getAllUsers,
+  getAllActiveUsers,
   recoverUserPwd,
   updatePassword,
   updateUser,
@@ -46,6 +47,27 @@ exports.getUsers = async (req, res, next) => {
   }
   try {
     const response = await getAllUsers(req.query);
+    res.status(OK).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getActiveUsers = async (req, res, next) => {
+  if (!req.query.limit || !req.query.offset) {
+    let avatar_image;
+    if (process.env.API) {
+      return res.redirect(
+        `http://${process.env.API}/users?page=1&offset=10&limit=10`
+      );
+    } else {
+      return res.redirect(
+        'http://localhost:3001/users?page=1&offset=10&limit=10'
+      );
+    }
+  }
+  try {
+    const response = await getAllActiveUsers(req.query);
     res.status(OK).json(response);
   } catch (error) {
     next(error);

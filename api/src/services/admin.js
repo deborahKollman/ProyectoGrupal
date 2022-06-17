@@ -10,6 +10,15 @@ exports.createAdmin = async(properties) => {
     });
    return [admin,created]
 }
+
+exports.getAllActiveAdmins = async() => {
+    const admins = await User.findAll({
+        attributes:{exclude:['buyer_reputation','buyer_opinions','seller_reputation','seller_opinions']},
+        where:{[Op.and]: [{rol:'admin'},{state:'Active'}]},
+        order: [['id', 'ASC']]
+    });
+    return admins
+}
  
 exports.getAllAdmins = async() => {
     const admins = await User.findAll({
@@ -43,7 +52,7 @@ exports.updateAdmin = async(id,changes) => {
 exports.deleteAdmin = async(id) => {
     const admin = await User.findByPk(id);
     if(admin){
-        await User.destroy({where:{id}})
+        await User.update({state: 'Deactivated'},{where:{id}})
         return {message:'Admin deleted successfully'}
     }
     return {err_message:'Admin not found'}

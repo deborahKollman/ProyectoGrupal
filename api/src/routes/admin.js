@@ -1,12 +1,16 @@
 const {Router} = require('express');
-const {getAllAdmins, getAdminById, postAdmin, updateAdmin, deleteAdmin} = require('../controllers/admin.js')
+const {getAllAdmins, getAdminById, postAdmin, updateAdmin, deleteAdmin, getAllActiveAdmins} = require('../controllers/admin.js')
+const {checkUser} = require('../controllers/users.js')
 const router=Router();
 const {upload } = require('../middlewares/index.js')
 
-router.get('/',getAllAdmins);
+router.get('/all',getAllAdmins);
+router.get('/',getAllActiveAdmins)
 router.get('/:id',getAdminById);
 router.post('/',upload.single('avatar_image'),postAdmin);
 router.put('/:id',upload.single('avatar_image'),updateAdmin);
 router.delete('/:id',deleteAdmin);
+router.post('/check',checkUser);
+
 
 module.exports = router;
