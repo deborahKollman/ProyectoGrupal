@@ -1,4 +1,10 @@
-import { AUTHENTICATE, LOGOUT_SESSION, ADD_TO_FAVORITES, GET_FAVORITES, REMOVE_FAVORITES } from "./action";
+import {
+  AUTHENTICATE,
+  LOGOUT_SESSION,
+  ADD_TO_FAVORITES,
+  GET_FAVORITES,
+  REMOVE_FAVORITES,
+} from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
   rdcr_user: {},
@@ -16,7 +22,10 @@ const initialState = {
   user: {},
   users: [],
   reg_user: {}, // ojo al piojo xD: eliminaron por accidente creo ::
-  cart: []
+  cart: [],
+  errorLogin: {},
+  errorRegister: {},
+  mailSend: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -81,19 +90,20 @@ const rootReducer = (state = initialState, action) => {
         filteredCategories: [...filtered],
       };
     case "GET_USER":
-      window.sessionStorage.setItem("token", payload.id); //>>>>obs
-      const x = payload.hasOwnProperty("id");
-
-      console.log({ x }, "uwu");
+      window.sessionStorage.setItem(
+        "token",
+        payload.email + "/" + payload.password,
+      ); //>>>>obs
       return {
         ...state,
         user: payload,
-        rdcr_isAuth: !!payload.id,
+        rdcr_isAuth: true,
+        errorLogin: {},
       };
     case "REGISTER_USER":
       return {
         ...state,
-        reg_user: payload,
+        reg_user: { message: payload },
       };
     case "GET_USER_BY_ID":
       return {
@@ -111,7 +121,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         users: action.payload,
       };
-
+    case "GET_USER_ERROR":
+      return {
+        ...state,
+        errorLogin: action.payload,
+      };
     case AUTHENTICATE:
       window.sessionStorage.setItem("token", payload.login);
 
@@ -128,7 +142,7 @@ const rootReducer = (state = initialState, action) => {
           .replace(/^ +/, "")
           .replace(/=.*/, "=;expires=" + new Date().toUTCString());
       });
-      
+
       return {
         ...state,
         rdcr_isAuth: false,
@@ -137,26 +151,46 @@ const rootReducer = (state = initialState, action) => {
 
     case ADD_TO_FAVORITES:
       return {
-          ...state,
-          favorites: action.payload
+        ...state,
+        favorites: action.payload,
+      };
 
-      }
-    
     case GET_FAVORITES:
-        return {
-          ...state,
-          favorites: action.payload,
-        };
+      return {
+        ...state,
+        favorites: action.payload,
+      };
 
-        
-        case REMOVE_FAVORITES:
-          return {
-            ...state,
-            favorites: action.payload,
-          };
-      
-
-
+    case REMOVE_FAVORITES:
+      return {
+        ...state,
+        favorites: action.payload,
+      };
+    case "GET_ERROR_REGISTER":
+      return {
+        ...state,
+        errorLogin: action.payload.message,
+      };
+    case "CLEAR_ERROR_REGISTER":
+      return {
+        ...state,
+        errorRegister: {},
+      };
+    case "REGISTER_USER_ERROR":
+      return {
+        ...state,
+        errorRegister: action.payload,
+      };
+    case "CLEAR_USER_REGISTER":
+      return {
+        ...state,
+        reg_user: {},
+      };
+    case "SEND_MAIL":
+      return {
+        ...state,
+        mailSend: action.payload,
+      };
     default:
       return state;
   }

@@ -6,24 +6,27 @@ export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
-
 const URL = `http://localhost:3001`;
 export const types = {
-  ADD_TO_CART: 'ADD_TO_CART',
-  REMOVE_ONE_FROM_CART: 'REMOVE_ONE_FROM_CART',
-  REMOVE_ALL_FROM_CART: 'V',
-  CLEAR_CART: 'CLEAR_CART'
-}
+  ADD_TO_CART: "ADD_TO_CART",
+  REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
+  REMOVE_ALL_FROM_CART: "V",
+  CLEAR_CART: "CLEAR_CART",
+};
 
 export const myLocalStorage = () => {
-  let productsInLocalStorage = localStorage.getItem('itemCar')
+  let productsInLocalStorage = localStorage.getItem('service')
   productsInLocalStorage = JSON.parse(productsInLocalStorage)
   console.log(productsInLocalStorage)
   return productsInLocalStorage
 }
 // Para desloguearse
 export const act_logout = () => {
-  return { type: LOGOUT_SESSION };
+  return (dispatch) => {
+    dispatch({
+      type: LOGOUT_SESSION,
+    });
+  };
 };
 
 // Para simular un login
@@ -51,17 +54,16 @@ export const fakeLogin = (pO_User) => {
 // Para traer un usuario
 export const getUser = () => {
   return async (dispatch) => {
-    const { data } = await axios.get("http://localhost:3001/login/success", {
+    const { data } = await axios.get(`${URL}/login`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
     });
-    console.log(data, "ACTIONNNNNNNNNNNNN");
     dispatch({
       type: "GET_USER",
-      payload: data.user,
+      payload: data,
     });
   };
 };
@@ -69,18 +71,23 @@ export const getUser = () => {
 // Para traer un usuario, esta repetida
 export const getUserr = (user) => {
   return async (dispatch) => {
-    const { data } = await axios.post("http://localhost:3001/login", user /* , {
+    const { data } = await axios.post("http://localhost:3001/login", user, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
-    } */);
-    console.log(data,"ACTIONNNNNNNNNNNNN");
-    dispatch({
-      type: "GET_USER",
-      payload: data.user,
     });
+    if (data.message) {
+      dispatch({
+        type: "GET_USER_ERROR",
+        payload: data.message,
+      });
+    } else {
+      dispatch({
+        type: "GET_USER",
+        payload: data,
+      });
+    }
   };
 };
 
@@ -93,13 +100,15 @@ export const registerUser = (user) => {
         email,
         password,
       });
-      console.log(data);
       dispatch({
         type: "REGISTER_USER",
-        payload: user,
+        payload: "Usuario registrado correctamente", // mandar este mensaje por la ruta de users
       });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: "REGISTER_USER_ERROR",
+        payload: error.response.data,
+      });
     }
   };
 };
@@ -277,86 +286,67 @@ export function getPublicationsByCategory(a) {
   };
 }
 
-
-
 //FUNCION PARA AGREGAR A FAV
-export function addToFavorites(user,publication){
-    return async(dispatch) =>{
-      try {
-           await axios.put(`${URL}/users/${user}/favorites`,publication);
-          let fav = await axios.get(`${URL}/users/${user}/favorites`);
-           
-        dispatch({
-            type: ADD_TO_FAVORITES,
-            payload: fav.data
-
-        })
-
-
-      } catch (error) {
-        console.log(error);
-      }
-
-
-
-    }
-};
-//FUNCION PARA TRAER FAVORITOS
-export function getFavorites(user){
-  return async(dispatch) =>{
+export function addToFavorites(user, publication) {
+  return async (dispatch) => {
     try {
-          const fav = await axios.get(`${URL}/users/${user}/favorites`);
+      await axios.put(`${URL}/users/${user}/favorites`, publication);
+      let fav = await axios.get(`${URL}/users/${user}/favorites`);
 
-          dispatch({
-            type: GET_FAVORITES,
-            payload: fav.data,
-
-        })
-
-
+      dispatch({
+        type: ADD_TO_FAVORITES,
+        payload: fav.data,
+      });
     } catch (error) {
       console.log(error);
     }
+  };
+}
+//FUNCION PARA TRAER FAVORITOS
+export function getFavorites(user) {
+  return async (dispatch) => {
+    try {
+      const fav = await axios.get(`${URL}/users/${user}/favorites`);
 
-
-
-  }
-};
+      dispatch({
+        type: GET_FAVORITES,
+        payload: fav.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 // PARA BORRAR
-export function removeFavorites(user,publication){
-  return async(dispatch) =>{
+export function removeFavorites(user, publication) {
+  return async (dispatch) => {
     try {
-           
-           await axios.delete(`${URL}/users/${user}/favorites`,{data:publication});
-           const fav = await axios.get(`${URL}/users/${user}/favorites`);
-          dispatch({
-            type: REMOVE_FAVORITES,
-            payload: fav.data,
-
-        })
-
-
+      await axios.delete(`${URL}/users/${user}/favorites`, {
+        data: publication,
+      });
+      const fav = await axios.get(`${URL}/users/${user}/favorites`);
+      dispatch({
+        type: REMOVE_FAVORITES,
+        payload: fav.data,
+      });
     } catch (error) {
       console.log(error);
     }
-
-
-
-  }
-};
+  };
+}
 
 export function confirmPassword(form) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/login/success`, {
+      const response = await axios.get(`${URL}/register/success`, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
       });
-      const { data } = await axios.put(`${URL}/login/confirm`, {
+      const { data } = await axios.put(`${URL}/register/confirm`, {
         ...form,
         ...response.data,
       });
@@ -364,12 +354,63 @@ export function confirmPassword(form) {
     } catch (e) {
       console.log(e.message);
     }
-  }; 
+  };
 }
 
-export function myLocalStorageTwo(){ //Ojo al piojo:: hay 2 de estas cuidado se cruzen
-  let productsInLocalStorage = localStorage.getItem('itemCar');
+export function myLocalStorageTwo() {
+  //Ojo al piojo:: hay 2 de estas cuidado se cruzen
+  let productsInLocalStorage = localStorage.getItem("itemCar");
   productsInLocalStorage = JSON.parse(productsInLocalStorage);
-  console.log(productsInLocalStorage)
-  return productsInLocalStorage
+  console.log(productsInLocalStorage);
+  return productsInLocalStorage;
+}
+
+export function getErrorRegister() {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL}/register/error`);
+      console.log(data);
+      dispatch({
+        type: "GET_ERROR_REGISTER",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function clearErrorRegister() {
+  return async (dispatch) => {
+    const { data } = await axios.post(`${URL}/register/logout`);
+    dispatch({
+      type: "CLEAR_ERROR_REGISTER",
+      payload: data,
+    });
+  };
+}
+
+export function clearUserRegister() {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_USER_REGISTER",
+    });
+  };
+}
+
+export function sendEmail({ email, type }) {
+  return async (dispatch) => {
+    try {
+      console.log(type);
+      const { data } = await axios.post(`${URL}/email?type=${type}`, {
+        email,
+      });
+      dispatch({
+        type: "SEND_MAIL",
+        payload: !!data.state,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }

@@ -5,16 +5,17 @@ import Typography from "@mui/material/Typography";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
 import "./styles/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, getUserr, fakeLogin } from "../redux/action";
-import axios from "axios";
-
-
+import {
+  getUserr,
+  getErrorRegister,
+  clearErrorRegister,
+} from "../redux/action";
 
 const HookInputValue = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -42,31 +43,33 @@ const Login = () => {
     password: password.value,
   };
 
+  const { errorLogin, rdcr_isAuth } = useSelector((state) => state);
   const [error, setError] = useState({
     text: "",
-    
-}); 
-
+  });
 
   const xNavigate = useNavigate();
 
   const mLocalLoggin = () => {
-    if(data.username === "" || data.password === "") setError({text: "Please,complet the empty field"}) ;
-    else{
-    xDispatch(getUserr(data));
-    xNavigate(`/home`);
-
-    setError({text: "Incorrect user or password"});
+    if (data.username === "" || data.password === "")
+      setError({ text: "Empty fields" });
+    else {
+      xDispatch(getUserr(data));
+      xDispatch(clearErrorRegister());
     }
-
   };
 
-  const { rdcr_isAuth, rdcr_user } = useSelector((state) => state);
-
-  console.log(rdcr_isAuth, "xdxxdxdxdxxxddd", rdcr_user);
-
-
-
+  useEffect(() => {
+    if (Object.keys(errorLogin).length > 0) {
+      setError({ text: errorLogin });
+    } else {
+      xDispatch(getErrorRegister());
+      setError({ text: "" });
+    }
+    if (rdcr_isAuth) {
+      xNavigate("/home");
+    }
+  }, [errorLogin, rdcr_isAuth]);
 
   return (
     <div className="page-login">
@@ -89,8 +92,14 @@ const Login = () => {
           <MyTextField required label="E-MAIL" type="email" {...email} />
           <MyTextField label="PASSWORD" type="password" {...password} />
 
-
-          {error.text ? <Alert severity="error" sx={{width: '260px', m: 0.5}} >{error.text}</Alert> : null}
+          {error.text ? (
+            <Alert
+              severity="error"
+              sx={{ width: "260px", m: 0.5, fontSize: "1.3rem" }}
+            >
+              {error.text}
+            </Alert>
+          ) : null}
 
           <MyButtonTwo
             variant="contained"
@@ -115,7 +124,7 @@ const Login = () => {
                 Remember me
               </Typography>
             </div>
-            <Link to="/#">Forgot Password</Link>
+            <Link to="/sendEmail/recovery">Forgot Password</Link>
           </div>
 
           <Typography variant="body1" color="initial">

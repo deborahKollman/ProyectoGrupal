@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MyButtonThree, MyButtonTwo, MyTextField } from "../elements/Forms";
 import BurgerButton from "../components/NavBar/NavBar.jsx";
 import Typography from "@mui/material/Typography";
@@ -7,8 +7,12 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./styles/Login.scss";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUser,
+  clearErrorRegister,
+  clearUserRegister,
+} from "../redux/action";
 
 const validate = (form) => {
   const errors = {};
@@ -38,56 +42,62 @@ const validate = (form) => {
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { errorRegister, reg_user } = useSelector((state) => state);
 
-  const [input, setInput] = useState({
-    email: "",
-    emailError: "",
-    password: "",
-    passwordError: "",
-    confirmPassword: "",
-    confirmPasswordError: "",
-  });
-
-  const [handleError, setHandleError] = useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const handleEmailChange = (e) => {
-    setInput({
-      ...input,
+  const [handleError, setHandleError] = useState({});
+
+  const handleChangeOnForm = (e) => {
+    setForm({
+      ...form,
       [e.target.name]: e.target.value,
     });
+
+    setHandleError(
+      validate({
+        ...form,
+        [e.target.name]: e.target.value,
+      }),
+    );
   };
 
-  const handlePasswordChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const buttonHandler = async () => {
-    setHandleError(validate(input));
-    if (Object.keys(handleError).length === 0) {
-      dispatch(registerUser(input));
-      swal("Success", "You have successfully registered", "success");
-      navigate("/home");
-    } else {
-      swal("Error", "Por favor, revisa los errores", "error");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validate(form);
+    setHandleError(errors);
+    if (Object.keys(errors).length === 0) {
+      dispatch(registerUser(form));
     }
+    if (errorRegister.message) {
+      swal("Error", errorRegister.message, "error");
+      dispatch(clearErrorRegister());
+    }
+    setForm({
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
+
+  useEffect(() => {
+    if (errorRegister.message) {
+      swal("Error", errorRegister.message, "error");
+      dispatch(clearErrorRegister());
+    }
+    if (reg_user.message) {
+      swal("Success", "Usuario registrado correctamente", "success");
+      dispatch(clearUserRegister());
+      navigate("/login");
+    }
+  }, [errorRegister, dispatch, reg_user, navigate]);
 
   const mGoogleRegister = () => {
-    window.open("http://localhost:3001/login/register", "_self");
+    window.open("http://localhost:3001/register/google", "_self");
   };
 
   return (
@@ -112,9 +122,9 @@ const Register = () => {
             required
             label="E-MAIL"
             name="email"
-            value={input.email}
+            value={form.email}
             type="email"
-            onChange={(e) => handleEmailChange(e)}
+            onChange={handleChangeOnForm}
           />
           {
             <div className="error-div">
@@ -125,9 +135,9 @@ const Register = () => {
             required
             label="PASSWORD"
             name="password"
-            //value={password}
+            value={form.password}
             type="password"
-            onChange={(e) => handlePasswordChange(e)}
+            onChange={handleChangeOnForm}
           />
           {
             <div className="error-div">
@@ -138,9 +148,9 @@ const Register = () => {
           <MyTextField
             label="CONFIRM PASSWORD"
             name="confirmPassword"
-            //value={confirmPassword}
+            value={form.confirmPassword}
             type="password"
-            onChange={(e) => handleConfirmPasswordChange(e)}
+            onChange={handleChangeOnForm}
           />
           {
             <div className="error-div">
@@ -149,7 +159,7 @@ const Register = () => {
           }
 
           <MyButtonTwo
-            onClick={(e) => buttonHandler()}
+            onClick={handleSubmit}
             variant="contained"
             endIcon={<HowToRegIcon />}
           >

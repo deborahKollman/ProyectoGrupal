@@ -39,7 +39,7 @@ const InitialSession = () => {
   );
 };
 
-const LoginSession = ({ pAvatar }) => {
+const LoginSession = ({ avatar }) => {
   return (
     <div className="NavBar-login_user">
       <MyNav>
@@ -61,15 +61,7 @@ const LoginSession = ({ pAvatar }) => {
           </li>
         </ol>
       </MyNav>
-      {!pAvatar ? (
-        <img
-          src={pAvatar}
-          alt={pAvatar}
-          style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-        ></img>
-      ) : (
-        <AccountMenu />
-      )}
+      <AccountMenu avatar={avatar} />
     </div>
   );
 };
