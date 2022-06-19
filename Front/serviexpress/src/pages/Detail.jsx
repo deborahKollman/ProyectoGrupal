@@ -10,7 +10,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 //import ServicesBar from '../components/ServicesBar';
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
-import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites} from '../redux/action.js';
+import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites,getUser } from '../redux/action.js';
 import { useParams,Link } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
@@ -18,6 +18,8 @@ import Favorite from '@mui/icons-material/Favorite';
 import {MDBContainer} from "mdbreact";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import MercadoPago from '../components/MercadoPago'
+
 
 
 export default function Detail(){
@@ -27,7 +29,9 @@ export default function Detail(){
     const detail = useSelector(state => state.detail);
     const moreUsers = useSelector(state => state.users);
     const fav = useSelector(state => state.favorites);
- 
+
+
+
   const [checked, setChecked] = useState(false);
 
 
@@ -49,6 +53,7 @@ export default function Detail(){
         dispatch(getUserById(detail.userId));
         dispatch(getUsers());
         dispatch(getFavorites(detail.userId));
+        dispatch(getUser());
         heart();
 
 
@@ -74,8 +79,6 @@ export default function Detail(){
     const [open, setOpen] = useState(false);
 
     const [msgAlert, setMsg] = useState("");
-
-
 
     const favClicked = () => {   
         if(checked) {
@@ -106,7 +109,7 @@ export default function Detail(){
     const heartChange = (event) => {
       setChecked(event.target.checked);
     };
-
+    
    
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
@@ -168,6 +171,9 @@ export default function Detail(){
 
     </div>
         <Link to={`/payment/${id}`}>Buy</Link>
+        {detail.title && detail.price && <MercadoPago title={detail.title} price={detail.price} ></MercadoPago> }
+        
+
         <div className={stylesDetail.about}>
         <h3>About Services</h3>
           <p>{detail.detail_resume}</p>

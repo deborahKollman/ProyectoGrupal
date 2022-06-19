@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import Payment from "./components/Payment.jsx";
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
+import MercadoPago from "./components/MercadoPago.jsx";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -37,6 +38,7 @@ function App() {
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/favorites" element={<Favorites />} />
+      <Route path="/mercado" element={<MercadoPago/>} />
       <Route path="/payment/:id" element={<Payment />} />
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
