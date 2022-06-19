@@ -88,7 +88,7 @@ router.get(
     if (req.user.message) {
       res.redirect('http://localhost:3000/login');
     } else {
-      res.redirect('http://localhost:3000/confirm');
+      res.redirect('http://localhost:3000/sendEmail/confirm');
     }
   }
 );

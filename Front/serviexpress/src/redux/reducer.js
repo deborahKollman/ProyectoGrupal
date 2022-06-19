@@ -27,6 +27,7 @@ const initialState = {
   errorLogin: {},
   errorRegister: {},
   mercadoPago: "",
+  mailSend: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -170,7 +171,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_ERROR_REGISTER":
       return {
         ...state,
-        errorRegister: action.payload.message,
+        errorLogin: action.payload.message,
       };
     case "CLEAR_ERROR_REGISTER":
       return {
@@ -187,6 +188,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         reg_user: {},
       };
+<<<<<<< HEAD
     case GET_MERCADOPAGO:
       return {
         ...state,
@@ -196,6 +198,13 @@ const rootReducer = (state = initialState, action) => {
 
 
 
+=======
+    case "SEND_MAIL":
+      return {
+        ...state,
+        mailSend: action.payload,
+      };
+>>>>>>> origin
     default:
       return state;
   }
