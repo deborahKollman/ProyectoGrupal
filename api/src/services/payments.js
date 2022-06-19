@@ -9,21 +9,32 @@ exports.getPayments=async()=>{
     return services;
 }
 
-exports.postPayment= async(stripeid, amount)=>{
+exports.postPayment= async(stripeid, amount, usremail='palmabeto@hotmail.com')=>{
     
     try {
         
         console.log('Grabo el Stripe Id:', stripeid, ' y el monto:',amount)
+        //Confirmom el pago en stripe
         const payment = await stripe.paymentIntents.create({
             amount,
             currency: 'USD',
             payment_method: stripeid,
             confirm: true
         });
+
+        // Guardo el pago en la base de datos
 /*         const r = await Payment.create({stripeid,amount})
         console.log('El payment',payment)
         return payment; */
-        return payment;
+
+        //Envio el mail al comprador
+        const sendmail = await axios ("http://localhost:3001/emailpayment",{
+          "email":usremail,
+          "subject": "Servi Express - Payment Confirmation",
+          "text": "Your payment has been registered"
+      })
+
+      return payment;
     }
     catch(error) {
         console.log(error)
