@@ -188,7 +188,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         reg_user: {},
       };
-<<<<<<< HEAD
     case GET_MERCADOPAGO:
       return {
         ...state,
@@ -198,13 +197,11 @@ const rootReducer = (state = initialState, action) => {
 
 
 
-=======
     case "SEND_MAIL":
       return {
         ...state,
         mailSend: action.payload,
       };
->>>>>>> origin
     default:
       return state;
   }

@@ -6,7 +6,7 @@ export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 export const GET_MERCADOPAGO = "GET_MERCADOPAGO";
-
+const URL = `http://localhost:3001`;
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",

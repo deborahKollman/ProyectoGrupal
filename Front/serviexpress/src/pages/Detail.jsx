@@ -170,9 +170,11 @@ export default function Detail(){
        
 
     </div>
-        <Link to={`/payment/${id}`}>Buy</Link>
+        <div className={stylesDetail.buyButtons}>
+        <label>Pay with: </label>
+        <Link to={`/payment/${id}`}>Card</Link>
         {detail.title && detail.price && <MercadoPago title={detail.title} price={detail.price} ></MercadoPago> }
-        
+        </div>
 
         <div className={stylesDetail.about}>
         <h3>About Services</h3>
