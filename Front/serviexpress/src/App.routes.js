@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import Payment from "./components/Payment.jsx";
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
+import Checkout from "./pages/Checkout.jsx";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -42,6 +43,7 @@ function App() {
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/prueba" element={<Orders />} />
+      <Route path="/checkout" element={<Checkout/>} />
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
     </Routes>
