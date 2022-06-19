@@ -131,6 +131,120 @@ const fxpub = async function() {
                         "categoryId":2,
                         "services": [2]})
                         
+                        //New
+                        pub=await Publication.create( {
+                            "date": "8/10/2021",
+                            "state":"Active",
+                            "title":"Soporte tecnico",
+                            "album":["https://images.pexels.com/photos/3760613/pexels-photo-3760613.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/7709110/pexels-photo-7709110.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Soporte tecnico de PC, asesorias, atencion a domicilio o remoto.",
+                            "detail_resume": "Soporte tecnico, asesorias",
+                            "price": 2000,
+                            "userId": 6,
+                            "categoryId":7,
+                            "services": [43]})
+
+                        pub=await Publication.create( {
+                            "date": "11/11/2019",
+                            "state":"Active",
+                            "title":"Reparacion de celulares",
+                            "album":["https://images.pexels.com/photos/719399/pexels-photo-719399.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/1476321/pexels-photo-1476321.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/1388947/technology-telephone-mobile-smart-1388947.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Reparacion de telefonos celulares y tablets,consultas y presupuestos sin cargo, liberacion de linea.",
+                            "detail_resume": "Reparacion de telefonos celulares y tablets",
+                            "price": 1000,
+                            "userId": 4,
+                            "categoryId":7,
+                            "services": [45]})
+
+                        pub=await Publication.create( {
+                            "date": "11/11/2019",
+                            "state":"Active",
+                            "title":"Reparacion de computadoras",
+                            "album":["https://images.pexels.com/photos/4705636/pexels-photo-4705636.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/4705608/pexels-photo-4705608.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/442152/pexels-photo-442152.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Reparacion de desktop, notebook, netbook, consultas y presupuestos sin cargo, mejoras de equipo.",
+                            "detail_resume": "Reparacion de computadoras",
+                            "price": 1000,
+                            "userId": 4,
+                            "categoryId":7,
+                            "services": [43]})
+
+                        pub=await Publication.create( {
+                            "date": "05/08/2018",
+                            "state":"Active",
+                            "title":"Fotografia profesional",
+                            "album":["https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://media.istockphoto.com/photos/shooting-a-wedding-with-a-vintage-camera-picture-id621711304?k=20&m=621711304&s=612x612&w=0&h=4dYYopaiduSYu43V5n7cMn6T1KYp7AWvYit4FKOT7xk=",
+                            "https://images.pexels.com/photos/326316/pexels-photo-326316.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Fotografia profesional para bodas, nacimientos, cumpleaños, eventos especiales, sesiones de fotografia, presupuestos sin cargo.",
+                            "detail_resume": "Fotografia para eventos",
+                            "price": 2500,
+                            "userId": 5,
+                            "categoryId":11,
+                            "services": [71]})
+
+                        pub=await Publication.create( {
+                            "date": "05/02/2020",
+                            "state":"Active",
+                            "title":"Clases particulares",
+                            "album":["https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/3768126/pexels-photo-3768126.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/239548/pexels-photo-239548.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Clases particulares de matematicas, fisica y quimica, para alumnos de primaria y secundaria, impartidas por un profesional de la educacion matriculado, modalidad presencial y virtual.",
+                            "detail_resume": "Clases particulares de matematicas",
+                            "price": 700,
+                            "userId": 10,
+                            "categoryId":3,
+                            "services": [16]})
+
+                        pub=await Publication.create( {
+                            "date": "8/10/2021",
+                            "state":"Active",
+                            "title":"Desarrollo de sistemas",
+                            "album":["https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/1181371/pexels-photo-1181371.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Desarrollo full stack de sistemas, soporte continuo, presupuestos, atencion a individuos y empresas.",
+                            "detail_resume": "Desarrollo y soporte de sistemas",
+                            "price": 10000,
+                            "userId": 6,
+                            "categoryId":7,
+                            "services": [44]})
+
+                        pub=await Publication.create( {
+                            "date": "4/10/2020",
+                            "state":"Active",
+                            "title":"Manicuria y Pedicuria",
+                            "album":["https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/7755549/pexels-photo-7755549.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/2624853/pexels-photo-2624853.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Me dedico a manicuria y pedicuria, recupera la belleza de tus manos y pies, lucí unas uñas espectaculares a un precio razonable.",
+                            "detail_resume": "Manicuria y pedicuria profesional",
+                            "price": 2000,
+                            "userId": 9,
+                            "categoryId":2,
+                            "services": [11,12]})
+
+                        pub=await Publication.create( {
+                            "date": "05/08/2019",
+                            "state":"Active",
+                            "title":"Catering",
+                            "album":["https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            "https://images.pexels.com/photos/3843224/pexels-photo-3843224.jpeg?auto=compress&cs=tinysrgb&w=600"],
+                            "detail":"Servicio de catering para bodas, bautismos, cumpleaños, eventos especiales. Grupo profesional para asegurarse de que tu evento sea perfecto. Precio por 100 invitados.",
+                            "detail_resume": "Servicio de catering para eventos",
+                            "price": 5000,
+                            "userId": 5,
+                            "categoryId":5,
+                            "services": [31]})
+
+
 
          const pub1=await Publication.create( 
             {
