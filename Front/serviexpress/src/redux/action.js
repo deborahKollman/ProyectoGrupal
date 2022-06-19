@@ -6,7 +6,7 @@ export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
-const URL = `http://localhost:3001`;
+
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
@@ -54,7 +54,7 @@ export const fakeLogin = (pO_User) => {
 // Para traer un usuario
 export const getUser = () => {
   return async (dispatch) => {
-    const { data } = await axios.get(`${URL}/login`, {
+    const { data } = await axios.get(`/login`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const getUser = () => {
 // Para traer un usuario, esta repetida
 export const getUserr = (user) => {
   return async (dispatch) => {
-    const { data } = await axios.post("http://localhost:3001/login", user, {
+    const { data } = await axios.post("/login", user, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export const registerUser = (user) => {
   return async (dispatch) => {
     try {
       const { email, password } = user;
-      const { data } = await axios.post("http://localhost:3001/users", {
+      const { data } = await axios.post("/users", {
         email,
         password,
       });
@@ -117,7 +117,7 @@ export const registerUser = (user) => {
 export const createPublication = (pObjData) => {
   return async () => {
     try {
-      const response = await axios.post(`${URL}/publications`, pObjData, {
+      const response = await axios.post(`/publications`, pObjData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -132,7 +132,7 @@ export const createPublication = (pObjData) => {
 export const jalz_getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://127.0.0.1:3001/categories`);
+      const { data } = await axios.get(`/categories`);
       dispatch({
         type: "JALZ_GET_CATEGORIES",
         payload: data,
@@ -145,7 +145,7 @@ export const jalz_getAllCategories = () => {
 
 export const getById = (id) => {
   return async (dispatch) => {
-    const publi = await axios.get(`${URL}/publications/${id}`);
+    const publi = await axios.get(`/publications/${id}`);
     dispatch({
       type: "GET_BY_ID",
       payload: publi.data,
@@ -162,7 +162,7 @@ export function filterCategories(payload) {
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = axios.get(`${URL}/categories`);
+      const json = axios.get(`/categories`);
       return dispatch({
         type: "GET_CATEGORIES",
         payload: json.data.map((el) => el.name),
@@ -177,7 +177,7 @@ export const getAllCategories = () => {
 export const postProfileUser = (input) => {
   return async (dispatch) => {
     try {
-      let profileUser = await axios.post(`${URL}/users/`, input);
+      let profileUser = await axios.post(`/users/`, input);
       return dispatch({ type: "POST_PROFILEUSER", profileUser });
     } catch (error) {
       console.log(error);
@@ -194,7 +194,7 @@ export const swich_loading = (e) => {
 export function getPublications() {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/publications");
+      const response = await axios.get("/publications");
       dispatch({
         type: "GET_PUBLICATIONS",
         payload: response.data,
@@ -210,7 +210,7 @@ export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
       const publication = await axios.get(
-        `http://localhost:3001/publications/${id}`,
+        `/publications/${id}`,
       );
       return dispatch({
         type: "GET_PUBLICATION_ID",
@@ -227,7 +227,7 @@ export const getPublicationId = (id) => {
 export function getPublicationsName(name) {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/publications?title=` + name)
+      .get(`/publications?title=` + name)
       .then((responese) => {
         dispatch({
           type: "GET_PUBLICATIONS_NAME",
@@ -249,7 +249,7 @@ export function getPublicationsName(name) {
 export function getUserById(id) {
   return async (dispatch) => {
     try {
-      let data = await axios.get("http://localhost:3001/users/" + id);
+      let data = await axios.get("/users/" + id);
       dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
     } catch (error) {
       console.log(error);
@@ -261,7 +261,7 @@ export function getUserById(id) {
 export function getUsers() {
   return async (dispatch) => {
     try {
-      let users = await axios.get("http://localhost:3001/users");
+      let users = await axios.get("/users");
       dispatch({ type: "GET_USERS", payload: users.data.users });
     } catch (error) {
       console.log(error);
@@ -273,7 +273,7 @@ export function getPublicationsByCategory(a) {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/publications?cat_id=` + a,
+        `/publications?cat_id=` + a,
       );
       //  console.log(response.data)
       dispatch({
@@ -290,8 +290,8 @@ export function getPublicationsByCategory(a) {
 export function addToFavorites(user, publication) {
   return async (dispatch) => {
     try {
-      await axios.put(`${URL}/users/${user}/favorites`, publication);
-      let fav = await axios.get(`${URL}/users/${user}/favorites`);
+      await axios.put(`/users/${user}/favorites`, publication);
+      let fav = await axios.get(`/users/${user}/favorites`);
 
       dispatch({
         type: ADD_TO_FAVORITES,
@@ -306,7 +306,7 @@ export function addToFavorites(user, publication) {
 export function getFavorites(user) {
   return async (dispatch) => {
     try {
-      const fav = await axios.get(`${URL}/users/${user}/favorites`);
+      const fav = await axios.get(`/users/${user}/favorites`);
 
       dispatch({
         type: GET_FAVORITES,
@@ -322,10 +322,10 @@ export function getFavorites(user) {
 export function removeFavorites(user, publication) {
   return async (dispatch) => {
     try {
-      await axios.delete(`${URL}/users/${user}/favorites`, {
+      await axios.delete(`/users/${user}/favorites`, {
         data: publication,
       });
-      const fav = await axios.get(`${URL}/users/${user}/favorites`);
+      const fav = await axios.get(`/users/${user}/favorites`);
       dispatch({
         type: REMOVE_FAVORITES,
         payload: fav.data,
@@ -339,14 +339,14 @@ export function removeFavorites(user, publication) {
 export function confirmPassword(form) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/register/success`, {
+      const response = await axios.get(`/register/success`, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
       });
-      const { data } = await axios.put(`${URL}/register/confirm`, {
+      const { data } = await axios.put(`/register/confirm`, {
         ...form,
         ...response.data,
       });
@@ -368,7 +368,7 @@ export function myLocalStorageTwo() {
 export function getErrorRegister() {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL}/register/error`);
+      const { data } = await axios.get(`/register/error`);
       console.log(data);
       dispatch({
         type: "GET_ERROR_REGISTER",
@@ -382,7 +382,7 @@ export function getErrorRegister() {
 
 export function clearErrorRegister() {
   return async (dispatch) => {
-    const { data } = await axios.post(`${URL}/register/logout`);
+    const { data } = await axios.post(`/register/logout`);
     dispatch({
       type: "CLEAR_ERROR_REGISTER",
       payload: data,
@@ -402,7 +402,7 @@ export function sendEmail({ email, type }) {
   return async (dispatch) => {
     try {
       console.log(type);
-      const { data } = await axios.post(`${URL}/email?type=${type}`, {
+      const { data } = await axios.post(`/email?type=${type}`, {
         email,
       });
       dispatch({
