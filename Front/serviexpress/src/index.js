@@ -6,10 +6,10 @@ import { BrowserRouter } from 'react-router-dom';
 import STORE from './redux/store';
 import { Provider } from 'react-redux';
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+
+console.log('api',process.env.REACT_APP_API)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
