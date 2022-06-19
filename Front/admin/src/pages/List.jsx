@@ -1,7 +1,8 @@
 import './styles/List.scss'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
-import Datatable from '../components/DataTable/Datatable'
+import {Datatable} from '../components/DataTable/Datatable'
+import {TableCategory} from '../components/DataTable/TableCategory'
 
 const List = ({pType}) => {
 
@@ -16,7 +17,24 @@ const List = ({pType}) => {
   )
 }
 
-export default List
+const ListOfCategory = ({pType}) => {
+
+  return (
+    <div className="list_category">
+      <Sidebar/>
+      <div className="list-container">
+        <Navbar/>
+        <TableCategory pType={pType}/>
+      </div>
+    </div>
+  )
+}
+
+export {
+  List,
+  ListOfCategory
+}
+
 
 /* 
 

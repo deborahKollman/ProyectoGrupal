@@ -1,18 +1,14 @@
 import "./styles/Navbar.scss";
 
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-import { act_themeTogle } from "../redux/action";
-import { useDispatch } from "react-redux";
+import SwitchDark from "../components/Elements/SwitchDark";
 
 const Navbar = () => {
-
-  const xDispatch = useDispatch();
 
 
   return (
@@ -23,31 +19,28 @@ const Navbar = () => {
         <SearchIcon />
       </div>
       <div className="items">
-        <div className="item">
+        <div className="itemm">
+          <SwitchDark/>
+        </div>
+        <div className="itemm">
           <LanguageOutlinedIcon className="icon" />
           English
         </div>
-        <div className="item">
-          <DarkModeOutlinedIcon
-            className="icon"
-            onClick={() => xDispatch(act_themeTogle())}
-          />
-        </div>
-        <div className="item">
+        <div className="itemm">
           <FullscreenExitOutlinedIcon className="icon" />
         </div>
-        <div className="item">
+        <div className="itemm">
           <NotificationsNoneOutlinedIcon className="icon" />
           <div className="counter">1</div>
         </div>
-        <div className="item">
+        <div className="itemm">
           <ChatBubbleOutlineOutlinedIcon className="icon" />
           <div className="counter">2</div>
         </div>
-        <div className="item">
+        <div className="itemm">
           <ListOutlinedIcon className="icon" />
         </div>
-        <div className="item">
+        <div className="itemm">
           <img
             src="https://i.ibb.co/nfPP3tS/OIP.jpg"
             alt="bby-tiger"

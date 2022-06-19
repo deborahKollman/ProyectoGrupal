@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import "./styles/Single.scss";
 import Chart from "../components/Chart";
-import Datatable from "../components/DataTable/Datatable";
+import {Datatable} from "../components/DataTable/Datatable";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

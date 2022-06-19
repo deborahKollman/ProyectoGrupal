@@ -1,24 +1,23 @@
 import "../styles/Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
-import { userColumns } from "./FormatTable";
+import { userColumns, categoriesColumns } from "./FormatTable";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FeedIcon from '@mui/icons-material/Feed';
+import FeedIcon from "@mui/icons-material/Feed";
 import { useEffect } from "react";
 import { act_getAllCategories, act_getAllUsers } from "../../redux/action";
 
-const Datatable = ({pType}) => {
-
+const Datatable = ({ pType }) => {
   let fAction;
   let aRows = [];
   let aPersonalColumns = [];
 
   const oStatesOfRdcr = useSelector((state) => state);
 
-  switch(pType){
+  switch (pType) {
     case "USER":
       fAction = act_getAllUsers;
       aRows = oStatesOfRdcr.rdcr_users;
@@ -27,22 +26,27 @@ const Datatable = ({pType}) => {
     case "CATEGORY":
       fAction = act_getAllCategories;
       aRows = oStatesOfRdcr.rdcr_categories;
+      aPersonalColumns = categoriesColumns;
       break;
-    default: break;
+    default:
+      break;
   }
-  
-  const xDispatch = useDispatch()
-  useEffect(() => {
-    xDispatch(fAction());
-  }, [xDispatch], [pType], [fAction])
 
-  console.log(aRows,"AAAAAAAAAAAAAAAAAAAAAA")
+  const xDispatch = useDispatch();
+  useEffect(
+    () => {
+      xDispatch(fAction());
+    },
+    [xDispatch],
+    [pType],
+    [fAction]
+  );
 
   const actionColumn = [
     {
       field: "action",
       headerName: "ACTIONS",
-      width: 200,
+      width: 120,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -76,7 +80,7 @@ const Datatable = ({pType}) => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
+        LIST OF {pType.toUpperCase()}
         <Link to="/users/new" className="link">
           Add New
         </Link>
@@ -85,15 +89,15 @@ const Datatable = ({pType}) => {
         className="datagrid"
         rows={aRows}
         columns={aPersonalColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
+        pageSize={8}
+        rowsPerPageOptions={[8]}
+        // checkboxSelection
       />
     </div>
   );
 };
 
-export default Datatable;
+export {Datatable};
 
 /* 
 // import { userColumns, userRows } from "../assets/database/datatablesource";

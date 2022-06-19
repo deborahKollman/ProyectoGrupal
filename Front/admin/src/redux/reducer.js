@@ -1,10 +1,8 @@
 import { 
-  LIGHT, 
-  DARK, 
   TOGGLE, 
   GET_ALL_USERS,
   GET_USER_BY_ID,
-  GET_ALL_CATEGORIES
+  GET_ALL_CATEGORIES,
 } from "./action";
 
 const initialState = {
@@ -12,24 +10,15 @@ const initialState = {
   rdcr_users: [],
   rdcr_user: {},
   rdcr_categories: [],
+  rdcr_category: {},
 };
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
   const { rdcr_darkMode } = state;
   switch (type) {
-    case LIGHT: {
-      console.log("LIGHT");
-      return {
-        rdcr_darkMode: false,
-      };
-    }
-    case DARK: {
-      return {
-        rdcr_darkMode: true,
-      };
-    }
     case TOGGLE: {
       return {
+        ...state,
         rdcr_darkMode: !rdcr_darkMode,
       };
     }
@@ -51,9 +40,7 @@ const rootReducer = (state = initialState, action) => {
         rdcr_categories: payload,
       };
     }
-    default: {
-      return state;
-    }
+    default: return state; 
   }
 };
 

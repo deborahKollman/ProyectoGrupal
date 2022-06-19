@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Single from "./pages/Single";
 import New from "./pages/New";
-import List from "./pages/List";
+import {List, ListOfCategory} from "./pages/List";
 import { aUserInputs, aProductInputs } from "./assets/sources/FormOne.js";
 import './styles/dark.scss';
 import { useSelector } from 'react-redux';
@@ -24,9 +24,13 @@ function App() {
             <Route path="new" element={<New inputs={aUserInputs} />} />
           </Route>
           <Route path="categories">
-            <Route index element={<List pType={"CATEGORY"} />} />
+            <Route index element={<ListOfCategory pType={"CATEGORY"} />} />
             <Route path=":productId" element={<Single />} />
             <Route path="new" element={<New inputs={aProductInputs} />} />
+          </Route>
+          <Route path="services">
+            <Route index element={<ListOfCategory pType={"SERVICE"} />} />
+            <Route path=":productId" element={<Single />} />
           </Route>
         </Route>
       </Routes>
