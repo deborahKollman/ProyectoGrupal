@@ -21,12 +21,11 @@ function App() {
           <Route path="users">
             <Route index element={<List pType={"USER"} />} />
             <Route path=":userId" element={<Single />} />
-            <Route path="new" element={<New inputs={aUserInputs} />} />
+            <Route path="new" element={<New pInputForm={aUserInputs} title={"User"} />} />
           </Route>
           <Route path="categories">
             <Route index element={<ListOfCategory pType={"CATEGORY"} />} />
             <Route path=":productId" element={<Single />} />
-            <Route path="new" element={<New inputs={aProductInputs} />} />
           </Route>
           <Route path="services">
             <Route index element={<ListOfServices/>} />
@@ -53,4 +52,7 @@ function App() {
   const [dark, setDark] = useState(false);
 
   const {darkMode} = useContext(DarkModeContext);
+
+  <Route path="new" element={<New inputs={aProductInputs} title={"Categorue"} />} />
+
 */
