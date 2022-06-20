@@ -13,13 +13,15 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import { rgxName } from "../../../assets/sources/RegExp";
 import { act_getAllServices } from "../../../redux/action";
 import BasicModal from "./Modal";
 import { Autocomplete, Toolbar, Tooltip, Typography } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { act_getAllCategories } from "../../../redux/action";
-import {act_postService} from '../../../assets/sources/ApiFunctions';
+import { act_getAllCategories, act_clearServices } from "../../../redux/action";
+import {act_postService } from '../../../assets/sources/ApiFunctions';
+import { ComboBoxFilter } from "./ComboBox";
 
 const ComboBox = ({category, setCategory}) => {
   
@@ -47,17 +49,21 @@ const ComboBox = ({category, setCategory}) => {
   );
 };
 
-const EnhancedTableToolbar = (props) => {
-  const { filter, setFilter } = props;
+const EnhancedTableToolbar = ({ filter, setFilter }) => {
+  const xDispatch = useDispatch();
+
   const mFilter = () => {
     setFilter(!filter);
     console.log(filter);
+
   };
 
   const [category, setCategory] = useState(null);
 
-  // const mFilterBtCategory = () => {
-  // }
+  const mCleanFilter = () => {
+    xDispatch(act_clearServices());
+    setCategory(null);
+  }
 
   return (
     <section>
@@ -70,6 +76,11 @@ const EnhancedTableToolbar = (props) => {
           Services
         </Typography>
 
+        <Tooltip title="Filter list" onClick={mCleanFilter}>
+          <IconButton>
+            <CleaningServicesIcon />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="Filter list" onClick={mFilter}>
           <IconButton>
             <FilterListIcon />
@@ -78,7 +89,7 @@ const EnhancedTableToolbar = (props) => {
       </Toolbar>
       {filter && (
         <div style={{ display: "flex", justifyContent: "flex-start" }}>
-          <ComboBox category={category} setCategory={setCategory}/>
+          <ComboBoxFilter category={category} setCategory={setCategory}/>
         </div>
       )}
     </section>
@@ -89,6 +100,7 @@ const MainService = () => {
   const [modal, setModal] = useState({ active: false, id: null });
 
   const { rdcr_services } = useSelector((state) => state);
+  console.log(rdcr_services);
 
   const xDispatch = useDispatch();
   useEffect(() => {
