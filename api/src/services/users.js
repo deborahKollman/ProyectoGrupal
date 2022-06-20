@@ -142,7 +142,17 @@ exports.updatePassword = async (email, password) => {
 exports.deleteUser = async (id) => {
   const user = await User.findByPk(id);
   if (user) {
-    await User.update({state:'Deactivated'}, { where: { id } });
+    await User.update({state:'Inactive'}, { where: { id } });
+    const pub = await Publication.findAll({
+      where:{userId:id},
+      attributes:['id']
+    })
+    const pubsId=pub.map((elem)=>{
+      return elem.dataValues.id
+    })
+    for(let i=0;i<pubsId.length;i++){
+      await Publication.update({state:'Inactive'}, { where: { id:pubsId[i]} })
+    }
     return { message: 'User deleted successfully' };
   }
   return { err_msg: 'User not found' };
@@ -224,6 +234,7 @@ exports.getFavorites = async (id) => {
   if (!user) {
     return { err_msg: 'User not found' };
   }
+ 
   return favorites;
 };
 
