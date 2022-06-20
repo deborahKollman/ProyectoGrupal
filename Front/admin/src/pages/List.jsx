@@ -1,8 +1,9 @@
 import './styles/List.scss'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
-import {Datatable} from '../components/DataTable/Datatable'
-import {TableCategory} from '../components/DataTable/TableCategory'
+import {Datatable} from '../components/Content/User/User'
+import {TableCategory} from '../components/Content/Category/Category'
+import {MainService} from '../components/Content/Serv/Serv'
 
 const List = ({pType}) => {
 
@@ -30,9 +31,22 @@ const ListOfCategory = ({pType}) => {
   )
 }
 
+const ListOfServices = () => {
+  return (
+    <div className="list_category">
+      <Sidebar/>
+      <div className="list-container">
+        <Navbar/>
+        <MainService/>
+      </div>
+    </div>
+  )
+}
+
 export {
   List,
-  ListOfCategory
+  ListOfCategory,
+  ListOfServices
 }
 
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useEffect } from "react";
-import { act_getOneCategory } from "../../redux/action";
+import { act_getOneCategory } from "../../../redux/action";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useState } from "react";
@@ -11,8 +11,8 @@ import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import styled from "styled-components";
-import { rgxName } from "../../assets/sources/RegExp";
-import { act_putCategory } from "../../assets/sources/ApiFunctions";
+import { rgxName } from "../../../assets/sources/RegExp";
+import { act_putCategory } from "../../../assets/sources/ApiFunctions";
 
 export default function BasicModal({ pModal, pSetModal }) {
   const handleClose = () => pSetModal({ active: false, pId: null });

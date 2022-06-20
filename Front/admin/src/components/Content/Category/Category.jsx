@@ -1,10 +1,10 @@
-import "../styles/Datatable.scss";
+import "../../styles/Datatable.scss";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { act_getAllCategories, act_getAllUsers } from "../../redux/action";
+import { act_getAllCategories, act_getAllUsers } from "../../../redux/action";
 
-import { userColumns, categoriesColumns } from "./FormatTable";
+import { userColumns, categoriesColumns } from "../FormatTable";
 import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,8 +15,8 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-import { rgxName } from "../../assets/sources/RegExp";
-import { act_postCategory, act_deleteCategory } from "../../redux/action";
+import { rgxName } from "../../../assets/sources/RegExp";
+import { act_postCategory, act_deleteCategory } from "../../../redux/action";
 import BasicModal from "./Modal";
 
 const TableCategory = ({ pType }) => {

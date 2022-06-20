@@ -1,15 +1,10 @@
 import axios from "axios";
  
-export const TOGGLE = "TOGGLE";
-export const GET_ALL_USERS = "GET_ALL_USERS";
-export const GET_USER_BY_ID = "GET_USER_BY_ID";
-export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
-
 // const URL = "http://localhost:3001/";
  
 export const act_themeTogle = () => {
   return {
-    type: TOGGLE,
+    type: "TOGGLE",
   };
 };
 
@@ -20,7 +15,7 @@ export const act_getAllUsers = () => {
       const { data } = await axios.get(`http://localhost:3001/users`);
       console.log("second", data);
       dispatch({
-        type: GET_ALL_USERS,
+        type: "GET_ALL_USERS",
         payload: data.users,
       });
     } catch (error) {
@@ -36,7 +31,7 @@ export function act_getUserById(pIdentity) {
         `http://localhost:3001/users/${pIdentity}`
       );
       dispatch({ 
-        type: GET_USER_BY_ID, 
+        type: "GET_USER_BY_ID", 
         payload: data.user 
       });
     } catch (error) {
@@ -59,7 +54,7 @@ export function act_getAllCategories() {
         `http://localhost:3001/categories/only`
       );
       dispatch({ 
-        type: GET_ALL_CATEGORIES, 
+        type: "GET_ALL_CATEGORIES", 
         payload: data
       });
     } catch (error) {
@@ -94,3 +89,18 @@ export const act_deleteCategory = (pIdentity) => {
     }
   }
 }
+
+
+export const act_getAllServices = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/services`);
+      dispatch({
+        type: "GET_ALL_SERVICES",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};

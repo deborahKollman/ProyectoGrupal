@@ -29,7 +29,43 @@ export const userColumns = [
       field: "rol",
       headerName: "ROL",
       width: 60,
+    }
+  ];
+
+  export const categoriesColumns = [
+    { field: "id", headerName: "ID", width: 30},
+    {
+      field: "name",
+      headerName: "NAME",
+      width: 170
     },
+  ];
+
+  export const servicesColumns = [
+    { field: "id", headerName: "ID", width: 30},
+    {
+      field: "name",
+      headerName: "NAME",
+      width: 170
+    },
+    {
+      field: "categories",
+      headerName: "Category",
+      width: 170,
+      renderCell: (params) => {
+        return (
+          <div>
+            {params.row.categories[0].name}­
+          </div>
+        );
+      },
+    },
+  ];
+
+  
+
+  /* 
+  ,
     // {
     //   field: "status",
     //   headerName: "Status",
@@ -42,13 +78,4 @@ export const userColumns = [
     //     );
     //   },
     // },
-  ];
-
-  export const categoriesColumns = [
-    { field: "id", headerName: "ID", width: 30},
-    {
-      field: "name",
-      headerName: "NAME",
-      width: 170
-    },
-  ];
+  */

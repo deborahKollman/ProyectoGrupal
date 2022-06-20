@@ -1,14 +1,14 @@
-import "../styles/Datatable.scss";
+import "../../styles/Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
-import { userColumns, categoriesColumns } from "./FormatTable";
+import { userColumns, categoriesColumns } from "../FormatTable";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FeedIcon from "@mui/icons-material/Feed";
 import { useEffect } from "react";
-import { act_getAllCategories, act_getAllUsers } from "../../redux/action";
+import { act_getAllCategories, act_getAllUsers } from "../../../redux/action";
 
 const Datatable = ({ pType }) => {
   let fAction;
