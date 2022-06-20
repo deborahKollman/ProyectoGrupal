@@ -234,6 +234,7 @@ exports.getFavorites = async (id) => {
   if (!user) {
     return { err_msg: 'User not found' };
   }
+ 
   return favorites;
 };
 

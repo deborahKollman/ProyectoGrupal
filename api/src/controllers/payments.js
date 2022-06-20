@@ -1,4 +1,4 @@
-const {getPayments, postPayment} = require('../services/payments');
+const {getPayments, postPayment, postMercadopago} = require('../services/payments');
 const {BAD_REQUEST, CREATED, OK} = require('../routes/helpers/status.js')
 
 exports.getPayments = async (req, res, next) => {
@@ -13,11 +13,23 @@ exports.getPayments = async (req, res, next) => {
 exports.postPayment = async (req, res, next) => {
     try {
         const r = await postPayment(req.body.stripeid, req.body.amount);
-        res.status(CREATED).send(r);
+        res.status(CREATED).send({message: r});
       } catch (error) {
         next(error);
       }
-}
+};
+
+exports.postMercadopago = async(req,res,next ) => {
+  console.log(req.body.title,req.body.price,"controller");
+  try {
+    const r = await postMercadopago(req.body.title,req.body.price);
+     res.status(CREATED).send(r);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 /* 
 exports.getServiceById =async (req, res, next) => {

@@ -20,7 +20,7 @@ const Favorites = ({id}) => {
     const fav = useSelector(state => state.favorites);
 
     useEffect(() => {
-        dispatch(getFavorites(1))
+        dispatch(getFavorites(28))
 
 
     },[dispatch])
