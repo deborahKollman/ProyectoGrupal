@@ -6,7 +6,6 @@ export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
-
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
@@ -15,11 +14,11 @@ export const types = {
 };
 
 export const myLocalStorage = () => {
-  let productsInLocalStorage = localStorage.getItem('service')
-  productsInLocalStorage = JSON.parse(productsInLocalStorage)
-  console.log(productsInLocalStorage)
-  return productsInLocalStorage
-}
+  let productsInLocalStorage = localStorage.getItem("service");
+  productsInLocalStorage = JSON.parse(productsInLocalStorage);
+  console.log(productsInLocalStorage);
+  return productsInLocalStorage;
+};
 // Para desloguearse
 export const act_logout = () => {
   return (dispatch) => {
@@ -75,6 +74,7 @@ export const getUserr = (user) => {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     });
     if (data.message) {
@@ -209,9 +209,7 @@ export function getPublications() {
 export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
-      const publication = await axios.get(
-        `/publications/${id}`,
-      );
+      const publication = await axios.get(`/publications/${id}`);
       return dispatch({
         type: "GET_PUBLICATION_ID",
         payload: publication.data,
@@ -272,9 +270,7 @@ export function getUsers() {
 export function getPublicationsByCategory(a) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `/publications?cat_id=` + a,
-      );
+      const response = await axios.get(`/publications?cat_id=` + a);
       //  console.log(response.data)
       dispatch({
         type: "GET_PUBLICATIONS_BY_CATEGORIES",
