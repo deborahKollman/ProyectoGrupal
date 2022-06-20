@@ -13,7 +13,12 @@ exports.getServices = async (req, res, next) => {
 exports.getServiceById =async (req, res, next) => {
   try {
     const r = await getServiceById(req.params.id);
-    res.status(OK).json(r);
+    if(r.err_message){
+      res.status(BAD_REQUEST).send(r.err_message);
+    }
+    else{
+      res.status(OK).json(r)
+    }
   } catch (error) {
     next(error);
   }

@@ -24,8 +24,14 @@ exports.getServiceById=async(id)=>{
           }
         }
     })
+
+    if(service){
+      return service;
+    }
+
+    return {err_message:'Service not found'}
     
-    return service;
+    
 };
 
 exports.getServiceByCategoryId = async (id) => {
@@ -60,7 +66,9 @@ exports.postService=async(name,categories=[])=>{
 }
 
 exports.updateService=async(id,name)=>{
-  const service=await Service.findById(id);
+  const service=await Service.findOne({
+    where:{id}
+  });
 
   if(!service){
     return {err_message:'Service not found'}
@@ -70,7 +78,9 @@ exports.updateService=async(id,name)=>{
 }
 
 exports.deleteService=async(id)=>{
-  const service= await Service.findById(id);
+  const service=await Service.findOne({
+    where:{id}
+  });
   if(!service){
     return {err_message:'Service not found'}
   }
