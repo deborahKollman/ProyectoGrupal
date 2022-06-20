@@ -1,4 +1,4 @@
-const {getServices, getServiceById, postService ,deleteService, updateService} = require('../services/services.js');
+const {getServices, getServiceById, getServiceByCategoryId, postService ,deleteService, updateService} = require('../services/services.js');
 const {BAD_REQUEST, CREATED, OK} = require('../routes/helpers/status.js')
 
 exports.getServices = async (req, res, next) => {
@@ -18,6 +18,20 @@ exports.getServiceById =async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getServiceByCategoryId = async (req,res,next) => {
+  try {
+    const r = await getServiceByCategoryId(req.params.id);
+    if(r.err_message){
+      res.status(BAD_REQUEST).send(r.err_message);
+    }
+    else{
+      res.status(OK).json(r)
+    }
+  } catch (error) {
+    next(error);
+  }
+}
 
 exports.postService=async(req,res,next)=>{
   try {
