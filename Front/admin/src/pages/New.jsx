@@ -3,10 +3,66 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import "./styles/New.scss";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import { PostUser } from "../assets/sources/ApiFunctions";
+/* ********************************* */
 
-const New = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
-  console.log(file);
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { Autocomplete, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+
+const New = ({ pInputForm, title }) => {
+  const oInitial = {
+    n_name: "",
+    n_lastName: "",
+    n_email: "",
+    n_dpw: "",
+    n_phone: "",
+    n_password: "",
+    n_country: "",
+    n_province: "",
+  };
+
+  const [file, setFile] = useState(null);
+  const [inputs, setInputs] = useState(oInitial);
+  const [select, setSelect] = useState(null);
+  const [status, setStatus] = useState({ on: null, off: null });
+
+  const mSubmit = async (event) => {
+    event.preventDefault();
+    // console.log("submit", inputs);
+    // console.log(file);
+    // console.log(status); 
+    const response = await PostUser({
+      "location": "",
+      "email": inputs.n_email,
+      "password": inputs.n_password,
+      "name": inputs.n_name,
+      "last_name": inputs.n_lastName,
+      "avatar_image": file,
+      "description": "",
+      "phone_number": inputs.n_phone,
+      "country": inputs.n_country,
+      "province_state": inputs.n_province,
+      "rol": select,
+      "state": status.on ? "Active" : "Inactive",
+    });
+    console.log(response, "response");
+  };
+/* {
+	"location": "",
+	"email": "vvvv@asdf.com",
+	"password": "123456789",
+	"name": "nname",
+	"last_name": "lassstname",
+	"avatar_image": "https://i.ibb.co/nfPP3tS/OIP.jpg",
+	"description": "dessscription",
+	"phone_number": "987654321",
+	"country": "Peru",
+	"province_state": "Lima",
+	"rol": "client",
+	"state": "Active"
+} */
   return (
     <div className="new">
       <Sidebar />
@@ -25,28 +81,40 @@ const New = ({ inputs, title }) => {
               }
               alt=""
             />
+            <div className="formInput">
+              <label htmlFor="file">
+                Image: <DriveFolderUploadOutlinedIcon className="iconn" />
+              </label>
+              <input
+                type="file"
+                id="file"
+                onChange={(e) => setFile(e.target.files[0])}
+                style={{ display: "none" }}
+              />
+            </div>
+            <GroupSizesColors status={status} setStatus={setStatus} />
           </div>
           <div className="right">
-            <form>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ display: "none" }}
-                />
-              </div>
+            <form onSubmit={mSubmit}>
+              <ComboBox select={select} setSelect={setSelect} />
 
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+              {pInputForm.map((pI) => (
+                <div className="formInput" key={pI.id}>
+                  <label>{pI.label}</label>
+                  <input
+                    type={pI.type}
+                    placeholder={pI.placeholder}
+                    name={pI.name}
+                    value={inputs[pI.name]}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, [pI.name]: e.target.value })
+                    }
+                  />
                 </div>
               ))}
-              <button>Send</button>
+              <button type="submit" className="New-button">
+                Send
+              </button>
             </form>
           </div>
         </div>
@@ -55,4 +123,74 @@ const New = ({ inputs, title }) => {
   );
 };
 
+const ComboBox = ({ select, setSelect }) => {
+  const aOptions = ["client", "Seller", "admin"];
+
+  return (
+    <Autocomplete
+      sx={{ width: "40%", mb: "9px" }}
+      options={aOptions}
+      autoHighlight
+      renderInput={(params) => (
+        <TextField {...params} label="User Rol" variant="standard" />
+      )}
+      value={select}
+      onChange={(event, value) => setSelect(value)}
+    />
+  );
+};
+
+const GroupSizesColors = (props) => {
+  const { status, setStatus } = props;
+
+  const buttons = [
+    <Button
+      variant={status.on ? "contained" : "outlined"}
+      color="success"
+      key="1"
+      onClick={() => setStatus({ on: true, off: false })}
+    >
+      Enabled
+    </Button>,
+    <Button
+      variant={status.off ? "contained" : "outlined"}
+      color="error"
+      key="2"
+      onClick={() => setStatus({ on: false, off: true })}
+    >
+      Disabled
+    </Button>,
+  ];
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        margin: "12px 0",
+        display: "grid",
+        placeItems: "center",
+      }}
+    >
+      <ButtonGroup size="small">{buttons}</ButtonGroup>
+    </div>
+  );
+};
+
 export default New;
+
+/* 
+const defaultProps = {
+    options: aOptions,
+    getOptionLabel: (option) => option.title,
+  };
+
+   <Autocomplete
+        {...defaultProps}
+*/
+
+/* 
+
+<div style={{width:"40%", display: "flex", placeItems: "flex-start", flexFlow: "row-reverse"}}>
+
+
+*/

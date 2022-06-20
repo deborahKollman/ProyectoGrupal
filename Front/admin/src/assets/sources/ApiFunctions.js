@@ -38,3 +38,12 @@ export async function PutService (pIdentity, oForm) {
     return data
   } catch (error) {console.log(error);}
 }
+
+export async function PostUser (oForm) {
+  try {
+    const { data } = await axios.post( `http://localhost:3001/users`, oForm, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return data
+  } catch (error) {console.log(error);}
+}
