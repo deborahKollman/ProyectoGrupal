@@ -75,3 +75,55 @@ export const aUserInputs = [
     },
   ];
   
+  export const aFormCategory = [
+    {
+      id: 1,
+      label: "Name of the category",
+      type: "text",
+      placeholder: "Mechnical",
+      errorMessage: "Please enter a name for the category",
+      regExp: /^[a-zA-Z0-9_]{3,}$/
+    },
+    {
+      id: 2,
+      label: "Status",
+      type: "select",
+      placeholder: "Status",
+      options: [
+        {
+          id: 1,
+          value: "Active",
+          label: "Active",
+        },
+        {
+          id: 2,
+          value: "Inactive",
+          label: "Inactive",
+        },
+      ],
+    }
+  ]
+
+  /* 
+  category
+    {
+      id: 2,
+      label: "Description",
+      type: "text",
+      placeholder: "Description",
+      errorMessage: "Please enter a description for the category",
+      regExp: /^[a-zA-Z0-9_]{3,}$/
+    },
+    {
+      id: 3,
+      label: "Image",
+      type: "file",
+      placeholder: "Image"
+    },
+    {
+      id: 4,
+      label: "Icon",
+      type: "file",
+      placeholder: "Icon"
+    },
+  */
