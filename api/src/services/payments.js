@@ -17,7 +17,7 @@ exports.getPayments=async()=>{
     return services;
 }
 
-exports.postPayment= async(stripeid, amount)=>{
+exports.postPayment= async(stripeid, amount ,usremail)=>{
     
     try {
         
@@ -26,12 +26,13 @@ exports.postPayment= async(stripeid, amount)=>{
             amount,
             currency: 'USD',
             payment_method: stripeid,
+            usremail,
             confirm: true
         });
 /*         const r = await Payment.create({stripeid,amount})
         console.log('El payment',payment)
         return payment; */
-        console.log(payment);
+        
         return "Service purchased";
     }
     catch(error) {
@@ -50,9 +51,9 @@ exports.postMercadopago = async(title, price) =>{
             }
             ],
             back_urls: {
-              "success": "http://localhost:3000/success",
-              "failure": "http://localhost:3000/feedback",
-              "pending": "http://localhost:8080/feedback"
+              "success": "http://localhost:3000/home",
+              "failure": "http://localhost:3000/home",
+              "pending": "http://localhost:3000/home"
             },
             auto_return: "approved",
         }

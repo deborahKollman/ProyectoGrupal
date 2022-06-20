@@ -18,21 +18,21 @@ server.use(morgan('dev'));
 server.use(express.json());
 server.use(cors());
 
-// server.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     credentials: true
-//   })
-// );
+ server.use(
+   cors({
+     origin: 'http://localhost:3000',
+     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+     credentials: true
+   })
+ );
 server.use(express.static('public'));
-// server.use(
-//   cookieSession({
-//     name: 'session',
-//     keys: ['key1', 'key2'],
-//     maxAge: 24 * 60 * 60 * 1000
-//   })
-// );
+ server.use(
+   cookieSession({
+     name: 'session',
+     keys: ['key1', 'key2'],
+     maxAge: 24 * 60 * 60 * 1000
+   })
+ );
 server.use(
   session({
     secret: 'secret',

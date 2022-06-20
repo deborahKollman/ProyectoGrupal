@@ -5,6 +5,7 @@ import {
   GET_FAVORITES,
   REMOVE_FAVORITES,
   GET_MERCADOPAGO,
+  GET_STRIPE
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
@@ -16,7 +17,7 @@ const initialState = {
   profileUser: [],
   favorites: [],
   categories: [],
-
+  stripe: {},
   filteredCategories: [],
   publicationById: {},
   userId: { seller_opinions: [], buyer_opinions: [] },
@@ -202,6 +203,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         mailSend: action.payload,
       };
+
+      case GET_STRIPE:
+        return {
+          ...state,
+          stripe: action.payload,
+          
+
+        }
+
+
+
+
     default:
       return state;
   }

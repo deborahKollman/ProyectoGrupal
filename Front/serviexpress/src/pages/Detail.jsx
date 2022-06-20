@@ -18,7 +18,9 @@ import Favorite from '@mui/icons-material/Favorite';
 import {MDBContainer} from "mdbreact";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import MercadoPago from '../components/MercadoPago'
+import MercadoPago from '../components/MercadoPago';
+import {Modal} from '@mui/material';
+import Payment from '../components/Payment';
 
 
 
@@ -110,6 +112,17 @@ export default function Detail(){
       setChecked(event.target.checked);
     };
     
+
+    const [show,setShow] = useState();
+
+    const handleCloseModal = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+
+
+
+
    
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
@@ -172,9 +185,23 @@ export default function Detail(){
     </div>
         <div className={stylesDetail.buyButtons}>
         <label>Pay with: </label>
-        <Link to={`/payment/${id}`}>Card</Link>
+        
+        <button onClick={handleShow} >Tarjeta</button>
         {detail.title && detail.price && <MercadoPago title={detail.title} price={detail.price} ></MercadoPago> }
         </div>
+
+        <Modal
+           open={show}
+           onClose={handleCloseModal}
+           className={stylesDetail.modal}
+          >
+
+           <Payment price={detail.price} usremail="" album={detail.album} title={detail.title}></Payment>
+
+
+        </Modal>
+
+
 
         <div className={stylesDetail.about}>
         <h3>About Services</h3>
