@@ -1,8 +1,10 @@
 require('dotenv').config();
 const { Payment }=require('../database/postgres.js')
 const Stripe = require('stripe')
+const axios = require('axios');
 
 const stripe = new Stripe(process.env.STRIPEPRVKEY)
+
 
 exports.getPayments=async()=>{
     const services=await Payment.findAll()
@@ -10,11 +12,20 @@ exports.getPayments=async()=>{
 }
 
 exports.postPayment= async(stripeid, amount, usremail='palmabeto@hotmail.com')=>{
-    
+  const contentHtml=`
+  <div style="background-color: rgb(242, 229, 206)">
+  <h1 style="background-color: rgb(255, 222, 6)">Payment Confirmation</h1>
+  <ul>
+    <li>Name: ${usremail}</li>
+    <li>Amount: ${amount}</li>
+    </ul>
+  <p style="background-color: rgb(255, 222, 6)">Your payment has been registered</p>
+  </div>
+  `
     try {
         
         console.log('Grabo el Stripe Id:', stripeid, ' y el monto:',amount)
-        //Confirmom el pago en stripe
+        //Confirmo el pago en stripe
         const payment = await stripe.paymentIntents.create({
             amount,
             currency: 'USD',
@@ -28,10 +39,10 @@ exports.postPayment= async(stripeid, amount, usremail='palmabeto@hotmail.com')=>
         return payment; */
 
         //Envio el mail al comprador
-        const sendmail = await axios ("http://localhost:3001/emailpayment",{
+        const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
           "email":usremail,
           "subject": "Servi Express - Payment Confirmation",
-          "text": "Your payment has been registered"
+          "html": contentHtml
       })
 
       return payment;

@@ -16,7 +16,7 @@ OAuth2.setCredentials({ refresh_token: acountTransport.auth.refreshToken });
 router.post('/', (req, res) => {
   const { email } = req.body;
   const { type } = req.query;
-  const { subject , text} = req.body
+  const { subject , html} = req.body
   const response = {
     recovery: `
     <h2>Confirm you email account</h2>
@@ -56,9 +56,9 @@ router.post('/', (req, res) => {
       const mailOptions = {
         from: 'Servi Express - Services',
         to: email,
-        html: response[type],
-        subject,
-        text
+        html,
+        subject
+        //text
       };
 
       const info = await transporter.sendMail(mailOptions);
