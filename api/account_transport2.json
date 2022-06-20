@@ -1,0 +1,11 @@
+{
+  "service": "gmail",
+  "auth": {
+    "type": "OAuth2",
+    "user": "serviexpress.henry@gmail.com",
+    "clientId": "534306975657-35m2qmfan1dd5o0b49dctotcdrshb13q.apps.googleusercontent.com",
+    "clientSecret": "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",
+    "refreshToken": "1//04wQ-JwmaxAQHCgYIARAAGAQSNwF-L9Irkd2sRMYLk3VCsUjy_g_R8X6ukd42p_PoNaBX20-bqd78Bvs2tjpwk32-qcAnZYEWuy0",
+    "redirectUris": ["https://developers.google.com/oauthplayground"]
+  }
+}

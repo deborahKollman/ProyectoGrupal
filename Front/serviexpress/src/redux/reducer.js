@@ -4,6 +4,7 @@ import {
   ADD_TO_FAVORITES,
   GET_FAVORITES,
   REMOVE_FAVORITES,
+  GET_MERCADOPAGO,
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
@@ -25,6 +26,7 @@ const initialState = {
   cart: [],
   errorLogin: {},
   errorRegister: {},
+  mercadoPago: "",
   mailSend: false,
 };
 
@@ -186,6 +188,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         reg_user: {},
       };
+    case GET_MERCADOPAGO:
+      return {
+        ...state,
+        mercadoPago: action.payload,
+
+      }
+
+
+
     case "SEND_MAIL":
       return {
         ...state,

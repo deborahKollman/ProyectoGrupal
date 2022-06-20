@@ -48,7 +48,7 @@ const handleSubmit = async (e) => {
 
 
         })
-        console.log(pay);
+        console.log(pay.data);
     }
 
 };
@@ -79,7 +79,7 @@ export default function Payment(){
     },[dispatch,id])
 
 
-    console.log(publication);
+  
 
 
 

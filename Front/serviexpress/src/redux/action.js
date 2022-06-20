@@ -5,6 +5,8 @@ export const AUTHENTICATE = "AUTHENTICATE";
 export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
+export const GET_MERCADOPAGO = "GET_MERCADOPAGO";
+const URL = `http://localhost:3001`;
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -30,7 +32,6 @@ export const act_logout = () => {
 
 // Para simular un login
 export const fakeLogin = (pO_User) => {
-  console.log(pO_User);
   return async (dispatch) => {
     const response = {
       user: {
@@ -390,6 +391,20 @@ export function clearUserRegister() {
   return (dispatch) => {
     dispatch({
       type: "CLEAR_USER_REGISTER",
+    });
+  };
+}
+
+export function getMercadoPago(title, price) {
+  return async (dispatch) => {
+    const { data } = await axios.post(`${URL}/payments/mercado`, {
+      title,
+      price,
+    });
+
+    dispatch({
+      type: GET_MERCADOPAGO,
+      payload: data,
     });
   };
 }

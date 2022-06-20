@@ -1,35 +1,107 @@
 require('dotenv').config();
 const { Payment }=require('../database/postgres.js')
 const Stripe = require('stripe')
+const axios = require('axios');
 
 const stripe = new Stripe(process.env.STRIPEPRVKEY)
+
+
+const mercadopago = require('mercadopago');
+
+mercadopago.configure({
+	access_token: process.env.MERCADOKEY,
+});
+  
 
 exports.getPayments=async()=>{
     const services=await Payment.findAll()
     return services;
 }
 
-exports.postPayment= async(stripeid, amount)=>{
-    
+exports.postPayment= async(stripeid, amount, usremail='palmabeto@hotmail.com')=>{
+  const contentHtml=`
+  <div style="background-color: rgb(242, 229, 206)">
+  <h1 style="background-color: rgb(255, 222, 6)">Payment Confirmation</h1>
+  <ul>
+    <li>Name: ${usremail}</li>
+    <li>Amount: ${amount}</li>
+    </ul>
+  <p style="background-color: rgb(255, 222, 6)">Your payment has been registered</p>
+  </div>
+  `
     try {
         
         console.log('Grabo el Stripe Id:', stripeid, ' y el monto:',amount)
+        //Confirmo el pago en stripe
         const payment = await stripe.paymentIntents.create({
             amount,
             currency: 'USD',
             payment_method: stripeid,
             confirm: true
         });
+
+        // Guardo el pago en la base de datos
 /*         const r = await Payment.create({stripeid,amount})
         console.log('El payment',payment)
         return payment; */
-        return payment;
+
+
+        //Envio el mail al comprador
+        const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
+          "email":usremail,
+          "subject": "Servi Express - Payment Confirmation",
+          "html": contentHtml
+      })
+
+      return payment;
+
+        //console.log(payment);
+        //return "Service purchased";
+
     }
     catch(error) {
         console.log(error)
-        return (error)
+        return (error.raw.message)
     }
 }
+
+exports.postMercadopago = async(title, price) =>{
+    try {
+        const preference = {
+            items: [{
+              title,
+              unit_price: parseInt(price),
+              quantity: 1,
+            }
+            ],
+            back_urls: {
+              "success": "http://localhost:3000/success",
+              "failure": "http://localhost:3000/feedback",
+              "pending": "http://localhost:8080/feedback"
+            },
+            auto_return: "approved",
+        }
+
+
+     const data = await mercadopago.preferences.create(preference);
+     const respId = data.body.id;
+        console.log(respId);
+        return respId;
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+
+};
+
+
+
+
+
+
 
 /* 
 exports.getServiceById=async(id)=>{

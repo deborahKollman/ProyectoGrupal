@@ -33,14 +33,9 @@ const Datatable = ({ pType }) => {
   }
 
   const xDispatch = useDispatch();
-  useEffect(
-    () => {
-      xDispatch(fAction());
-    },
-    [xDispatch],
-    [pType],
-    [fAction]
-  );
+  useEffect(() => {
+    xDispatch(fAction());
+  }, [xDispatch, pType, fAction]);
 
   const actionColumn = [
     {
@@ -97,7 +92,7 @@ const Datatable = ({ pType }) => {
   );
 };
 
-export {Datatable};
+export { Datatable };
 
 /* 
 // import { userColumns, userRows } from "../assets/database/datatablesource";

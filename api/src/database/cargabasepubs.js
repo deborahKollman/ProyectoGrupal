@@ -244,6 +244,104 @@ const fxpub = async function() {
                             "categoryId":5,
                             "services": [31]})
 
+                            pub=await Publication.create( {
+                                "date": "4/15/2019",
+                                "state":"Active",
+                                "title":"Idiomas",
+                                "album":["https://image.shutterstock.com/image-photo/cheerful-woman-teaching-english-class-600w-141309880.jpg",
+                                "https://image.shutterstock.com/image-photo/elder-600w-472286809.jpg",
+                                "https://image.shutterstock.com/image-photo/hand-writing-on-blackboard-language-600w-477810547.jpg"],
+                                "detail":"Aprendizaje y apoyo a la medida de las necesidades del alumno.Preparación para exámenes nacionales e internacionales PET, FCE, etc.Amplia disponibilidad horaria.",
+                                "detail_resume": "Aprenda Inglés y Alemán",
+                                "price": 6200,
+                                "userId": 4,
+                                "categoryId":3,
+                                "services": [1]})
+                                
+                                pub=await Publication.create( {
+                                "date": "5/17/2020",
+                                "state":"Active",
+                                "title":"Soporte escolar",
+                                "album":["https://image.shutterstock.com/image-photo/smiling-female-lecturer-helping-student-600w-1145576060.jpg",
+                                "https://image.shutterstock.com/image-photo/african-american-teacher-schoolgirl-wearing-600w-1798363273.jpg",
+                                "https://image.shutterstock.com/image-photo/online-education-children-girl-schoolgirl-600w-1723955134.jpg"],
+                                "detail":"ALUMNOS: PRIMARIO-SECUNDARIO-CBC-INGRESO UTN -TERCIARIO-UNIVERSITARIO.LAS CLASES PUEDEN SER VIRTUALES Y/O PRESENCIALES.Las virtuales se dictan a través de la aplicación meet, compartiendo la pantalla de una pizarra virtual.",
+                                "detail_resume": "Ayuda escolar primaria y secundaria",
+                                "price": 9400,
+                                "userId": 2,
+                                "categoryId":3,
+                                "services": [2]})
+                                
+                                pub=await Publication.create( {
+                                "date": "2/23/2019",
+                                "state":"Active",
+                                "title":"Computación",
+                                "album":["https://image.shutterstock.com/image-photo/elementary-school-computer-science-classroom-600w-1787093735.jpg",
+                                "https://image.shutterstock.com/image-photo/lecture-computer-class-600w-210341884.jpg",
+                                "https://image.shutterstock.com/image-photo/school-kids-using-computer-classroom-600w-575481358.jpg"],
+                                "detail":"Clases online por Zoom para sacarse dudas, para hacer ejercicios, para ayudar a entender cómo resolver esos problemas mediante la programación orientada a objetos o con C. Puedo ayudarte a introducirte en el mundo de la programación o a enseñarte de 0 (cero) cualquier lenguaje.",
+                                "detail_resume": "Clases de computacion-Nivel inicial e intermedio",
+                                "price": 1500,
+                                "userId": 5,
+                                "categoryId":3,
+                                "services": [2]})
+                                
+                                pub=await Publication.create( {
+                                "date": "2/2/2018",
+                                "state":"Active",
+                                "title":"Canto y baile",
+                                "album":["https://image.shutterstock.com/image-photo/caucasian-beautiful-woman-teacher-doing-600w-2157130025.jpg",
+                                "https://image.shutterstock.com/image-photo/group-children-teacher-music-class-600w-2145520107.jpg",
+                                "https://image.shutterstock.com/image-photo/cheerful-active-teenage-black-girl-600w-2162547227.jpg"],
+                                "detail":"Relajación, respiración, técnica vocal y repertorio según tus gustos.Encontra tu propia voz.",
+                                "detail_resume": "Clases De Canto Online Y Presencial",
+                                "price": 11600,
+                                "userId": 1,
+                                "categoryId":3,
+                                "services": [1]})
+                                
+                                pub=await Publication.create( {
+                                "date": "2/3/2021",
+                                "state":"Active",
+                                "title":"Manejo",
+                                "album":["https://image.shutterstock.com/image-photo/driver-courses-people-concept-car-600w-1516100510.jpg",
+                                "https://image.shutterstock.com/image-photo/student-driver-taking-driving-test-600w-364523669.jpg",
+                                "https://image.shutterstock.com/image-photo/handsome-senior-driving-instructor-writing-600w-364520978.jpg"],
+                                "detail":"*Alquiler de motos para rendir. Consulta presupuesto!*Entrenamiento para el examen practico A21,A22,A3 todas las categorías. *Te acompañamos a rendir.*Servicio de practica con moto propia. (retiro de vehículo por su domicilio).",
+                                "detail_resume": "Manejo (practicas- Entrenamiento-alquiler)",
+                                "price": 1500,
+                                "userId": 2,
+                                "categoryId":3,
+                                "services": [2]})
+                                
+                                pub=await Publication.create( {
+                                "date": "6/2/2021",
+                                "state":"Active",
+                                "title":"Cocina",
+                                "album":["https://image.shutterstock.com/image-photo/male-chef-group-people-cooking-600w-633405473.jpg",
+                                "https://image.shutterstock.com/image-photo/students-teacher-pastry-training-course-600w-145280539.jpg",
+                                "https://image.shutterstock.com/image-photo/two-positive-women-chefs-cooking-600w-585513890.jpg"],
+                                "detail":"Les presento mí nuevo taller on line! Se podrá ver :Muffins Lemon Pie;Crema Lemon Pie;Relleno apto;Cómo rellenarlo;Muffins de manzana con strudel;Distintos tipos de budines : Marmolado;Limón;Frutas secas ; pasas;Cubiertas: Ganache de chocolate;Glaseados;Merengue apto;Decoración;El por por qué y para de la pastelería;Que aporta la manteca el aceite o los diferentes tipos de ;Azúcares.Desde la comodidad de tu casa",
+                                "detail_resume": "Curso De Pastelería",
+                                "price": 4900,
+                                "userId": 1,
+                                "categoryId":3,
+                                "services": [2]})
+                                
+                                pub=await Publication.create( {
+                                "date": "10/15/2019",
+                                "state":"Active",
+                                "title":"Instrumentos musicales",
+                                "album":["https://image.shutterstock.com/image-photo/focused-girl-playing-acoustic-guitar-600w-1695502747.jpg",
+                                "https://image.shutterstock.com/image-photo/lowangle-shot-middle-school-students-600w-1878694351.jpg",
+                                "https://image.shutterstock.com/image-photo/focused-boy-playing-acoustic-guitar-600w-1695502726.jpg"],
+                                "detail":"Recibido de las carreras Profesorado en Música orientación Guitarra Jazz y la Tecnicatura de instrumento popular orientación Guitarra Jazz. Además, sigo formándome con Leo Tegli (Reconocido guitarrista de la escena de Jazz-Fusión de nuestro país) Profesor recibido en el conservatorio de música Leopoldo Marechal. (Estudio de jazz modal, Jazz-Fusión. Repertorio y recursos de improvisación)",
+                                "detail_resume": "Clases de guitarra y violin",
+                                "price": 5500,
+                                "userId": 2,
+                                "categoryId":3,
+                                "services": [2]})
+                                                           
 
 
          const pub1=await Publication.create( 
@@ -315,7 +413,7 @@ const fxpub = async function() {
                     "services": []
                     }
             )
-            const pub4=await Publication.create( 
+           /*  const pub4=await Publication.create( 
                 {
                     "date": "2022-06-09T23:28:02.650Z",
                     "state": "Active",
@@ -428,7 +526,7 @@ const fxpub = async function() {
                     }
             )
     
- 
+  */
         }
         catch (error) {
             console.log(error)
