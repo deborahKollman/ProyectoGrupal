@@ -11,20 +11,21 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link } from "react-router-dom";
-// import { DarkModeContext } from "../context/darkModeReducer";
-// import { useContext } from "react";
 import { act_themeDark, act_themeLight } from "../redux/action";
 import { useDispatch } from "react-redux";
-
+import CategoryIcon from "@mui/icons-material/Category";
 const Sidebar = () => {
-  // const {dispatch} = useContext(DarkModeContext);
   const xDispatch = useDispatch();
 
   return (
     <div className="sidebarr">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none", textAlign: "center" }}>
-          <img className="logo" src="https://i.ibb.co/sbkstqQ/log.png" alt="serviexpress"/>
+          <img
+            className="logo"
+            src="https://i.ibb.co/sbkstqQ/log.png"
+            alt="serviexpress"
+          />
         </Link>
       </div>
       <hr />
@@ -32,66 +33,76 @@ const Sidebar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li>
-            <DashboardIcon className="icon" />
+            <DashboardIcon className="iconn" />
             <span>Dashboard</span>
           </li>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineOutlinedIcon className="icon" />
+              <PersonOutlineOutlinedIcon className="iconn" />
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link to="/categories" style={{ textDecoration: "none" }}>
             <li>
-              <StoreIcon className="icon" />
+              <CategoryIcon className="iconn" />
+              <span>Categories</span>
+            </li>
+          </Link>
+          <Link to="/services" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="iconn" />
               <span>Services</span>
             </li>
           </Link>
           <li>
-            <CreditCardIcon className="icon" />
+            <CreditCardIcon className="iconn" />
             <span>Orders</span>
           </li>
           <p className="title">USEFUL</p>
           <li>
-            <QueryStatsIcon className="icon" />
+            <QueryStatsIcon className="iconn" />
             <span>Stats</span>
           </li>
           <li>
-            <NotificationsNoneIcon className="icon" />
+            <NotificationsNoneIcon className="iconn" />
             <span>Notifications</span>
           </li>
           <p className="title">SERVICE</p>
           <li>
-            <SettingsSystemDaydreamIcon className="icon" />
+            <SettingsSystemDaydreamIcon className="iconn" />
             <span>System Health</span>
           </li>
           <li>
-            <DisplaySettingsIcon className="icon" />
+            <DisplaySettingsIcon className="iconn" />
             <span>Logs</span>
           </li>
           <li>
-            <SettingsIcon className="icon" />
+            <SettingsIcon className="iconn" />
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
           <li>
-            <ManageAccountsIcon className="icon" />
+            <ManageAccountsIcon className="iconn" />
             <span>Profile</span>
           </li>
           <li>
-            <ExitToAppIcon className="icon" />
+            <ExitToAppIcon className="iconn" />
             <span>Logout</span>
           </li>
         </ul>
-      </div>
-
-      <div className="bottom">
-        <div className="colorOption" onClick={()=> xDispatch(act_themeLight())}></div>
-        <div className="colorOption" onClick={()=> xDispatch(act_themeDark())}></div>
       </div>
     </div>
   );
 };
 
 export default Sidebar;
+
+/* 
+
+// import { DarkModeContext } from "../context/darkModeReducer";
+// import { useContext } from "react";
+  // const {dispatch} = useContext(DarkModeContext);
+
+  
+*/
