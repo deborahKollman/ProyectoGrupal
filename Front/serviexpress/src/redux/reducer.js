@@ -192,10 +192,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         mercadoPago: action.payload,
-
-      }
-
-
+      };
 
     case "SEND_MAIL":
       return {
