@@ -20,7 +20,7 @@ import BasicModal from "./Modal";
 import { Autocomplete, Toolbar, Tooltip, Typography } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { act_getAllCategories, act_clearServices } from "../../../redux/action";
-import {act_postService } from '../../../assets/sources/ApiFunctions';
+import {act_postService, DeleteService } from '../../../assets/sources/ApiFunctions';
 import { ComboBoxFilter } from "./ComboBox";
 
 const ComboBox = ({category, setCategory}) => {
@@ -135,10 +135,10 @@ const MainService = () => {
   };
 
   const handleDelete = (pId) => {
-    // xDispatch(act_deleteCategory(pId))
-    // .then(() => {
-    //   xDispatch(fAction());
-    // })
+    DeleteService(pId)
+    .then(() => {
+      xDispatch(act_getAllServices());
+    })
   };
 
   const handleModify = (pId) => {
@@ -192,6 +192,9 @@ const MainService = () => {
     const response = await act_postService(oPost);
     console.log(response);
     xDispatch(act_getAllServices());
+    setInputs({ ...inputs, n_name: "" });
+    setCategory(null);
+    
   };
 
   const [filter, setFilter] = useState(false);
