@@ -28,6 +28,30 @@ exports.getServiceById=async(id)=>{
     return service;
 };
 
+exports.getServiceByCategoryId = async (id) => {
+  const category = await Category.findOne({
+    where:{id},
+    include:{
+      model:Service
+    }
+  })
+  if(category){
+    const services = await Service.findAll({
+      include:{
+        model:Category,
+        through:{
+          attributes:[]
+        },
+        where:{id},
+        attributes:[]
+      }
+    })
+
+    return  services;
+  }
+  return {err_message:'Category not found'}
+}
+
 exports.postService=async(name,categories=[])=>{
     const service=await Service.create({name:name});
     service.setCategories(categories)
