@@ -49,20 +49,6 @@ const New = ({ pInputForm, title }) => {
     });
     console.log(response, "response");
   };
-/* {
-	"location": "",
-	"email": "vvvv@asdf.com",
-	"password": "123456789",
-	"name": "nname",
-	"last_name": "lassstname",
-	"avatar_image": "https://i.ibb.co/nfPP3tS/OIP.jpg",
-	"description": "dessscription",
-	"phone_number": "987654321",
-	"country": "Peru",
-	"province_state": "Lima",
-	"rol": "client",
-	"state": "Active"
-} */
   return (
     <div className="new">
       <Sidebar />
@@ -192,5 +178,18 @@ const defaultProps = {
 
 <div style={{width:"40%", display: "flex", placeItems: "flex-start", flexFlow: "row-reverse"}}>
 
-
+  {
+	"location": "",
+	"email": "vvvv@asdf.com",
+	"password": "123456789",
+	"name": "nname",
+	"last_name": "lassstname",
+	"avatar_image": "https://i.ibb.co/nfPP3tS/OIP.jpg",
+	"description": "dessscription",
+	"phone_number": "987654321",
+	"country": "Peru",
+	"province_state": "Lima",
+	"rol": "client",
+	"state": "Active"
+}  
 */
