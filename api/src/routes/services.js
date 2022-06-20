@@ -1,9 +1,11 @@
 const { Router } = require('express');
-const {getServices, getServiceById , postService, deleteService, updateService} = require('../controllers/services.js');
+const {getServices, getServiceById ,getServiceByCategoryId, postService, deleteService, updateService} = require('../controllers/services.js');
 
 const router = Router();
 
 router.get('/', getServices);
+
+router.get('/category/:id',getServiceByCategoryId);
 
 router.get('/:id',getServiceById);
 
