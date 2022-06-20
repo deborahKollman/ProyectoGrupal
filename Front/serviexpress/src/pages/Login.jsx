@@ -70,6 +70,7 @@ const Login = () => {
     if (rdcr_isAuth) {
    
       xNavigate("/home");
+      xDispatch(clearErrorRegister());
     }
   }, [errorLogin, rdcr_isAuth]);
 
