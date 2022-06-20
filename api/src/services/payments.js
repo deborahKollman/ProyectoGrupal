@@ -4,6 +4,14 @@ const Stripe = require('stripe')
 
 const stripe = new Stripe(process.env.STRIPEPRVKEY)
 
+const mercadopago = require('mercadopago');
+
+mercadopago.configure({
+	access_token: process.env.MERCADOKEY,
+});
+  
+
+
 exports.getPayments=async()=>{
     const services=await Payment.findAll()
     return services;
@@ -23,13 +31,52 @@ exports.postPayment= async(stripeid, amount)=>{
 /*         const r = await Payment.create({stripeid,amount})
         console.log('El payment',payment)
         return payment; */
-        return payment;
+        console.log(payment);
+        return "Service purchased";
     }
     catch(error) {
         console.log(error)
-        return (error)
+        return (error.raw.message)
     }
 }
+
+exports.postMercadopago = async(title, price) =>{
+    try {
+        const preference = {
+            items: [{
+              title,
+              unit_price: parseInt(price),
+              quantity: 1,
+            }
+            ],
+            back_urls: {
+              "success": "http://localhost:3000/success",
+              "failure": "http://localhost:3000/feedback",
+              "pending": "http://localhost:8080/feedback"
+            },
+            auto_return: "approved",
+        }
+
+
+     const data = await mercadopago.preferences.create(preference);
+     const respId = data.body.id;
+        console.log(respId);
+        return respId;
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+
+};
+
+
+
+
+
+
 
 /* 
 exports.getServiceById=async(id)=>{
