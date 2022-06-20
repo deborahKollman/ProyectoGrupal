@@ -104,3 +104,30 @@ export const act_getAllServices = () => {
     }
   };
 };
+
+export const act_filterServicesByCategory = (pObj) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/services/category/${pObj.id}`
+      );
+      //add foreign key to services
+      data.forEach((pI) => {
+        pI.categories = [pObj];
+      });
+
+      dispatch({
+        type: "FILTER_SERVICES_BY_CATEGORY",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export const act_clearServices = () => {
+  return {
+    type: "CLEAR_SERVICES",
+  };
+}

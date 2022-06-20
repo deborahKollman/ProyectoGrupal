@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useEffect } from "react";
-import { act_getOneService } from "../../../assets/sources/ApiFunctions";
+import { act_getOneService, PutService } from "../../../assets/sources/ApiFunctions";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useState } from "react";
@@ -65,12 +65,13 @@ export default function BasicModal({ pModal, pSetModal }) {
   //   const xDispatch = useDispatch();
   const mOnSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit", validation.n_name);
+    
     if (!validation.n_name) {
       const oSubmit = {
         name: inputs.n_name,
+        category: comboBox.id,
       };
-      const response = await act_putCategory(pModal.id, oSubmit);
+      const response = await PutService(pModal.id, oSubmit);
       console.log("response", response);
       handleClose();
     }
@@ -88,7 +89,7 @@ export default function BasicModal({ pModal, pSetModal }) {
         <MyForm className="tblCat-r1" onSubmit={mOnSubmit}>
           <div className="r1-header">
             <h4 disabled>
-              <b>Category: </b>
+              <b>Service: </b>
               {pModal.id}
             </h4>
             <FormControlLabel

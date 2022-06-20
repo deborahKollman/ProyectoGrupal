@@ -6,10 +6,11 @@ const initialState = {
   rdcr_categories: [],
   rdcr_category: {},
   rdcr_services: [],
+  rdcr_servicesBckp: [],
 };
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  const { rdcr_darkMode } = state;
+  const { rdcr_darkMode,  rdcr_servicesBckp} = state;
   switch (type) {
     case "TOGGLE": {
       return {
@@ -39,6 +40,19 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         rdcr_services: payload,
+        rdcr_servicesBckp: payload,
+      };
+    }
+    case "FILTER_SERVICES_BY_CATEGORY": {
+      return {
+        ...state,
+        rdcr_services: payload,
+      };
+    }
+    case "CLEAR_SERVICES": {
+      return {
+        ...state,
+        rdcr_services: [...rdcr_servicesBckp]
       };
     }
     default: return state; 
