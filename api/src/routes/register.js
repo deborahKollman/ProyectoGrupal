@@ -6,6 +6,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
+const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
+
+
 const registerGoogle = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -70,7 +73,7 @@ router.put('/confirm', async (req, res) => {
     await user.update({
       password: bcrypt.hashSync(confirmPassword, 10)
     });
-    return res.redirect('http://localhost:3000/login');
+    return res.redirect(`${baseURL}/login`);
   }
 });
 
@@ -86,9 +89,9 @@ router.get(
   }),
   (req, res) => {
     if (req.user.message) {
-      res.redirect('http://localhost:3000/login');
+      res.redirect(`${baseURL}/login`);
     } else {
-      res.redirect('http://localhost:3000/sendEmail/confirm');
+      res.redirect(`${baseURL}/sendEmail/confirm`);
     }
   }
 );

@@ -7,6 +7,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
+const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
+
 const loginGoogle = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -37,7 +39,7 @@ router.get('/', async (req, res) => {
   if (user) {
     return res.send(user);
   } else {
-    res.redirect('http://localhost:3000/login');
+    res.redirect(`${baseURL}/login`);
   }
 });
 
@@ -55,7 +57,7 @@ router.get(
     failureMessage: true
   }),
   function (_, res) {
-    res.redirect('http://localhost:3000/home');
+    res.redirect(`${baseURL}/home`);
   }
 );
 

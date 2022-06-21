@@ -17,6 +17,8 @@ import {
   clearErrorRegister,
 } from "../redux/action";
 
+const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+
 const HookInputValue = (initialValue) => {
   const [value, setValue] = useState(initialValue);
   const onChange = (e) => {
@@ -35,7 +37,7 @@ const Login = () => {
   const checked = HookInputValue("");
 
   const mGoogleLogin = () => {
-    window.open("http://localhost:3001/login/google", "_self");
+    window.open(`${baseURL}/login/google`, "_self");
   };
 
   const data = {

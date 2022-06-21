@@ -5,9 +5,10 @@ import App from './App.routes';
 import { BrowserRouter } from 'react-router-dom';
 import STORE from './redux/store';
 import { Provider } from 'react-redux';
-import axios from 'axios'; 
+import axios from 'axios';
+import env from 'react-dotenv'
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+axios.defaults.baseURL = env.REACT_APP_API || 'http://localhost:3001'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +18,6 @@ root.render(
     </BrowserRouter>
   </Provider>
 ); 
-
-
 
 /* 
 
