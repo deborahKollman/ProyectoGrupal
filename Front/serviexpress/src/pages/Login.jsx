@@ -60,6 +60,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+       console.log(rdcr_isAuth);
     if (Object.keys(errorLogin).length > 0) {
       setError({ text: errorLogin });
     } else {
@@ -67,6 +68,7 @@ const Login = () => {
       setError({ text: "" });
     }
     if (rdcr_isAuth) {
+   
       xNavigate("/home");
       xDispatch(clearErrorRegister());
     }

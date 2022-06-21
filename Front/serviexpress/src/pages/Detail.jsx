@@ -18,7 +18,9 @@ import Favorite from '@mui/icons-material/Favorite';
 import {MDBContainer} from "mdbreact";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import MercadoPago from '../components/MercadoPago'
+import MercadoPago from '../components/MercadoPago';
+import {Modal} from '@mui/material';
+import Payment from '../components/Payment';
 
 
 
@@ -29,14 +31,15 @@ export default function Detail(){
     const detail = useSelector(state => state.detail);
     const moreUsers = useSelector(state => state.users);
     const fav = useSelector(state => state.favorites);
-
-
+    const userLogin = useSelector(state => state.user)
+    const favCheck = useSelector(state => state.favorite_check);
 
   const [checked, setChecked] = useState(false);
 
 
   const heart = () => {
     fav.publications && fav.publications.forEach(e => {
+        
         if(e.id === parseInt(id)) {
           setChecked(true);
         }
@@ -54,6 +57,7 @@ export default function Detail(){
         dispatch(getUsers());
         dispatch(getFavorites(detail.userId));
         dispatch(getUser());
+        
         heart();
 
 
@@ -82,11 +86,11 @@ export default function Detail(){
 
     const favClicked = () => {   
         if(checked) {
-          dispatch(removeFavorites(detail.userId, {id: id}));
+          dispatch(removeFavorites(userLogin.id,{id: detail.id}));
           setMsg("Removed from favorites")
         } 
         else {
-          dispatch(addToFavorites(detail.userId, {id: id}));
+          dispatch(addToFavorites(userLogin.id,{id: detail.id}));
           setMsg("Added to favorites")
         }
 
@@ -110,6 +114,12 @@ export default function Detail(){
       setChecked(event.target.checked);
     };
     
+
+    const [show,setShow] = useState();
+
+    const handleCloseModal = () => setShow(false);
+    const handleShow = () => setShow(true);
+
    
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
@@ -172,9 +182,23 @@ export default function Detail(){
     </div>
         <div className={stylesDetail.buyButtons}>
         <label>Pay with: </label>
-        <Link to={`/payment/${id}`}>Card</Link>
+        
+        <button onClick={handleShow} >Tarjeta</button>
         {detail.title && detail.price && <MercadoPago title={detail.title} price={detail.price} ></MercadoPago> }
         </div>
+
+        <Modal
+           open={show}
+           onClose={handleCloseModal}
+           className={stylesDetail.modal}
+          >
+
+           <Payment price={detail.price} usremail="" album={detail.album} title={detail.title}></Payment>
+
+
+        </Modal>
+
+
 
         <div className={stylesDetail.about}>
         <h3>About Services</h3>

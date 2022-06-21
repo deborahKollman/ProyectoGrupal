@@ -5,6 +5,8 @@ import {
   GET_FAVORITES,
   REMOVE_FAVORITES,
   GET_MERCADOPAGO,
+  GET_STRIPE,
+  FAVORITE_CHECK,
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
@@ -16,7 +18,7 @@ const initialState = {
   profileUser: [],
   favorites: [],
   categories: [],
-
+  stripe: {},
   filteredCategories: [],
   publicationById: {},
   userId: { seller_opinions: [], buyer_opinions: [] },
@@ -28,6 +30,8 @@ const initialState = {
   errorRegister: {},
   mercadoPago: "",
   mailSend: false,
+  favorite_check: false,
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -199,6 +203,30 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         mailSend: action.payload,
       };
+
+      case GET_STRIPE:
+        return {
+          ...state,
+          stripe: action.payload,
+          
+
+        }
+      case FAVORITE_CHECK:  
+          let auxCheck = false;
+          
+          action.payload[0].forEach(e => {
+              if(e.id === parseInt(action.payload[1])) auxCheck = true;
+          })
+
+
+        return {
+            ...state,
+            favorite_check: auxCheck,
+
+        }
+
+
+
     default:
       return state;
   }
