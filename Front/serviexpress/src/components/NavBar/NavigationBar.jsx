@@ -54,7 +54,9 @@ const NavigationBar = () => {
       <BottomNavigationAction
         label="Favorites"
         icon={<FavoriteIcon fontSize="large" />}
-        onChange={handleFav}
+        onClick={() => {
+          mNavigation("favorites");
+        }}
         
       />
 

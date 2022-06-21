@@ -26,13 +26,13 @@ server.use(
   })
 );
 server.use(express.static('public'));
-// server.use(
-//   cookieSession({
-//     name: 'session',
-//     keys: ['key1', 'key2'],
-//     maxAge: 24 * 60 * 60 * 1000
-//   })
-// );
+ server.use(
+   cookieSession({
+     name: 'session',
+     keys: ['key1', 'key2'],
+     maxAge: 24 * 60 * 60 * 1000
+   })
+ );
 server.use(
   session({
     secret: 'secret',

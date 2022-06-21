@@ -20,7 +20,7 @@ const Favorites = ({id}) => {
     const fav = useSelector(state => state.favorites);
 
     useEffect(() => {
-        dispatch(getFavorites(28))
+        dispatch(getFavorites(27))
 
 
     },[dispatch])
@@ -52,7 +52,7 @@ const Favorites = ({id}) => {
   const removeFav = () => {
     checked && checked.forEach(e => {
         
-        dispatch(removeFavorites(1,{id: e.id}));
+        dispatch(removeFavorites(27,{id: e.id}));
 
     })
     
