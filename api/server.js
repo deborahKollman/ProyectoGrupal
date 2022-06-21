@@ -16,15 +16,15 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser('secret'));
 server.use(morgan('dev'));
 server.use(express.json());
-server.use(cors());
+// server.use(cors());
 
-// server.use(
-//   cors({
-//     origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//     credentials: true
-//   })
-// );
+server.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true
+  })
+);
 server.use(express.static('public'));
  server.use(
    cookieSession({
