@@ -16,11 +16,11 @@ export const types = {
 };
 
 export const myLocalStorage = () => {
-  let productsInLocalStorage = localStorage.getItem('service')
-  productsInLocalStorage = JSON.parse(productsInLocalStorage)
-  console.log(productsInLocalStorage)
-  return productsInLocalStorage
-}
+  let productsInLocalStorage = localStorage.getItem("service");
+  productsInLocalStorage = JSON.parse(productsInLocalStorage);
+  console.log(productsInLocalStorage);
+  return productsInLocalStorage;
+};
 // Para desloguearse
 export const act_logout = () => {
   return (dispatch) => {
@@ -32,7 +32,6 @@ export const act_logout = () => {
 
 // Para simular un login
 export const fakeLogin = (pO_User) => {
- 
   return async (dispatch) => {
     const response = {
       user: {
@@ -76,6 +75,7 @@ export const getUserr = (user) => {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     });
     if (data.message) {
@@ -210,9 +210,7 @@ export function getPublications() {
 export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
-      const publication = await axios.get(
-        `/publications/${id}`,
-      );
+      const publication = await axios.get(`/publications/${id}`);
       return dispatch({
         type: "GET_PUBLICATION_ID",
         payload: publication.data,
@@ -273,9 +271,7 @@ export function getUsers() {
 export function getPublicationsByCategory(a) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `/publications?cat_id=` + a,
-      );
+      const response = await axios.get(`/publications?cat_id=` + a);
       //  console.log(response.data)
       dispatch({
         type: "GET_PUBLICATIONS_BY_CATEGORIES",
@@ -399,18 +395,18 @@ export function clearUserRegister() {
   };
 }
 
-
-export function getMercadoPago(title,price){
-
+export function getMercadoPago(title, price) {
   return async (dispatch) => {
-    const {data} = await axios.post(`${URL}/payments/mercado`,{title,price});
+    const { data } = await axios.post(`${URL}/payments/mercado`, {
+      title,
+      price,
+    });
 
     dispatch({
       type: GET_MERCADOPAGO,
       payload: data,
-    })
-
-  }
+    });
+  };
 }
 
 export function sendEmail({ email, type }) {
