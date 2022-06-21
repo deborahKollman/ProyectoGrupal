@@ -1,8 +1,8 @@
 // const { publications } = require('../database/data.js');
-const { Publication, Service, User } = require('../database/postgres.js');
+const { Publication, Service, User, Category } = require('../database/postgres.js');
 const { Op } = require('sequelize');
 
-exports.getPublications = (offset, limit, title, cat_id = '0') => {
+exports.getPublications = async (offset, limit, title, cat_id = '0') => {
   // Retorna las limit publicaciones activas a partir de la nro offset
   if (title === '' && cat_id === '0') {
     activePub = Publication.findAll({
@@ -57,7 +57,6 @@ exports.getPublicationDetails = (id) => {
 };
 
 exports.postPublication = async (
-  state,
   title,
   detail,
   detail_resume,
@@ -66,33 +65,26 @@ exports.postPublication = async (
   categoryId,
   usr_id = 1
 ) => {
-  try {
-    const user = await User.findOne({ where: { id: usr_id } });
-    console.log(
-      title,
-      detail,
-      detail_resume,
-      price,
-      album,
-      categoryId,
-      (usr_id = 1)
-    );
-    const publication = await Publication.create({
-      date: Date.now(),
-      state: 'Active',
-      title,
-      detail,
-      detail_resume,
-      price,
-      album,
-      categoryId
-    });
-    publication.setUser(user);
-
-    return publication;
-  } catch (error) {
-    return { err_msg: 'Publication post error' };
+  const user = await User.findOne({ where: { id: usr_id } });
+  if(user){
+    const category = await Category.findOne({ where: {id:categoryId}});
+    if(category){
+      const publication = await Publication.create({
+        date: Date.now(),
+        state: 'Active',
+        title,
+        detail,
+        detail_resume,
+        price,
+        album
+      });
+      publication.setUser(user);
+      publication.setCategory(category);
+      return publication;
+    }
+    return {err_msg:'Category not found'}
   }
+  return {err_msg:'User not found'}
 };
 
 exports.getPublicationsByTitle = (title) => {
@@ -138,3 +130,17 @@ exports.getPublicationsByCategory = (cat_id) => {
   });
   return publications;
 };
+
+exports.getPublicationsByUserId = async (id) => {
+  const user = await User.findOne({
+    where: {id}
+  })
+  if(user){
+    const publications = await Publication.findAll({
+      where: {userId: id}
+    })
+
+    return publications
+  }
+  return {err_message: 'User not found'}
+}
