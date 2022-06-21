@@ -1,3 +1,4 @@
+const { BAD_REQUEST, OK } = require('../routes/helpers/status.js')
 const {
   getPublications,
   getPublicationDetails,
@@ -5,7 +6,8 @@ const {
   deletePublication,
   updatePublication,
   getPublicationsByTitle,
-  getPublicationsByCategory
+  getPublicationsByCategory,
+  getPublicationsByUserId
 } = require('../services/publications.js');
 
 exports.getPublications = async (req, res, next) => {
@@ -55,26 +57,30 @@ exports.postPublication = async (req, res, next) => {
       usr_id,
       categoryId
     } = req.body;
-    if (!process.env.API) {
-      const album = req.files.map(
-        (e) =>
-          'http://' +
-          process.env.HOST +
-          ':' +
-          process.env.PORT +
-          e.destination.slice(1) +
-          '/' +
-          e.filename
-      );
-    } else {
-      const album = req.files.map(
-        (e) =>
-          'http://' +
-          process.env.API +
-          e.destination.slice(1) +
-          '/' +
-          e.filename
-      );
+    console.log(req.files)
+    var album = null;
+    if(req.files){
+      if (!process.env.API) {
+        album = req.files.map(
+          (e) =>
+            'http://' +
+            process.env.HOST +
+            ':' +
+            process.env.PORT +
+            e.destination.slice(1) +
+            '/' +
+            e.filename
+        );
+      } else {
+        album = req.files.map(
+          (e) =>
+            'http://' +
+            process.env.API +
+            e.destination.slice(1) +
+            '/' +
+            e.filename
+        );
+      }
     }
     const r = await postPublication(
       title,
@@ -103,8 +109,8 @@ exports.getPublicationsByTitle = async (req, res, next) => {
 
 exports.getPublicationsByCategory = async (req, res, next) => {
   try {
-    const { cat_id } = req.params;
-    const response = await getPublicationsByCategory(cat_id);
+    const { categoryId } = req.params;
+    const response = await getPublicationsByCategory(categoryId);
     res.send(response);
   } catch (error) {
     next(error);
@@ -130,3 +136,18 @@ exports.updatePublication = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getPublicationsByUserId = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const r = await getPublicationsByUserId(userId);
+    if(r.err_message){
+      res.status(BAD_REQUEST).send(r.err_message)
+    }
+    else{
+      res.status(OK).json(r)
+    }
+  } catch (error) {
+    next(error)
+  }
+}

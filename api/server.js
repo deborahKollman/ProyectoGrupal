@@ -20,7 +20,7 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:4000'],
+    origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   })
