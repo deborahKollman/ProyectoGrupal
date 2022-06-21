@@ -16,15 +16,15 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser('secret'));
 server.use(morgan('dev'));
 server.use(express.json());
-// server.use(cors());
+server.use(cors());
 
-server.use(
-  cors({
-    origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true
-  })
-);
+// server.use(
+//   cors({
+//     origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     credentials: true
+//   })
+// );
 server.use(express.static('public'));
  server.use(
    cookieSession({
@@ -47,7 +47,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use(passport.authenticate('session'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Headers', ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app']);
+  res.header('Access-Control-Allow-Headers', '*');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
