@@ -1,16 +1,30 @@
 import React from 'react'
 import {filterCategories, getAllCategories} from '../../redux/action'
 import {useSelector, useDispatch} from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Styles from './Filter.module.scss'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import Typography from '@mui/material/Typography'
 
 //El filtro esta todo hecho, solo le falta la funcionalidad usando redux
 const FilterByCategories = () => {
+
+  const [selectedIndex, setSelectedIndex] = useState(1);
+
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+  ) => {
+    setSelectedIndex(index);
+  };
 
   const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.categories)
@@ -26,34 +40,48 @@ const FilterByCategories = () => {
   } 
 
   return (
-    <>
-    <div className={Styles.filterctn}>
-      <Form.Select size="lg">
-        <option disabled>Filter by categories</option>
-        {allCategories?.map((category) => {
-          return <option>{category.name}</option>
-        } )}
-      </Form.Select>
-    </div>
-    {/* <select onChange={(e) => handleChange(e)}>
-    <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
-      <InputLabel id="demo-select-small">Age</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        label="Categories"
-      >
-        <MenuItem value="all"><em>All</em></MenuItem>
 
-          {allCategories?.map((category) => {
-            return <MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>
-          })}
-
-      </Select>
-    </FormControl>
-    </select> */}
-    </>
+    <List sx={{ width: '100%', bgcolor: 'rgb(255, 222, 6)', display: 'flex', flexDirection: 'row'}}>
+        
+      {allCategories.map((e,index) => {
+        return ( 
+            <ListItem alignItems="flex-start">
+              <ListItemButton
+                selected={selectedIndex === index}
+                onClick={(event) => handleListItemClick(event, index)}
+               >
+              <ListItemText
+                primary={e.name}
+              />
+              </ListItemButton>
+            </ListItem>
+        );
+      })
+      }
+    </List>
   )
+
+/* 
+      <ListItem alignItems="flex-start">
+      <ListItemButton
+          selected={selectedIndex === 1}
+          onClick={(event) => handleListItemClick(event, 1)}
+        >
+        <ListItemText
+          primary="Idioms"
+        />
+
+      </ListItemButton>
+
+      </ListItem>
+
+      <ListItem alignItems="flex-start">
+        <ListItemText
+          primary="Construction"
+
+        />
+      </ListItem>
+    </List> */
 }
 
 export default FilterByCategories

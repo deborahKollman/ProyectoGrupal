@@ -163,10 +163,11 @@ export function filterCategories(payload) {
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = axios.get(`/categories`);
+      const json = await axios.get(`/categories`);
+      console.log(json.data);
       return dispatch({
         type: "GET_CATEGORIES",
-        payload: json.data.map((el) => el.name),
+        payload: json.data.map((el) => {return ({id: el.id, name: el.name})}),
       });
     } catch (error) {
       console.log(error);
