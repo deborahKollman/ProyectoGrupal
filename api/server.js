@@ -47,7 +47,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use(passport.authenticate('session'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Headers', ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app']);
+  res.header('Access-Control-Allow-Headers', 'true');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
