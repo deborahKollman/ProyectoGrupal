@@ -31,14 +31,15 @@ export default function Detail(){
     const detail = useSelector(state => state.detail);
     const moreUsers = useSelector(state => state.users);
     const fav = useSelector(state => state.favorites);
-
-
+    const userLogin = useSelector(state => state.user)
+    const favCheck = useSelector(state => state.favorite_check);
 
   const [checked, setChecked] = useState(false);
 
 
   const heart = () => {
     fav.publications && fav.publications.forEach(e => {
+        
         if(e.id === parseInt(id)) {
           setChecked(true);
         }
@@ -56,6 +57,7 @@ export default function Detail(){
         dispatch(getUsers());
         dispatch(getFavorites(detail.userId));
         dispatch(getUser());
+        
         heart();
 
 
@@ -84,11 +86,11 @@ export default function Detail(){
 
     const favClicked = () => {   
         if(checked) {
-          dispatch(removeFavorites(detail.userId, {id: id}));
+          dispatch(removeFavorites(userLogin.id,{id: detail.id}));
           setMsg("Removed from favorites")
         } 
         else {
-          dispatch(addToFavorites(detail.userId, {id: id}));
+          dispatch(addToFavorites(userLogin.id,{id: detail.id}));
           setMsg("Added to favorites")
         }
 
@@ -117,11 +119,6 @@ export default function Detail(){
 
     const handleCloseModal = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
-
-
-
 
    
     return <div className={stylesDetail.container}>

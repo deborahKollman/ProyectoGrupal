@@ -7,7 +7,9 @@ export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 export const GET_MERCADOPAGO = "GET_MERCADOPAGO";
 export const GET_STRIPE = "GET_STRIPE";
-const URL = `http://localhost:3001`;
+export const FAVORITE_CHECK = "FAVORITE_CHECK";
+
+
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -286,9 +288,10 @@ export function getPublicationsByCategory(a) {
 
 //FUNCION PARA AGREGAR A FAV
 export function addToFavorites(user, publication) {
+
   return async (dispatch) => {
     try {
-      await axios.put(`/users/${user}/favorites`, publication);
+      await axios.post(`/users/${user}/favorites`, publication);
       let fav = await axios.get(`/users/${user}/favorites`);
 
       dispatch({
@@ -449,5 +452,27 @@ export function getStripe(stripeid,amount, usremail){
 
 
     }
+
+};
+
+export function favoriteCheck(user, publication){
+    return async(dispatch) => {
+        try {
+          const fav = await axios.get(`/users/${user}/favorites`);
+          dispatch({  
+            type: FAVORITE_CHECK,
+            payload: [fav.data.publications,publication],
+          })
+
+          
+        } catch (error) {
+          
+        }
+
+
+
+    }
+
+
 
 };
