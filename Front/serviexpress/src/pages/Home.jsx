@@ -29,6 +29,7 @@ export default function Home() {
     indexOfFirstPublication,
     indexOfLastPublication,
   );
+  console.log('length cuurent services',currentServices.length)
 
   const [msgSearch, SetMsgSearch] = useState("");
 

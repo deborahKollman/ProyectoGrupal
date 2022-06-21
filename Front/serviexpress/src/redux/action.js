@@ -156,7 +156,9 @@ export const getById = (id) => {
 
 //simulando la accion para el filtro por categorias
 export function filterCategories(payload) {
-  return { type: "FILTER_CATEGORIES", payload };
+  return async (dispatch) => {
+    return dispatch({ type: "FILTER_CATEGORIES", payload });
+  }
 }
 
 // Trae todas las categorias
