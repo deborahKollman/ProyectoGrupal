@@ -80,6 +80,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profileUser: [...action.payload],
       };
+
     case "FILTER_CATEGORIES":
       let categoriesCopy = state.categories;
       let filtered =
@@ -95,6 +96,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
+
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",
