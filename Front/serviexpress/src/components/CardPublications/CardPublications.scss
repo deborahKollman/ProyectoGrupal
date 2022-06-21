@@ -4,15 +4,13 @@
   
 
   .card {
-    border-radius: 18px;
+    //border-radius: 18px;
     background: rgb(255, 255, 255);
     font-family: roboto;
     text-align: center;
     transition: 0.5s ease;
     cursor: pointer;
     /* margin:30px; */
-    box-shadow: 0 0 6px 2px rgba(135, 122, 83, 0.75),
-      0 40px 25px -15px rgba(0, 0, 0, 0.35);
     width: 300px;
     height: 400px;
   }
@@ -100,12 +98,6 @@
     color: rgb(218, 233, 4);
     text-shadow: 3px 3px 3px black;
     padding: 13px;
-  }
-
-  .card:hover {
-    transform: scale(1.1);
-    margin: 5px 35px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
   }
 
   .titleprice {
