@@ -19,11 +19,12 @@ export const types = {
 };
 
 export const myLocalStorage = () => {
-  let productsInLocalStorage = localStorage.getItem("service");
+  let productsInLocalStorage = window.localStorage.getItem("service");
   productsInLocalStorage = JSON.parse(productsInLocalStorage);
   console.log(productsInLocalStorage);
   return productsInLocalStorage;
 };
+
 // Para desloguearse
 export const act_logout = () => {
   return (dispatch) => {
