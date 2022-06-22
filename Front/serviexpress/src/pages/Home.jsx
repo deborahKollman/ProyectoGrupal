@@ -1,8 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser,getUsers, getPublications, swich_loading, getPublicationsByCategory,} from "../redux/action";
+import {
+  getUser,
+  getUsers,
+  getPublications,
+  swich_loading,
+  getPublicationsByCategory,
+  getAllCategories,
+} from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
+import FilterByCategories from "../components/Filters/FilterByCategories";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
@@ -13,8 +21,11 @@ import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function Home() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const allPublications = useSelector((state) => state.Publications);
   const SwichL = useSelector((state) => state.switchloading);
@@ -28,9 +39,10 @@ export default function Home() {
     indexOfFirstPublication,
     indexOfLastPublication,
   );
-
+  const { user, errorLogin, rdcr_isAuth } = useSelector((state) => state);
   const [msgSearch, SetMsgSearch] = useState("");
-
+  const sendLogin = window.localStorage.getItem("sendLogin");
+  const session = window.localStorage.getItem("session");
   const msg = (text) => {
     SetMsgSearch(text);
   };
@@ -43,12 +55,26 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getUser());
     dispatch(getUsers());
+    if (!Object.keys(user).length && sendLogin) {
+      dispatch(getUser());
+      window.localStorage.removeItem("sendLogin");
+    }
+
+    if (session && !errorLogin && rdcr_isAuth) {
+      console.log({ errorLogin });
+      swal("Inicio de sesión", "Inicio de sesión correcto!", "success");
+      window.localStorage.removeItem("session");
+    }
+
+    if (errorLogin) {
+      navigate("/login");
+    }
+    dispatch(getAllCategories());
     setTimeout(() => {
       dispatch(getPublications());
     }, 1000);
-  }, [dispatch]);
+  }, [dispatch, errorLogin, navigate, sendLogin, rdcr_isAuth, user, session]);
 
   useEffect(() => {
     setCurrentPage((pag) => (pag = 1));
@@ -71,6 +97,8 @@ export default function Home() {
       {/* <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
         <p className="filtername">|</p> */}
+
+      <FilterByCategories />
 
       <div className={Styles.homepaginate}>
         <PaginationHome

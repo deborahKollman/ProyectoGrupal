@@ -26,12 +26,13 @@ const initialState = {
   users: [],
   reg_user: {}, // ojo al piojo xD: eliminaron por accidente creo ::
   cart: [],
-  errorLogin: {},
+  errorLogin: "",
+  errorDataLogin: "",
   errorRegister: {},
   mercadoPago: "",
   mailSend: false,
+  sendLogin: false,
   favorite_check: false,
-
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -80,6 +81,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profileUser: [...action.payload],
       };
+
     case "FILTER_CATEGORIES":
       let categoriesCopy = state.categories;
       let filtered =
@@ -95,6 +97,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
+
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",
@@ -104,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
         rdcr_isAuth: true,
-        errorLogin: {},
+        errorLogin: "",
       };
     case "REGISTER_USER":
       return {
@@ -197,36 +200,63 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         mercadoPago: action.payload,
       };
-
     case "SEND_MAIL":
       return {
         ...state,
         mailSend: action.payload,
       };
+    case "USER_LOGIN_SUCCESSFULLY":
+      window.sessionStorage.setItem(
+        "token",
+        payload.email + "/" + payload.password,
+      ); //>>>>obs
+      return {
+        ...state,
+        user: payload,
+        rdcr_isAuth: true,
+        errorLogin: "",
+      };
+    case "USER_LOGIN_ERROR":
+      return {
+        ...state,
+        errorLogin: payload,
+      };
+    case "USER_LOGIN_DATA_ERROR":
+      return {
+        ...state,
+        errorDataLogin: payload,
+      };
+    case "CLEAR_ERROR_LOGIN":
+      return {
+        ...state,
+        errorLogin: "",
+        sendLogin: false,
+      };
+    case "CLEAR_LOGIN_DATA_ERROR":
+      return {
+        ...state,
+        errorDataLogin: "",
+      };
+    case "SEND_LOGIN":
+      return {
+        ...state,
+        sendLogin: true,
+      };
+    case GET_STRIPE:
+      return {
+        ...state,
+        stripe: action.payload,
+      };
+    case FAVORITE_CHECK:
+      let auxCheck = false;
 
-      case GET_STRIPE:
-        return {
-          ...state,
-          stripe: action.payload,
-          
-
-        }
-      case FAVORITE_CHECK:  
-          let auxCheck = false;
-          
-          action.payload[0].forEach(e => {
-              if(e.id === parseInt(action.payload[1])) auxCheck = true;
-          })
-
-
-        return {
-            ...state,
-            favorite_check: auxCheck,
-
-        }
-
-
-
+      action.payload[0].forEach((e) => {
+        if (e.id === parseInt(action.payload[1])) auxCheck = true;
+      });
+      return {
+        ...state,
+        favorite_check: auxCheck,
+      };
     default:
       return state;
   }
