@@ -29,6 +29,9 @@ server.use(
     credentials: true
   })
 );
+
+
+
 server.use(express.static('public'));
 server.use(
   cookieSession({
@@ -50,12 +53,11 @@ server.use(
 server.use(passport.initialize());
 server.use(passport.session());
 server.use(passport.authenticate('session'));
+
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Headers', 'true');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
+  res.header('Access-Control-Allow-Methods',  'true');
+  res.header('Access-Control-Allow-Headers', 
+  'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
