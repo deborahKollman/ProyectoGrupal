@@ -56,14 +56,13 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getUsers());
-    if (!Object.keys(user).length) {
+    if (!Object.keys(user).length && sendLogin) {
       dispatch(getUser());
-      if (sendLogin) {
-        window.localStorage.removeItem("sendLogin");
-      }
+      window.localStorage.removeItem("sendLogin");
     }
 
-    if (session && !errorLogin && !sendLogin) {
+    if (session && !errorLogin && rdcr_isAuth) {
+      console.log({ errorLogin });
       swal("Inicio de sesión", "Inicio de sesión correcto!", "success");
       window.localStorage.removeItem("session");
     }

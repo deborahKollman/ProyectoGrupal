@@ -8,6 +8,7 @@ const server = express();
 const router = require('./src/routes');
 const session = require('express-session');
 const passport = require('passport');
+const cookieSession = require('cookie-session');
 
 // Middlewares
 server.use(express.urlencoded({ extended: true }));

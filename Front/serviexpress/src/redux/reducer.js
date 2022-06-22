@@ -107,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
         rdcr_isAuth: true,
-        errorLogin: {},
+        errorLogin: "",
       };
     case "REGISTER_USER":
       return {

@@ -56,7 +56,7 @@ export const fakeLogin = (pO_User) => {
 // Para traer un usuario
 export const getUser = () => {
   return async (dispatch) => {
-    const { data } = await axios.get(`/login`, {
+    const { data } = await axios.get(`http://localhost:3001/login`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -379,7 +379,7 @@ export function myLocalStorageTwo() {
 export function getErrorRegister() {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/register/error`);
+      const { data } = await axios.get(`http://localhost:3001/register/error`);
       console.log(data);
       dispatch({
         type: "GET_ERROR_REGISTER",
@@ -393,7 +393,7 @@ export function getErrorRegister() {
 
 export function clearErrorRegister() {
   return async (dispatch) => {
-    const { data } = await axios.post(`/register/logout`);
+    const { data } = await axios.post(`http://localhost:3001/register/logout`);
     dispatch({
       type: "CLEAR_ERROR_REGISTER",
       payload: data,
@@ -424,9 +424,12 @@ export function sendEmail({ email, type }) {
   return async (dispatch) => {
     try {
       console.log(type);
-      const { data } = await axios.post(`/email?type=${type}`, {
-        email,
-      });
+      const { data } = await axios.post(
+        `http://localhost:3001/email?type=${type}`,
+        {
+          email,
+        },
+      );
       dispatch({
         type: "SEND_MAIL",
         payload: !!data.state,
@@ -439,13 +442,17 @@ export function sendEmail({ email, type }) {
 
 export const loginUser = (loginData) => {
   return async (dispatch) => {
-    const { data } = await axios.post(`${URL}/login`, loginData, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+    const { data } = await axios.post(
+      `http://localhost:3001/login`,
+      loginData,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
       },
-    });
+    );
     if (!data.message) {
       dispatch({
         type: "USER_LOGIN_SUCCESSFULLY",
