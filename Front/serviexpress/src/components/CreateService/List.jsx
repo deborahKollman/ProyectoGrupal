@@ -1,58 +1,27 @@
 import "./Styles.scss";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getPublications } from "../../redux/action";
 
 import {
-  Autocomplete,
   Toolbar,
   Tooltip,
   Typography,
-  TextField,
 } from "@mui/material";
 
 import { publicationsColumns } from "./FormatTable";
 import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FeedIcon from "@mui/icons-material/Feed";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+import EditIcon from "@mui/icons-material/Edit";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { ComboBoxFilter } from "../../elements/ComboBox";
-
-const ComboBox = ({ category, setCategory }) => {
-  const xDispatch = useDispatch();
-
-  useEffect(() => {
-    // xDispatch(act_getAllCategories());
-  }, [xDispatch]);
-
-  const rdcr_categories = [];
-  return (
-    <Autocomplete
-      sx={{ width: "100%", mb: "9px" }}
-      options={rdcr_categories}
-      autoHighlight
-      getOptionLabel={(option) => option.name}
-      renderOption={(props, option) => (
-        <h4 {...props} key={option.id}>
-          {option.name}
-        </h4>
-      )}
-      renderInput={(params) => (
-        <TextField {...params} label="Category" variant="standard" />
-      )}
-      value={category}
-      onChange={(event, value) => setCategory(value)}
-    />
-  );
-};
+import { DeletePublication } from "../../assets/sources/ApiFunctions";
 
 const EnhancedTableToolbar = ({ filter, setFilter }) => {
-  const xDispatch = useDispatch();
+  // const xDispatch = useDispatch();
 
   const mFilter = () => {
     setFilter(!filter);
@@ -71,6 +40,7 @@ const EnhancedTableToolbar = ({ filter, setFilter }) => {
       <Toolbar
         sx={{
           padding: "0 !important",
+          width: "70vw",
         }}
       >
         <Typography sx={{ flex: "1 1 100%" }} variant="h6" component="div">
@@ -89,7 +59,7 @@ const EnhancedTableToolbar = ({ filter, setFilter }) => {
         </Tooltip>
       </Toolbar>
       {filter && (
-        <div style={{ display: "flex", justifyContent: "flex-start" }}>
+        <div style={{ display: "flex", justifyContent: "flex-start", width: "70vw"}}>
           <ComboBoxFilter category={category} setCategory={setCategory} />
         </div>
       )}
@@ -97,11 +67,33 @@ const EnhancedTableToolbar = ({ filter, setFilter }) => {
   );
 };
 
-const MainPublication = () => {
-  
+const MainPublication = ({setValueTab, setPublication}) => {
+  const xDispatch = useDispatch();
+
+  useEffect(() => {
+    xDispatch(getPublications());
+  }, [xDispatch]);
+
   const [filter, setFilter] = useState(false);
   const {Publications} = useSelector((state) => state);
+
   
+  const handleDelete = async (pId) => {
+    const responce = await DeletePublication(pId);
+    if (responce.status === 200) {
+      xDispatch(getPublications());
+    } else {
+      console.log("Error");
+    }
+  }
+
+
+  const handleModify = (pId) => {
+    setValueTab(2);
+    setPublication(pId);
+    // setModal({active: true, id: pId});
+  }
+
   const actionColumn = [
     {
       field: "action",
@@ -115,12 +107,12 @@ const MainPublication = () => {
               style={{ textDecoration: "none" }}
             > */}
             <IconButton
-              color="primary"
+              color="warning"
               aria-label="Modify"
               size="large"
-              // onClick={() => handleModify(params.row.id)}
+              onClick={() => handleModify(params.row.id)}
             >
-              <FeedIcon fontSize="inherit" />
+              <EditIcon fontSize="inherit" />
             </IconButton>
             {/* </Link> */}
 
@@ -128,7 +120,7 @@ const MainPublication = () => {
               color="error"
               aria-label="delete"
               size="large"
-              // onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row.id)}
             >
               <DeleteIcon fontSize="inherit" />
             </IconButton>
@@ -143,96 +135,16 @@ const MainPublication = () => {
       <EnhancedTableToolbar filter={filter} setFilter={setFilter} />
 
       <DataGrid
-        sx={{ width: "100%", height: "69vh" }}
+        sx={{ width: "70vw", height: "69vh" }}
         className="datagrid"
         rows={Publications}
         columns={publicationsColumns.concat(actionColumn)}
         pageSize={7}
         rowsPerPageOptions={[7]}
       />
+      
     </section>
   );
 };
 
 export { MainPublication };
-
-/* 
-
-  const [inputs, setInputs] = useState({
-    n_name: "",
-    n_status: true,
-  });
-
-  const [validation, setValidation] = useState({
-    n_name: null,
-  });
-
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-
-    if (name === "n_name") {
-      setInputs({ ...inputs, [name]: value });
-    } else if (name === "n_status") {
-      setInputs({ ...inputs, [name]: event.target.checked });
-    }
-  };
-
-  const mValitation = (event) => {
-    const { value, name } = event.target;
-    if (name === "n_name") {
-      const bValid = rgxName(value);
-      setValidation({ ...validation, [name]: bValid });
-    }
-  };
-
-  const [category, setCategory] = useState(null);
-
-  const mOnSubmit = async (e) => {
-    e.preventDefault();
-    const oPost = {
-      name: inputs.n_name,
-      categories: category.id
-    }
-    const response = await act_postService(oPost);
-    console.log(response);
-    xDispatch(act_getAllServices());
-    setInputs({ ...inputs, n_name: "" });
-    setCategory(null);
-    
-  };
-=================================================
-<section className="tblCategory-right">
-        <form className="tblCat-r1" onSubmit={mOnSubmit}>
-          <FormControlLabel
-            label="State"
-            control={
-              <Switch
-                checked={inputs.n_status}
-                onChange={handleChange}
-                color="success"
-              />
-            }
-            className="tblCat-r1-switch"
-            name="n_status"
-          />
-
-          <ComboBox category={category} setCategory={setCategory}/>
-
-          <TextField
-            variant="standard"
-            label="Name"
-            name="n_name"
-            error={validation.n_name}
-            helperText={validation.n_name && "Required"}
-            value={inputs.n_name}
-            onChange={handleChange}
-            onKeyUp={mValitation}
-            onBlur={mValitation}
-          />
-
-          <Fab color="primary" aria-label="add" size="small" type="submit">
-            <AddIcon />
-          </Fab>
-        </form>
-      </section>
-*/

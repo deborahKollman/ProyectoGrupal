@@ -46,8 +46,6 @@ const MultiImgs = ({ pictures, pSetStateImage }) => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  console.log(state, "============", pictures);
-
   return (
     <section className="comp-multiImgs">
       <label

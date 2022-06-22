@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { jalz_getAllCategories, createPublication } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
  
-const Form = () => {
+const FormModify = () => {
   const [name, setName] = useState(null);
   const [Detail, setDetail] = useState(null);
   const [SomeDetail, setSomeDetail] = useState(null);
@@ -166,4 +166,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormModify;
