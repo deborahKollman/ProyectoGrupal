@@ -20,7 +20,7 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   })
@@ -49,6 +49,8 @@ server.use(passport.authenticate('session'));
 server.use((req, res, next) => {
   // const allowedOrigins = ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'];
   // console.log(req.headers.origin);
+  res.header('Access-Control-Allow-Headers', 'true');
+  
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
