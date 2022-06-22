@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { act_logout } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ArticleIcon from '@mui/icons-material/Article';
+import CollectionsIcon from '@mui/icons-material/Collections';
 
 export default function AccountMenu({ avatar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -69,14 +71,16 @@ export default function AccountMenu({ avatar }) {
         PaperProps={{
           elevation: 0,
           sx: {
+            width: 200,
+            height: 250,
             backgroundColor: "#000",
             color: "#fff",
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
             "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
+              width: 40,
+              height: 45,
               ml: -0.5,
               mr: 1,
             },
@@ -111,6 +115,26 @@ export default function AccountMenu({ avatar }) {
             <AttachMoneyIcon fontSize="small" sx={{ color: "#fff" }} />
           </ListItemIcon>
           Sell Service
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            xNavigate("/myorders");
+          }}
+        >
+          <ListItemIcon>
+            <ArticleIcon fontSize="small" sx={{ color: "#fff" }} />
+          </ListItemIcon>
+          My orders
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            xNavigate("/MyPublications");
+          }}
+        >
+          <ListItemIcon>
+            <CollectionsIcon fontSize="small" sx={{ color: "#fff" }} />
+          </ListItemIcon>
+          My publications
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
