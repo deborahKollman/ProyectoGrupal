@@ -6,7 +6,8 @@ export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 export const GET_MERCADOPAGO = "GET_MERCADOPAGO";
-const URL = `http://localhost:3001`;
+export const GET_STRIPE = "GET_STRIPE";
+export const FAVORITE_CHECK = "FAVORITE_CHECK";
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -16,11 +17,12 @@ export const types = {
 };
 
 export const myLocalStorage = () => {
-  let productsInLocalStorage = localStorage.getItem("service");
+  let productsInLocalStorage = window.localStorage.getItem("service");
   productsInLocalStorage = JSON.parse(productsInLocalStorage);
   console.log(productsInLocalStorage);
   return productsInLocalStorage;
 };
+
 // Para desloguearse
 export const act_logout = () => {
   return (dispatch) => {
@@ -163,17 +165,22 @@ export const getById = (id) => {
 
 //simulando la accion para el filtro por categorias
 export function filterCategories(payload) {
-  return { type: "FILTER_CATEGORIES", payload };
+  return async (dispatch) => {
+    return dispatch({ type: "FILTER_CATEGORIES", payload });
+  };
 }
 
 // Trae todas las categorias
 export const getAllCategories = () => {
   return async (dispatch) => {
     try {
-      const json = axios.get(`/categories`);
+      const json = await axios.get(`/categories`);
+      console.log(json.data);
       return dispatch({
         type: "GET_CATEGORIES",
-        payload: json.data.map((el) => el.name),
+        payload: json.data.map((el) => {
+          return { id: el.id, name: el.name };
+        }),
       });
     } catch (error) {
       console.log(error);
@@ -267,7 +274,7 @@ export function getUserById(id) {
 export function getUsers() {
   return async (dispatch) => {
     try {
-      let users = await axios.get("/users");
+      let users = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({ type: "GET_USERS", payload: users.data.users });
     } catch (error) {
       console.log(error);
@@ -294,7 +301,7 @@ export function getPublicationsByCategory(a) {
 export function addToFavorites(user, publication) {
   return async (dispatch) => {
     try {
-      await axios.put(`/users/${user}/favorites`, publication);
+      await axios.post(`/users/${user}/favorites`, publication);
       let fav = await axios.get(`/users/${user}/favorites`);
 
       dispatch({
@@ -404,10 +411,7 @@ export function clearUserRegister() {
 
 export function getMercadoPago(title, price) {
   return async (dispatch) => {
-    const { data } = await axios.post(`${URL}/payments/mercado`, {
-      title,
-      price,
-    });
+    const { data } = await axios.post(`/payments/mercado`, { title, price });
 
     dispatch({
       type: GET_MERCADOPAGO,
@@ -479,3 +483,34 @@ export const clearErrorDataLogin = () => {
     });
   };
 };
+
+export function getStripe(stripeid, amount, usremail) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post("/payments", {
+        stripeid,
+        amount,
+        usremail,
+      });
+
+      dispatch({
+        type: GET_STRIPE,
+        payload: data.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function favoriteCheck(user, publication) {
+  return async (dispatch) => {
+    try {
+      const fav = await axios.get(`/users/${user}/favorites`);
+      dispatch({
+        type: FAVORITE_CHECK,
+        payload: [fav.data.publications, publication],
+      });
+    } catch (error) {}
+  };
+}

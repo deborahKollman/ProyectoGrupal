@@ -18,7 +18,7 @@ exports.getPayments=async()=>{
     return services;
 }
 
-exports.postPayment= async(stripeid, amount, usremail='palmabeto@hotmail.com')=>{
+exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com' )=>{
   const contentHtml=`
   <div style="background-color: rgb(242, 229, 206)">
   <h1 style="background-color: rgb(255, 222, 6)">Payment Confirmation</h1>
@@ -29,39 +29,39 @@ exports.postPayment= async(stripeid, amount, usremail='palmabeto@hotmail.com')=>
   <p style="background-color: rgb(255, 222, 6)">Your payment has been registered</p>
   </div>
   `
-    try {
+  try {
         
-        console.log('Grabo el Stripe Id:', stripeid, ' y el monto:',amount)
-        //Confirmo el pago en stripe
-        const payment = await stripe.paymentIntents.create({
-            amount,
-            currency: 'USD',
-            payment_method: stripeid,
-            confirm: true
-        });
+    console.log('Grabo el Stripe Id:', stripeid, ' y el monto:',amount)
+    //Confirmo el pago en stripe
+    const payment = await stripe.paymentIntents.create({
+        amount,
+        currency: 'USD',
+        payment_method: stripeid,
+        confirm: true
+    });
 
-        // Guardo el pago en la base de datos
+    // Guardo el pago en la base de datos
 /*         const r = await Payment.create({stripeid,amount})
-        console.log('El payment',payment)
-        return payment; */
+    console.log('El payment',payment)
+    return payment; */
 
 
-        //Envio el mail al comprador
-        const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
-          "email":usremail,
-          "subject": "Servi Express - Payment Confirmation",
-          "html": contentHtml
-      })
+    //Envio el mail al comprador
+    const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
+      "email":usremail,
+      "subject": "Servi Express - Payment Confirmation",
+      "html": contentHtml
+  })
 
-      return payment;
+  return payment;
 
-        //console.log(payment);
-        //return "Service purchased";
+    //console.log(payment);
+    //return "Service purchased";
 
-    }
+}
     catch(error) {
         console.log(error)
-        return (error.raw.message)
+        return (error)
     }
 }
 
@@ -75,9 +75,9 @@ exports.postMercadopago = async(title, price) =>{
             }
             ],
             back_urls: {
-              "success": "http://localhost:3000/success",
-              "failure": "http://localhost:3000/feedback",
-              "pending": "http://localhost:8080/feedback"
+              "success": "http://localhost:3000/home",
+              "failure": "http://localhost:3000/home",
+              "pending": "http://localhost:3000/home"
             },
             auto_return: "approved",
         }

@@ -7,8 +7,10 @@ import {
   getPublications,
   swich_loading,
   getPublicationsByCategory,
+  getAllCategories,
 } from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
+import FilterByCategories from "../components/Filters/FilterByCategories";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
@@ -69,6 +71,7 @@ export default function Home() {
     if (errorLogin) {
       navigate("/login");
     }
+    dispatch(getAllCategories());
     setTimeout(() => {
       dispatch(getPublications());
     }, 1000);
@@ -95,6 +98,8 @@ export default function Home() {
       {/* <div className="filterservice">
         <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
         <p className="filtername">|</p> */}
+
+      <FilterByCategories />
 
       <div className={Styles.homepaginate}>
         <PaginationHome

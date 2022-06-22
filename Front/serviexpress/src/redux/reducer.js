@@ -5,6 +5,8 @@ import {
   GET_FAVORITES,
   REMOVE_FAVORITES,
   GET_MERCADOPAGO,
+  GET_STRIPE,
+  FAVORITE_CHECK,
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
@@ -16,7 +18,7 @@ const initialState = {
   profileUser: [],
   favorites: [],
   categories: [],
-
+  stripe: {},
   filteredCategories: [],
   publicationById: {},
   userId: { seller_opinions: [], buyer_opinions: [] },
@@ -30,6 +32,7 @@ const initialState = {
   mercadoPago: "",
   mailSend: false,
   sendLogin: false,
+  favorite_check: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -78,6 +81,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profileUser: [...action.payload],
       };
+
     case "FILTER_CATEGORIES":
       let categoriesCopy = state.categories;
       let filtered =
@@ -93,6 +97,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
+
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",
@@ -205,7 +210,6 @@ const rootReducer = (state = initialState, action) => {
         "token",
         payload.email + "/" + payload.password,
       ); //>>>>obs
-
       return {
         ...state,
         user: payload,
@@ -237,6 +241,21 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sendLogin: true,
+      };
+    case GET_STRIPE:
+      return {
+        ...state,
+        stripe: action.payload,
+      };
+    case FAVORITE_CHECK:
+      let auxCheck = false;
+
+      action.payload[0].forEach((e) => {
+        if (e.id === parseInt(action.payload[1])) auxCheck = true;
+      });
+      return {
+        ...state,
+        favorite_check: auxCheck,
       };
     default:
       return state;
