@@ -61,10 +61,17 @@ export const getUser = () => {
         "Access-Control-Allow-Origin": "*",
       },
     });
-    dispatch({
-      type: "GET_USER",
-      payload: data,
-    });
+    if (!data.message) {
+      dispatch({
+        type: "USER_LOGIN_SUCCESSFULLY",
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: "USER_LOGIN_ERROR",
+        payload: data.message,
+      });
+    }
   };
 };
 
@@ -425,3 +432,50 @@ export function sendEmail({ email, type }) {
     }
   };
 }
+
+export const loginUser = (loginData) => {
+  return async (dispatch) => {
+    const { data } = await axios.post(`${URL}/login`, loginData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    if (!data.message) {
+      dispatch({
+        type: "USER_LOGIN_SUCCESSFULLY",
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: "USER_LOGIN_DATA_ERROR",
+        payload: data.message,
+      });
+    }
+  };
+};
+
+export const clearErrorLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_ERROR_LOGIN",
+    });
+  };
+};
+
+export const sendLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "SEND_LOGIN",
+    });
+  };
+};
+
+export const clearErrorDataLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_LOGIN_DATA_ERROR",
+    });
+  };
+};

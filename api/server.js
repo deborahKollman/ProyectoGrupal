@@ -7,7 +7,6 @@ const cors = require('cors');
 const server = express();
 const router = require('./src/routes');
 const session = require('express-session');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 // Middlewares
@@ -26,13 +25,7 @@ server.use(
   })
 );
 server.use(express.static('public'));
-// server.use(
-//   cookieSession({
-//     name: 'session',
-//     keys: ['key1', 'key2'],
-//     maxAge: 24 * 60 * 60 * 1000
-//   })
-// );
+
 server.use(
   session({
     secret: 'secret',
