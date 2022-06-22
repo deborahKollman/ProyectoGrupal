@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
-
+import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
 import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
@@ -33,6 +33,11 @@ const BurgerButton = ({ msg }) => {
     }
   }, [avatar, rdcr_isAuth]);
 
+  function handleRefresh(e) {
+    e.preventDefault()
+    window.location.reload(e)
+  }
+
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
@@ -52,6 +57,17 @@ const BurgerButton = ({ msg }) => {
       </div>
 
       <SearchGroup msg={msg} />
+      <Button
+          variant="text"
+          onClick={(e) => {handleRefresh(e)}}
+          sx={{
+            color: "black",
+            fontSize: 12,
+          }}
+        >
+          Refresh
+        </Button>
+        
       {!rdcr_isAuth ? <InitialSession /> : <LoginSession avatar={avatar} />}
 
       <ListNav pOpen={open}>
