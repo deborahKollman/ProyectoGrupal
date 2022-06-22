@@ -7,8 +7,8 @@ const cors = require('cors');
 const server = express();
 const router = require('./src/routes');
 const session = require('express-session');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
+const cookieSession = require('cookie-session');
 
 // Middlewares
 server.use(express.urlencoded({ extended: true }));
@@ -20,19 +20,23 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:4000',
+      'https://serviexpress-client.vercel.app'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   })
 );
 server.use(express.static('public'));
- server.use(
-   cookieSession({
-     name: 'session',
-     keys: ['key1', 'key2'],
-     maxAge: 24 * 60 * 60 * 1000
-   })
- );
+server.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    maxAge: 24 * 60 * 60 * 1000
+  })
+);
 server.use(
   session({
     secret: 'secret',
