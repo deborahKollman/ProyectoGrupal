@@ -20,7 +20,6 @@ import {
   clearErrorLogin,
   clearErrorDataLogin,
 } from "../redux/action";
-import env from 'react-dotenv'
 const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
 
 const validate = ({ email, password }) => {
