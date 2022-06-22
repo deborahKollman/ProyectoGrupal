@@ -47,8 +47,8 @@ server.use(passport.session());
 server.use(passport.authenticate('session'));
 server.use((req, res, next) => {
   // const allowedOrigins = ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'];
-  const origin = req.headers.origin
-  res.setHeader('Access-Control-Allow-Origin',origin)
+  // console.log(req.headers.origin);
+  res.setHeader('Access-Control-Allow-Origin','*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
