@@ -19,10 +19,8 @@ server.use(express.json());
 // server.use(cors());
 
 const whitelist = ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app']
-
-server.use(
-  cors({
-    credentials: true,
+const corsOption = {
+  credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin, X-Requested-With, Content-Type, Accept, Authorization'],
     origin: function (origin, callback){
@@ -33,8 +31,10 @@ server.use(
         callback(new Error('Not allowed by CORS'))
       }
     }
-    
-  })
+}
+
+server.use(
+  cors(corsOption)
 );
 // server.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
