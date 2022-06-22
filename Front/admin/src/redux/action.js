@@ -1,6 +1,10 @@
 import axios from "axios";
+
+export const GET_ORDERS = "GET_ORDERS";
+
+
  
-// const URL = "http://localhost:3001/";
+ const URL = "http://localhost:3001";
  
 export const act_themeTogle = () => {
   return {
@@ -131,3 +135,24 @@ export const act_clearServices = () => {
     type: "CLEAR_SERVICES",
   };
 }
+
+export function getOrders(){
+
+    return async (dispatch) => {
+      try {
+         const {data} = await axios.get(`${URL}/contracts`);
+
+         dispatch({
+            type: GET_ORDERS,
+            payload: data,
+         })
+
+        
+      } catch (error) {
+          console.log(error);
+      }
+
+    }
+
+
+};
