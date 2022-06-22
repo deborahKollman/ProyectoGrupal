@@ -13,7 +13,7 @@ exports.getPayments = async (req, res, next) => {
 exports.postPayment = async (req, res, next) => {
     try {
 
-        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail);
+        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer=10, req.body.idPublicacion=5);
         res.status(CREATED).send(r);
 
       } catch (error) {
