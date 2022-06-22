@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Payment }=require('../database/postgres.js')
+const { Payment, Contract, Publication, User }=require('../database/postgres.js')
 const Stripe = require('stripe')
 const axios = require('axios');
 
@@ -18,7 +18,7 @@ exports.getPayments=async()=>{
     return services;
 }
 
-exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com' )=>{
+exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com', idBuyer, idPublication )=>{
   const contentHtml=`
   <div style="background-color: rgb(242, 229, 206)">
   <h1 style="background-color: rgb(255, 222, 6)">Payment Confirmation</h1>
@@ -40,10 +40,25 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
         confirm: true
     });
 
+    // Guardo un fake contract
+    const contract = await Contract.create({"country": 'Argentina', "postal_code":2000,"city":'Rosario', "state": 'Santa Fe', "address":'San Martin', "service_date":'01/01/2020'})
+    
+    //Relaciono la publicacion con el contrato
+    const pub = await Publication.findByPk(idPublication);
+    pub.setContracts(contract)
+
+    //Relaciono el comprador con el contrato
+    const usr = await User.findByPk(idBuyer);
+    usr.setContracts(contract)
+
+
+    // Busco el contrtato
+    
     // Guardo el pago en la base de datos
-/*         const r = await Payment.create({stripeid,amount})
-    console.log('El payment',payment)
-    return payment; */
+    const pay = await Payment.create({stripeid,amount})
+    contract.setPayment(pay)
+    //console.log('El payment',payment)
+
 
 
     //Envio el mail al comprador

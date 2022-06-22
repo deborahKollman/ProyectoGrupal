@@ -18,7 +18,7 @@ import swal from "sweetalert";
 const stripePromise = loadStripe("pk_test_51LBNJbA25r7eed2bkcHZIzmLbouFZsUM9b19WawYn5tGP726sLszup0jpaMqFoJxwZ1lwuZxjtlOmTh39hrBsQzk00kZiUQf6V")
 
 
-export default function Payment({price,usremail,title,album}){
+export default function Payment({price,usremail,title,album,idBuyer,idPublicacion}){
     
  
 
@@ -51,7 +51,7 @@ export default function Payment({price,usremail,title,album}){
             
             const {id} = paymentMethod;
             
-            dispatch(getStripe(id,price,usremail = "algo"));
+            dispatch(getStripe(id,price,usremail,idBuyer,idPublicacion));
             swal("Success", "Service Purchased", "success");
         }
         

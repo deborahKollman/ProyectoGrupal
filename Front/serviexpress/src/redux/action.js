@@ -9,8 +9,6 @@ export const GET_MERCADOPAGO = "GET_MERCADOPAGO";
 export const GET_STRIPE = "GET_STRIPE";
 export const FAVORITE_CHECK = "FAVORITE_CHECK";
 
-
-
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
@@ -58,17 +56,24 @@ export const fakeLogin = (pO_User) => {
 // Para traer un usuario
 export const getUser = () => {
   return async (dispatch) => {
-    const { data } = await axios.get(`/login`, {
+    const { data } = await axios.get(`http://localhost:3001/login`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
     });
-    dispatch({
-      type: "GET_USER",
-      payload: data,
-    });
+    if (!data.message) {
+      dispatch({
+        type: "USER_LOGIN_SUCCESSFULLY",
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: "USER_LOGIN_ERROR",
+        payload: data.message,
+      });
+    }
   };
 };
 
@@ -162,7 +167,7 @@ export const getById = (id) => {
 export function filterCategories(payload) {
   return async (dispatch) => {
     return dispatch({ type: "FILTER_CATEGORIES", payload });
-  }
+  };
 }
 
 // Trae todas las categorias
@@ -173,7 +178,9 @@ export const getAllCategories = () => {
       console.log(json.data);
       return dispatch({
         type: "GET_CATEGORIES",
-        payload: json.data.map((el) => {return ({id: el.id, name: el.name})}),
+        payload: json.data.map((el) => {
+          return { id: el.id, name: el.name };
+        }),
       });
     } catch (error) {
       console.log(error);
@@ -267,7 +274,7 @@ export function getUserById(id) {
 export function getUsers() {
   return async (dispatch) => {
     try {
-      let users = await axios.get("/users");
+      let users = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({ type: "GET_USERS", payload: users.data.users });
     } catch (error) {
       console.log(error);
@@ -292,7 +299,6 @@ export function getPublicationsByCategory(a) {
 
 //FUNCION PARA AGREGAR A FAV
 export function addToFavorites(user, publication) {
-
   return async (dispatch) => {
     try {
       await axios.post(`/users/${user}/favorites`, publication);
@@ -373,7 +379,7 @@ export function myLocalStorageTwo() {
 export function getErrorRegister() {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/register/error`);
+      const { data } = await axios.get(`http://localhost:3001/register/error`);
       console.log(data);
       dispatch({
         type: "GET_ERROR_REGISTER",
@@ -387,7 +393,7 @@ export function getErrorRegister() {
 
 export function clearErrorRegister() {
   return async (dispatch) => {
-    const { data } = await axios.post(`/register/logout`);
+    const { data } = await axios.post(`http://localhost:3001/register/logout`);
     dispatch({
       type: "CLEAR_ERROR_REGISTER",
       payload: data,
@@ -405,7 +411,7 @@ export function clearUserRegister() {
 
 export function getMercadoPago(title, price) {
   return async (dispatch) => {
-    const {data} = await axios.post(`/payments/mercado`,{title,price});
+    const { data } = await axios.post(`/payments/mercado`, { title, price });
 
     dispatch({
       type: GET_MERCADOPAGO,
@@ -418,9 +424,12 @@ export function sendEmail({ email, type }) {
   return async (dispatch) => {
     try {
       console.log(type);
-      const { data } = await axios.post(`/email?type=${type}`, {
-        email,
-      });
+      const { data } = await axios.post(
+        `http://localhost:3001/email?type=${type}`,
+        {
+          email,
+        },
+      );
       dispatch({
         type: "SEND_MAIL",
         payload: !!data.state,
@@ -431,52 +440,86 @@ export function sendEmail({ email, type }) {
   };
 }
 
-
-export function getStripe(stripeid,amount, usremail){
-  
-    return async (dispatch) =>{
-        try {
-          
-        const {data} =  await axios.post("/payments",{
-            stripeid,
-            amount,
-            usremail
-           
-
-          });
-        
-          dispatch({
-            type: GET_STRIPE,
-            payload: data.id,
-          })
-
-        } catch (error) {
-          console.log(error);
-        }
-
-
+export const loginUser = (loginData) => {
+  return async (dispatch) => {
+    const { data } = await axios.post(
+      `http://localhost:3001/login`,
+      loginData,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+    );
+    if (!data.message) {
+      dispatch({
+        type: "USER_LOGIN_SUCCESSFULLY",
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: "USER_LOGIN_DATA_ERROR",
+        payload: data.message,
+      });
     }
-
+  };
 };
 
-export function favoriteCheck(user, publication){
-    return async(dispatch) => {
-        try {
-          const fav = await axios.get(`/users/${user}/favorites`);
-          dispatch({  
-            type: FAVORITE_CHECK,
-            payload: [fav.data.publications,publication],
-          })
-
-          
-        } catch (error) {
-          
-        }
-
-
-
-    }
-
-
-
+export const clearErrorLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_ERROR_LOGIN",
+    });
+  };
 };
+
+export const sendLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "SEND_LOGIN",
+    });
+  };
+};
+
+export const clearErrorDataLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_LOGIN_DATA_ERROR",
+    });
+  };
+};
+
+export function getStripe(stripeid, amount, usremail,idBuyer,idPublicacion) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post("/payments", {
+        stripeid,
+        amount,
+        usremail,
+        idBuyer,
+        idPublicacion
+      });
+
+      dispatch({
+        type: GET_STRIPE,
+        payload: data.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function favoriteCheck(user, publication) {
+  return async (dispatch) => {
+    try {
+      const fav = await axios.get(`/users/${user}/favorites`);
+      dispatch({
+        type: FAVORITE_CHECK,
+        payload: [fav.data.publications, publication],
+      });
+    } catch (error) {}
+  };
+}

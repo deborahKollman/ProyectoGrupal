@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW
       },
       stripeid: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
       },
       amount: {

@@ -10,7 +10,7 @@ import {
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
-  rdcr_user: {},
+  rdcr_user: { "location": "USA, Fenix", "id": 2, "email": "nnxx@hotmail.com", "$2a$10$bLsRQPzFUm5wf7F0q0ntV.fW5zru7uPiQIz5T2m46Bi6znOlkgtRK": "123456", "name": "Juan", "last_name": "Perez", "avatar_image": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80", "description": "Responsabilidad", "phone_number": "978654321", "country": "Peru", "province_state": "Lima", "rol": "client", "buyer_reputation": 3, "buyer_opinions": [ { "commenter": "Fernando Fernandez", "comment": "Muy cumplido", "rating": 5, "buyer_avatar": "https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" }, { "commenter": "Carlos Perez", "comment": "Bien", "rating": 4, "buyer_avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjR8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" }, { "commenter": "Nicolas Garcia", "comment": "No se pudo completar el trabajo por un problema mio", "rating": 4, "buyer_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" } ], "seller_reputation": 4, "seller_opinions": [ { "commenter": "Fulano Perez", "comment": "Que buen servicio", "rating": 5 }, { "commenter": "Mengano Gomez", "comment": "Trabajo decente, medio caro", "rating": 3 } ], "state": "Active" },
   rdcr_categories: [],
   Publications: [],
   switchloading: false,
@@ -26,12 +26,13 @@ const initialState = {
   users: [],
   reg_user: {}, // ojo al piojo xD: eliminaron por accidente creo ::
   cart: [],
-  errorLogin: {},
+  errorLogin: "",
+  errorDataLogin: "",
   errorRegister: {},
   mercadoPago: "",
   mailSend: false,
+  sendLogin: false,
   favorite_check: false,
-
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -106,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload,
         rdcr_isAuth: true,
-        errorLogin: {},
+        errorLogin: "",
       };
     case "REGISTER_USER":
       return {
@@ -199,36 +200,63 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         mercadoPago: action.payload,
       };
-
     case "SEND_MAIL":
       return {
         ...state,
         mailSend: action.payload,
       };
+    case "USER_LOGIN_SUCCESSFULLY":
+      window.sessionStorage.setItem(
+        "token",
+        payload.email + "/" + payload.password,
+      ); //>>>>obs
+      return {
+        ...state,
+        user: payload,
+        rdcr_isAuth: true,
+        errorLogin: "",
+      };
+    case "USER_LOGIN_ERROR":
+      return {
+        ...state,
+        errorLogin: payload,
+      };
+    case "USER_LOGIN_DATA_ERROR":
+      return {
+        ...state,
+        errorDataLogin: payload,
+      };
+    case "CLEAR_ERROR_LOGIN":
+      return {
+        ...state,
+        errorLogin: "",
+        sendLogin: false,
+      };
+    case "CLEAR_LOGIN_DATA_ERROR":
+      return {
+        ...state,
+        errorDataLogin: "",
+      };
+    case "SEND_LOGIN":
+      return {
+        ...state,
+        sendLogin: true,
+      };
+    case GET_STRIPE:
+      return {
+        ...state,
+        stripe: action.payload,
+      };
+    case FAVORITE_CHECK:
+      let auxCheck = false;
 
-      case GET_STRIPE:
-        return {
-          ...state,
-          stripe: action.payload,
-          
-
-        }
-      case FAVORITE_CHECK:  
-          let auxCheck = false;
-          
-          action.payload[0].forEach(e => {
-              if(e.id === parseInt(action.payload[1])) auxCheck = true;
-          })
-
-
-        return {
-            ...state,
-            favorite_check: auxCheck,
-
-        }
-
-
-
+      action.payload[0].forEach((e) => {
+        if (e.id === parseInt(action.payload[1])) auxCheck = true;
+      });
+      return {
+        ...state,
+        favorite_check: auxCheck,
+      };
     default:
       return state;
   }

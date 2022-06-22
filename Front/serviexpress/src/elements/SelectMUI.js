@@ -81,7 +81,7 @@ const MySelectTwo = ({aSecond, pHandleChange, pDad}) => {
           {aSecondFiltered.map((pII) => (
             <MenuItem
               key={pII.id}
-              value={pII.name}
+              value={pII.id}
             >
               {pII.name}
             </MenuItem>

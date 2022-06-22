@@ -64,5 +64,8 @@
       "space-before-function-paren": "off",
       "camelcase": "off"
     }
-  }
+  },
+  "pre-commit": [
+    "npm run format"
+  ]
 }

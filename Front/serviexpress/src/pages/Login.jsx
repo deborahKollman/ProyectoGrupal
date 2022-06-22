@@ -6,6 +6,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
 import Alert from "@mui/material/Alert";
+import swal from "sweetalert";
 
 import "./styles/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,66 +16,80 @@ import {
   getUserr,
   getErrorRegister,
   clearErrorRegister,
+  loginUser,
+  clearErrorLogin,
+  clearErrorDataLogin,
 } from "../redux/action";
 import env from 'react-dotenv'
-const baseURL = env.REACT_APP_API || 'http://localhost:3001'
+const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
 
-const HookInputValue = (initialValue) => {
-  const [value, setValue] = useState(initialValue);
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-  return { value, onChange };
+const validate = ({ email, password }) => {
+  let error = "";
+
+  if (!password || !email) {
+    error = "Asegurese de llenar todos los campos";
+  }
+
+  return error;
 };
 
-//=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
-
 const Login = () => {
-  const xDispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { errorLogin, errorDataLogin, rdcr_isAuth } = useSelector(
+    (state) => state,
+  );
 
-  const email = HookInputValue("");
-  const password = HookInputValue("");
-  const checked = HookInputValue("");
-
-  const mGoogleLogin = () => {
-    window.open(`${baseURL}/login/google`, "_self");
-  };
-
-  const data = {
-    username: email.value,
-    password: password.value,
-  };
-
-  const { errorLogin, rdcr_isAuth } = useSelector((state) => state);
-  const [error, setError] = useState({
-    text: "",
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
   });
+  const [error, setError] = useState("");
 
-  const xNavigate = useNavigate();
-
-  const mLocalLoggin = () => {
-    if (data.username === "" || data.password === "")
-      setError({ text: "Empty fields" });
-    else {
-      xDispatch(getUserr(data));
-      xDispatch(clearErrorRegister());
+  const loginGoogle = () => {
+    window.localStorage.setItem("session", true);
+    window.localStorage.setItem("sendLogin", true);
+    window.open("http://localhost:3001/login/google", "_self");
+  };
+  const sendLogin = window.localStorage.getItem("sendLogin");
+  const loginLocal = () => {
+    setError(validate(form));
+    if (!error) {
+      dispatch(
+        loginUser({
+          username: form.email,
+          password: form.password,
+        }),
+      );
+      setForm({
+        email: "",
+        password: "",
+      });
     }
+  };
+
+  const handleForm = ({ target: { name, value } }) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
   useEffect(() => {
-       console.log(rdcr_isAuth);
-    if (Object.keys(errorLogin).length > 0) {
-      setError({ text: errorLogin });
-    } else {
-      xDispatch(getErrorRegister());
-      setError({ text: "" });
+    if (errorLogin) {
+      swal("Error", errorLogin, "error");
+      dispatch(clearErrorLogin());
     }
-    if (rdcr_isAuth) {
-   
-      xNavigate("/home");
-      xDispatch(clearErrorRegister());
+    if (errorDataLogin) {
+      swal("Error", errorDataLogin, "error");
+      dispatch(clearErrorDataLogin());
     }
-  }, [errorLogin, rdcr_isAuth]);
+    if (rdcr_isAuth && !sendLogin) {
+      swal("Inicio de sesión correcto", "Logeado", "success");
+      navigate("/home");
+      // si no da error es una feature 😂
+    }
+  }, [dispatch, errorLogin, errorDataLogin, rdcr_isAuth, navigate, sendLogin]);
 
   return (
     <div className="page-login">
@@ -89,34 +104,47 @@ const Login = () => {
           <MyButtonThree
             variant="contained"
             endIcon={<GoogleIcon />}
-            onClick={mGoogleLogin}
+            onClick={loginGoogle}
           >
             Sing In With Google
           </MyButtonThree>
 
-          <MyTextField required label="E-MAIL" type="email" {...email} />
-          <MyTextField label="PASSWORD" type="password" {...password} />
+          <MyTextField
+            required
+            label="E-MAIL"
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleForm}
+          />
+          <MyTextField
+            label="PASSWORD"
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleForm}
+          />
 
-          {error.text ? (
+          {error ? (
             <Alert
               severity="error"
               sx={{ width: "260px", m: 0.5, fontSize: "1.3rem" }}
             >
-              {error.text}
+              {error}
             </Alert>
           ) : null}
 
           <MyButtonTwo
             variant="contained"
             endIcon={<LockOpenIcon />}
-            onClick={mLocalLoggin}
+            onClick={loginLocal}
           >
             Login
           </MyButtonTwo>
 
           <div className="Login-3">
             <div className="Login-3remenver">
-              <Checkbox
+              {/* <Checkbox
                 {...checked}
                 sx={{
                   color: "#000000",
@@ -124,10 +152,11 @@ const Login = () => {
                     color: "#fcdc3c",
                   },
                 }}
-              />
+              /> 
               <Typography variant="body1" color="initial">
                 Remember me
               </Typography>
+              */}
             </div>
             <Link to="/sendEmail/recovery">Forgot Password</Link>
           </div>
@@ -143,20 +172,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// const mUser = () => {
-// con axios
-// fetch("http://localhost:3001/login/success", {
-//   method: "GET",
-//   credentials: "include",
-//   headers: {
-//     "Content-Type": "application/json",
-//     Accept: "application/json",
-//   },
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log(data);
-//   });
-// xDispatch(getUser());
-// };

@@ -19,6 +19,7 @@ import Payment from "./components/Payment.jsx";
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
 import MercadoPago from "./components/MercadoPago.jsx";
+import MyOrders from "./pages/MyOrders.jsx";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -39,7 +40,7 @@ function App() {
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
-      <Route path="/favorites" element={<Favorites />} />
+      <Route path="/favorites/:id" element={<Favorites />} />
       <Route path="/mercado" element={<MercadoPago/>} />
       <Route path="/payment/:id" element={<Payment />} />
       <Route exact path="/Home" element={<Home />} />
@@ -48,6 +49,7 @@ function App() {
       <Route path="/checkout" element={<Checkout/>} />
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
+      <Route exact path="/myorders" element={<MyOrders/>} />
     </Routes>
   );
 }

@@ -6,6 +6,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import ShopTwoIcon from "@mui/icons-material/ShopTwo";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../redux/action";
+import { useEffect } from "react";
 
 const NavigationBar = () => {
   
@@ -23,13 +26,20 @@ const NavigationBar = () => {
     xNavigate(`/${pPath}`);
   };
 
+  const dispatch = useDispatch();
 
   const handleFav = () =>{
       console.log("hola");
       
   };
 
+  const user = useSelector(state => state.user);
 
+  useEffect(() => {
+      dispatch(getUser())
+
+
+  },[]);
 
 
 
@@ -55,7 +65,7 @@ const NavigationBar = () => {
         label="Favorites"
         icon={<FavoriteIcon fontSize="large" />}
         onClick={() => {
-          mNavigation("favorites");
+          mNavigation(`favorites/${user.id}`);
         }}
         
       />

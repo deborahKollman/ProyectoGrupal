@@ -25,7 +25,7 @@ const loginGoogle = new GoogleStrategy(
     if (user) {
       return cb(null, user);
     }
-    return cb(null, { message: 'User not registered' });
+    return cb(null, { message: 'Error' });
   }
 );
 
@@ -34,12 +34,14 @@ passport._strategies.loginGoogle = loginGoogle;
 passport._strategies.loginGoogle.name = 'loginGoogle';
 
 router.get('/', async (req, res) => {
-  console.log(req.session);
   const user = await User.findByPk(req?.session?.passport?.user?.id);
   if (user) {
     return res.send(user);
   } else {
-    res.redirect(`${baseURL}/login`);
+    if (req?.user?.message) {
+      res.send({ message: 'Este usuario no registrado', status: 401 });
+    }
+    // openhandle detected!
   }
 });
 
@@ -56,7 +58,7 @@ router.get(
     failureRedirect: '/login',
     failureMessage: true
   }),
-  function (_, res) {
+  function (req, res) {
     res.redirect(`${baseURL}/home`);
   }
 );
