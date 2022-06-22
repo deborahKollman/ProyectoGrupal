@@ -21,9 +21,11 @@ server.use(express.json());
 server.use(
   cors({
     // origin: ['http://localhost:3000', 'http://localhost:4000', 'https://serviexpress-client.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true,
-    origin: true
+    origin: function(origin, callback){
+      return callback(null, true);
+    },
+    optionsSuccessStatus: 200,
+    credentials: true
   })
 );
 
