@@ -51,7 +51,7 @@ export default function Payment({price,usremail,title,album}){
             
             const {id} = paymentMethod;
             
-            dispatch(getStripe(id,price,usremail = "algo"));
+            dispatch(getStripe(id,price,usremail));
             swal("Success", "Service Purchased", "success");
         }
         
