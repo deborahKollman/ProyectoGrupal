@@ -267,7 +267,7 @@ export function getUserById(id) {
 export function getUsers() {
   return async (dispatch) => {
     try {
-      let users = await axios.get("/users");
+      let users = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({ type: "GET_USERS", payload: users.data.users });
     } catch (error) {
       console.log(error);
