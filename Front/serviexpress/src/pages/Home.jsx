@@ -11,7 +11,6 @@ import {
 } from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import FilterByCategories from "../components/Filters/FilterByCategories";
-import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
 import ServicesBar from "../components/ServicesBar";
@@ -105,6 +104,7 @@ export default function Home() {
           value={allPublications.length}
           pagination={pagination}
           items={PublicationsPerPage}
+          pages = {Math.ceil(allPublications.length/PublicationsPerPage)}
         ></PaginationHome>
       </div>
 
@@ -129,14 +129,6 @@ export default function Home() {
           })
         )}
       </div>
-
-      {/* <div className="paginationHome">
-        <PaginationHome
-          value={allPublications.length}
-          pagination={pagination}
-          items={PublicationsPerPage}
-        ></PaginationHome>
-      </div> */}
 
       <div className="logos"></div>
     </div>
