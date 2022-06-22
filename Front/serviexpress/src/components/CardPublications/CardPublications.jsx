@@ -48,8 +48,10 @@ const totalStar = 5-score;
           </div>
           </Link>
           <div className={StylesCard.cardtext}>
-            <h6 c >{title}</h6>
+            <p className={StylesCard.title}>{title}</p>
+            <div className={StylesCard.summary}>
             <p className={StylesCard.titlesummary}>{summary}</p>
+            </div>
             <div className={StylesCard.cardstats}>
                     <div className={StylesCard.stat}>
                         {scoreStar.map(e => <BsStarFill/>)}

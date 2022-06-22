@@ -13,6 +13,8 @@ import {
   clearErrorRegister,
   clearUserRegister,
 } from "../redux/action";
+const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+
 
 const validate = (form) => {
   const errors = {};
@@ -96,8 +98,10 @@ const Register = () => {
     }
   }, [errorRegister, dispatch, reg_user, navigate]);
 
+
+  
   const mGoogleRegister = () => {
-    window.open("http://localhost:3001/register/google", "_self");
+    window.open(`${baseURL}/register/google`, "_self");
   };
 
   return (
