@@ -5,6 +5,9 @@ import App from './App.routes';
 import { BrowserRouter } from 'react-router-dom';
 import STORE from './redux/store';
 import { Provider } from 'react-redux';
+import axios from 'axios'; 
+
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +17,8 @@ root.render(
     </BrowserRouter>
   </Provider>
 ); 
+
+
 
 /* 
 
@@ -37,5 +42,5 @@ $ npm install @mui/icons-material
 
 ::LIBRARIES
 npm install @mui/material @emotion/react @emotion/styled
-
+$ npm install @mui/x-data-grid
 */

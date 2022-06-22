@@ -1,21 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MyButtonThree, MyButtonTwo, MyTextField } from "../elements/Forms";
 import BurgerButton from "../components/NavBar/NavBar.jsx";
 import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-import GoogleIcon from '@mui/icons-material/Google';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
+import GoogleIcon from "@mui/icons-material/Google";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./styles/Login.scss";
-import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUser,
+  clearErrorRegister,
+  clearUserRegister,
+} from "../redux/action";
 
+const validate = (form) => {
+  const errors = {};
+  const validate = {
+    name: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
+  };
+
+  if (!form.email) {
+    errors.email = "Por favor, ingresa un correo electrónico";
+  }
+
+  if (!validate.name.test(form.email)) {
+    errors.email = "The e-mail should be a 'example@example.com' format";
+  }
+
+  if (form.password.length < 8) {
+    errors.password = "The password should have 8 characters at least";
+  }
+
+  if (form.password !== form.confirmPassword) {
+    errors.confirmPassword = "The password should match";
+  }
+
+  return errors;
+};
 
 const Register = () => {
-  const [first, setFirst] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { errorRegister, reg_user } = useSelector((state) => state);
 
-  const [checked, setChecked] = useState(true);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  const [handleError, setHandleError] = useState({});
+
+  const handleChangeOnForm = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+
+    setHandleError(
+      validate({
+        ...form,
+        [e.target.name]: e.target.value,
+      }),
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validate(form);
+    setHandleError(errors);
+    if (Object.keys(errors).length === 0) {
+      dispatch(registerUser(form));
+    }
+    if (errorRegister.message) {
+      swal("Error", errorRegister.message, "error");
+      dispatch(clearErrorRegister());
+    }
+    setForm({
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+  };
+
+  useEffect(() => {
+    if (errorRegister.message) {
+      swal("Error", errorRegister.message, "error");
+      dispatch(clearErrorRegister());
+    }
+    if (reg_user.message) {
+      swal("Success", "Usuario registrado correctamente", "success");
+      dispatch(clearUserRegister());
+      navigate("/login");
+    }
+  }, [errorRegister, dispatch, reg_user, navigate]);
+
+  const mGoogleRegister = () => {
+    window.open("http://localhost:3001/register/google", "_self");
   };
 
   return (
@@ -28,48 +110,65 @@ const Register = () => {
             Register
           </Typography>
 
-          <MyButtonThree variant="contained" endIcon={<GoogleIcon />}>
+          <MyButtonThree
+            variant="contained"
+            endIcon={<GoogleIcon />}
+            onClick={mGoogleRegister}
+          >
             Register With Google
           </MyButtonThree>
 
           <MyTextField
             required
             label="E-MAIL"
-            value={first}
+            name="email"
+            value={form.email}
             type="email"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            onChange={handleChangeOnForm}
           />
-
+          {
+            <div className="error-div">
+              <p>{handleError.email}</p>
+            </div>
+          }
           <MyTextField
             required
             label="PASSWORD"
-            value={first}
+            name="password"
+            value={form.password}
             type="password"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            onChange={handleChangeOnForm}
           />
+          {
+            <div className="error-div">
+              <p>{handleError.password}</p>
+            </div>
+          }
+
           <MyTextField
             label="CONFIRM PASSWORD"
-            value={first}
+            name="confirmPassword"
+            value={form.confirmPassword}
             type="password"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            onChange={handleChangeOnForm}
           />
+          {
+            <div className="error-div">
+              <p>{handleError.confirmPassword}</p>
+            </div>
+          }
 
-          <MyButtonTwo variant="contained" endIcon={<HowToRegIcon />}>
+          <MyButtonTwo
+            onClick={handleSubmit}
+            variant="contained"
+            endIcon={<HowToRegIcon />}
+          >
             Register
           </MyButtonTwo>
- 
         </section>
-
       </div>
     </div>
   );
 };
 
-
-export default Register
+export default Register;

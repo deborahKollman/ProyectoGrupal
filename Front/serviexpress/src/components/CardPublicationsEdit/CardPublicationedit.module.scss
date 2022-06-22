@@ -1,0 +1,135 @@
+
+.comp_card_publication { 
+  margin-bottom: 20px;
+  
+
+  .card {
+    border-radius: 18px;
+    background: rgb(255, 255, 255);
+    font-family: roboto;
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+    width: 300px;
+    height: 400px;
+  }
+
+  img {
+    grid-area: image;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 300px;
+    height: 200px;
+  }
+
+  .cardimage {
+    grid-area: image;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 100%;
+  }
+
+  .titlec {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;;;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: rgb(5, 5, 5);
+  }
+
+  .cardtext {
+    grid-area: text;
+    margin: 25px;
+    font-size: 15px;
+  }
+
+  .textstats {
+    padding-top: 10px;
+    font-size: 20px;
+    color: azure;
+  }
+
+  .cardtext h1 {
+    color: rgb(49, 49, 49);
+    font-size: 1.7em;
+  }
+
+  .cardtext p {
+    color: rgb(71, 70, 70);
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .cardstats {
+    grid-area: stats;
+    display: block;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    align-items: center;
+    padding-top: 20px;
+  }
+
+  .cardstats {
+    display:flex;
+    justify-content: center;
+    color: rgb(171, 145, 29);
+    border-color: black;
+    margin-top: -25px;
+    margin-bottom: 8px;
+  }
+
+  .card:hover {
+    box-shadow: 0 0 3px 3px rgba(78, 78, 76, 0.75),
+    0 40px 25px -15px rgba(0, 0, 0, 0.35);
+    }
+
+  .titleprice {
+    color: rgba(241, 9, 9, 0.35);
+    text-align: left;
+  }
+  .titlestar{
+    text-align: left;
+  }
+  .titlesummary{
+    text-align: left;
+  }
+  .UL{
+   display: flex;
+  }
+  .like{
+  position: absolute;
+  margin-left: 230px;
+  }
+
+
+}
+.divtitlec{
+display: flex;
+gap: 10px;
+width: 270px;
+}
+
+.editt{
+  display: flex;
+  text-align: right;
+  color: rgb(255, 0, 93);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.editt:hover{
+  transform: scale(1.1);
+}
+
+.divtitlee{
+  text-align: left;
+}
+
+.UL{
+  gap: 90px;
+}
+
+.delete:hover{
+  transform: scale(1.3);
+
+}

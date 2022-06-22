@@ -1,22 +1,93 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MyButtonThree, MyButtonTwo, MyTextField } from "../elements/Forms";
 import BurgerButton from "../components/NavBar/NavBar.jsx";
 import Typography from "@mui/material/Typography";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Checkbox from "@mui/material/Checkbox";
-import GoogleIcon from '@mui/icons-material/Google';
+import GoogleIcon from "@mui/icons-material/Google";
+import Alert from "@mui/material/Alert";
+import swal from "sweetalert";
 
 import "./styles/Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUserr,
+  getErrorRegister,
+  clearErrorRegister,
+  loginUser,
+  clearErrorLogin,
+  clearErrorDataLogin,
+} from "../redux/action";
+
+const validate = ({ email, password }) => {
+  let error = "";
+
+  if (!password || !email) {
+    error = "Asegurese de llenar todos los campos";
+  }
+
+  return error;
+};
 
 const Login = () => {
-  const [first, setFirst] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { errorLogin, errorDataLogin, rdcr_isAuth } = useSelector(
+    (state) => state,
+  );
 
-  const [checked, setChecked] = useState(true);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  const loginGoogle = () => {
+    window.localStorage.setItem("session", true);
+    window.localStorage.setItem("sendLogin", true);
+    window.open("http://localhost:3001/login/google", "_self");
   };
+  const sendLogin = window.localStorage.getItem("sendLogin");
+  const loginLocal = () => {
+    setError(validate(form));
+    if (!error) {
+      dispatch(
+        loginUser({
+          username: form.email,
+          password: form.password,
+        }),
+      );
+      setForm({
+        email: "",
+        password: "",
+      });
+    }
+  };
+
+  const handleForm = ({ target: { name, value } }) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => {
+    if (errorLogin) {
+      swal("Error", errorLogin, "error");
+      dispatch(clearErrorLogin());
+    }
+    if (errorDataLogin) {
+      swal("Error", errorDataLogin, "error");
+      dispatch(clearErrorDataLogin());
+    }
+    if (rdcr_isAuth && !sendLogin) {
+      swal("Inicio de sesión correcto", "Logeado", "success");
+      navigate("/home");
+      // si no da error es una feature 😂
+    }
+  }, [dispatch, errorLogin, errorDataLogin, rdcr_isAuth, navigate, sendLogin]);
 
   return (
     <div className="page-login">
@@ -28,58 +99,71 @@ const Login = () => {
             Login
           </Typography>
 
-          <MyButtonThree variant="contained" endIcon={<GoogleIcon />}>
+          <MyButtonThree
+            variant="contained"
+            endIcon={<GoogleIcon />}
+            onClick={loginGoogle}
+          >
             Sing In With Google
           </MyButtonThree>
 
           <MyTextField
             required
             label="E-MAIL"
-            value={first}
+            name="email"
             type="email"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            value={form.email}
+            onChange={handleForm}
           />
           <MyTextField
             label="PASSWORD"
-            value={first}
             type="password"
-            onChange={(e) => {
-              setFirst(e.target.value);
-            }}
+            name="password"
+            value={form.password}
+            onChange={handleForm}
           />
 
-          <MyButtonTwo variant="contained" endIcon={<LockOpenIcon />}>
+          {error ? (
+            <Alert
+              severity="error"
+              sx={{ width: "260px", m: 0.5, fontSize: "1.3rem" }}
+            >
+              {error}
+            </Alert>
+          ) : null}
+
+          <MyButtonTwo
+            variant="contained"
+            endIcon={<LockOpenIcon />}
+            onClick={loginLocal}
+          >
             Login
           </MyButtonTwo>
 
           <div className="Login-3">
             <div className="Login-3remenver">
-              <Checkbox
-                checked={checked}
-                onChange={handleChange}
+              {/* <Checkbox
+                {...checked}
                 sx={{
                   color: "#000000",
                   "&.Mui-checked": {
                     color: "#fcdc3c",
                   },
                 }}
-              />
-              <Typography variant="body1" color="initial" >
+              /> 
+              <Typography variant="body1" color="initial">
                 Remember me
               </Typography>
+              */}
             </div>
-            <Link to="/#" >Forgot Password</Link>
+            <Link to="/sendEmail/recovery">Forgot Password</Link>
           </div>
 
-          <Typography variant="body1" color="initial" >
+          <Typography variant="body1" color="initial">
             Not a Member Yet?
-            <Link to="/register" >    Join now</Link>
+            <Link to="/register"> Join now</Link>
           </Typography>
-
         </section>
-
       </div>
     </div>
   );

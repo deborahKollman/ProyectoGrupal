@@ -1,4 +1,4 @@
-
+import * as React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import stylesDetail from './styles/stylesDetail.module.scss';
 import CardSellerDetail from '../components/CardSellerDetail';
@@ -7,108 +7,235 @@ import ProfileOpinion from '../components/ProfileOpinion';
 import Footer from '../components/FooterDetail';
 import NavBar from '../components/NavBar/NavBar';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import ServicesBar from '../components/ServicesBar';
+//import ServicesBar from '../components/ServicesBar';
+import {useDispatch,useSelector} from 'react-redux';
+import { useEffect, useState } from 'react';
+import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites,getUser } from '../redux/action.js';
+import { useParams,Link, useNavigate } from 'react-router-dom';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import {MDBContainer} from "mdbreact";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import MercadoPago from '../components/MercadoPago';
+import {Modal} from '@mui/material';
+import Payment from '../components/Payment';
 
 
 
 export default function Detail(){
+    const {id} = useParams();
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const detail = useSelector(state => state.detail);
+    const moreUsers = useSelector(state => state.users);
+    const fav = useSelector(state => state.favorites);
+    const userLogin = useSelector(state => state.user)
+    const favCheck = useSelector(state => state.favorite_check);
+
+  const [checked, setChecked] = useState(false);
+
+
+  const heart = () => {
+    fav.publications && fav.publications.forEach(e => {
+        
+        if(e.id === parseInt(id)) {
+          setChecked(true);
+        }
+
+      })
+
+  };
+   
 
 
 
+    useEffect(() => {
+        dispatch(getById(id));
+        dispatch(getUserById(detail.userId));
+        dispatch(getUsers());
+        dispatch(getFavorites(detail.userId));
+        dispatch(getUser());
+        
+        heart();
 
+
+    },[dispatch,id,detail.userId]);
+
+
+  const [text,setText] = useState();
+
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  
+    const handleClick = (e) => {
+        e.preventDefault();
+        setText(detail.detail);
+        document.getElementById("btnVerMas").style.display = 'none';
+
+    };
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const [open, setOpen] = useState(false);
+
+    const [msgAlert, setMsg] = useState("");
+
+    const favClicked = () => {   
+        if(checked) {
+          dispatch(removeFavorites(userLogin.id,{id: detail.id}));
+          setMsg("Removed from favorites")
+        } 
+        else {
+          dispatch(addToFavorites(userLogin.id,{id: detail.id}));
+          setMsg("Added to favorites")
+        }
+
+
+       
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+
+      }
+
+      setOpen(false);
+    };
+    
+    
+
+    const heartChange = (event) => {
+      setChecked(event.target.checked);
+    };
+    
+
+    const [show,setShow] = useState();
+
+    const handleCloseModal = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    // Esta funcion es la que agrega la orden al carrito de compras, utilizando toda la informacion de la publicacion
+    function handleAddToOrder() {
+      console.log("aqui va el localstorage")
+      localStorage.setItem("order",JSON.stringify(detail));
+      let myOrder = localStorage.getItem("order");
+      console.log(myOrder)
+      navigate('/prueba');
+    }
+
+   
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
           <div>
-            <ServicesBar></ServicesBar>
+         {/*    <ServicesBar></ServicesBar> */}
           </div>
+
+          <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="info" sx={{ width: '100%' , fontSize: 12}}>
+            {msgAlert}
+         </Alert>
+         </Snackbar>
 
 
         <div className={stylesDetail.division}>
         <div className={stylesDetail.leftSide}>
           <div>
           <Breadcrumb className={stylesDetail.anchors} >
-          <Breadcrumb.Item href="#" >Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="#">
-          Services
+          <Breadcrumb.Item href="/" >Principal</Breadcrumb.Item>
+          <Breadcrumb.Item href="/home">
+          Home
           </Breadcrumb.Item>
-          <Breadcrumb.Item active>Detail</Breadcrumb.Item>
+          <Breadcrumb.Item active>{detail.title}</Breadcrumb.Item>
           </Breadcrumb>
 
           </div>
+          <div className={stylesDetail.title}>
+                <p>{detail.title}</p>
+          </div>  
 
+          <div className={stylesDetail.subTitle}>
+           <div className={stylesDetail.date}>
+                <label>Publicado el:</label>
+               <p> {detail.date}</p>
 
+           </div>
+
+          <button onClick={handleAddToOrder}>Add to order</button>
+          <div>      
+              <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
+          </div>
+        </div>
 
         <div className={stylesDetail.carousel}>
      <Carousel fade>
-       <Carousel.Item>
-       <img
-         className="d-block w-100"
-        src="https://images.unsplash.com/photo-1508188609340-e8068b599193?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-           alt="First slide"
-         />
-     <Carousel.Caption>
-          <h3>First slide label</h3>
-       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-       </Carousel.Caption>
-     </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="https://images.unsplash.com/photo-1608126841548-dfad1d420a0f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-      alt="Second slide"
-    />
+        {detail.album.map(e => {
+            return <Carousel.Item>
+            <img className="d-block w-100" src={e} alt="First slide"
+                   />
+            </Carousel.Item>
+       })}
 
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </Carousel.Caption>
-     </Carousel.Item>
-      <Carousel.Item>
-       <img
-        className="d-block w-100"
-       src="https://images.unsplash.com/photo-1618947084583-07ff857ca918?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d2VsZGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt="Third slide"
-       />
-
-    <Carousel.Caption>
-         <h3>Third slide label</h3>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
     </Carousel>
+       <div className={stylesDetail.price}><p>Price: </p>
+       <div> ${detail.price} </div>
+       
+       </div>
+       
 
     </div>
+        <div className={stylesDetail.buyButtons}>
+        <label>Pay with: </label>
+        
+        <button onClick={handleShow} >Tarjeta</button>
+        {detail.title && detail.price && <MercadoPago title={detail.title} price={detail.price} ></MercadoPago> }
+        </div>
+
+        <Modal
+           open={show}
+           onClose={handleCloseModal}
+           className={stylesDetail.modal}
+          >
+
+           <Payment price={detail.price} usremail={userLogin.email} album={detail.album} title={detail.title} idPublicacion={id} idBuyer={userLogin.id}></Payment>
+
+
+        </Modal>
+
+
 
         <div className={stylesDetail.about}>
         <h3>About Services</h3>
-           <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+          <p>{detail.detail_resume}</p>
+          <p></p>
+          <p>{text}</p>
 
-        </p>
-            <button>Ver Mas</button>
+            <button id='btnVerMas' className={stylesDetail.more} onClick={handleClick}>Ver Mas</button>
         </div>
 
          <h2>We Recommend Also...</h2>
           <div className={stylesDetail.cardOthers}>
  
              <Carousel>
-            <Carousel.Item>
-                 <CardOthersServices></CardOthersServices>
+
+             {moreUsers.map(e => {
+                return (
+                  
+                  <Carousel.Item>
+                  <CardOthersServices user={e}></CardOthersServices>
                  
-             </Carousel.Item>
+                  </Carousel.Item>
 
-             <Carousel.Item>
-                 <CardOthersServices></CardOthersServices>
-             </Carousel.Item>
-
-             <Carousel.Item>
-                 <CardOthersServices></CardOthersServices>
-             </Carousel.Item>
-
-             <Carousel.Item>
-                 <CardOthersServices></CardOthersServices>
-             </Carousel.Item>
+                )
 
 
+             })}
             </Carousel>
 
         </div>
@@ -116,18 +243,22 @@ export default function Detail(){
 
 
         <div className={stylesDetail.opinion} >
+          <ProfileOpinion userid={detail.userId}></ProfileOpinion>
 
-          <ProfileOpinion></ProfileOpinion>
-          <ProfileOpinion></ProfileOpinion>
-          <ProfileOpinion></ProfileOpinion>
-          <ProfileOpinion></ProfileOpinion>
         </div>
        
     </div>
-    <CardSellerDetail></CardSellerDetail>
+    <CardSellerDetail userid={detail.userId}></CardSellerDetail>
 
     </div>
      <Footer></Footer>
+
+     <div className={stylesDetail.footer}>
+        <MDBContainer fluid>
+          &copy; 2022 Copyright: ServiExpress 
+        </MDBContainer>
+      </div>
     </div>
 
+   
 };

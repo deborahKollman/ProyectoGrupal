@@ -29,7 +29,7 @@ const MyHeader = styled.header`
     align-items: center;
     justify-content: space-between;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 650px) {
     .header-input-container {
       display: none;
     }
@@ -42,11 +42,11 @@ const MyHeader = styled.header`
       display: flex;
     }
     z-index: 3;
-    height: ${({ pOpen }) => (!pOpen ? "12vh" : "100%")};
+    height: ${({ pOpen }) => (!pOpen ? "12vh" : "100vh")};
     clip-path: ${({ pOpen }) =>
       !pOpen ? "none" : "polygon(0 0, 100% 0, 100% 100%, 30% 100%);"};
-
-    position: ${({ pOpen }) => (!pOpen ? "inherit" : "absolute")};
+    position: ${({ pOpen }) => (!pOpen ? "inherit" : "fixed")};
+    top: 0;
   }
 `;
 //===============================================================
@@ -71,7 +71,7 @@ const ListNav = styled.ul`
     background-color: #aaa;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 650px) {
     display: ${({ pOpen }) => !pOpen ? "none" : "flex"};
     transform: ${({ pOpen }) => (pOpen ? "translateX(0)" : "translateX(100%)")};
     flex-flow: column nowrap;

@@ -1,165 +1,136 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getServices, swich_loading} from "../redux/action"
-import {Link} from 'react-router-dom';
-import Card from "../components/CardService/CardService"
-import PaginationRounded from "../components/Pagination/Pagination";
-import Loading from '../components/Loading/Loading';
-import NavBar from '../components/NavBar/NavBar'
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUser,
+  getUsers,
+  getPublications,
+  swich_loading,
+  getPublicationsByCategory,
+  getAllCategories,
+} from "../redux/action";
+import CardPublications from "../components/CardPublications/CardPublications";
+import FilterByCategories from "../components/Filters/FilterByCategories";
+import Loading from "../components/Loading/Loading.js";
+import NavBar from "../components/NavBar/NavBar";
 import ServicesBar from "../components/ServicesBar";
-// import './Home.css';
+import Styles from "./styles/Home.module.scss";
+import PaginationHome from "../components/PaginationHome";
+import Carousel from "react-bootstrap/Carousel";
+import stylesDetail from "./styles/stylesDetail.module.scss";
+import Alert from "@mui/material/Alert";
+import { flexbox } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
-export default function Home(){
-    const dispatch = useDispatch();
-    const allServices = useSelector ((state)=>state.services);
-    const SwichL = useSelector ((state)=>state.switchloading)
-    const [CurrentPage, setCurrentPage] = useState(1);
-    const [ServicesPerPage, setServicesPerPage] = useState(16);
-    const indexOfLastService = (CurrentPage * ServicesPerPage);
-    const indexOfFirstService = (indexOfLastService - ServicesPerPage);
-    const currentServices = allServices.slice(indexOfFirstService,indexOfLastService);
-    // const [order,setorder] = useState ("")
-    // const [orderscore , setorderscore] = useState(1)
-    const servicescreate = [];
-    const pagination = (pageNumber) => {setCurrentPage(pageNumber)}
-    
-        useEffect(() => {
-            dispatch(getServices())
-        }, [dispatch]);
+export default function Home() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const allPublications = useSelector((state) => state.Publications);
+  const SwichL = useSelector((state) => state.switchloading);
+  console.log(SwichL);
+  console.log(allPublications);
+  const [CurrentPage, setCurrentPage] = useState(1);
+  const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
+  const indexOfLastPublication = CurrentPage * PublicationsPerPage;
+  const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
+  const currentServices = allPublications.slice(
+    indexOfFirstPublication,
+    indexOfLastPublication,
+  );
+  const { user, errorLogin, rdcr_isAuth } = useSelector((state) => state);
+  const [msgSearch, SetMsgSearch] = useState("");
+  const sendLogin = window.localStorage.getItem("sendLogin");
+  const session = window.localStorage.getItem("session");
+  const msg = (text) => {
+    SetMsgSearch(text);
+  };
 
-        useEffect(()=>{
-            setCurrentPage((pag)=> pag = 1)
-        }, [allServices])
+  // const [order,setorder] = useState ("")
+  // const [orderscore , setorderscore] = useState(1)
+  // const servicescreate = [];
+  const pagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
+  useEffect(() => {
+    dispatch(getUsers());
+    if (!Object.keys(user).length && sendLogin) {
+      dispatch(getUser());
+      window.localStorage.removeItem("sendLogin");
+    }
 
-if(allServices.length===0)dispatch(swich_loading(true))
-else if(allServices.length!==0)dispatch(swich_loading(false))
+    if (session && !errorLogin && rdcr_isAuth) {
+      console.log({ errorLogin });
+      swal("Inicio de sesión", "Inicio de sesión correcto!", "success");
+      window.localStorage.removeItem("session");
+    }
 
+    if (errorLogin) {
+      navigate("/login");
+    }
+    dispatch(getAllCategories());
+    setTimeout(() => {
+      dispatch(getPublications());
+    }, 1000);
+  }, [dispatch, errorLogin, navigate, sendLogin, rdcr_isAuth, user, session]);
 
+  useEffect(() => {
+    setCurrentPage((pag) => (pag = 1));
+  }, [allPublications]);
 
-        return(
-            <div className="wphome">
-           
-            <NavBar>
-                
-            </NavBar>
-                
-            <div className="divpag">
-            <p>holaaaaaaaaaaaaaa</p>
-            <ServicesBar>
-                
-            </ServicesBar>
-                    
-                        <PaginationRounded className ="pagination"
-                            ServicesPerPag={ServicesPerPage}
-                            allServices={allServices.length}
-                            pagination = {pagination}
-                            
-                        />
-                    </div>
+  // function filterforCategory1() {dispatch(getPublicationsByCategory(1))}
 
-                <div className='services-home'>
-                { SwichL===true ? (
-					<div className="loadd">
-                    
-						<Loading>
-                        <h2 className="h2loading">Loading...</h2>
-                        </Loading>
-						
-					</div>
-                    ) : (currentServices.map( e => {
-                    
-                    return(
-                    <div>
-                        <Card   
-                            id={e.id}
-                            album={e.album} 
-                            title={e.title} 
-                            summary={e.detail_resume}
-                            score={e.score} 
-                            price={e.price}
-                            // opinions= {e.opinions}
-                            
-                        />
-                    </div>
-                    
-                    )}))
+  return (
+    <div className={Styles.container}>
+      <NavBar msg={msg}></NavBar>
+      {msgSearch && (
+        <Alert
+          severity="error"
+          sx={{ fontSize: 16, display: flexbox, justifyContent: "center" }}
+        >
+          {msgSearch}
+        </Alert>
+      )}
 
-                }
-                </div>
+      {/* <div className="filterservice">
+        <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
+        <p className="filtername">|</p> */}
 
-            
-        
-        </div>
-    )
+      <FilterByCategories />
 
+      <div className={Styles.homepaginate}>
+        <PaginationHome
+          value={allPublications.length}
+          pagination={pagination}
+          items={PublicationsPerPage}
+          pages = {Math.ceil(allPublications.length/PublicationsPerPage)}
+        ></PaginationHome>
+      </div>
+
+      <div className={Styles.serviceshome}>
+        {SwichL === true || allPublications.length === 0 ? (
+          <Loading></Loading>
+        ) : (
+          currentServices.map((e) => {
+            return (
+              <div>
+                <CardPublications
+                  id={e.id}
+                  album={e.album}
+                  title={e.title}
+                  summary={e.detail_resume}
+                  userId={e.userId}
+                  price={e.price}
+                  // opinions= {e.opinions}
+                />
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      <div className="logos"></div>
+    </div>
+  );
 }
-
-
-
-
-
-
-
-
-
-
-          {/* <select onChange={e=>  filterforCategory(e)}>
-                            <option key = 'All' value='All'>All categories</option>
-                            <option key = 'plumbing' value='plumbing'>plumbing</option>
-                            <option key = 'electricity' value='electricity'>electricity</option>
-                            <option key = 'carpentry' value='carpentry'>carpentry</option>
-                            <option key = 'developers' value='developers'>developers</option>
-                            <option key = 'graphic & design' value='graphic & design'>graphic & design</option>
-                            <option key = 'advocacy' value='advocacy'>advocacy</option>
-                            <option key = 'engineering' value='engineering'>engineering</option>
-                            <option key = 'technical service' value='technical service'>technical service</option>
-                            <option key = 'digital marketing' value='digital marketing'>digital marketing</option>
-                            <option key = 'music & audio' value='music & audio'>music & audio</option>
-                        </select> */}
-
-
-
-
-                        // function orderforName(e){
-                        //     if(e.target.value === 'default'){
-                        //         dispatch(getServices())
-                        //     } 
-                        //     else{
-                        //         e.preventDefault();
-                        //         dispatch(orderByName(e.target.value))
-                        //         setorder(`ordenado ${e.target.value}`)
-                        //         setCurrentPage((pag)=> pag = 1)
-                        //     }
-                        // }
-
-
-
-                            // function handleClick(e){
-        //     e.preventDefault(); //evita que se recargue y se rompa la pagina
-        //     dispatch(getServices())
-        // }
-    
-        // function filterforCategory(e){
-        //     if(e.target.value === 'All'){ 
-        //         dispatch(getServices())
-        //     } 
-        //     else{
-        //         dispatch(getServicesForCategory(e.target.value))
-        //     }
-        // }
-
-
-
-        // function orderforScore(e){
-        //     if(e.target.value === 'default'){
-        //         dispatch(getServices())
-        //     } 
-        //     else {
-        //         e.preventDefault();
-        //         dispatch(orderByScore(e.target.value))
-        //         setorderscore(`ordenadopscore ${e.target.value}`)
-        //         setCurrentPage((pag)=> pag = 1)
-        //     }
-        // }

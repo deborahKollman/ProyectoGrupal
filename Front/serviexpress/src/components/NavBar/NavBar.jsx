@@ -1,28 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import Favorite from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 
-import { MyHeader, ListNav, StyledBurger, MyNav } from "./NavBar-StyleComp";
+import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
-import AccountMenu from "./MUI-AcountMenu";
+import Button from "@mui/material/Button";
+import { useSelector, useDispatch } from "react-redux";
+import NavigationBar from "./NavigationBar";
+import { InitialSession, LoginSession } from "./SubComponents";
+import { IconButton } from "@mui/material";
+import { getUser } from "../../redux/action";
 
 const logo = require("../../assets/icons/log.png");
-const BurgerButton = () => {
-  const [open, setOpen] = useState(false);
 
+//=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
+const BurgerButton = ({ msg }) => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [avatar, setAvatar] = useState("");
   const mReloadOpen = () => {
     setOpen(!open);
   };
 
+  const { user } = useSelector((state) => state);
+  const { rdcr_isAuth } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (Object.keys(user)?.length > 0) {
+      setAvatar(user.avatar_image);
+    }
+    if (!rdcr_isAuth && user.password) {
+      dispatch(getUser());
+    }
+  }, [avatar, rdcr_isAuth]);
+
+  function handleRefresh(e) {
+    e.preventDefault()
+    window.location.reload(e)
+  }
+
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
-        <figure>
-          <img src={logo} alt="" />
-        </figure>
+        <Link to={`/Home`}>
+          <figure>
+            <img src={logo} alt="" />
+          </figure>
+        </Link>
 
         <IconButton className="burgerFigure" onClick={mReloadOpen}>
           <StyledBurger pOpen={open}>
@@ -33,31 +56,19 @@ const BurgerButton = () => {
         </IconButton>
       </div>
 
-      <SearchGroup />
-
-      <div className="NavBar-login_user">
-        <MyNav>
-          <ol>
-            <li>
-              <IconButton aria-label="delete" size="large">
-                <Favorite />
-              </IconButton>
-            </li>
-            <li>
-              <IconButton aria-label="delete" size="large">
-                <NotificationsActiveIcon />
-              </IconButton>
-            </li>
-            <li>
-              <IconButton aria-label="delete" size="large">
-                <LocalMallIcon />
-              </IconButton>
-            </li>
-          </ol>
-        </MyNav>
-
-        <AccountMenu />
-      </div>
+      <SearchGroup msg={msg} />
+      <Button
+          variant="text"
+          onClick={(e) => {handleRefresh(e)}}
+          sx={{
+            color: "black",
+            fontSize: 12,
+          }}
+        >
+          Refresh
+        </Button>
+        
+      {!rdcr_isAuth ? <InitialSession /> : <LoginSession avatar={avatar} />}
 
       <ListNav pOpen={open}>
         <li>
@@ -76,19 +87,10 @@ const BurgerButton = () => {
           </Link>
         </li>
       </ListNav>
-      {/* <MyButton variant="contained" endIcon={<VolunteerActivismIcon />}>
-        Join Serviexpress
-      </MyButton> */}
+
+      {!open && <NavigationBar />}
     </MyHeader>
   );
 };
 
 export default BurgerButton;
-
-//---------------------------------------------------------------------------
-//-----------------------------STYLED COMPONENTS-----------------------------
-//---------------------------------------------------------------------------
-/* 
-            <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            
-            */

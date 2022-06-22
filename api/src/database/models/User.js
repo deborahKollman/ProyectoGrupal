@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, ENUM } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -20,35 +20,34 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull:false
+        defaultValue: ''
       },
       name: {
+        type: DataTypes.STRING
+      },
+      last_name: {
         type: DataTypes.STRING,
-        allowNull:false
+        defaultValue: ''
       },
-      last_name:{
-        type:DataTypes.STRING,
-        defaultValue:""
+      avatar_image: {
+        type: DataTypes.STRING,
+        defaultValue: ''
       },
-      avatar_image:{
-        type:DataTypes.STRING,
-        defaultValue:""
+      description: {
+        type: DataTypes.TEXT,
+        defaultValue: ''
       },
-      description:{
-        type:DataTypes.TEXT,
-        defaultValue:""
-      },
-      phone_number:{
-        type:DataTypes.STRING,
-        defaultValue:""
+      phone_number: {
+        type: DataTypes.STRING,
+        defaultValue: ''
       },
       country: {
         type: DataTypes.STRING,
-        defaultValue:""
+        defaultValue: ''
       },
       province_state: {
         type: DataTypes.STRING,
-        defaultValue:""
+        defaultValue: ''
       },
       location: {
         type: DataTypes.VIRTUAL,
@@ -68,8 +67,8 @@ module.exports = (sequelize) => {
         }
       },
       buyer_opinions: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        defaultValue: []
       },
       seller_reputation: {
         type: DataTypes.FLOAT,
@@ -79,8 +78,12 @@ module.exports = (sequelize) => {
         }
       },
       seller_opinions: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        defaultValue: []
+      },
+      state:{
+        type: DataTypes.STRING,
+        defaultValue: 'Active'
       }
     },
     {

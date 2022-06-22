@@ -1,11 +1,16 @@
 import stylesCardSeller from '../pages/styles/stylesCardSeller.module.scss';
 import star from '../assets/icons/star.png';
-import {Modal,Button} from 'react-bootstrap';
+/* import {Modal,Button} from 'react-bootstrap'; */
 import {useState} from 'react';
-
+import {Modal} from '@mui/material';
 import ContactCard from './ContactCard';
+import { useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import { getUserById } from '../redux/action';
 
-export default function CardSellerDetail(){
+import Button from '@mui/material/Button';
+
+export default function CardSellerDetail({userid}){
 
     const [show,setShow] = useState();
 
@@ -13,58 +18,36 @@ export default function CardSellerDetail(){
     const handleShow = () => setShow(true);
 
 
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.userId);
+
+
+    useEffect(() => {
+        dispatch(getUserById(userid));
+    },[dispatch,userid]);
 
 
     return <div className={stylesCardSeller.containerCard}>
         <h3>About Seller</h3>
-        <img src={"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"} alt="perfil"></img>
-        <h2 className={stylesCardSeller.name}>Name</h2>
+        <img src={user.avatar_image} alt="perfil"></img>
+        <h2 className={stylesCardSeller.name}>{user.name +" "+ user.last_name}</h2>
+        <h4>Location: {user.location}</h4>
         <div className={stylesCardSeller.opinion}>
             <div>
             <img src={star} alt="star"></img>
-            <label>5.0</label>
+            <label>{user.buyer_reputation}</label>
             </div>
-            <label>Texto </label>
+            <label>({user.buyer_opinions.length} Opinions)</label>
         </div>
 
+        <p className={stylesCardSeller.descrip}>{user.description}</p>
 
-        <div className={stylesCardSeller.opinion}>
-            <div>
-            <img src={star} alt="star"></img>
-            <label>5.0</label>
-            </div>
-            <label>Texto </label>
-        </div>
-
-        <div className={stylesCardSeller.opinion}>
-            <div>
-            <img src={star} alt="star"></img>
-            <label>5.0</label>
-            </div>
-            <label>Texto </label>
-        </div>
-
-        <div className={stylesCardSeller.opinion}>
-            <div>
-            <img src={star} alt="star"></img>
-            <label>5.0</label>
-            </div>
-            <label>Texto </label>
-        </div>
-
-        <div className={stylesCardSeller.opinion}>
-            <div>
-            <img src={star} alt="star"></img>
-            <label>5.0</label>
-            </div>
-            <label>Texto </label>
-        </div>
+        <Button variant='outlined' color="primary" onClick={handleShow} >Contact</Button>;
+        
 
 
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-        <button onClick={handleShow}>Contact</button>
-
-        <Modal show={show} onHide={handleClose} className={stylesCardSeller.contact}>
+        
+{/*         <Modal show={show} onHide={handleClose} className={stylesCardSeller.contact}>
         <Modal.Header closeButton>
           <Modal.Title>Contact</Modal.Title>
         </Modal.Header>
@@ -78,6 +61,31 @@ export default function CardSellerDetail(){
           </Button>
         </Modal.Footer>
       </Modal>
+ */}
+
+
+      <Modal
+  open={show}
+  onClose={handleClose}
+  className={stylesCardSeller.modal}
+>
+
+
+ <ContactCard name={user.name} perfil={user.avatar_image}></ContactCard>
+ 
+
+</Modal>
+
+
+
+
+
+
+
+
+
+
+
 
     </div>
 

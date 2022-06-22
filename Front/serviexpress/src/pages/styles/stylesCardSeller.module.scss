@@ -41,6 +41,14 @@
 }
 
 
+.descrip{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    
+
+}
+
+
 .opinion img{
     width: 20px;
     height: 20px;
@@ -63,15 +71,6 @@ h3{
 
 }
 
-.contact{
-    width: max-content;
-    height: max-content;
-    margin: 0;
-    
-
-
-
-}
 
 .contact button{
     font-size: large;
@@ -79,15 +78,29 @@ h3{
 
 
 
-
-
 @media (max-width: 1000px){
     .containerCard{
         width: 290px;
         height: 650px;
-       
+       padding-right: 0px;
     }
 
     
+
+}
+
+@media (max-width: 600px){
+    .modal{
+        margin: 10px;
+      
+
+    }
+
+}
+
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }

@@ -1,82 +1,102 @@
 require('dotenv').config();
-const express = require('express');
 const passport = require('passport');
-const { User } = require('../../src/database/postgres');
+const { User } = require('../database/postgres');
 const LocalStrategy = require('passport-local');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oidc');
+const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 
-passport.use(
-  new LocalStrategy(async function verify(username, password, cb) {
-    const user = await User.findOne({ where: { email: username } });
-    if (!user) {
-      return cb(null, false, { message: 'Incorrect username.' });
-    }
-    if (user.password !== password) {
-      return cb(null, false, { message: 'Incorrect password.' });
-    }
-    return cb(null, {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      password: user.password
+const loginGoogle = new GoogleStrategy(
+  {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: '/login/oauth2/redirect/google'
+  },
+  async (_, profile, cb) => {
+    const user = await User.findOne({
+      where: {
+        email: profile.emails[0].value
+      }
     });
+
+    if (user) {
+      return cb(null, user);
+    }
+    return cb(null, { message: 'Error' });
+  }
+);
+
+// force use because name is not unique
+passport._strategies.loginGoogle = loginGoogle;
+passport._strategies.loginGoogle.name = 'loginGoogle';
+
+router.get('/', async (req, res) => {
+  const user = await User.findByPk(req?.session?.passport?.user?.id);
+  if (user) {
+    return res.send(user);
+  } else {
+    if (req?.user?.message) {
+      res.send({ message: 'Este usuario no registrado', status: 401 });
+    }
+    // openhandle detected!
+  }
+});
+
+router.get(
+  '/google',
+  passport.authenticate('loginGoogle', {
+    scope: ['email', 'profile']
   })
 );
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/login/oauth2/redirect/google'
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      cb(null, profile);
-    }
-  )
-);
-
-passport.serializeUser(function (user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function (user, cb) {
-  cb(null, user);
-});
-
-router.get('/error', (req, res) => {
-  res.send('Hubo algun error');
-});
-
-router.get('/success', (req, res) => {
-  if (req.user) {
-    return res.status(200).json({
-      user: req.user
-    });
-  }
-  res.send(404);
-});
-
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
-
 router.get(
   '/oauth2/redirect/google',
-  passport.authenticate('google', {
-    failureRedirect: '/login/error'
+  passport.authenticate('loginGoogle', {
+    failureRedirect: '/login',
+    failureMessage: true
   }),
   function (req, res) {
-    res.redirect('http://localhost:3000');
+    res.redirect('http://localhost:3000/home');
   }
+);
+
+passport.serializeUser((user, cb) => cb(null, user));
+
+passport.deserializeUser((user, cb) => cb(null, user));
+
+router.post('/logout', function (req, res) {
+  req.logout();
+  res.send({
+    message: 'Logged out'
+  });
+});
+
+// Login Local
+passport.use(
+  new LocalStrategy(async function verify(username, password, cb) {
+    const user = await User.findOne({
+      where: {
+        email: username
+      }
+    });
+    if (user) {
+      if (bcrypt.compareSync(password, user.password)) {
+        return cb(null, user);
+      }
+      return cb(null, { message: 'Contraseña incorrecta' });
+    }
+    return cb(null, { message: 'Este email no esta registrado' });
+  })
 );
 
 router.post(
   '/',
   passport.authenticate('local', {
-    failureRedirect: '/login/error'
+    failureRedirect: '/login/local/error'
   }),
   (req, res) => {
-    res.redirect('http://localhost:3000');
+    return res.status(200).send(req.user);
   }
 );
 

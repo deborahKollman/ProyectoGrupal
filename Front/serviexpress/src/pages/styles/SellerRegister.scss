@@ -3,10 +3,20 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    align-items: center;
     .sel_reg-one{
         display: flex;
         flex-flow: column;
         justify-content: center;
         align-items: center;
     }
+
+    .profileUserTitle {
+        margin-top: 15px;
+    }
+}
+
+.error-div{
+    color: red;
+    font-size: small;
 }

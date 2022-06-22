@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    justify-content: center;
+    position: fixed;
+}
+
+.orders {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+    display: grid;
+}
+
+.column {
+    width: 300px;
+    margin-top: 20px;
+    line-height: 3.5;
+}
+
+.buttons {
+   justify-content: center;
+   position: relative;
+   top: 100px;
+}
+
+.emptycart{
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: grid;
+}
+
+.emptybtn {
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: black;
+    font-weight: 600;
+}
+.emptybtn:hover{cursor: pointer;}
+
+.emptyicon{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

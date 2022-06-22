@@ -3,13 +3,12 @@ const {Category, Service}=require('../database/postgres.js')
 
 exports.getServices=async()=>{
     const services=await Service.findAll({
-    attributes: [
-      ['id', 'ser_id'],
-      ['name', 'ser_name']
-    ],
     include:{
       model:Category,
-      attributes:[['id','cat_id'],['name','cat_name']]}
+      through:{
+        attributes:[]
+      }
+    }
     })
 
     return services;
@@ -18,17 +17,46 @@ exports.getServices=async()=>{
 exports.getServiceById=async(id)=>{
     const service=await Service.findOne({
         where:{id:id},
-        attributes: [
-          ['id', 'ser_id'],
-          ['name', 'ser_name']
-        ],
         include:{
           model:Category,
-          attributes:[['id','cat_id'],['name','cat_name']]}
+          through:{
+            attributes:[]
+          }
+        }
     })
+
+    if(service){
+      return service;
+    }
+
+    return {err_message:'Service not found'}
     
-    return service;
+    
 };
+
+exports.getServiceByCategoryId = async (id) => {
+  const category = await Category.findOne({
+    where:{id},
+    include:{
+      model:Service
+    }
+  })
+  if(category){
+    const services = await Service.findAll({
+      include:{
+        model:Category,
+        through:{
+          attributes:[]
+        },
+        where:{id},
+        attributes:[]
+      }
+    })
+
+    return  services;
+  }
+  return {err_message:'Category not found'}
+}
 
 exports.postService=async(name,categories=[])=>{
     const service=await Service.create({name:name});
@@ -38,7 +66,9 @@ exports.postService=async(name,categories=[])=>{
 }
 
 exports.updateService=async(id,name)=>{
-  const service=await Service.findById(id);
+  const service=await Service.findOne({
+    where:{id}
+  });
 
   if(!service){
     return {err_message:'Service not found'}
@@ -48,7 +78,9 @@ exports.updateService=async(id,name)=>{
 }
 
 exports.deleteService=async(id)=>{
-  const service= await Service.findById(id);
+  const service=await Service.findOne({
+    where:{id}
+  });
   if(!service){
     return {err_message:'Service not found'}
   }

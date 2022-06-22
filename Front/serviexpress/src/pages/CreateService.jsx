@@ -1,56 +1,106 @@
 import React from "react";
-import { MySelect } from "../elements/SelectMUI";
-import { MyButtonTwo, MyTextField } from "../elements/Forms";
-import { MultiImgs } from "../components/UploadImg";
+
 import BurgerButton from "../components/NavBar/NavBar";
-import './styles/CreateService.scss';
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import "./styles/CreateService.scss";
+import { MainPublication } from "../components/CreateService/List";
+import Form from "../components/CreateService/Form";
+import FormModify from "../components/CreateService/FormModify";
+
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import ViewListIcon from "@mui/icons-material/ViewList";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
 const CreateService = () => {
+  // const [modal, setModal] = useState({ active: false, id: null });
+
+  const [valueTab, setValueTab] = React.useState(0);
+  const [publication, setPublication] = React.useState(null);
+
+  const handleChange = (event, newValue) => {
+    setValueTab(newValue);
+  };
+
   return (
     <div className="page-createService">
       <BurgerButton />
+      {/* <BasicModal pModal={modal} pSetModal={setModal} /> */}
 
-      <section className="createService-content">
-        <h1>Service Info</h1>
-
-        <MySelect />
-        <MySelect />
-
-        <MyTextField
-          sx={{
-            fieldset: {
-              borderColor: "#fcdc3c !important",
-            },
-          }}
-          id="outlined-multiline-static"
-          label="DESCRIPTION"
-          multiline
-          rows={4}
-          placeholder="Tell us about your business"
-        />
-
-        <MyTextField
-          required
-          sx={{
-            fieldset: {
-              borderColor: "#fcdc3c !important",
-            },
-          }}
-          label="MIN PRICE"
-          type="number"
-          value={1}
-          onChange={(e) => {
-            console.log("object");
-          }}
-        />
-
-        <MultiImgs />
-        
-        <MyButtonTwo variant="contained" endIcon={<LibraryAddIcon />}>
-            Save Service
-          </MyButtonTwo>
-
-      </section>
+      <Box sx={{ width: "100%" }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={valueTab}
+            onChange={handleChange}
+            textColor="inherit"
+            indicatorColor="primary"
+          >
+            <Tab
+              icon={<ViewListIcon />}
+              iconPosition="start"
+              label="List Of Publications"
+              {...a11yProps(0)}
+            />
+            <Tab
+              icon={<AddBoxIcon />}
+              iconPosition="start"
+              label="Add Publication"
+              {...a11yProps(1)}
+            />
+            <Tab
+              icon={<AddBoxIcon />}
+              iconPosition="start"
+              label="Edit Publication"
+              {...a11yProps(2)}
+              disabled = {false}
+            />
+          </Tabs>
+        </Box>
+        <TabPanel value={valueTab} index={0}>
+          <MainPublication setValueTab={setValueTab} setPublication={setPublication}/>
+        </TabPanel>
+        <TabPanel value={valueTab} index={1}>
+          <Form />
+        </TabPanel>
+        <TabPanel value={valueTab} index={2}>
+          <FormModify publication={publication}/>
+        </TabPanel>
+      </Box>
     </div>
   );
 };

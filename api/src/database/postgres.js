@@ -5,7 +5,29 @@ const path = require('path');
 const { Sequelize, Op } = require('sequelize');
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
-const sequelize = new Sequelize(
+const sequelize = process.env.NODE_ENV?
+new Sequelize({
+  database: DB_NAME,
+  dialect: "postgres",
+  host: DB_HOST,
+  port: 5432,
+  username: DB_USER,
+  password: DB_PASSWORD,
+  pool: {
+    max: 3,
+    min: 1,
+    idle: 10000,
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+    keepAlive: true,
+  },
+  ssl: true,
+})
+:new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
   {
     logging: false,
@@ -25,13 +47,10 @@ sequelize.models = Object.entries(sequelize.models).reduce(
   {}
 );
 // Relaciones de DB
-const { Category, Service, User, Admin, Contract, Favorite, Publication } =
+const { Category, Service, User,  Contract, Favorite, Publication, Payment } =
   sequelize.models;
 Category.belongsToMany(Service, { through: 'CategoryServices' });
 Service.belongsToMany(Category, { through: 'CategoryServices' });
-
-User.hasOne(Admin);
-Admin.belongsTo(User);
 
 User.hasMany(Publication);
 Publication.belongsTo(User);
@@ -49,10 +68,13 @@ Contract.belongsTo(User);
 Publication.hasMany(Contract);
 Contract.belongsTo(Publication);
 
-User.hasMany(Favorite);
+User.hasOne(Favorite);
 Favorite.belongsTo(User);
 Favorite.belongsToMany(Publication, { through: 'FavoritePublications' });
 Publication.belongsToMany(Favorite, { through: 'FavoritePublications' });
+
+Contract.hasOne(Payment);
+Payment.belongsTo(Contract);
 
 module.exports = {
   ...sequelize.models,

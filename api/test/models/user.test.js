@@ -13,7 +13,7 @@ describe('Users model', () => {
       expect(name).toBe('SequelizeValidationError');
     }
   });
-  it('el atributo "nombre" no puede ser nulo', async () => {
+  xit('el atributo "nombre" no puede ser nulo', async () => {
     try {
       const user = await User.create({ ...users[1], name: null });
       expect(user.name).not.toBeNull();
@@ -37,7 +37,7 @@ describe('Users model', () => {
       expect(name).toBe('SequelizeValidationError');
     }
   });
-  it('el atributo "country" no puede ser nulo', async () => {
+  xit('el atributo "country" no puede ser nulo', async () => {
     try {
       const user = await User.create({ ...users[4], country: null });
       expect(user.country).not.toBeNull();
@@ -45,7 +45,7 @@ describe('Users model', () => {
       expect(name).toBe('SequelizeValidationError');
     }
   });
-  it('el atributo "province_state" no puede ser nulo', async () => {
+  xit('el atributo "province_state" no puede ser nulo', async () => {
     try {
       const user = await User.create({ ...users[5], province_state: null });
       expect(user.province_state).not.toBeNull();

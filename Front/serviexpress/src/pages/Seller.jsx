@@ -14,7 +14,6 @@ const Seller = () => {
   return (
     <div className="page-seller">
       <BurgerButton />
-
       <figure className="seller-one">
         <img
           src="https://i.ibb.co/CmYp4Cq/bg-mobile-first-hero-x2.jpg"

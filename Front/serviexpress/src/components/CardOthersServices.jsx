@@ -1,14 +1,16 @@
 import cardStyle from '../pages/styles/cardOthersServices.module.scss'
-import Opinion from './Opinion'
+import {Rating} from '@mui/material';
 
-export default function CardOthersServices(){
+
+export default function CardOthersServices({user}){
+   
+
+
     return <div className={cardStyle.container}>
-        <img src="https://images.unsplash.com/photo-1507335563142-a814078ce38c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdlbGRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="imagen"></img>
-        <h3>Welder2000</h3>
-        <p>"Cumplido"</p>
-        <p>"Responsable"</p>
-        <p>"Buen Precio"</p>
-        <Opinion></Opinion>
+        <img src={user.avatar_image} alt="perfil"></img>
+        <h3>{user.name}</h3>
+        {user.buyer_opinions.map(e => <p>"{e.comment}"</p>  )}
+        <Rating name="read-only" value={user.buyer_reputation} readOnly/>
       </div>
 
 

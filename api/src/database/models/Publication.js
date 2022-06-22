@@ -1,4 +1,4 @@
-const { DataTypes, STRING } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -16,10 +16,11 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW
       },
       state: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: 'Active'
       },
-      title:{
-        type:STRING(50)
+      title: {
+        type: DataTypes.STRING(50)
       },
       album: {
         type: DataTypes.ARRAY(DataTypes.STRING)
@@ -27,8 +28,8 @@ module.exports = (sequelize) => {
       detail: {
         type: DataTypes.TEXT
       },
-      detail_resume:{
-        type:DataTypes.STRING(50)
+      detail_resume: {
+        type: DataTypes.STRING(50)
       },
       price: {
         type: DataTypes.FLOAT
