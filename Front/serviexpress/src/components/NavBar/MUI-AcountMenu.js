@@ -128,7 +128,7 @@ export default function AccountMenu({ avatar }) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            xNavigate("/MyPublications");
+            xNavigate("/seller/add-service");
           }}
         >
           <ListItemIcon>
