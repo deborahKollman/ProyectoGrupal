@@ -491,13 +491,15 @@ export const clearErrorDataLogin = () => {
   };
 };
 
-export function getStripe(stripeid, amount, usremail) {
+export function getStripe(stripeid, amount, usremail,idBuyer,idPublicacion) {
   return async (dispatch) => {
     try {
       const { data } = await axios.post("/payments", {
         stripeid,
         amount,
         usremail,
+        idBuyer,
+        idPublicacion
       });
 
       dispatch({

@@ -88,9 +88,15 @@ const headCells = [
     label: 'Avatar',
 
   },
+  {
+    id: 'id',
+    numeric: false,
+    disablePadding: false,
+    label: 'ID',
+  },
     {id: 'name',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Name',
   },
   {
@@ -104,6 +110,12 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'Service',
+  },
+  {
+    id: 'serviceId',
+    numeric: true,
+    disablePadding: false,
+    label: 'ID del servicio',
   },
   {
     id: 'status',
@@ -148,6 +160,7 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
+            sx={{ fontSize: 14, fontWeight: 'bold', textAlign: 'center' }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
