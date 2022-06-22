@@ -193,7 +193,7 @@ export default function Detail(){
            className={stylesDetail.modal}
           >
 
-           <Payment price={detail.price} usremail="" album={detail.album} title={detail.title}></Payment>
+           <Payment price={detail.price} usremail={userLogin.email} album={detail.album} title={detail.title}></Payment>
 
 
         </Modal>

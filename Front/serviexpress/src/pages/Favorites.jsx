@@ -11,16 +11,16 @@ import { getFavorites,removeFavorites } from '../redux/action';
 import { useEffect } from 'react';
 import styles from './styles/favorites.module.scss';
 import { useNavigate} from "react-router-dom";
-
+import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
-const Favorites = ({id}) => {
-
+const Favorites = () => {
+    const {id} = useParams();
     const dispatch = useDispatch();
     const fav = useSelector(state => state.favorites);
 
     useEffect(() => {
-        dispatch(getFavorites(27))
+        dispatch(getFavorites(parseInt(id)))
 
 
     },[dispatch])
@@ -42,6 +42,8 @@ const Favorites = ({id}) => {
     setChecked(newChecked);
   };
 
+  console.log(fav);
+
   const detailClick = (e) => {
       console.log(e);
      // navigate('/detail/');
@@ -52,7 +54,7 @@ const Favorites = ({id}) => {
   const removeFav = () => {
     checked && checked.forEach(e => {
         
-        dispatch(removeFavorites(27,{id: e.id}));
+        dispatch(removeFavorites(id,{id: e.id}));
 
     })
     
