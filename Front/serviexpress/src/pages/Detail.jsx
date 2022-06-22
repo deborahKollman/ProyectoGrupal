@@ -76,11 +76,11 @@ export default function Detail(){
         document.getElementById("btnVerMas").style.display = 'none';
 
     };
-
+   
     const Alert = React.forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
-
+    
     const [open, setOpen] = useState(false);
 
     const [msgAlert, setMsg] = useState("");
