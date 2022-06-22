@@ -1,12 +1,12 @@
 import React from "react";
-import Styles from './Pagination.scss'
 
 
 
-export default function Pagination({PublicationsPerPage, allpublicationsnumber, pagination}){
+
+export default function Paginationnumber({PublicationsPerPage, allPublications}){
     const pageNumbers = []
     const reset=false
-    for(let i=1; i<=Math.ceil(allpublicationsnumber/PublicationsPerPage); i++){
+    for(let i=1; i<=Math.ceil(allPublications.length/PublicationsPerPage); i++){
         pageNumbers.push(i)
     }
     
@@ -14,14 +14,15 @@ export default function Pagination({PublicationsPerPage, allpublicationsnumber, 
     
     return(
         
-        <div className="pagination2">
+        pageNumbers.length
+        // <div className="pagination2">
                 
-                    {       pageNumbers.map(Number=>{ return(
-                            <div className={Styles.number} key={Number}>
-                            <a onClick={()=>pagination(Number)}>{Number}</a>
-                            </div>)
-                        })}
+        //             {       pageNumbers.map(Number=>{ return(
+        //                     <div className={Styles.number} key={Number}>
+        //                     <a onClick={()=>pagination(Number)}>{Number}</a>
+        //                     </div>)
+        //                 })}
                 
-        </div>
+        // </div>
     )
 }
