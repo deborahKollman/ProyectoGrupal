@@ -20,7 +20,6 @@ import {
   clearErrorLogin,
   clearErrorDataLogin,
 } from "../redux/action";
-import env from 'react-dotenv'
 const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
 
 const validate = ({ email, password }) => {
@@ -49,7 +48,7 @@ const Login = () => {
   const loginGoogle = () => {
     window.localStorage.setItem("session", true);
     window.localStorage.setItem("sendLogin", true);
-    window.open("http://localhost:3001/login/google", "_self");
+    window.open(`${baseURL}/login/google`, "_self");
   };
   const sendLogin = window.localStorage.getItem("sendLogin");
   const loginLocal = () => {
