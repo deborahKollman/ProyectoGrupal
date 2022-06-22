@@ -165,10 +165,19 @@
     display: flex;
     gap: 20px;
     justify-content: center;
-
+    
 
 
 }
+
+.buyButtons button{
+    border: none;
+    background-color: transparent;
+    color: blue;
+
+
+}
+
 
 .modal{
     display: flex;
