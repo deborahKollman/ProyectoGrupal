@@ -50,8 +50,8 @@ function a11yProps(index) {
 const CreateService = () => {
   // const [modal, setModal] = useState({ active: false, id: null });
 
-  const [valueTab, setValueTab] = React.useState(0);
-  const [publication, setPublication] = React.useState(null);
+  const [valueTab, setValueTab] = React.useState(2);
+  const [publicationID, setPublicationID] = React.useState(null);
 
   const handleChange = (event, newValue) => {
     setValueTab(newValue);
@@ -92,13 +92,13 @@ const CreateService = () => {
           </Tabs>
         </Box>
         <TabPanel value={valueTab} index={0}>
-          <MainPublication setValueTab={setValueTab} setPublication={setPublication}/>
+          <MainPublication setValueTab={setValueTab} setPublicationID={setPublicationID}/>
         </TabPanel>
         <TabPanel value={valueTab} index={1}>
           <Form />
         </TabPanel>
         <TabPanel value={valueTab} index={2}>
-          <FormModify publication={publication}/>
+          <FormModify publicationID={publicationID}/>
         </TabPanel>
       </Box>
     </div>

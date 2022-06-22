@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const MySelect = (props) => {
-  const {aFirst, pHandleChange} = props;
+  const {aFirst, pHandleChange, pSCategory} = props;
  
   return (
     <Box sx={{ width: "260px", mt: "30px" }}>
@@ -26,6 +26,7 @@ const MySelect = (props) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Category"
+          value={pSCategory}
           onChange={pHandleChange}
         >
           <MenuItem value={null}>
