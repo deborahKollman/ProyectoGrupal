@@ -7,6 +7,8 @@ import { MyNav } from "./NavBar-StyleComp";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { Link } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const InitialSession = () => {
   return (
@@ -40,23 +42,31 @@ const InitialSession = () => {
 };
 
 const LoginSession = ({ avatar }) => {
+  const user = useSelector(state => state.user);
+  const xNavigate = useNavigate();
   return (
     <div className="NavBar-login_user">
       <MyNav>
         <ol>
           <li>
             <IconButton aria-label="delete" size="large">
-              <Favorite />
+            
+            <Favorite onClick={() => xNavigate(`/favorites/${user.id}`)} />  
+            
             </IconButton>
           </li>
           <li>
             <IconButton aria-label="delete" size="large">
-              <NotificationsActiveIcon />
+            
+            <NotificationsActiveIcon />
+            
             </IconButton>
           </li>
           <li>
             <IconButton aria-label="delete" size="large">
-              <LocalMallIcon />
+           
+            <LocalMallIcon />
+            
             </IconButton>
           </li>
         </ol>
