@@ -25,11 +25,7 @@ export default function Home() {
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
-  const currentServices = allPublications.slice(
-    indexOfFirstPublication,
-    indexOfLastPublication,
-  );
-  console.log('length cuurent services',currentServices.length)
+  const currentServices = allPublications.slice(indexOfFirstPublication,indexOfLastPublication,);
 
   const [msgSearch, SetMsgSearch] = useState("");
 
