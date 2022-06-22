@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import React from 'react'
 import {filterCategories, getAllCategories, getPublicationsByCategory} from '../../redux/action'
 import {useSelector, useDispatch} from 'react-redux'
@@ -50,7 +51,7 @@ const FilterByCategories = () => {
 
   return (
 
-    <List sx={{ width: '100%', bgcolor: 'rgb(255, 222, 6)', display: 'flex', flexDirection: 'row'}}>
+    <List sx={{ width: '100%', bgcolor: 'rgb(255, 222, 6)', display: 'flex', flexDirection: 'row', mt: '20px', p:'1px',}}>
     {/* <List "height"=150, "width"=250, "rowHeight"= 10 , "rowCount"= 5> */}
         
       {allCategories.map((e,index) => {
@@ -61,6 +62,7 @@ const FilterByCategories = () => {
                 onClick={(event) => handleListItemClick(event, index)}
                >
               <ListItemText
+                primaryTypographyProps={{fontSize: 13, color: 'black',  fontWeight: 500 }}
                 primary={e.name}
               />
               </ListItemButton>
