@@ -26,12 +26,7 @@ server.use(
   })
 );
 
-server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Methods',  'true');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
+
 
 server.use(express.static('public'));
  server.use(
@@ -55,6 +50,13 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use(passport.authenticate('session'));
 
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Methods',  'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 
+  'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 
 // root of routes
 server.use('/', router);

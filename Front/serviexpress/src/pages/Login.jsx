@@ -16,8 +16,8 @@ import {
   getErrorRegister,
   clearErrorRegister,
 } from "../redux/action";
-
-const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+import env from 'react-dotenv'
+const baseURL = env.REACT_APP_API || 'http://localhost:3001'
 
 const HookInputValue = (initialValue) => {
   const [value, setValue] = useState(initialValue);
