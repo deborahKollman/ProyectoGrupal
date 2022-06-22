@@ -16,10 +16,14 @@ const Orders = () => {
 
   const navigate = useNavigate()
 
+  // Guardo en la variable la llamada al localstorage y me devuelve lo que seleccione anteriormente 
+  let myOrderSelected = JSON.parse(localStorage.getItem('order'))
+  console.log(myOrderSelected)
+
+
   function clearOrder() {
-    let myLocalStorage = []
-    localStorage.setItem("service", JSON.stringify(myLocalStorage))
-    navigate('/prueba')
+    localStorage.removeItem('order')
+    navigate('/home')
   }
 
   function handleCancel() {
@@ -44,34 +48,29 @@ const Orders = () => {
     <div className={Styles.container}>
       <BurgerButton/>   
 
-     {/* {localStorage.service.length? */}
+     {/* {localStorage.length? */}
      
-      <div className={Styles.orders}>   
+      <div className={Styles.orders}> 
 
+      <h1>My Order</h1>  
         <Card sx={{ maxWidth: 800, maxHeight: 450, display: 'flex'}}>
         <CardMedia
           component="img"
           width="100"
-          image={tres}
+          image={myOrderSelected.album}
           alt="the service you want"
          />
         <div className={Styles.column}>
           <CardContent sx={{maxWidth: 300}}>
            <Typography gutterBottom variant="h5" component="div">
-              Service
+             {myOrderSelected.title}
            </Typography>
            <Typography variant="body1" color="text.secondary">
-             I am a creative and inspired architect. My job consists in planning, developing and implementing building designs. 
-             I am able to compile feasibility reports, determine environmental impact, create project proposals, estimate costs, 
-             determine timelines and oversee construction processes.
+             {myOrderSelected.detail_resume}
             </Typography>
 
             <Typography>
-              ⭐⭐⭐⭐⭐(5)
-            </Typography>
-
-            <Typography>
-              Price: $USD 5000
+              Price: USD {myOrderSelected.price}
             </Typography>
           </CardContent>
 

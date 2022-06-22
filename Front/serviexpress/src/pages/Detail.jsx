@@ -11,7 +11,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 import {getById,getUserById,getUsers,addToFavorites,getFavorites,removeFavorites,getUser } from '../redux/action.js';
-import { useParams,Link } from 'react-router-dom';
+import { useParams,Link, useNavigate } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -28,6 +28,7 @@ export default function Detail(){
     const {id} = useParams();
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const detail = useSelector(state => state.detail);
     const moreUsers = useSelector(state => state.users);
     const fav = useSelector(state => state.favorites);
@@ -120,6 +121,15 @@ export default function Detail(){
     const handleCloseModal = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // Esta funcion es la que agrega la orden al carrito de compras, utilizando toda la informacion de la publicacion
+    function handleAddToOrder() {
+      console.log("aqui va el localstorage")
+      localStorage.setItem("order",JSON.stringify(detail));
+      let myOrder = localStorage.getItem("order");
+      console.log(myOrder)
+      navigate('/prueba');
+    }
+
    
     return <div className={stylesDetail.container}>
         <NavBar></NavBar>
@@ -157,8 +167,8 @@ export default function Detail(){
 
            </div>
 
-          <div>
-              
+          <button onClick={handleAddToOrder}>Add to order</button>
+          <div>      
               <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
           </div>
         </div>
