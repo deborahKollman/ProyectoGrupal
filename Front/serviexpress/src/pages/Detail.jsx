@@ -21,6 +21,7 @@ import MuiAlert from '@mui/material/Alert';
 import MercadoPago from '../components/MercadoPago';
 import {Modal} from '@mui/material';
 import Payment from '../components/Payment';
+import swal from 'sweetalert';
 
 
 
@@ -76,11 +77,11 @@ export default function Detail(){
         document.getElementById("btnVerMas").style.display = 'none';
 
     };
-
+   
     const Alert = React.forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
-
+    
     const [open, setOpen] = useState(false);
 
     const [msgAlert, setMsg] = useState("");
@@ -123,11 +124,14 @@ export default function Detail(){
 
     // Esta funcion es la que agrega la orden al carrito de compras, utilizando toda la informacion de la publicacion
     function handleAddToOrder() {
-      console.log("aqui va el localstorage")
       localStorage.setItem("order",JSON.stringify(detail));
       let myOrder = localStorage.getItem("order");
-      console.log(myOrder)
-      navigate('/prueba');
+      swal({
+        title: "Added to order",
+        icon: "success",
+        timer: 2000,
+      })
+      navigate('/checkout');
     }
 
    

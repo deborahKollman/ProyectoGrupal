@@ -7,11 +7,11 @@
     border-radius: 18px;
     background: rgb(255, 255, 255);
     font-family: roboto;
-    text-align: center;
     transition: 0.5s ease;
     cursor: pointer;
     width: 300px;
     height: 400px;
+    margin-bottom: 5px;
   }
 
   img {
@@ -85,22 +85,34 @@
   }
 
   .titleprice {
+    position: absolute;
     color: rgba(0, 0, 0, 0.35);
-    text-align: left;
-  }
+     }
+
+     
   .titlestar{
     text-align: left;
   }
+  .title{
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+  }
   .titlesummary{
     text-align: left;
+    
   }
   .UL{
-   display: flex;
+  margin-bottom: 20px;
+  position: relative;
+  bottom: -10px;
   }
   .like{
   position: absolute;
   margin-left: 230px;
   }
+.summary{
+  height: 50px;
+}
 
     
 }

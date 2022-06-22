@@ -55,9 +55,9 @@ exports.postPublication = async (req, res, next) => {
       detail_resume = '',
       price = 0,
       usr_id,
-      categoryId
+      categoryId,
+      services
     } = req.body;
-    console.log(req.files)
     var album = null;
     if(req.files){
       if (!process.env.API) {
@@ -89,7 +89,8 @@ exports.postPublication = async (req, res, next) => {
       price,
       album,
       categoryId,
-      usr_id
+      usr_id,
+      services
     );
     res.status(200).send(r);
   } catch (error) {

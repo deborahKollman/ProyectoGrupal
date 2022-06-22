@@ -22,14 +22,17 @@ import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import FooterBar from '../components/FooterBar/FooterBar';
 
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const allPublications = useSelector((state) => state.Publications);
+  const users = useSelector((state) => state.users);
+  const allPublications = useSelector((state) => state.Publications).sort(function(a,b){
+  if(users.find((u)=>u.id===a.userId).seller_reputation>users.find((u)=>u.id===b.userId).seller_reputation){return -1}
+  if(users.find((u)=>u.id===a.userId).seller_reputation<users.find((u)=>u.id===b.userId).seller_reputation){return 1}
+  return 0}) 
   const SwichL = useSelector((state) => state.switchloading);
-  console.log(SwichL);
-  console.log(allPublications);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
@@ -80,7 +83,10 @@ export default function Home() {
   }, [allPublications]);
 
   // function filterforCategory1() {dispatch(getPublicationsByCategory(1))}
-
+  // allPublications.sort(function(a,b){
+  //   if(a.title>b.title){return 1}
+  //   if(a.title<b.title){return -1}
+  //   return 0})
   return (
     <div className={Styles.container}>
       <NavBar msg={msg}></NavBar>
@@ -112,7 +118,8 @@ export default function Home() {
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
-          currentServices.map((e) => {
+            
+            currentServices.map((e) => {
             return (
               <div>
                 <CardPublications
@@ -130,7 +137,13 @@ export default function Home() {
         )}
       </div>
 
-      <div className="logos"></div>
+      <FooterBar/>
     </div>
   );
 }
+
+
+
+
+
+

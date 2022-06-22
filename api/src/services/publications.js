@@ -63,12 +63,30 @@ exports.postPublication = async (
   price,
   album,
   categoryId,
-  usr_id = 1
+  usr_id = 1,
+  services
 ) => {
   const user = await User.findOne({ where: { id: usr_id } });
   if(user){
     const category = await Category.findOne({ where: {id:categoryId}});
     if(category){
+      var serv=[];
+      if(Array.isArray(services)){
+        for(let i=0;i<services.length;i++){
+          var servM = await Service.findOne({where:{id:services[i]}})
+          if(!servM){return {err_msg:'Service not found'}}
+          serv.push(servM)
+        }
+      }else{
+        if(services){
+          services = services.split(',')
+          for(let i=0;i<services.length;i++){
+            var servM = await Service.findOne({where:{id:services[i]}})
+            if(!servM){return {err_msg:'Service not found'}}
+            serv.push(servM)
+          }
+        }
+      }
       const publication = await Publication.create({
         date: Date.now(),
         state: 'Active',
@@ -80,6 +98,7 @@ exports.postPublication = async (
       });
       publication.setUser(user);
       publication.setCategory(category);
+      publication.setServices(serv);
       return publication;
     }
     return {err_msg:'Category not found'}

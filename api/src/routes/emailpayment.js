@@ -17,13 +17,14 @@ router.post('/', (req, res) => {
   const { email } = req.body;
   const { type } = req.query;
   const { subject , html} = req.body
+  const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
   const response = {
     recovery: `
     <h2>Confirm you email account</h2>
     <p>
       <p>Confirm to recover your account in [Servi - Express] 😄</p>
       <label>Confirm: </label>  
-      <a href="http://localhost:3000/recoverypass">
+      <a href="${baseURL}/recoverypass">
         Click here to confirm your email 👈
       </a>
     </p>
@@ -33,7 +34,7 @@ router.post('/', (req, res) => {
     <p>
       <p>Confirm to create your account in [Servi - Express] 😋</p>
       <label>Confirm: </label>  
-      <a href="http://localhost:3000/confirm">
+      <a href="${baseURL}/confirm">
         Click here to confirm your email 👈
       </a>
     </p>
