@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Payment }=require('../database/postgres.js')
+const { Payment, Contract, Publication }=require('../database/postgres.js')
 const Stripe = require('stripe')
 const axios = require('axios');
 
@@ -40,10 +40,20 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
         confirm: true
     });
 
+    // Guardo un fake contract
+    const contract = await Contract.create({"country": 'Argentina', "postal_code":2000,"city":'Rosario', "state": 'Santa Fe', "address":'San Martin', "service_date":'01/01/2020'})
+    
+    //Relaciono la publicacion con el contrato
+    const pub = await Publication.findByPk(1)
+    pub.set(contract)
+
+    // Busco el contrtato
+    
     // Guardo el pago en la base de datos
-/*         const r = await Payment.create({stripeid,amount})
+    const pay = await Payment.create({stripeid,amount})
+    contract.set(pay)
     console.log('El payment',payment)
-    return payment; */
+
 
 
     //Envio el mail al comprador
