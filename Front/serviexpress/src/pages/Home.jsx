@@ -22,6 +22,7 @@ import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import FooterBar from '../components/FooterBar/FooterBar';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -136,7 +137,7 @@ export default function Home() {
         )}
       </div>
 
-      <div className="logos"></div>
+      <FooterBar/>
     </div>
   );
 }
