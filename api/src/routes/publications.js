@@ -21,6 +21,6 @@ router.get('/category/:categoryId', getPublicationsByCategory);
 router.get('/user/:userId',getPublicationsByUserId);
 router.post('/', upload.array('pictures', 5), postPublication);
 router.delete('/:id', deletePublication);
-router.put('/:id', updatePublication);
+router.put('/:id', upload.array('pictures', 5), updatePublication);
 
 module.exports = router;

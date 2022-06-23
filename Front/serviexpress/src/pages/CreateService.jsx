@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import ViewListIcon from "@mui/icons-material/ViewList";
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,7 +52,7 @@ const CreateService = () => {
   // const [modal, setModal] = useState({ active: false, id: null });
 
   const [valueTab, setValueTab] = React.useState(0);
-  const [publication, setPublication] = React.useState(null);
+  const [publicationID, setPublicationID] = React.useState(null);
 
   const handleChange = (event, newValue) => {
     setValueTab(newValue);
@@ -83,7 +84,7 @@ const CreateService = () => {
               {...a11yProps(1)}
             />
             <Tab
-              icon={<AddBoxIcon />}
+              icon={<AutoFixHighIcon />}
               iconPosition="start"
               label="Edit Publication"
               {...a11yProps(2)}
@@ -92,13 +93,13 @@ const CreateService = () => {
           </Tabs>
         </Box>
         <TabPanel value={valueTab} index={0}>
-          <MainPublication setValueTab={setValueTab} setPublication={setPublication}/>
+          <MainPublication setValueTab={setValueTab} setPublicationID={setPublicationID}/>
         </TabPanel>
         <TabPanel value={valueTab} index={1}>
           <Form />
         </TabPanel>
         <TabPanel value={valueTab} index={2}>
-          <FormModify publication={publication}/>
+          <FormModify publicationID={publicationID}/>
         </TabPanel>
       </Box>
     </div>
