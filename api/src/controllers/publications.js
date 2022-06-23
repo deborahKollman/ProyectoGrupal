@@ -130,9 +130,40 @@ exports.deletePublication = async (req, res, next) => {
 
 exports.updatePublication = async (req, res, next) => {
   try {
+    var changes = req.body
+    if(req.files){
+      var album;
+      if (!process.env.API) {
+        album = req.files.map(
+          (e) =>
+            'http://' +
+            process.env.HOST +
+            ':' +
+            process.env.PORT +
+            e.destination.slice(1) +
+            '/' +
+            e.filename
+        );
+      } else {
+        album = req.files.map(
+          (e) =>
+            'http://' +
+            process.env.API +
+            e.destination.slice(1) +
+            '/' +
+            e.filename
+        );
+      }
+      changes.album = album;
+    }
     const { id } = req.params;
-    const update = await updatePublication(id, req.body);
-    res.status(200).send(update);
+    const update = await updatePublication(id, changes);
+    if(update.err_message){
+      res.status(BAD_REQUEST).send(update.err_message);
+    }else{
+      res.status(OK).json(update);
+    }
+    
   } catch (error) {
     next(error);
   }
