@@ -523,3 +523,15 @@ export function favoriteCheck(user, publication) {
     } catch (error) {}
   };
 }
+
+export function postForm(input) {
+  return async (dispatch) => {
+    try {
+      let checkoutform = await axios.post(`/contracts`, input);
+      dispatch({ type: 'POST_FORM', checkoutform});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
