@@ -10,3 +10,12 @@ export const DeletePublication = (id) => {
         console.log(error.message)
     }
 }
+
+export const GetPublicationByID = (id) => {
+    try {
+        const responce = axios.get(`${URL}/publications/${id}`)
+        return responce
+    } catch (error) {
+        console.log(error.message)
+    }
+}

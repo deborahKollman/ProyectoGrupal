@@ -29,20 +29,20 @@ const UploadImg = () => {
   );
 };
 
-const MultiImgs = ({ pictures, pSetStateImage }) => {
-  const [state, setState] = useState({
-    profileImg: "https://i.ibb.co/X2bcwRM/mario.jpg",
-  });
-
+const MultiImgs = ({ pStateImage, pSetStateImage }) => {
+  // const [state, setState] = useState({
+  //   profileImg: "https://i.ibb.co/92bwv3m/aaaaaaaaaaaa.png",
+  // });
+  
   const mImgHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setState({ profileImg: reader.result });
+        // setState({ profileImg: reader.result });
+        pSetStateImage(reader.result);
       }
     };
-    pSetStateImage(e.target.files[0]);
-
+    // pSetStateImage(e.target.files[0]);
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -72,7 +72,8 @@ const MultiImgs = ({ pictures, pSetStateImage }) => {
       {
         
       }
-      <MediaCard pURLimg={state.profileImg} />
+      {/* <MediaCard pURLimg={state.profileImg} /> */}
+      <MediaCard pURLimg={pStateImage} />
     </section>
   );
 };

@@ -67,7 +67,7 @@ const EnhancedTableToolbar = ({ filter, setFilter }) => {
   );
 };
 
-const MainPublication = ({setValueTab, setPublication}) => {
+const MainPublication = ({setValueTab, setPublicationID}) => {
   const xDispatch = useDispatch();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const MainPublication = ({setValueTab, setPublication}) => {
 
   const handleModify = (pId) => {
     setValueTab(2);
-    setPublication(pId);
+    setPublicationID(pId);
     // setModal({active: true, id: pId});
   }
 

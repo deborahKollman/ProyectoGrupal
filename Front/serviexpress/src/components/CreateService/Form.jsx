@@ -9,11 +9,11 @@ import { jalz_getAllCategories, createPublication } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
  
 const Form = () => {
-  const [name, setName] = useState(null);
-  const [Detail, setDetail] = useState(null);
-  const [SomeDetail, setSomeDetail] = useState(null);
-  const [category, setCategory] = useState(null);
-  const [subcategory, setSubcategory] = useState(null);
+  const [name, setName] = useState("");
+  const [Detail, setDetail] = useState("");
+  const [SomeDetail, setSomeDetail] = useState("");
+  const [category, setCategory] = useState("");
+  const [subcategory, setSubcategory] = useState("");
   const [price, setPrice] = useState(null);
   const [pictures, setImage] = useState(null);
   const [status, setStatus] = useState(true);
@@ -52,7 +52,7 @@ const Form = () => {
     const data = {
       state: status ? "Active" : "Inactive",
       title: name,
-      album: pictures,
+      pictures,
       detail: Detail,
       detail_resume: SomeDetail,
       price,
@@ -62,11 +62,15 @@ const Form = () => {
     };
 
     xDispatch(createPublication(data));
+
+
   };
 
   return (
-    <form onSubmit={mSubmit} className="createService-content">
+    <main className="Comp-Form">
 
+    <form onSubmit={mSubmit} className="createService-content">
+      <h4>Add Publication</h4>
       <FormControlLabel
         sx={{ width: "100%" }}
         label="State"
@@ -153,7 +157,7 @@ const Form = () => {
         }}
       />
 
-      <MultiImgs pStateImage={pictures} pSetStateImage={setImage} />
+      <MultiImgs pSetStateImage={setImage} />
 
       <MyButtonTwo
         type="submit"
@@ -163,6 +167,7 @@ const Form = () => {
         Save Service
       </MyButtonTwo>
     </form>
+    </main>
   );
 };
 

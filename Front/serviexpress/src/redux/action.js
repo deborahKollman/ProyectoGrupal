@@ -224,10 +224,10 @@ export function getPublications() {
 export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
-      const publication = await axios.get(`/publications/${id}`);
+      const {data} = await axios.get(`/publications/${id}`);
       return dispatch({
         type: "GET_PUBLICATION_ID",
-        payload: publication.data,
+        payload: data,
       });
     } catch (e) {
       console.log(e);
