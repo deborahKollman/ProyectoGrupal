@@ -71,13 +71,13 @@ const MainPublication = ({setValueTab, setPublicationID}) => {
   const xDispatch = useDispatch();
 
   const [filter, setFilter] = useState(false);
-  const {rdcr_publications_by_user, rdcr_user} = useSelector((state) => state);
+  const {rdcr_publications_by_user, user} = useSelector((state) => state);
 
   console.log(rdcr_publications_by_user);
 
   useEffect(() => {
-    xDispatch(act_getPublicationByUser(rdcr_user.id));
-  }, [xDispatch, rdcr_user]);
+    xDispatch(act_getPublicationByUser(user.id));
+  }, [xDispatch, user]);
 
 
   

@@ -24,7 +24,7 @@ const Form = () => {
     xDispatch(jalz_getAllCategories());
   }, [xDispatch]);
 
-  const { rdcr_categories, rdcr_user } = useSelector((state) => state);
+  const { rdcr_categories, user } = useSelector((state) => state);
 
   const aCategories = rdcr_categories?.map((pI) => {
     return {
@@ -46,7 +46,7 @@ const Form = () => {
       return oServices;
     })
     .flat();
-
+    // alert(JSON.stringify(user.id),"AAAAAAAA")
   const mSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -56,7 +56,7 @@ const Form = () => {
       detail: Detail,
       detail_resume: SomeDetail,
       price,
-      userId: rdcr_user.id,
+      userId: user.id,
       categoryId: category,
       services: subcategory,
     };
