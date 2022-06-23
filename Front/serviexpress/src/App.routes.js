@@ -19,6 +19,7 @@ import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
 import MercadoPago from "./components/MercadoPago.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
+import Checkout from "./pages/Checkout/CheckoutForm.js";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -48,6 +49,7 @@ function App() {
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
       <Route exact path="/myorders" element={<MyOrders/>} />
+      <Route exact path="/checkout" element={<Checkout/>} />
     </Routes>
   );
 }
