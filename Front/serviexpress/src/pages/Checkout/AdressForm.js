@@ -5,10 +5,15 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-import { useState } from 'react';
+import { useState} from 'react';
+import {useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { postForm } from '../../redux/action';
 
 export default function AddressForm() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   let myOrderSelected = JSON.parse(localStorage.getItem('order'))
 
   let todaysDate = new Date();
@@ -32,13 +37,29 @@ function handleChange(e) {
   })
 }
 
+function handleSubmit(e) {
+  e.preventDefault();  
+      dispatch(postForm(input))
+      alert("Transaccion successfull")
+      setInput({
+        id: '',
+        contract_date: '',
+        country: '',
+        postal_code: '',
+        state: '',
+        city: '',
+        adress: '',
+        service_date: todaysDate,
+      })
+}
+
   return (
     <React.Fragment>
       <Typography variant="h5" gutterBottom>
-        Shipping address
+        Service address
       </Typography>
 
-      <FormControl>
+      <FormControl onSubmit={(e) => {handleSubmit(e)}} >
 
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
