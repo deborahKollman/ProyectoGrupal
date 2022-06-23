@@ -5,13 +5,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
-const products = [
-  {
-    name: 'Plumbing',
-    detail: 'Fix your plumbing problems',
-    price: '$800.00',
-  },
-];
 
 const addresses = ['123', 'Fake Street', 'Springfield'];
 const payments = [
@@ -22,28 +15,29 @@ const payments = [
 ];
 
 export default function Review() {
+  let myOrder = JSON.parse(localStorage.getItem('order'))
   return (
     <React.Fragment>
       <Typography variant="h4" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
+        
+          <ListItem sx={{ py: 1, px: 0 }}>
             <ListItemText>
-              <Typography variant="h6">{product.name}</Typography>
-              <Typography variant="subtitle1">{product.detail}</Typography>
+              <Typography variant="h6">{myOrder.title}</Typography>
+              <Typography variant="subtitle1">{myOrder.detail_resume}</Typography>
             </ListItemText>
-            <Typography variant="h6">{product.price}</Typography>
+            <Typography variant="h6">${myOrder.price}</Typography>
           </ListItem>
-        ))}
+      
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText>
             <Typography variant="h6">Total</Typography>
           </ListItemText>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            $800.00
+           ${myOrder.price}
           </Typography>
         </ListItem>
       </List>

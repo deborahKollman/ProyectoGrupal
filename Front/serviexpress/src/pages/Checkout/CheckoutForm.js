@@ -16,6 +16,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import BurgerButton from '../../components/NavBar/NavBar'
 import FooterBar from '../../components/FooterBar/FooterBar';
+import {useNavigate} from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -48,6 +49,7 @@ const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  let navigate = useNavigate();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -76,14 +78,18 @@ export default function Checkout() {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                   Thank you for your order.
                 </Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="h5">
                   Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  confirmation, and will send you an update when your service is ready.
                 </Typography>
+                <Button
+                    variant="contained"
+                    onClick={() => navigate('/home')}
+                    sx={{ mt: 3, ml: 1 }}
+                  >Home</Button>
               </React.Fragment>
             ) : (
               <React.Fragment>
