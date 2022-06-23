@@ -151,9 +151,10 @@ const rootReducer = (state = initialState, action) => {
           .replace(/^ +/, "")
           .replace(/=.*/, "=;expires=" + new Date().toUTCString());
       });
-
+      
       return {
         ...state,
+        Publications: [],
         rdcr_isAuth: false,
         rdcr_user: {},
       };

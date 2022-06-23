@@ -105,7 +105,7 @@ const Login = () => {
             endIcon={<GoogleIcon />}
             onClick={loginGoogle}
           >
-            Sing In With Google
+            Sign In With Google
           </MyButtonThree>
 
           <MyTextField

@@ -64,14 +64,11 @@ export default function Home() {
     }
 
     if (session && !errorLogin && rdcr_isAuth) {
-      console.log({ errorLogin });
       swal("Inicio de sesión", "Inicio de sesión correcto!", "success");
       window.localStorage.removeItem("session");
     }
 
-    if (errorLogin) {
-      navigate("/login");
-    }
+    
     dispatch(getAllCategories());
     setTimeout(() => {
       dispatch(getPublications());
