@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import ViewListIcon from "@mui/icons-material/ViewList";
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,7 +51,7 @@ function a11yProps(index) {
 const CreateService = () => {
   // const [modal, setModal] = useState({ active: false, id: null });
 
-  const [valueTab, setValueTab] = React.useState(2);
+  const [valueTab, setValueTab] = React.useState(0);
   const [publicationID, setPublicationID] = React.useState(null);
 
   const handleChange = (event, newValue) => {
@@ -83,7 +84,7 @@ const CreateService = () => {
               {...a11yProps(1)}
             />
             <Tab
-              icon={<AddBoxIcon />}
+              icon={<AutoFixHighIcon />}
               iconPosition="start"
               label="Edit Publication"
               {...a11yProps(2)}

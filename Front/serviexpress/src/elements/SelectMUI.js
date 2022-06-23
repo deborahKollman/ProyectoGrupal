@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const MySelect = (props) => {
-  const {aFirst, pHandleChange, pSCategory} = props;
+  const {aFirst, pHandleChange} = props;
  
   return (
     <Box sx={{ width: "260px", mt: "30px" }}>
@@ -26,7 +26,6 @@ const MySelect = (props) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Category"
-          value={pSCategory}
           onChange={pHandleChange}
         >
           <MenuItem value={null}>
@@ -94,4 +93,52 @@ const MySelectTwo = ({aSecond, pHandleChange, pDad}) => {
 };
 
 
-export { MySelect, MySelectTwo };
+
+
+
+const MySelectCategory = (props) => {
+  const {aFirst, pSCategory, pSetCategory} = props;
+  console.log("pSCategory", pSCategory);
+  const pHandleChange = (e) => {
+    pSetCategory(e.target.value);
+  }
+
+  return (
+    <Box sx={{ width: "260px", mt: "30px" }}>
+      <FormControl fullWidth>
+        <InputLabel
+          sx={{ color: "black !important" }}
+          id="demo-simple-select-label"
+        >
+          Category
+        </InputLabel>
+        <Select
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Category"
+          onChange={pHandleChange}
+          value={pSCategory}
+        >
+          <MenuItem value={null}>
+            <em>Seleccionar Categoría</em>
+          </MenuItem>
+          {aFirst.map((pI) => (
+            <MenuItem
+              key={pI.id}
+              value={pI.id}
+            >
+              {pI.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
+  );
+};
+
+export { MySelect, MySelectTwo, MySelectCategory };

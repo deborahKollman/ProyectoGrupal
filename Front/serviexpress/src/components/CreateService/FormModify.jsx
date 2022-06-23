@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { MySelect, MySelectTwo } from "../../elements/SelectMUI";
+import { MySelectCategory, MySelectTwo } from "../../elements/SelectMUI";
 import { MyButtonTwo, MyTextField } from "../../elements/Forms";
 import { MultiImgs } from "../UploadImg";
 import "./Styles.scss";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
-import { jalz_getAllCategories } from "../../redux/action";
+import { getPublicationId, jalz_getAllCategories } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
-import { GetPublicationByID } from "../../assets/sources/ApiFunctions";
 
 const FormModify = ({ publicationID }) => {
-  
   const oInitial = {
-    n_title: "null",
-    n_detail: null,
-    n_someDetail: null,
-    n_status: null,
+    n_title: "",
+    n_detail: "",
+    n_someDetail: "",
+    n_status: "",
     n_price: 0,
-  }
+  };
 
   const [publicationData, setPublicationData] = useState(oInitial);
-  const [category, setCategory] = useState(4);
-  const [subCategory, setSubCategory] = useState(4);
-
- 
-  const [pictures, setImage] = useState(null);
+  const [category, setCategory] = useState(0);
+  const [subCategory, setSubCategory] = useState(0);
 
   const xDispatch = useDispatch();
+
+  const [pictures, setImage] = useState([]);
 
   useEffect(() => {
     xDispatch(jalz_getAllCategories());
   }, [xDispatch]);
 
-  const { rdcr_categories, rdcr_user } = useSelector((state) => state);
+  const { publicationById, rdcr_categories, rdcr_user } = useSelector(
+    (state) => state
+  );
 
   const aCategories = rdcr_categories?.map((pI) => {
     return {
@@ -59,114 +58,140 @@ const FormModify = ({ publicationID }) => {
     e.preventDefault();
     console.log(publicationData);
     console.log(rdcr_user.id);
-
   };
+
+  useEffect(() => {
+    xDispatch(getPublicationId(publicationID));
+  }, [publicationID, xDispatch]);
+
+  useEffect(() => {
+    const { title, detail, detail_resume, state, price } = publicationById;
+    setPublicationData({
+      n_title: title,
+      n_detail: detail,
+      n_someDetail: detail_resume,
+      n_status: state === "Active" ? true : false,
+      n_price: price,
+    });
+    setCategory(publicationById.categoryId);
+    setImage(publicationById.album[0]);
+  }, [publicationById]);
+
   return (
-    <form onSubmit={mSubmit} className="createService-content">
-      <h5 style={{ textAlign: "initial", width: "100%" }}>
-        {
-          JSON.stringify(publicationData)
-          // JSON.stringify(publicationData)
-        }
-        Code Of Publication: [C01-{publicationID}]
+    <section className="Comp-FormModify">
+      <h5 style={{ textAlign: "center", width: "100"}}>
+        Edit Publication N°: {publicationID}
       </h5>
-      <FormControlLabel
-        sx={{ width: "100%" }}
-        label="State"
-        labelPlacement="start"
-        control={
-          <Switch
-            checked={publicationData.n_status}
-            onChange={() => setPublicationData({ ...publicationData, n_status: !publicationData.n_status })}
-            color="success"
-          />
-        }
-      />
+      <form onSubmit={mSubmit} className="modifyForm-content">
+        <FormControlLabel
+          label="State"
+          labelPlacement="start"
+          control={
+            <Switch
+              checked={publicationData.n_status}
+              onChange={() =>
+                setPublicationData({
+                  ...publicationData,
+                  n_status: !publicationData.n_status,
+                })
+              }
+              color="success"
+            />
+          }
+        />
 
-      <MyTextField
-        sx={{
-          fieldset: {
-            borderColor: "#fcdc3c !important",
-          },
-        }}
-        label="Title"
-        placeholder="Title of service"
-        value={publicationData.n_title}
-        onChange={(e) => setPublicationData({ ...publicationData, n_title: e.target.value })}
-      />
+        <MyTextField
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          label="Title"
+          placeholder="Title of service"
+          value={publicationData.n_title}
+          onChange={(e) =>
+            setPublicationData({ ...publicationData, n_title: e.target.value })
+          }
+        />
 
-      <MySelect
-        aFirst={aCategories}
-        pSCategory = {category}
-        pHandleChange={(e) => {
-          setCategory(e.target.value);
-        }}
-      />
-      <MySelectTwo
-        aSecond={aServices}
-        pHandleChange={(e) => {
-          setSubCategory(e.target.value);
-        }}
-        pDad={publicationData.n_category}
-      />
+        <MySelectCategory
+          aFirst={aCategories}
+          pSCategory={category}
+          pSetCategory={setCategory}
+        />
+        <MySelectTwo
+          pDad={category}
+          aSecond={aServices}
+          pHandleChange={(e) => {
+            setSubCategory(e.target.value);
+          }}
+          pValue={subCategory}
+        />
 
-      <MyTextField
-        sx={{
-          fieldset: {
-            borderColor: "#fcdc3c !important",
-          },
-        }}
-        id="outlined-multiline-static"
-        label="Detail Of Publication"
-        multiline
-        rows={4}
-        placeholder="Tell us about your business"
-        value={publicationData.n_detail}
-        onChange={(e) => setPublicationData({ ...publicationData, n_detail: e.target.value })}
-      />
+        <MyTextField
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          label="Description"
+          placeholder="Description"
+          value={publicationData.n_someDetail}
+          onChange={(e) =>
+            setPublicationData({
+              ...publicationData,
+              n_someDetail: e.target.value,
+            })
+          }
+        />
+        <MyTextField
+          required
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          label="MIN PRICE"
+          type="number"
+          value={publicationData.n_price}
+          onChange={(e) => {
+            setPublicationData({ ...publicationData, n_price: e.target.value });
+          }}
+          inputProps={{
+            min: "0",
+            max: "9999",
+            inputMode: "numeric",
+            pattern: "[0-9]*",
+          }}
+        />
 
-      <MyTextField
-        sx={{
-          fieldset: {
-            borderColor: "#fcdc3c !important",
-          },
-        }}
-        label="Description"
-        placeholder="Description"
-        value={publicationData.n_someDetail}
-        onChange={(e) => setPublicationData({ ...publicationData, n_someDetail: e.target.value })}
-      />
-      <MyTextField
-        required
-        sx={{
-          fieldset: {
-            borderColor: "#fcdc3c !important",
-          },
-        }}
-        label="MIN PRICE"
-        type="number"
-        value={publicationData.n_price}
-        onChange={(e) => {
-          setPublicationData({ ...publicationData, n_price: e.target.value });
-        }}
-        inputProps={{
-          min: "0",
-          max: "9999",
-          inputMode: "numeric",
-          pattern: "[0-9]*",
-        }}
-      />
+        <MyTextField
+          sx={{
+            fieldset: {
+              borderColor: "#fcdc3c !important",
+            },
+          }}
+          id="outlined-multiline-static"
+          label="Detail Of Publication"
+          multiline
+          rows={4}
+          placeholder="Tell us about your business"
+          value={publicationData.n_detail}
+          onChange={(e) =>
+            setPublicationData({ ...publicationData, n_detail: e.target.value })
+          }
+        />
+        <MultiImgs pStateImage={pictures} pSetStateImage={setImage} />
 
-      <MultiImgs pStateImage={pictures} pSetStateImage={setImage} />
-
-      <MyButtonTwo
-        type="submit"
-        variant="contained"
-        endIcon={<LibraryAddIcon />}
-      >
-        Save Service
-      </MyButtonTwo>
-    </form>
+        <MyButtonTwo
+          type="submit"
+          variant="contained"
+          endIcon={<LibraryAddIcon />}
+        >
+          Save Service
+        </MyButtonTwo>
+      </form>
+    </section>
   );
 };
 

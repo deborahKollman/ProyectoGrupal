@@ -118,10 +118,11 @@ export default function Home() {
           <Loading></Loading>
         ) : (
             
-            currentServices.map((e) => {
+            currentServices?.map((e) => {
             return (
               <div>
                 <CardPublications
+                  key={e.id}
                   id={e.id}
                   album={e.album}
                   title={e.title}
