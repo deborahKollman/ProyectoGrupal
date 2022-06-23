@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPublicationId, jalz_getAllCategories } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
 import { UploadPublication } from "../../assets/sources/ApiFunctions";
+import SearchAppBar from "./SearchMUI";
 
 const FormModify = ({ publicationID }) => {
   const oInitial = {
@@ -71,26 +72,33 @@ const FormModify = ({ publicationID }) => {
     setCategory(publicationById.categoryId);
     setImage(album && album[0]);
   }, [publicationById]);
+  console.log(publicationById,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
   const mSubmit = async (e) => {
     e.preventDefault();
     const oData = {
-      ...publicationData,
-      n_category: category,
-      n_subCategory: subCategory,
-      n_user: rdcr_user.id,
+      state: publicationData.n_status ? "Active" : "Inactive",
+      title: publicationData.n_title,
+      detail: publicationData.n_detail,
+      detail_resume: publicationData.n_someDetail,
+      price: publicationData.n_price,
+      userId: rdcr_user.id,
+      categoryId: category,
+      services: subCategory,
       pictures,
-    }
+    };
     console.log(oData);
-    // UploadPublication(publicationById, )
+    UploadPublication(publicationID, oData);
   };
 
   return (
     <section className="Comp-FormModify">
-      <h5 style={{ textAlign: "center", width: "100" }}>
-        Edit Publication N°: {publicationID}
-      </h5>
+      <SearchAppBar />
+
       <form onSubmit={mSubmit} className="modifyForm-content">
+        <h5 style={{ textAlign: "center", width: "100" }}>
+          Edit Publication N°: {publicationID}
+        </h5>
         <FormControlLabel
           label="State"
           labelPlacement="start"
