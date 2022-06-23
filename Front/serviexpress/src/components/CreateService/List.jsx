@@ -2,7 +2,7 @@ import "./Styles.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getPublications } from "../../redux/action";
+import { act_getPublicationByUser } from "../../redux/action";
 
 import {
   Toolbar,
@@ -70,18 +70,21 @@ const EnhancedTableToolbar = ({ filter, setFilter }) => {
 const MainPublication = ({setValueTab, setPublicationID}) => {
   const xDispatch = useDispatch();
 
-  useEffect(() => {
-    xDispatch(getPublications());
-  }, [xDispatch]);
-
   const [filter, setFilter] = useState(false);
-  const {Publications} = useSelector((state) => state);
+  const {rdcr_publications_by_user, rdcr_user} = useSelector((state) => state);
+
+  console.log(rdcr_publications_by_user);
+
+  useEffect(() => {
+    xDispatch(act_getPublicationByUser(rdcr_user.id));
+  }, [xDispatch, rdcr_user]);
+
 
   
   const handleDelete = async (pId) => {
     const responce = await DeletePublication(pId);
     if (responce.status === 200) {
-      xDispatch(getPublications());
+      xDispatch(act_getPublicationByUser(1));
     } else {
       console.log("Error");
     }
@@ -137,7 +140,7 @@ const MainPublication = ({setValueTab, setPublicationID}) => {
       <DataGrid
         sx={{ width: "70vw", height: "69vh" }}
         className="datagrid"
-        rows={Publications}
+        rows={rdcr_publications_by_user}
         columns={publicationsColumns.concat(actionColumn)}
         pageSize={7}
         rowsPerPageOptions={[7]}

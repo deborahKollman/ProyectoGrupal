@@ -29,20 +29,63 @@ const UploadImg = () => {
   );
 };
 
-const MultiImgs = ({ pStateImage, pSetStateImage }) => {
-  // const [state, setState] = useState({
-  //   profileImg: "https://i.ibb.co/92bwv3m/aaaaaaaaaaaa.png",
-  // });
-  
+const MultiImgsUpload = ({ pStateImage, pSetStateImage }) => {
+   
   const mImgHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        // setState({ profileImg: reader.result });
         pSetStateImage(reader.result);
       }
     };
-    // pSetStateImage(e.target.files[0]);
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  return (
+    <section className="comp-multiImgs">
+      <label
+        htmlFor="contained-button-file"
+        className="cmp-MultiImgs-label"        
+      >
+        <Input
+          accept="image/*"
+          id="contained-button-file"
+          multiple
+          type="file"
+          onChange={mImgHandler}
+        />
+ 
+        <Button
+          variant="contained"
+          component="span"
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload Images
+        </Button>
+      </label>
+      {
+        
+      }
+      <MediaCard pURLimg={ pStateImage } />
+    </section>
+  );
+};
+
+
+const MultiImgs = ({ pictures, pSetStateImage }) => {
+  const [state, setState] = useState({
+    profileImg: "https://i.ibb.co/X2bcwRM/mario.jpg",
+  });
+
+  const mImgHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setState({ profileImg: reader.result });
+      }
+    };
+    pSetStateImage(e.target.files[0]);
+
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -72,13 +115,12 @@ const MultiImgs = ({ pStateImage, pSetStateImage }) => {
       {
         
       }
-      {/* <MediaCard pURLimg={state.profileImg} /> */}
-      <MediaCard pURLimg={pStateImage} />
+      <MediaCard pURLimg={state.profileImg} />
     </section>
   );
 };
 
-export { UploadImg, MultiImgs };
+export { UploadImg, MultiImgs, MultiImgsUpload };
 
 const Input = styled("input")({
   display: "none",

@@ -19,3 +19,12 @@ export const GetPublicationByID = (id) => {
         console.log(error.message)
     }
 }
+
+export const UploadPublication = (pId, pForm) => {
+    try {
+        const responce = axios.put(`${URL}/publications/${pId}`, pForm)
+        return responce
+    } catch (error) {
+        console.log(error.message)
+    }
+}

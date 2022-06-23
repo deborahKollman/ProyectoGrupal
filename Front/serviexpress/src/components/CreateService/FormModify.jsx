@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { MySelectCategory, MySelectTwo } from "../../elements/SelectMUI";
 import { MyButtonTwo, MyTextField } from "../../elements/Forms";
-import { MultiImgs } from "../UploadImg";
+import { MultiImgsUpload } from "../UploadImg";
 import "./Styles.scss";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
 import { getPublicationId, jalz_getAllCategories } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
+import { UploadPublication } from "../../assets/sources/ApiFunctions";
 
 const FormModify = ({ publicationID }) => {
   const oInitial = {
@@ -16,15 +17,14 @@ const FormModify = ({ publicationID }) => {
     n_status: "",
     n_price: 0,
   };
-
   const [publicationData, setPublicationData] = useState(oInitial);
   const [category, setCategory] = useState(0);
   const [subCategory, setSubCategory] = useState(0);
+  const [pictures, setImage] = useState(
+    "https://i.ibb.co/92bwv3m/aaaaaaaaaaaa.png"
+  );
 
   const xDispatch = useDispatch();
-
-  const [pictures, setImage] = useState([]);
-
   useEffect(() => {
     xDispatch(jalz_getAllCategories());
   }, [xDispatch]);
@@ -54,18 +54,13 @@ const FormModify = ({ publicationID }) => {
     })
     .flat();
 
-  const mSubmit = async (e) => {
-    e.preventDefault();
-    console.log(publicationData);
-    console.log(rdcr_user.id);
-  };
-
   useEffect(() => {
     xDispatch(getPublicationId(publicationID));
   }, [publicationID, xDispatch]);
 
   useEffect(() => {
-    const { title, detail, detail_resume, state, price } = publicationById;
+    const { title, detail, detail_resume, state, price, album } =
+      publicationById;
     setPublicationData({
       n_title: title,
       n_detail: detail,
@@ -74,12 +69,25 @@ const FormModify = ({ publicationID }) => {
       n_price: price,
     });
     setCategory(publicationById.categoryId);
-    setImage(publicationById.album[0]);
+    setImage(album && album[0]);
   }, [publicationById]);
+
+  const mSubmit = async (e) => {
+    e.preventDefault();
+    const oData = {
+      ...publicationData,
+      n_category: category,
+      n_subCategory: subCategory,
+      n_user: rdcr_user.id,
+      pictures,
+    }
+    console.log(oData);
+    // UploadPublication(publicationById, )
+  };
 
   return (
     <section className="Comp-FormModify">
-      <h5 style={{ textAlign: "center", width: "100"}}>
+      <h5 style={{ textAlign: "center", width: "100" }}>
         Edit Publication N°: {publicationID}
       </h5>
       <form onSubmit={mSubmit} className="modifyForm-content">
@@ -181,7 +189,7 @@ const FormModify = ({ publicationID }) => {
             setPublicationData({ ...publicationData, n_detail: e.target.value })
           }
         />
-        <MultiImgs pStateImage={pictures} pSetStateImage={setImage} />
+        <MultiImgsUpload pStateImage={pictures} pSetStateImage={setImage} />
 
         <MyButtonTwo
           type="submit"

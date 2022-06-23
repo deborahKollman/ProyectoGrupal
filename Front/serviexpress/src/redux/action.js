@@ -523,3 +523,17 @@ export function favoriteCheck(user, publication) {
     } catch (error) {}
   };
 }
+
+export function act_getPublicationByUser(pId){
+  return async (dispatch) => {
+    try {
+      const responce = await axios.get(`/publications/user/${pId}`);
+      dispatch({
+        type: "ACT_GET_PUBLICATION_BY_USER",
+        payload: responce.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
