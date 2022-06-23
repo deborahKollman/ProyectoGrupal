@@ -4,8 +4,14 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
+import MercadoPago from '../../components/MercadoPago';
+import { useState } from 'react';
 
 export default function PaymentForm() {
+  let myOrder = JSON.parse(localStorage.getItem('order'));
+  const [show,setShow] = useState();
+  const handleShow = () => setShow(true);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -58,6 +64,9 @@ export default function PaymentForm() {
             control={<Checkbox color="secondary" name="saveCard" value="yes" />}
             label="Remember credit card details for next time"
           />
+         
+        <MercadoPago title={myOrder.title} price={myOrder.price} ></MercadoPago> 
+
         </Grid>
       </Grid>
     </React.Fragment>
