@@ -117,11 +117,46 @@ exports.getPublicationsByTitle = (title) => {
   return publication;
 };
 
-exports.updatePublication = (id, publicationChanges) => {
-  const publicationUpdate = Publication.update(publicationChanges, {
-    where: { id }
-  });
-  return publicationUpdate;
+exports.updatePublication = async (id, publicationChanges) => {
+  var publication = await Publication.findOne({where:{id}})
+  if(publication){
+    await Publication.update({...publicationChanges}, {
+      where: { id }
+    });
+    if(publicationChanges.categoryId){
+      const cat = publicationChanges.categoryId
+      const category = await Category.findOne({where:{id:cat}});
+      if(category){
+        publication.setCategory(category);
+      }else{
+        return {err_message:'Category not found'}
+      }
+    }
+    if(publicationChanges.services){
+      var services = publicationChanges.services
+      var serv=[];
+      if(Array.isArray(services)){
+        for(let i=0;i<services.length;i++){
+          var servM = await Service.findOne({where:{id:services[i]}})
+          if(!servM){return {err_msg:'Service not found'}}
+          serv.push(servM)
+        }
+      }else{
+        if(services){
+          services = services.split(',')
+          for(let i=0;i<services.length;i++){
+            var servM = await Service.findOne({where:{id:services[i]}})
+            if(!servM){return {err_msg:'Service not found'}}
+            serv.push(servM)
+          }
+        }
+      }
+      publication.setServices(serv);
+    }
+    var publication = await Publication.findOne({where:{id}})
+    return publication;
+  }
+  return {err_message:'Publication not found'}
 };
 
 exports.deletePublication = (id) => {
