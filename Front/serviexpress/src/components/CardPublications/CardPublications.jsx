@@ -50,7 +50,7 @@ const totalStar = 5-score;
           
             <div>
              <Carousel fade>
-               {album.map(e => {
+               {album?.map(e => {
                 return <Carousel.Item>
                 <img src={e} alt="First slide"
                    />
@@ -69,8 +69,8 @@ const totalStar = 5-score;
             </div>
             <div className={StylesCard.cardstats}>
                     <div className={StylesCard.stat}>
-                        {scoreStar.map(e => <BsStarFill/>)}
-                        {scoreStarTotal.map(e => <BsStar/>)}
+                        {scoreStar?.map(e => <BsStarFill/>)}
+                        {scoreStarTotal?.map(e => <BsStar/>)}
                     </div>
                 </div>
             <div className={StylesCard.UL}>

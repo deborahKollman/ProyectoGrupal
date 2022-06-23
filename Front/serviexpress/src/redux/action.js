@@ -224,10 +224,10 @@ export function getPublications() {
 export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
-      const publication = await axios.get(`/publications/${id}`);
+      const {data} = await axios.get(`/publications/${id}`);
       return dispatch({
         type: "GET_PUBLICATION_ID",
-        payload: publication.data,
+        payload: data,
       });
     } catch (e) {
       console.log(e);
@@ -524,6 +524,19 @@ export function favoriteCheck(user, publication) {
   };
 }
 
+export function act_getPublicationByUser(pId){
+  return async (dispatch) => {
+    try {
+      const responce = await axios.get(`/publications/user/${pId}`);
+      dispatch({
+        type: "ACT_GET_PUBLICATION_BY_USER",
+        payload: responce.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 export function postForm(input) {
   return async (dispatch) => {
     try {
