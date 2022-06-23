@@ -7,32 +7,16 @@ import Grid from '@mui/material/Grid';
 
 const products = [
   {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
+    name: 'Plumbing',
+    detail: 'Fix your plumbing problems',
+    price: '$800.00',
   },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
-  },
-  { name: 'Shipping', desc: '', price: 'Free' },
 ];
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
+const addresses = ['123', 'Fake Street', 'Springfield'];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
+  { name: 'Card holder', detail: 'Marge Simpson' },
   { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
   { name: 'Expiry date', detail: '04/2024' },
 ];
@@ -40,41 +24,45 @@ const payments = [
 export default function Review() {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
         {products.map((product) => (
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+            <ListItemText>
+              <Typography variant="h6">{product.name}</Typography>
+              <Typography variant="subtitle1">{product.detail}</Typography>
+            </ListItemText>
+            <Typography variant="h6">{product.price}</Typography>
           </ListItem>
         ))}
 
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Total" />
-          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+          <ListItemText>
+            <Typography variant="h6">Total</Typography>
+          </ListItemText>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            $800.00
           </Typography>
         </ListItem>
       </List>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Shipping
+          <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
+            Adress
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography variant='h6' gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+          <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
             Payment details
           </Typography>
           <Grid container>
             {payments.map((payment) => (
               <React.Fragment key={payment.name}>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
+                  <Typography variant='h6' gutterBottom>{payment.name}</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <Typography gutterBottom>{payment.detail}</Typography>

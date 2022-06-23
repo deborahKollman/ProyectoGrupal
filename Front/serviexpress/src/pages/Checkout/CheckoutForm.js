@@ -15,10 +15,11 @@ import AddressForm from './AdressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import BurgerButton from '../../components/NavBar/NavBar'
+import FooterBar from '../../components/FooterBar/FooterBar';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography variant="h6" color="text.secondary" align="center">
       {'Copyright © '}     
        Servi Express
        {' '}     
@@ -60,7 +61,7 @@ export default function Checkout() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BurgerButton/>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
@@ -106,8 +107,9 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </Container>
+    
+       <Copyright /> 
     </ThemeProvider>
   );
 }

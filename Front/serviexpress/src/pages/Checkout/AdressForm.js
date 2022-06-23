@@ -34,7 +34,7 @@ function handleChange(e) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Shipping address
       </Typography>
 
@@ -70,7 +70,7 @@ function handleChange(e) {
           <TextField
             required
             id="address1"
-            name="address"
+            name="adress"
             value={input.adress}
             label="Address"
             fullWidth
