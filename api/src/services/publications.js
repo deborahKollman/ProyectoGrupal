@@ -66,24 +66,32 @@ exports.postPublication = async (
   userId,
   services
 ) => {
+  if(!userId){
+    return {err_msg:'Must send userId'}
+  }
   const user = await User.findOne({ where: { id: userId } });
   if(user){
+    if(!categoryId){
+      return {err_msg:'Must send categoryId'}
+    }
     const category = await Category.findOne({ where: {id:categoryId}});
     if(category){
-      var serv=[];
-      if(Array.isArray(services)){
-        for(let i=0;i<services.length;i++){
-          var servM = await Service.findOne({where:{id:services[i]}})
-          if(!servM){return {err_msg:'Service not found'}}
-          serv.push(servM)
-        }
-      }else{
-        if(services){
-          services = services.split(',')
+      if(services){
+        var serv=[];
+        if(Array.isArray(services)){
           for(let i=0;i<services.length;i++){
             var servM = await Service.findOne({where:{id:services[i]}})
             if(!servM){return {err_msg:'Service not found'}}
             serv.push(servM)
+          }
+        }else{
+          if(services){
+            services = services.split(',')
+            for(let i=0;i<services.length;i++){
+              var servM = await Service.findOne({where:{id:services[i]}})
+              if(!servM){return {err_msg:'Service not found'}}
+              serv.push(servM)
+            }
           }
         }
       }
