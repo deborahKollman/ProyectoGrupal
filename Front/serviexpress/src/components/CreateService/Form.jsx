@@ -7,6 +7,7 @@ import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
 import { jalz_getAllCategories, createPublication } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
+import swal from "sweetalert";
  
 const Form = () => {
   const [name, setName] = useState("");
@@ -49,6 +50,8 @@ const Form = () => {
     // alert(JSON.stringify(user.id),"AAAAAAAA")
   const mSubmit = async (e) => {
     e.preventDefault();
+  console.log(user.id, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
     const data = {
       state: status ? "Active" : "Inactive",
       title: name,
@@ -60,8 +63,18 @@ const Form = () => {
       categoryId: category,
       services: subcategory,
     };
-
-    xDispatch(createPublication(data));
+    if(user){
+      try {
+        const x = await xDispatch(createPublication(data));
+        if(x.status === 200){
+          swal("Perfect!", "Successfully Created Publication !", "success");
+        } else {
+          swal("Oops!", `Verify Your Entered Data`, "warning");
+        }
+      } catch (error) {
+        swal("Oops!", "Something went wrong !", "error");
+      }
+    }
 
 
   };

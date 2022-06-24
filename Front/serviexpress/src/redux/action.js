@@ -566,4 +566,21 @@ export function filterprice(value){
       console.log(error);
     }
   };
-};
+
+}
+
+export const act_putPublication = async (pId, pOform) => {
+    try {
+      const responce = await axios.put(`/publications/${pId}`, pOform,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      return responce.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
