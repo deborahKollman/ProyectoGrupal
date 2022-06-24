@@ -33,6 +33,7 @@ const initialState = {
   mailSend: false,
   sendLogin: false,
   favorite_check: false,
+  rdcr_publications_by_user: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -97,7 +98,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
-
+    case "FILTER_PRICE":
+     return {
+      ...state,
+      Publications: action.payload
+      };
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",
@@ -151,9 +156,10 @@ const rootReducer = (state = initialState, action) => {
           .replace(/^ +/, "")
           .replace(/=.*/, "=;expires=" + new Date().toUTCString());
       });
-
+      
       return {
         ...state,
+        Publications: [],
         rdcr_isAuth: false,
         rdcr_user: {},
       };
@@ -257,6 +263,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favorite_check: auxCheck,
       };
+    case "ACT_GET_PUBLICATION_BY_USER":{
+      return {
+        ...state,
+        rdcr_publications_by_user: payload
+      }
+    }
     default:
       return state;
   }

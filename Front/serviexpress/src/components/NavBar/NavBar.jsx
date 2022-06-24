@@ -8,7 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
 import { IconButton } from "@mui/material";
-import { getUser } from "../../redux/action";
+import { getPublications, getUser } from "../../redux/action";
+import { BsWindowSidebar } from "react-icons/bs";
+import Detail from "../../pages/Detail";
+
 
 const logo = require("../../assets/icons/log.png");
 
@@ -23,6 +26,7 @@ const BurgerButton = ({ msg }) => {
 
   const { user } = useSelector((state) => state);
   const { rdcr_isAuth } = useSelector((state) => state);
+  const detail = useSelector(state => state.detail);
 
   useEffect(() => {
     if (Object.keys(user)?.length > 0) {
@@ -35,7 +39,8 @@ const BurgerButton = ({ msg }) => {
 
   function handleRefresh(e) {
     e.preventDefault()
-    window.location.reload(e)
+    // window.location.reload(e)
+    dispatch(getPublications())
   }
 
   return (
@@ -57,7 +62,8 @@ const BurgerButton = ({ msg }) => {
       </div>
 
       <SearchGroup msg={msg} />
-      <Button
+        {window.location.href.includes("ome")?
+          <Button
           variant="text"
           onClick={(e) => {handleRefresh(e)}}
           sx={{
@@ -65,9 +71,10 @@ const BurgerButton = ({ msg }) => {
             fontSize: 12,
           }}
         >
-          Refresh
-        </Button>
-        
+        🧹(clean filter)
+        </Button> :
+        true
+      }
       {!rdcr_isAuth ? <InitialSession /> : <LoginSession avatar={avatar} />}
 
       <ListNav pOpen={open}>

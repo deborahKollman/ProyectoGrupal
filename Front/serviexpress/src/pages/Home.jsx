@@ -23,6 +23,7 @@ import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import SwitchesGroup from "../components/Filters/switchprice";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -62,14 +63,10 @@ export default function Home() {
     }
 
     if (session && !errorLogin && rdcr_isAuth) {
-      console.log({ errorLogin });
       swal("Inicio de sesión", "Inicio de sesión correcto!", "success");
       window.localStorage.removeItem("session");
     }
 
-    if (errorLogin) {
-      navigate("/login");
-    }
     dispatch(getAllCategories());
     setTimeout(() => {
       dispatch(getPublications());
@@ -107,15 +104,18 @@ export default function Home() {
           items={PublicationsPerPage}
         ></PaginationHome>
       </div>
-
+      <div className={Styles.switchs}>
+        <SwitchesGroup />
+      </div>
       <div className={Styles.serviceshome}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
-          currentServices.map((e) => {
+          currentServices?.map((e) => {
             return (
               <div>
                 <CardPublications
+                  key={e.id}
                   id={e.id}
                   album={e.album}
                   title={e.title}

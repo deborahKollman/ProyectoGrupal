@@ -14,12 +14,14 @@ import Orders from "./pages/Orders";
 import Home from "./pages/Home";
 import CreateService from "./pages/CreateService";
 import { useSelector } from "react-redux";
-import Checkout from './pages/Checkout'
 import Payment from "./components/Payment.jsx";
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
 import MercadoPago from "./components/MercadoPago.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
+import Checkout from "./pages/Checkout/CheckoutForm.js";
+import Profile from "./pages/Profile.jsx";
+
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -46,10 +48,11 @@ function App() {
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/prueba" element={<Orders />} />
-      <Route path="/checkout" element={<Checkout/>} />
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
       <Route exact path="/myorders" element={<MyOrders/>} />
+      <Route exact path="/checkout" element={<Checkout/>} />
+      <Route path='/profile' element={<Profile/>} />
     </Routes>
   );
 }

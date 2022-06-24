@@ -1,6 +1,10 @@
 import axios from "axios";
+
+export const GET_ORDERS = "GET_ORDERS";
+
+
  
-// const URL = "http://localhost:3001/";
+ const URL = "http://localhost:3001";
  
 export const act_themeTogle = () => {
   return {
@@ -12,7 +16,7 @@ export const act_getAllUsers = () => {
   return async (dispatch) => {
     try {
       console.log("first");
-      const { data } = await axios.get(`http://localhost:3001/users`);
+      const { data } = await axios.get(`/users`);
       console.log("second", data);
       dispatch({
         type: "GET_ALL_USERS",
@@ -28,7 +32,7 @@ export function act_getUserById(pIdentity) {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/users/${pIdentity}`
+        `/users/${pIdentity}`
       );
       dispatch({ 
         type: "GET_USER_BY_ID", 
@@ -42,7 +46,7 @@ export function act_getUserById(pIdentity) {
 
 export async function act_getOneCategory (pIdentity) {
   try {
-    const { data } = await axios.get( `http://localhost:3001/categories/${pIdentity}` );
+    const { data } = await axios.get( `/categories/${pIdentity}` );
     return data
   } catch (error) {console.log(error);}
 }
@@ -51,7 +55,7 @@ export function act_getAllCategories() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/categories/only`
+        `/categories/only`
       );
       dispatch({ 
         type: "GET_ALL_CATEGORIES", 
@@ -67,7 +71,7 @@ export const act_postCategory = (oCategory) => {
   return async () => {
     try {
       const data = await axios.post(
-        `http://localhost:3001/categories`,
+        `/categories`,
         oCategory
       );
       console.log(data);
@@ -81,7 +85,7 @@ export const act_deleteCategory = (pIdentity) => {
   return async () => {
     try {
       const data = await axios.delete(
-        `http://localhost:3001/categories/${pIdentity}`
+        `/categories/${pIdentity}`
       );
       console.log(data);
     } catch (error) {
@@ -94,7 +98,7 @@ export const act_deleteCategory = (pIdentity) => {
 export const act_getAllServices = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/services`);
+      const { data } = await axios.get(`/services`);
       dispatch({
         type: "GET_ALL_SERVICES",
         payload: data,
@@ -109,7 +113,7 @@ export const act_filterServicesByCategory = (pObj) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/services/category/${pObj.id}`
+        `/services/category/${pObj.id}`
       );
       //add foreign key to services
       data.forEach((pI) => {
@@ -131,3 +135,24 @@ export const act_clearServices = () => {
     type: "CLEAR_SERVICES",
   };
 }
+
+export function getOrders(){
+
+    return async (dispatch) => {
+      try {
+         const {data} = await axios.get(`${URL}/contracts`);
+
+         dispatch({
+            type: GET_ORDERS,
+            payload: data,
+         })
+
+        
+      } catch (error) {
+          console.log(error);
+      }
+
+    }
+
+
+};

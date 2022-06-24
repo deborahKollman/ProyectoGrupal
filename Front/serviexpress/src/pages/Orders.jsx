@@ -75,7 +75,7 @@ const Orders = () => {
           </CardContent>
 
            <CardActions className={Styles.buttons}>
-             <Button onClick={() => navigate('/payment')} size="medium">Continue</Button>
+             <Button onClick={() => navigate('/checkout')} size="medium">Continue</Button>
              <Button onClick={handleCancel} size="medium">Cancel</Button>
            </CardActions>
         </div>

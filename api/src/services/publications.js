@@ -63,12 +63,40 @@ exports.postPublication = async (
   price,
   album,
   categoryId,
-  usr_id = 1
+  userId,
+  services
 ) => {
-  const user = await User.findOne({ where: { id: usr_id } });
+  if(!userId){
+    return {err_msg:'Must send userId'}
+  }
+  const user = await User.findOne({ where: { id: userId } });
   if(user){
+    if(!categoryId){
+      return {err_msg:'Must send categoryId'}
+    }
     const category = await Category.findOne({ where: {id:categoryId}});
     if(category){
+      if(services){
+        var serv=[];
+        if(Array.isArray(services)){
+          for(let i=0;i<services.length;i++){
+            var servM = await Service.findOne({where:{id:services[i]}})
+            if(!servM){return {err_msg:'Service not found'}}
+            serv.push(servM)
+          }
+        }else{
+          if(typeof services ==='string'){
+            services = services.split(',')
+          }else{
+            serv.push(services)
+          }
+          for(let i=0;i<services.length;i++){
+            var servM = await Service.findOne({where:{id:services[i]}})
+            if(!servM){return {err_msg:'Service not found'}}
+            serv.push(servM)
+          }
+        }
+      }
       const publication = await Publication.create({
         date: Date.now(),
         state: 'Active',
@@ -80,6 +108,7 @@ exports.postPublication = async (
       });
       publication.setUser(user);
       publication.setCategory(category);
+      publication.setServices(serv);
       return publication;
     }
     return {err_msg:'Category not found'}
@@ -98,11 +127,46 @@ exports.getPublicationsByTitle = (title) => {
   return publication;
 };
 
-exports.updatePublication = (id, publicationChanges) => {
-  const publicationUpdate = Publication.update(publicationChanges, {
-    where: { id }
-  });
-  return publicationUpdate;
+exports.updatePublication = async (id, publicationChanges) => {
+  var publication = await Publication.findOne({where:{id}})
+  if(publication){
+    await Publication.update({...publicationChanges}, {
+      where: { id }
+    });
+    if(publicationChanges.categoryId){
+      const cat = publicationChanges.categoryId
+      const category = await Category.findOne({where:{id:cat}});
+      if(category){
+        publication.setCategory(category);
+      }else{
+        return {err_message:'Category not found'}
+      }
+    }
+    if(publicationChanges.services){
+      var services = publicationChanges.services
+      var serv=[];
+      if(Array.isArray(services)){
+        for(let i=0;i<services.length;i++){
+          var servM = await Service.findOne({where:{id:services[i]}})
+          if(!servM){return {err_msg:'Service not found'}}
+          serv.push(servM)
+        }
+      }else{
+        if(services){
+          services = services.split(',')
+          for(let i=0;i<services.length;i++){
+            var servM = await Service.findOne({where:{id:services[i]}})
+            if(!servM){return {err_msg:'Service not found'}}
+            serv.push(servM)
+          }
+        }
+      }
+      publication.setServices(serv);
+    }
+    var publication = await Publication.findOne({where:{id}})
+    return publication;
+  }
+  return {err_message:'Publication not found'}
 };
 
 exports.deletePublication = (id) => {
