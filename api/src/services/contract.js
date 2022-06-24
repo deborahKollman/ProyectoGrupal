@@ -32,8 +32,14 @@ exports.getContractById = async (id) => {
 
 exports.createContract = async (user, publication, country, postal_code, state, city, address, service_date) => {
     console.log('user',user)
+    if(!user){
+        return {err_message:'Must send user(id)'}
+    }
     const usr = await User.findOne({where:{id:user}});
     if(usr){
+        if(!publication){
+            return {err_message:'Must send publication(id)'}
+        }
         const pub = await Publication.findOne({where:{id:publication}});
         if(pub){
             const contract = await Contract.create({country, postal_code, city, state, address, service_date});

@@ -62,7 +62,7 @@ const BurgerButton = ({ msg }) => {
       </div>
 
       <SearchGroup msg={msg} />
-        {window.location.href.includes("Home")?
+        {window.location.href.includes("ome")?
           <Button
           variant="text"
           onClick={(e) => {handleRefresh(e)}}

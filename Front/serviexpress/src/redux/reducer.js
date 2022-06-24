@@ -98,7 +98,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
-
+    case "FILTER_PRICE":
+     return {
+      ...state,
+      Publications: action.payload
+      };
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",

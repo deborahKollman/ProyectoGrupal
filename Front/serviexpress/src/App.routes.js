@@ -21,6 +21,7 @@ import MercadoPago from "./components/MercadoPago.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
 
+
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
   return (
