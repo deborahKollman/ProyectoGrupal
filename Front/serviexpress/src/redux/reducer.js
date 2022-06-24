@@ -33,7 +33,11 @@ const initialState = {
   mailSend: false,
   sendLogin: false,
   favorite_check: false,
+
+  
+
   rdcr_publications_by_user: [],
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -98,7 +102,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
-
+    case "FILTER_PRICE":
+     return {
+      ...state,
+      Publications: action.payload
+      };
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",

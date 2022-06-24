@@ -22,7 +22,7 @@ import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import FooterBar from '../components/FooterBar/FooterBar';
+import SwitchesGroup from "../components/Filters/switchprice"
 
 export default function Home() {
   const navigate = useNavigate();
@@ -110,7 +110,9 @@ export default function Home() {
           pages = {Math.ceil(allPublications.length/PublicationsPerPage)}
         ></PaginationHome>
       </div>
-
+      <div className={Styles.switchs}>
+      <SwitchesGroup/>
+      </div>
       <div className={Styles.serviceshome}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
@@ -135,7 +137,7 @@ export default function Home() {
         )}
       </div>
 
-      <FooterBar/>
+      <div className="logos"></div>
     </div>
   );
 }
