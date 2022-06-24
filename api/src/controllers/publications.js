@@ -54,7 +54,7 @@ exports.postPublication = async (req, res, next) => {
       detail = '',
       detail_resume = '',
       price = 0,
-      userId, //Danger xD
+      userId,
       categoryId,
       services
     } = req.body;
