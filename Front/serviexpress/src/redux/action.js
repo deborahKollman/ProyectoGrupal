@@ -529,9 +529,7 @@ export function postForm(input) {
     try {
       let checkoutform = await axios.post(`/contracts`, input);
       dispatch({ type: 'POST_FORM', checkoutform});
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {console.log(error)}
   };
 
 }
