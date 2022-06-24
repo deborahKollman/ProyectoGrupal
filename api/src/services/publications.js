@@ -85,13 +85,15 @@ exports.postPublication = async (
             serv.push(servM)
           }
         }else{
-          if(services){
+          if(typeof services ==='string'){
             services = services.split(',')
-            for(let i=0;i<services.length;i++){
-              var servM = await Service.findOne({where:{id:services[i]}})
-              if(!servM){return {err_msg:'Service not found'}}
-              serv.push(servM)
-            }
+          }else{
+            serv.push(services)
+          }
+          for(let i=0;i<services.length;i++){
+            var servM = await Service.findOne({where:{id:services[i]}})
+            if(!servM){return {err_msg:'Service not found'}}
+            serv.push(servM)
           }
         }
       }
