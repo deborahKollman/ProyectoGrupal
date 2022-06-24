@@ -76,7 +76,7 @@ const MainPublication = ({setValueTab, setPublicationID}) => {
   console.log(rdcr_publications_by_user);
 
   useEffect(() => {
-    xDispatch(act_getPublicationByUser(user.id));
+    (!!user.id) && xDispatch(act_getPublicationByUser(user.id));
   }, [xDispatch, user]);
 
 
