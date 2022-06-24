@@ -30,16 +30,16 @@ function Copyright() {
   );
 }
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Service address', 'Review your order', 'Payment details'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <PaymentForm />;
-    case 2:
       return <Review />;
+    case 2:
+      return <PaymentForm />;
     default:
       throw new Error('Unknown step');
   }
@@ -89,7 +89,7 @@ export default function Checkout() {
                     variant="contained"
                     onClick={() => navigate('/home')}
                     sx={{ mt: 3, ml: 1 }}
-                  >Home</Button>
+                  >Return Home</Button>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -101,13 +101,13 @@ export default function Checkout() {
                     </Button>
                   )}
 
-                  <Button
+                  {/* <Button
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                  </Button>
+                  </Button> */}
                 </Box>
               </React.Fragment>
             )}
