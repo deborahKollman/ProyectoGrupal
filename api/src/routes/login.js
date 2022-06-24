@@ -16,17 +16,23 @@ const loginGoogle = new GoogleStrategy(
     callbackURL: '/login/oauth2/redirect/google'
   },
   async (_, profile, cb) => {
-    const user = await User.findOne({
-      where: {
-        email: profile.emails[0].value
+    try {
+      console.log(profile)
+      const user = await User.findOne({
+        where: {
+          email: profile.emails[0].value
+        }
+      });
+      if (user) {
+        return cb(null, user);
       }
-    });
-
-    if (user) {
-      return cb(null, user);
+      console.log('ERROR')
+      return cb(null, false, { message: 'Incorrect username or password' });
+    
+    } catch (error) {
+      return done(null, false, error)
     }
-    return cb(null, { message: 'Error' });
-  }
+    }
 );
 
 // force use because name is not unique
@@ -43,12 +49,14 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 router.get(
   '/google',
   passport.authenticate('loginGoogle', {
     scope: ['email', 'profile']
   })
 );
+
 
 router.get(
   '/oauth2/redirect/google',
