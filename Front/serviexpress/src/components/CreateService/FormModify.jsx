@@ -5,10 +5,11 @@ import { MultiImgsUpload } from "../UploadImg";
 import "./Styles.scss";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
-import { getPublicationId, jalz_getAllCategories } from "../../redux/action";
+import { act_putPublication, getPublicationId, jalz_getAllCategories } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
 import { UploadPublication } from "../../assets/sources/ApiFunctions";
 import SearchAppBar from "./SearchMUI";
+import swal from "sweetalert";
 
 const FormModify = ({ publicationID }) => {
   const oInitial = {
@@ -21,16 +22,15 @@ const FormModify = ({ publicationID }) => {
   const [publicationData, setPublicationData] = useState(oInitial);
   const [category, setCategory] = useState(0);
   const [subCategory, setSubCategory] = useState(0);
-  const [pictures, setImage] = useState(
-    "https://i.ibb.co/92bwv3m/aaaaaaaaaaaa.png"
-  );
+  const [pictures, setImage] = useState("https://i.ibb.co/92bwv3m/aaaaaaaaaaaa.png");
+  const [sendImg, setSendImg] = useState([]);
 
   const xDispatch = useDispatch();
   useEffect(() => {
     xDispatch(jalz_getAllCategories());
   }, [xDispatch]);
 
-  const { publicationById, rdcr_categories, rdcr_user } = useSelector(
+  const { publicationById, rdcr_categories, user } = useSelector(
     (state) => state
   );
 
@@ -73,6 +73,7 @@ const FormModify = ({ publicationID }) => {
     setImage(album && album[0]);
   }, [publicationById]);
   console.log(publicationById,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+  console.log(user.id,"AAAAAAAAAAAAAAAAAAAAAA");
 
   const mSubmit = async (e) => {
     e.preventDefault();
@@ -82,13 +83,14 @@ const FormModify = ({ publicationID }) => {
       detail: publicationData.n_detail,
       detail_resume: publicationData.n_someDetail,
       price: publicationData.n_price,
-      userId: rdcr_user.id,
+      userId: user.id,
       categoryId: category,
       services: subCategory,
-      pictures,
+      pictures: sendImg,
     };
     console.log(oData);
     UploadPublication(publicationID, oData);
+    // xDispatch(act_putPublication(publicationID, oData));
   };
 
   return (
@@ -197,7 +199,7 @@ const FormModify = ({ publicationID }) => {
             setPublicationData({ ...publicationData, n_detail: e.target.value })
           }
         />
-        <MultiImgsUpload pStateImage={pictures} pSetStateImage={setImage} />
+        <MultiImgsUpload pStateImage={pictures} pSetStateImage={setImage} pSetSendImg={setSendImg} />
 
         <MyButtonTwo
           type="submit"
@@ -252,7 +254,7 @@ export default FormModify;
     //   detail: Detail,
     //   detail_resume: SomeDetail,
     //   price,
-    //   userId: rdcr_user.id,
+    //   userId: user.id,
     //   categoryId: category,
     //   services: subcategory,
     // };
