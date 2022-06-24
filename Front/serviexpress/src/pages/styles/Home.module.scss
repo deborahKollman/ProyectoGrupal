@@ -5,11 +5,21 @@
     position: relative;
     justify-content: center;
     gap: 1em;
+    margin-left: 10%;
+    // margin-righ: 17%;
     // top: 70px;
     /* margin-left: 150px; */
     /* grid-template-rows: auto; */
-  justify-items: center;
+  // justify-items: center;
   }
+
+.switchs{
+  position:fixed;
+  // background-color: #FCDC3C;
+  width: 140px;
+  margin-left: 3%;
+  margin-top: 13%;
+}
 
 .container{
   display: flex;
