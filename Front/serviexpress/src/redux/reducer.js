@@ -33,11 +33,7 @@ const initialState = {
   mailSend: false,
   sendLogin: false,
   favorite_check: false,
-
-  
-
   rdcr_publications_by_user: [],
-
 };
 
 const rootReducer = (state = initialState, action) => {
