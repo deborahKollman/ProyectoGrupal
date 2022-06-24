@@ -37,6 +37,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
         amount,
         currency: 'USD',
         payment_method: stripeid,
+        payment_method_types: ['card'],
         confirm: true
     });
 
@@ -62,21 +63,21 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
 
 
     //Envio el mail al comprador
-    const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
+    const sendmail = await axios.post("http://localhost:3001/emailpayment",{
       "email":usremail,
       "subject": "Servi Express - Payment Confirmation",
       "html": contentHtml
   })
-
-  return payment;
+  
+  return "Service purchased";
 
     //console.log(payment);
     //return "Service purchased";
 
 }
     catch(error) {
-        console.log(error)
-        return (error)
+        console.log(error.raw.message);
+        return (error.raw.message)
     }
 }
 

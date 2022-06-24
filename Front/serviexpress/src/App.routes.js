@@ -20,6 +20,7 @@ import DetailEdit from "./pages/DetailEdit";
 import MercadoPago from "./components/MercadoPago.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
+import Profile from "./pages/Profile.jsx";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
       <Route exact path="/myorders" element={<MyOrders/>} />
       <Route exact path="/checkout" element={<Checkout/>} />
+      <Route path='/profile' element={<Profile/>} />
     </Routes>
   );
 }
