@@ -64,14 +64,11 @@ export default function Home() {
     }
 
     if (session && !errorLogin && rdcr_isAuth) {
-      console.log({ errorLogin });
       swal("Inicio de sesión", "Inicio de sesión correcto!", "success");
       window.localStorage.removeItem("session");
     }
 
-    if (errorLogin) {
-      navigate("/login");
-    }
+    
     dispatch(getAllCategories());
     setTimeout(() => {
       dispatch(getPublications());
@@ -121,10 +118,11 @@ export default function Home() {
           <Loading></Loading>
         ) : (
             
-            currentServices.map((e) => {
+            currentServices?.map((e) => {
             return (
               <div>
                 <CardPublications
+                  key={e.id}
                   id={e.id}
                   album={e.album}
                   title={e.title}

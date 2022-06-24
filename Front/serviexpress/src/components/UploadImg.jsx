@@ -29,6 +29,49 @@ const UploadImg = () => {
   );
 };
 
+const MultiImgsUpload = ({ pStateImage, pSetStateImage }) => {
+   
+  const mImgHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        pSetStateImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  return (
+    <section className="comp-multiImgs">
+      <label
+        htmlFor="contained-button-file"
+        className="cmp-MultiImgs-label"        
+      >
+        <Input
+          accept="image/*"
+          id="contained-button-file"
+          multiple
+          type="file"
+          onChange={mImgHandler}
+        />
+ 
+        <Button
+          variant="contained"
+          component="span"
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload Images
+        </Button>
+      </label>
+      {
+        
+      }
+      <MediaCard pURLimg={ pStateImage } />
+    </section>
+  );
+};
+
+
 const MultiImgs = ({ pictures, pSetStateImage }) => {
   const [state, setState] = useState({
     profileImg: "https://i.ibb.co/X2bcwRM/mario.jpg",
@@ -77,7 +120,7 @@ const MultiImgs = ({ pictures, pSetStateImage }) => {
   );
 };
 
-export { UploadImg, MultiImgs };
+export { UploadImg, MultiImgs, MultiImgsUpload };
 
 const Input = styled("input")({
   display: "none",
