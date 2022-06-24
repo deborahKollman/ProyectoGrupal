@@ -1,10 +1,8 @@
 import {Elements , PaymentElement, useStripe, CardElement, useElements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import {Button} from '@mui/material';
-import axios from 'axios';
 import styles from '../pages/styles/payment.module.scss'
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'; 
+
 import {useDispatch,useSelector} from 'react-redux';
 import {getById,getStripe} from '../redux/action'
 import swal from "sweetalert";
@@ -41,7 +39,7 @@ export default function Payment({price,usremail,title,album,idBuyer,idPublicacio
             type: 'card',
             card: elements.getElement(CardElement),
         });
-    
+      
         if(error) {
             console.log(error);
             swal("error", "Error", "error");

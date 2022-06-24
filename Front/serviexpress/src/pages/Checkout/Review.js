@@ -16,6 +16,7 @@ const payments = [
 
 export default function Review() {
   let myOrder = JSON.parse(localStorage.getItem('order'))
+  console.log(myOrder);
   return (
     <React.Fragment>
       <Typography variant="h4" gutterBottom>
