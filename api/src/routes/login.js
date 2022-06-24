@@ -38,9 +38,7 @@ router.get('/', async (req, res) => {
   if (user) {
     return res.send(user);
   } else {
-    if (req?.user?.message) {
-      res.send({ message: 'Este usuario no registrado', status: 401 });
-    }
+    res.send({ message: 'Este usuario no registrado', status: 401 });
     // openhandle detected!
   }
 });
