@@ -5,7 +5,7 @@ import { MultiImgsUpload } from "../UploadImg";
 import "./Styles.scss";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
-import { act_putPublication, getPublicationId, jalz_getAllCategories } from "../../redux/action";
+import { act_getPublicationByUser, getPublicationId, jalz_getAllCategories } from "../../redux/action";
 import { FormControlLabel, Switch } from "@mui/material";
 import { UploadPublication } from "../../assets/sources/ApiFunctions";
 import SearchAppBar from "./SearchMUI";
@@ -88,9 +88,39 @@ const FormModify = ({ publicationID }) => {
       services: subCategory,
       pictures: sendImg,
     };
-    console.log(oData);
-    UploadPublication(publicationID, oData);
-    // xDispatch(act_putPublication(publicationID, oData));
+
+    await swal({
+      title: "Are you sure of this action? ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: false,
+    }).then((willModify) => {
+      if (willModify) {
+        try {
+          const exec = async () => {
+            const xResponse = await UploadPublication(publicationID, oData);
+            if (xResponse.status === 200) {
+              swal("Post Modified!", {
+                icon: "success",
+              });
+              xDispatch(act_getPublicationByUser(user.id));
+            } else {
+              swal("Error deleting post!", {
+                icon: "error",
+              });
+            } 
+          }; exec();
+
+        } catch (error) {
+          swal("Error deleting your information!", {
+            icon: "error",
+          });
+        }
+      } else {
+        swal("Cancelled operation!");
+      }
+    });
+    
   };
 
   return (
