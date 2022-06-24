@@ -44,7 +44,7 @@ function Copyright() {
   );
 }
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Service address', 'Review your order', 'Payment details'];
 
 function getStepContent(step) {
   switch (step) {
@@ -122,7 +122,7 @@ export default function Checkout() {
                     variant="contained"
                     onClick={() => navigate('/home')}
                     sx={{ mt: 3, ml: 1 }}
-                  >Home</Button>
+                  >Return Home</Button>
               </React.Fragment>
             ) : (
               <React.Fragment>

@@ -22,6 +22,7 @@ import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
 import Profile from "./pages/Profile.jsx";
 
+
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
   return (

@@ -542,9 +542,27 @@ export function postForm(input) {
     try {
       let checkoutform = await axios.post(`/contracts`, input);
       dispatch({ type: 'POST_FORM', checkoutform});
+    } catch (error) {console.log(error)}
+  };
+
+}
+
+export function filterprice(value){
+  return async (dispatch) => {
+    try {
+      let response = 
+      value==="range1" ? (await axios.get("/publications")).data.filter((a)=>a.price<100)
+      : value==="range2" ? (await axios.get("/publications")).data.filter((a)=>a.price>100 && a.price<500)
+      : value==="range3" ? (await axios.get("/publications")).data.filter((a)=>a.price>500)
+      : value==="all" ? (await axios.get("/publications")).data 
+      : await axios.get("/publications")
+      console.log("holas")
+      console.log(response)
+      dispatch({ type: "FILTER_PRICE", 
+                 payload: response
+                });
     } catch (error) {
       console.log(error);
     }
   };
-
-}
+};

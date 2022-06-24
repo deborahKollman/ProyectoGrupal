@@ -54,7 +54,7 @@ exports.postPublication = async (req, res, next) => {
       detail = '',
       detail_resume = '',
       price = 0,
-      usr_id,
+      userId,
       categoryId,
       services
     } = req.body;
@@ -89,7 +89,7 @@ exports.postPublication = async (req, res, next) => {
       price,
       album,
       categoryId,
-      usr_id,
+      userId,
       services
     );
     res.status(200).send(r);

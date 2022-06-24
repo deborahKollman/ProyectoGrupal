@@ -38,7 +38,8 @@ export default function AccountMenu({ avatar }) {
 
   const xDispatch = useDispatch();
   const mLogout = () => {
-    fetch("http://localhost:3001/login/logout", {
+    const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+    fetch(`${baseURL}/login/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,9 +50,9 @@ export default function AccountMenu({ avatar }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.sessionStorage.removeItem("token");
         xDispatch(act_logout());
+        xNavigate('/home');
       });
   };
 
