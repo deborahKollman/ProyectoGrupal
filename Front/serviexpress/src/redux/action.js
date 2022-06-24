@@ -551,9 +551,10 @@ export function filterprice(value){
   return async (dispatch) => {
     try {
       let response = 
-      value==="range1" ? (await axios.get("/publications")).data.filter((a)=>a.price<100)
-      : value==="range2" ? (await axios.get("/publications")).data.filter((a)=>a.price>100 && a.price<500)
-      : value==="range3" ? (await axios.get("/publications")).data.filter((a)=>a.price>500)
+      value==="range1" ? (await axios.get("/publications")).data.filter((a)=>a.price<500)
+      : value==="range2" ? (await axios.get("/publications")).data.filter((a)=>a.price>=500 && a.price<2000)
+      : value==="range3" ? (await axios.get("/publications")).data.filter((a)=>a.price>=2000 && a.price<4000)
+      : value==="range4" ? (await axios.get("/publications")).data.filter((a)=>a.price>=4000)
       : value==="all" ? (await axios.get("/publications")).data 
       : await axios.get("/publications")
       console.log("holas")
