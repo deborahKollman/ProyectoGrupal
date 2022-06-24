@@ -63,10 +63,10 @@ exports.postPublication = async (
   price,
   album,
   categoryId,
-  usr_id = 1,
+  userId,
   services
 ) => {
-  const user = await User.findOne({ where: { id: usr_id } });
+  const user = await User.findOne({ where: { id: userId } });
   if(user){
     const category = await Category.findOne({ where: {id:categoryId}});
     if(category){
