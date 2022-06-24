@@ -47,7 +47,7 @@ sequelize.models = Object.entries(sequelize.models).reduce(
   {}
 );
 // Relaciones de DB
-const { Category, Service, User,  Contract, Favorite, Publication, Payment } =
+const { Chat, Category, Service, User, Contract, Favorite, Publication, Payment, Budget } =
   sequelize.models;
 Category.belongsToMany(Service, { through: 'CategoryServices' });
 Service.belongsToMany(Category, { through: 'CategoryServices' });
@@ -75,6 +75,17 @@ Publication.belongsToMany(Favorite, { through: 'FavoritePublications' });
 
 Contract.hasOne(Payment);
 Payment.belongsTo(Contract);
+
+Budget.hasOne(Contract);
+Contract.belongsTo(Budget);
+
+Publication.hasMany(Budget);
+Budget.belongsTo(Publication);
+
+Budget.hasMany(Chat);
+Chat.belongsTo(Budget);
+
+
 
 module.exports = {
   ...sequelize.models,
