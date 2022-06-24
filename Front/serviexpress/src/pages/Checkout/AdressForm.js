@@ -5,28 +5,57 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
+import { Button } from '@mui/material';
+import swal from 'sweetalert';
 import { useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { postForm } from '../../redux/action';
 
-export default function AddressForm() {
+  const check = /\S+/;
+  const regExpr = /^[a-z]+$/i;
+  const regNum = /^\d+$/;
+
+// function validate(input) {
+//   let errors = {}
+//   if (!check.test(input.adress) || !check.test(input.state) || !check.test(input.city) ) {
+//    errors.adress = swal({
+//       title: 'Please, fill all the fields',
+//       icon: 'warning'
+//     })
+//   }
+//   // if(!regExpr.test(input.city) || !regExpr.test(input.state) || !regExpr.test(input.country)) {
+//   //   swal({
+//   //     title: 'Incorrect type of data',
+//   //     icon: 'warning'
+//   //   })
+//   // }
+//   if(!regNum.test(input.postal_code)) {
+//     errors.postal_code = swal({
+//       title: 'Zip code must be a number',
+//       icon: 'warning'
+//     })
+//   }
+// }
+
+export default function AddressForm({getStepContent, setActiveStep}) {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [errors, setError] = useState({})
   let myOrderSelected = JSON.parse(localStorage.getItem('order'))
 
   let todaysDate = new Date();
-  console.log(todaysDate)
    
   const [input, setInput] = useState({
-    id: myOrderSelected.id,
+    //id: myOrderSelected.id,
+    publication: myOrderSelected.id,
+    user: 3,
     contract_date: '',
     country: '',
-    postal_code: '',
     state: '',
     city: '',
-    adress: '',
+    address: '',
+    postal_code: '',
     service_date: todaysDate,
 })
 
@@ -35,22 +64,37 @@ function handleChange(e) {
     ...input,
     [e.target.name] : e.target.value
   })
+  // setError(validate({
+  //   ...input,
+  //   [e.target.name] : e.target.value
+  // }))
 }
 
 function handleSubmit(e) {
   e.preventDefault();  
-      dispatch(postForm(input))
-      alert("Transaccion successfull")
-      setInput({
-        id: '',
-        contract_date: '',
-        country: '',
-        postal_code: '',
-        state: '',
-        city: '',
-        adress: '',
-        service_date: todaysDate,
-      })
+  if(input.address && input.state && input.city && input.postal_code && input.contract_date && input.country) { 
+    dispatch(postForm(input))
+    console.log(input)
+    swal({
+      title: 'Completed',
+      icon: 'success'
+    })
+    setInput({
+      //id: '',
+      contract_date: '',
+      country: '',
+      postal_code: '',
+      state: '',
+      city: '',
+      address: '',
+      service_date: todaysDate,
+    })
+
+  }
+  else {
+    //setError(validate(input))
+  }
+
 }
 
   return (
@@ -59,46 +103,36 @@ function handleSubmit(e) {
         Service address
       </Typography>
 
-      <FormControl onSubmit={(e) => {handleSubmit(e)}} >
+      <form onSubmit={(e) => {handleSubmit(e)}} >
 
       <Grid container spacing={3}>
+
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="Full name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-            onChange={(e) => handleChange(e)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="contract_date"
-            value={input.contract_date}
-            label="Contract day"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-            onChange={(e) => handleChange(e)}
-          />
-        </Grid>
-        <Grid item xs={12}>
           <TextField
             required
             id="address1"
-            name="adress"
-            value={input.adress}
+            name="address"
+            value={input.address}
             label="Address"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
             onChange={(e) => handleChange(e)}
           />
+          {errors.address? errors.adress : null}
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <p>Date</p>
+          <input
+            required
+            type="date"
+            id="lastName"
+            name="contract_date"
+            value={input.contract_date}
+            label="Contract day"
+            onChange={(e) => handleChange(e)}
+            />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -137,6 +171,7 @@ function handleSubmit(e) {
             variant="standard"
             onChange={(e) => handleChange(e)}
           />
+          {errors.postal_code? errors.postal_code : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -155,10 +190,16 @@ function handleSubmit(e) {
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Use this address for payment details"
-          />
+            />
         </Grid>
+            <Button
+             type="submit"
+             variant="contained"
+             color='success'
+             sx={{ mt: 3, ml: 3 }}
+            >Submit</Button>
       </Grid>
-      </FormControl>
+      </form>
     </React.Fragment>
   );
 }
