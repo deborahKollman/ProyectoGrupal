@@ -49,6 +49,8 @@ const Form = () => {
     // alert(JSON.stringify(user.id),"AAAAAAAA")
   const mSubmit = async (e) => {
     e.preventDefault();
+  console.log(user.id, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
     const data = {
       state: status ? "Active" : "Inactive",
       title: name,
@@ -60,8 +62,9 @@ const Form = () => {
       categoryId: category,
       services: subcategory,
     };
-
-    xDispatch(createPublication(data));
+    if(user){
+      xDispatch(createPublication(data));
+    }
 
 
   };

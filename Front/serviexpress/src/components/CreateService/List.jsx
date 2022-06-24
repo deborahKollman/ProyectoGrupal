@@ -73,10 +73,12 @@ const MainPublication = ({setValueTab, setPublicationID}) => {
   const [filter, setFilter] = useState(false);
   const {rdcr_publications_by_user, user} = useSelector((state) => state);
 
-  console.log(rdcr_publications_by_user);
+  console.log(user.id, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
   useEffect(() => {
-    xDispatch(act_getPublicationByUser(user.id));
+    if (user.id) {
+      xDispatch(act_getPublicationByUser(user && user.id));
+    }
   }, [xDispatch, user]);
 
 
