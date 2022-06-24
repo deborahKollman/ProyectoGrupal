@@ -15,10 +15,19 @@ import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ArticleIcon from '@mui/icons-material/Article';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import {getUser} from '../../redux/action'
+
+
+
 
 export default function AccountMenu({ avatar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const user = useSelector(state => state.user);
+  
+
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -46,6 +55,17 @@ export default function AccountMenu({ avatar }) {
         xNavigate('/home');
       });
   };
+
+  React.useEffect(() => {
+    xDispatch(getUser());
+
+
+
+  },[xDispatch])
+
+
+
+
 
   return (
     <React.Fragment>
@@ -102,7 +122,11 @@ export default function AccountMenu({ avatar }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        <MenuItem
+           onClick={() => {
+            xNavigate(`/profile`);
+          }}
+        >
           <Avatar src={avatar} />
           Profile
         </MenuItem>

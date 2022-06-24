@@ -22,7 +22,7 @@ import MercadoPago from '../components/MercadoPago';
 import {Modal} from '@mui/material';
 import Payment from '../components/Payment';
 import swal from 'sweetalert';
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 export default function Detail(){
@@ -173,6 +173,7 @@ export default function Detail(){
 
           <button onClick={handleAddToOrder}>Add to order</button>
           <div>      
+          <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  icon={<ShoppingCartIcon/>} onClick={handleAddToOrder} />
               <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
           </div>
         </div>

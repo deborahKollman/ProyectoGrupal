@@ -18,6 +18,20 @@ import BurgerButton from '../../components/NavBar/NavBar'
 import FooterBar from '../../components/FooterBar/FooterBar';
 import {useNavigate} from 'react-router-dom'
 
+import {Elements , PaymentElement, useStripe, CardElement, useElements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import swal from "sweetalert";
+import {useDispatch,useSelector} from 'react-redux';
+import {getStripe,getUser} from '../../redux/action';
+import {useEffect} from 'react'
+
+
+
+
+const stripePromise = loadStripe("pk_test_51LBNJbA25r7eed2bkcHZIzmLbouFZsUM9b19WawYn5tGP726sLszup0jpaMqFoJxwZ1lwuZxjtlOmTh39hrBsQzk00kZiUQf6V")
+
+
+
 function Copyright() {
   return (
     <Typography variant="h6" color="text.secondary" align="center">
@@ -37,27 +51,46 @@ function getStepContent(step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <Review />;
-    case 2:
-      return <PaymentForm />;
-    default:
+      return  <Review />;
+    case 2: 
+      return  <PaymentForm />;
+    default: 
       throw new Error('Unknown step');
   }
 }
 
 const theme = createTheme();
 
+
+
+
+
+
+
 export default function Checkout() {
+
+
+
   const [activeStep, setActiveStep] = React.useState(0);
   let navigate = useNavigate();
 
+ 
+
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+
   };
+
+
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -100,14 +133,17 @@ export default function Checkout() {
                       Back
                     </Button>
                   )}
-
-                  {/* <Button
+                {activeStep !== steps.length - 1 ?
+                  <Button
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
+                    
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                  </Button> */}
+                    {activeStep === steps.length - 1 ? 'Buy With Card' : 'Next'}
+                    
+                  </Button> : null
+                  }
                 </Box>
               </React.Fragment>
             )}

@@ -1,3 +1,5 @@
+import { GET_ORDERS } from "./action";
+
  
 const initialState = {
   rdcr_darkMode: false,
@@ -7,6 +9,7 @@ const initialState = {
   rdcr_category: {},
   rdcr_services: [],
   rdcr_servicesBckp: [],
+  orders: [],
 };
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -55,6 +58,17 @@ const rootReducer = (state = initialState, action) => {
         rdcr_services: [...rdcr_servicesBckp]
       };
     }
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload,
+
+
+      }
+
+
+
+
     default: return state; 
   }
 };
