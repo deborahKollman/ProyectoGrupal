@@ -76,9 +76,7 @@ const MainPublication = ({setValueTab, setPublicationID}) => {
   console.log(user.id, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
   useEffect(() => {
-    if (user.id) {
-      xDispatch(act_getPublicationByUser(user && user.id));
-    }
+    (!!user.id) && xDispatch(act_getPublicationByUser(user.id));
   }, [xDispatch, user]);
 
 

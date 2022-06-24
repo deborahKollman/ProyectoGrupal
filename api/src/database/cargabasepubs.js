@@ -394,8 +394,8 @@ const fxpub = async function() {
                 "detail_resume": "Estoy matriculado en todo tipo de instalacion",
                 "price": 1000,
                 "userId": 2,
-                "categoryId": 2,
-                "services": []
+                "categoryId": 1,
+                "services": [6]
                 },
             )
             const pub3=await Publication.create( 
@@ -409,8 +409,8 @@ const fxpub = async function() {
                     "https://images.unsplash.com/photo-1594581835488-0b95b8b0bacd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29ya2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                     ],
                     "userId": 3,
-                    "categoryId": 3,
-                    "services": []
+                    "categoryId": 1,
+                    "services": [1]
                     }
             )
            /*  const pub4=await Publication.create( 
