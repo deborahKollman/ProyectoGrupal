@@ -7,6 +7,11 @@ import {
   GET_MERCADOPAGO,
   GET_STRIPE,
   FAVORITE_CHECK,
+  SEND_BUDGET,
+  POST_CHAT,
+  GET_CHAT,
+  
+  
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
@@ -34,10 +39,11 @@ const initialState = {
   sendLogin: false,
   favorite_check: false,
 
-  
+  budget: {},
+  chat: [],
+
 
   rdcr_publications_by_user: [],
-
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -273,6 +279,30 @@ const rootReducer = (state = initialState, action) => {
         rdcr_publications_by_user: payload
       }
     }
+
+    case SEND_BUDGET:
+      return {
+        ...state,
+        budget: action.payload,
+
+      }
+
+    case  POST_CHAT:
+      return {
+        ...state,
+     
+        
+      }
+
+      case GET_CHAT:
+        console.log(action.payload);
+        return{
+            ...state,
+            chat: action.payload,
+
+        }
+
+
     default:
       return state;
   }

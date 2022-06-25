@@ -15,6 +15,7 @@ exports.postPayment = async (req, res, next) => {
         console.log('########',req.body.idBuyer, req.body.idPublicacion)
         const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.title);
         res.status(CREATED).send(r);
+     
 
       } catch (error) {
         next(error);

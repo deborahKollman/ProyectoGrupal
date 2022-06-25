@@ -1,5 +1,5 @@
 
-const {createBudget, deleteBudget, getBudgetById, getBudgets, updateBudget, postChat} = require('../services/budget.js')
+const {createBudget, deleteBudget, getBudgetById, getBudgets, updateBudget, postChat,getChat} = require('../services/budget.js')
 const {BAD_REQUEST, CREATED, OK} = require('../routes/helpers/status.js')
 
 exports.getBudgets = async (req, res, next) => {
@@ -39,3 +39,20 @@ exports.postChat = async (req, res, next) => {
         next(error);
       }
 }
+
+exports.getChat = async (req, res, next) => {
+        const {id} = req.params;
+    try {
+        const r = await getChat(id);
+        
+        res.status(OK).send(r);
+
+
+
+    } catch (error) {
+        next(error)
+    }
+
+
+
+};
