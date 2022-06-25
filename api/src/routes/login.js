@@ -16,8 +16,6 @@ const loginGoogle = new GoogleStrategy(
     callbackURL: '/login/oauth2/redirect/google'
   },
   async (_, profile, cb) => {
-    try {
-      console.log(profile)
       const user = await User.findOne({
         where: {
           email: profile.emails[0].value
@@ -26,12 +24,7 @@ const loginGoogle = new GoogleStrategy(
       if (user) {
         return cb(null, user);
       }
-      console.log('ERROR')
-      return cb(null, false, { message: 'Incorrect username or password' });
-    
-    } catch (error) {
-      return done(null, false, error)
-    }
+      return cb(null, { message: 'Incorrect username or password' });
     }
 );
 
@@ -41,6 +34,7 @@ passport._strategies.loginGoogle.name = 'loginGoogle';
 
 router.get('/', async (req, res) => {
   const user = await User.findByPk(req?.session?.passport?.user?.id);
+  console.log(req?.session?.passport?.user?.id);
   if (user) {
     return res.send(user);
   } else {
@@ -49,6 +43,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/error', async (req,res) => {
+  res.redirect(`${baseURL}/register`)
+})
 
 router.get(
   '/google',
