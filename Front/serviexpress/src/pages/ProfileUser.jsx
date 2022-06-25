@@ -9,54 +9,9 @@ import FormControl from "@mui/material/FormControl";
 import { postProfileUser } from "../redux/action";
 import styles from "./styles/profileUser.module.css";
 import { AiOutlineCamera } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import Edit from "../components/Edit";
 
-const edit = () => {
-  return (
-    <div className={styles.edit}>
-      <h3 className="profileUserTitle">MY PROFILE</h3>
-
-      <form action="" className={styles.form}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="name"
-          name="name"
-        />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="last name"
-          name="lastName"
-        />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="country"
-          name="provinceState"
-        />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="province state"
-          name="phoneNumber"
-        />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="phone number"
-          name="email"
-        />
-        <input className={styles.input} type="text" placeholder="email" />
-        <button className={styles.button} type="submit">
-          Update 🖊
-        </button>
-      </form>
-    </div>
-  );
-};
-
-const history = () => {
+const History = () => {
   return (
     <div>
       <table className="table">
@@ -93,15 +48,15 @@ const transactions = () => {
 
 const responses = () => {
   return {
-    edit,
-    history,
+    edit: Edit,
+    history: History,
     transactions,
   };
 };
 
 const capitalize = (name) => {
   if (typeof name === "string" && name.length > 1) {
-    if (name.includes(",")) return "";
+    if (name.includes(",") && name.length < 3) return "";
     return name
       .split(" ")
       .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
