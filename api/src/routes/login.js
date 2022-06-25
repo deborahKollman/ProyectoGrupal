@@ -34,7 +34,7 @@ passport._strategies.loginGoogle.name = 'loginGoogle';
 
 router.get('/', async (req, res) => {
   const user = await User.findByPk(req?.session?.passport?.user?.id);
-  console.log(req?.session?.passport?.user?.id);
+  console.log(req?.session?.passport);
   if (user) {
     return res.send(user);
   } else {
