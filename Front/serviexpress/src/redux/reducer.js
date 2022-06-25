@@ -38,11 +38,12 @@ const initialState = {
   mailSend: false,
   sendLogin: false,
   favorite_check: false,
+
   budget: {},
   chat: [],
 
-  rdcr_publications_by_user: [],
 
+  rdcr_publications_by_user: [],
 };
 
 const rootReducer = (state = initialState, action) => {

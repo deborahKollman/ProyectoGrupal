@@ -227,7 +227,7 @@ export function getPublications() {
 export const getPublicationId = (id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`/publications/${id}`);
+      const { data } = await axios.get(`/publications/${id}`);
       return dispatch({
         type: "GET_PUBLICATION_ID",
         payload: data,
@@ -427,12 +427,9 @@ export function sendEmail({ email, type }) {
   return async (dispatch) => {
     try {
       console.log(type);
-      const { data } = await axios.post(
-        `/email?type=${type}`,
-        {
-          email,
-        },
-      );
+      const { data } = await axios.post(`/email?type=${type}`, {
+        email,
+      });
       dispatch({
         type: "SEND_MAIL",
         payload: !!data.state,
@@ -445,17 +442,13 @@ export function sendEmail({ email, type }) {
 
 export const loginUser = (loginData) => {
   return async (dispatch) => {
-    const { data } = await axios.post(
-      `/login`,
-      loginData,
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+    const { data } = await axios.post(`/login`, loginData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
-    );
+    });
     if (!data.message) {
       dispatch({
         type: "USER_LOGIN_SUCCESSFULLY",
@@ -494,7 +487,7 @@ export const clearErrorDataLogin = () => {
   };
 };
 
-export function getStripe(stripeid, amount, usremail,idBuyer,idPublicacion) {
+export function getStripe(stripeid, amount, usremail, idBuyer, idPublicacion) {
   return async (dispatch) => {
     try {
       const { data } = await axios.post("/payments", {
@@ -502,7 +495,7 @@ export function getStripe(stripeid, amount, usremail,idBuyer,idPublicacion) {
         amount,
         usremail,
         idBuyer,
-        idPublicacion
+        idPublicacion,
       });
 
       dispatch({
@@ -527,7 +520,7 @@ export function favoriteCheck(user, publication) {
   };
 }
 
-export function act_getPublicationByUser(pId){
+export function act_getPublicationByUser(pId) {
   return async (dispatch) => {
     try {
       const responce = await axios.get(`/publications/user/${pId}`);
@@ -538,36 +531,48 @@ export function act_getPublicationByUser(pId){
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 }
 export function postForm(input) {
   return async (dispatch) => {
     try {
       let checkoutform = await axios.post(`/contracts`, input);
-      dispatch({ type: 'POST_FORM', checkoutform});
-    } catch (error) {console.log(error)}
-  };
-
-}
-
-export function filterprice(value){
-  return async (dispatch) => {
-    try {
-      let response = 
-      value==="range1" ? (await axios.get("/publications")).data.filter((a)=>a.price<100)
-      : value==="range2" ? (await axios.get("/publications")).data.filter((a)=>a.price>100 && a.price<500)
-      : value==="range3" ? (await axios.get("/publications")).data.filter((a)=>a.price>500)
-      : value==="all" ? (await axios.get("/publications")).data 
-      : await axios.get("/publications")
-      console.log("holas")
-      console.log(response)
-      dispatch({ type: "FILTER_PRICE", 
-                 payload: response
-                });
+      dispatch({ type: "POST_FORM", checkoutform });
     } catch (error) {
       console.log(error);
     }
   };
+}
+
+export function filterprice(value) {
+  return async (dispatch) => {
+    try {
+      let response =
+        value === "range1"
+          ? (await axios.get("/publications")).data.filter((a) => a.price < 500)
+          : value === "range2"
+          ? (await axios.get("/publications")).data.filter(
+              (a) => a.price >= 500 && a.price < 2000,
+            )
+          : value === "range3"
+          ? (await axios.get("/publications")).data.filter(
+              (a) => a.price >= 2000 && a.price < 4000,
+            )
+          : value === "range4"
+          ? (await axios.get("/publications")).data.filter(
+              (a) => a.price >= 4000,
+            )
+          : value === "all"
+          ? (await axios.get("/publications")).data
+          : await axios.get("/publications");
+      console.log("holas");
+      console.log(response);
+      dispatch({ type: "FILTER_PRICE", payload: response });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 };
 
 
@@ -638,3 +643,32 @@ export function getChat(id){
 
 
 };
+
+
+
+export function updateUser(id, user) {
+  return async (dispatch) => {
+    const { data } = await axios.put(`/users/${id}`, user);
+    dispatch({
+      type: "UPDATE_USER_DATA",
+      payload: data,
+    });
+  };
+}
+
+export const act_putPublication = async (pId, pOform) => {
+    try {
+      const responce = await axios.put(`/publications/${pId}`, pOform,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      return responce.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
+
