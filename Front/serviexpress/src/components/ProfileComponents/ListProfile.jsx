@@ -3,14 +3,34 @@ import SideBarProfile from "./SideBarProfile";
 import Navbar from '../NavBar/NavBar'
 import ProfileId from './ProfileId';
 import styles from '../styles/ListProfile.module.scss';
-
+import Chat from './Chat';
+import {getUser} from '../../redux/action';
+import {useEffect} from 'react';
+import {useSelector,useDispatch} from 'react-redux';
 
 export const ListProfile = () => {
+
+
+
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+
+    useEffect(() => {
+      dispatch(getUser());
+
+
+
+    },[dispatch])
+
+
+
+
+
     return <div>    
             <Navbar />
             <div className={styles.container}>
             <SideBarProfile></SideBarProfile>
-            <ProfileId></ProfileId>
+            <ProfileId user={user}></ProfileId>
             </div>
 
 
@@ -65,11 +85,23 @@ export const ListSellerNotifications = () => {
 };
 
 export const ListSellerChats = () => {
+    
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+
+    useEffect(() => {
+      dispatch(getUser());
+
+
+
+    },[dispatch])
+
+
     return <div>    
             <Navbar />
             <div className={styles.container}>
             <SideBarProfile></SideBarProfile>
-           
+             <Chat  id={user.id} ></Chat>
             </div>
 
 
