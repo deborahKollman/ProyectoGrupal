@@ -33,8 +33,9 @@ passport._strategies.loginGoogle = loginGoogle;
 passport._strategies.loginGoogle.name = 'loginGoogle';
 
 router.get('/', async (req, res) => {
-  const user = await User.findByPk(req?.session?.passport?.user?.id);
-  console.log(req?.session?.passport);
+  const user = await User.findByPk(req?.user?.id);
+  console.log(req?.user);
+  console.log(req?.session)
   if (user) {
     return res.send(user);
   } else {
@@ -62,6 +63,7 @@ router.get(
     failureMessage: true
   }),
   function (req, res) {
+
     res.redirect(`${baseURL}/home`);
   }
 );
