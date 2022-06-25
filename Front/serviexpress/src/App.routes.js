@@ -18,6 +18,7 @@ import Payment from "./components/Payment.jsx";
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
 import MercadoPago from "./components/MercadoPago.jsx";
+import MercadoPagoSuccess from "./components/MercadoPagoSuccess.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
 import Profile from "./pages/Profile.jsx";
@@ -42,7 +43,10 @@ function App() {
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/favorites/:id" element={<Favorites />} />
-      <Route path="/mercado" element={<MercadoPago />} />
+
+      <Route exact path="/mercado/success" element={<MercadoPagoSuccess/>} />
+      <Route exact path="/mercado" element={<MercadoPago/>} />
+
       <Route path="/payment/:id" element={<Payment />} />
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
