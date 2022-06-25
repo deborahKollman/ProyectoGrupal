@@ -574,10 +574,25 @@ export function filterprice(value) {
 export function updateUser(id, user) {
   return async (dispatch) => {
     const { data } = await axios.put(`/users/${id}`, user);
-    console.log(data);
     dispatch({
       type: "UPDATE_USER_DATA",
       payload: data,
     });
   };
+}
+
+export const act_putPublication = async (pId, pOform) => {
+    try {
+      const responce = await axios.put(`/publications/${pId}`, pOform,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      return responce.data;
+    } catch (error) {
+      console.log(error);
+    }
 }
