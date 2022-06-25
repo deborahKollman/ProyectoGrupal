@@ -11,6 +11,7 @@ import {
 } from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import FilterByCategories from "../components/Filters/FilterByCategories";
+import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
 import ServicesBar from "../components/ServicesBar";
@@ -22,17 +23,15 @@ import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import SwitchesGroup from "../components/Filters/switchprice"
+import SwitchesGroup from "../components/Filters/switchprice";
 
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
-  const allPublications = useSelector((state) => state.Publications).sort(function(a,b){
-  if(users.find((u)=>u.id===a.userId).seller_reputation>users.find((u)=>u.id===b.userId).seller_reputation){return -1}
-  if(users.find((u)=>u.id===a.userId).seller_reputation<users.find((u)=>u.id===b.userId).seller_reputation){return 1}
-  return 0}) 
+  const allPublications = useSelector((state) => state.Publications);
   const SwichL = useSelector((state) => state.switchloading);
+  console.log(SwichL);
+  console.log(allPublications);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
@@ -68,7 +67,6 @@ export default function Home() {
       window.localStorage.removeItem("session");
     }
 
-    
     dispatch(getAllCategories());
     setTimeout(() => {
       dispatch(getPublications());
@@ -80,10 +78,7 @@ export default function Home() {
   }, [allPublications]);
 
   // function filterforCategory1() {dispatch(getPublicationsByCategory(1))}
-  // allPublications.sort(function(a,b){
-  //   if(a.title>b.title){return 1}
-  //   if(a.title<b.title){return -1}
-  //   return 0})
+
   return (
     
     
@@ -110,18 +105,16 @@ export default function Home() {
           value={allPublications.length}
           pagination={pagination}
           items={PublicationsPerPage}
-          pages = {Math.ceil(allPublications.length/PublicationsPerPage)}
         ></PaginationHome>
       </div>
       <div className={Styles.switchs}>
-      <SwitchesGroup/>
+        <SwitchesGroup />
       </div>
       <div className={Styles.serviceshome}>
         {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
         ) : (
-            
-            currentServices?.map((e) => {
+          currentServices?.map((e) => {
             return (
               <div>
                 <CardPublications
@@ -140,14 +133,16 @@ export default function Home() {
         )}
       </div>
 
+      {/* <div className="paginationHome">
+        <PaginationHome
+          value={allPublications.length}
+          pagination={pagination}
+          items={PublicationsPerPage}
+        ></PaginationHome>
+      </div> */}
+
       <div className="logos"></div>
     </div>
     
   );
 }
-
-
-
-
-
-
