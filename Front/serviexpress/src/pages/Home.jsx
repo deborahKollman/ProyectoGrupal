@@ -85,7 +85,12 @@ export default function Home() {
   //   if(a.title<b.title){return -1}
   //   return 0})
   return (
+    
+    
+    
+    
     <div className={Styles.container}>
+      
       <NavBar msg={msg}></NavBar>
       {msgSearch && (
         <Alert
@@ -96,11 +101,9 @@ export default function Home() {
         </Alert>
       )}
 
-      {/* <div className="filterservice">
-        <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
-        <p className="filtername">|</p> */}
-
       <FilterByCategories />
+      
+
 
       <div className={Styles.homepaginate}>
         <PaginationHome
@@ -139,6 +142,7 @@ export default function Home() {
 
       <div className="logos"></div>
     </div>
+    
   );
 }
 

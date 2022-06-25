@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
 import SearchGroup from "../SearchGroup";
 import Button from "@mui/material/Button";
@@ -9,6 +8,7 @@ import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
 import { IconButton } from "@mui/material";
 import { getPublications, getUser } from "../../redux/action";
+import { useNavigate } from "react-router-dom";
 import { BsWindowSidebar } from "react-icons/bs";
 import Detail from "../../pages/Detail";
 
@@ -20,6 +20,7 @@ const BurgerButton = ({ msg }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
+  const nav = useNavigate()
   const mReloadOpen = () => {
     setOpen(!open);
   };
@@ -46,11 +47,11 @@ const BurgerButton = ({ msg }) => {
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
-        <Link to={`/Home`}>
+        <div onClick={() => {nav(`/Home`)}}>
           <figure>
             <img src={logo} alt="" />
           </figure>
-        </Link>
+        </div>
 
         <IconButton className="burgerFigure" onClick={mReloadOpen}>
           <StyledBurger pOpen={open}>
