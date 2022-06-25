@@ -8,6 +8,9 @@ export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 export const GET_MERCADOPAGO = "GET_MERCADOPAGO";
 export const GET_STRIPE = "GET_STRIPE";
 export const FAVORITE_CHECK = "FAVORITE_CHECK";
+export const SEND_BUDGET = "SEND_BUDGET";
+export const POST_CHAT = "POST_CHAT";
+export const  GET_CHAT = " GET_CHAT";
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -565,4 +568,73 @@ export function filterprice(value){
       console.log(error);
     }
   };
+};
+
+
+export function sendBudget(publicationId,user_request,id_seller,comment_request,picture_request,priority){
+  return async (dispatch) =>{
+
+    try {
+       await axios.post("/budgets",{
+        publicationId,
+        user_request,
+        id_seller,
+        comment_request,
+        picture_request,
+        priority
+
+       });
+
+      dispatch({
+        type: SEND_BUDGET,
+
+      })
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+  }
+
+
+
+};
+
+
+export function postChat(budgetId, comment, id_sender, id_receiver){
+    return async (dispatch) =>{
+        axios.post("/budgets/chat",{
+          budgetId, 
+          comment, 
+          id_sender, 
+          id_receiver
+
+        }) 
+
+        dispatch({
+          type: POST_CHAT,
+
+
+        })
+    }
+
+
+
+};
+
+export function getChat(id){
+    return async (dispatch) => {
+        const chat = await axios.get('/budgets/chat/'+id);
+        
+        dispatch({
+          type: GET_CHAT,
+          payload: chat.data,
+        })
+
+    }
+
+
+
 };
