@@ -16,20 +16,12 @@ import { fontSize } from '@mui/system';
 
 
 
-export default function ProfileId() {
+export default function ProfileId({user}) {
    
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
-
-    useEffect(() => {
-      dispatch(getUser());
 
 
 
-    },[dispatch])
 
-
-    console.log(user);
 
 
    return (

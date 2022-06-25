@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false
       },
+      id_seller: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       date_request: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -23,7 +27,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT
       },
       picture_request: {
-        type: DataTypes.ARRAY(DataTypes.STRING)
+        type: DataTypes.ARRAY(DataTypes.TEXT)
       },
       priority: {
         type: DataTypes.ENUM('normal', 'urgent'),
