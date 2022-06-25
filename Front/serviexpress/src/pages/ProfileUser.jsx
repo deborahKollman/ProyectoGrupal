@@ -1,149 +1,155 @@
-import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import {useDispatch,useSelector} from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles/SellerRegister.scss";
 import BurgerButton from "../components/NavBar/NavBar";
 import { MyButtonTwo, MyTextField } from "../elements/Forms";
-import {UploadImg} from "../components/UploadImg";
-import FormControl from '@mui/material/FormControl';
+import { UploadImg } from "../components/UploadImg";
+import FormControl from "@mui/material/FormControl";
 import { postProfileUser } from "../redux/action";
+import styles from "./styles/profileUser.module.css";
+import { AiOutlineCamera } from "react-icons/ai";
+import Edit from "../components/Edit";
+
+const History = () => {
+  return (
+    <div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre del servicio</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Plomeria</td>
+            <td>{new Date().toLocaleDateString()}</td>
+            <td>activo</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Carpinteria</td>
+            <td>{new Date().toLocaleDateString()}</td>
+            <td>inactivo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const transactions = () => {
+  return <div>Transaccion pending...</div>;
+};
+
+const responses = () => {
+  return {
+    edit: Edit,
+    history: History,
+    transactions,
+  };
+};
+
+const capitalize = (name) => {
+  if (typeof name === "string" && name.length > 1) {
+    if (name.includes(",") && name.length < 3) return "";
+    return name
+      .split(" ")
+      .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  }
+};
 
 const ProfileUser = () => {
+  const {
+    user: {
+      name,
+      last_name,
+      country,
+      rol,
+      state,
+      location,
+      email,
+      avatar_image,
+      phone_number,
+      buyer_reputation,
+      seller_reputation,
+      province_state,
+    },
+  } = useSelector((state) => state);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const {reg_user} = useSelector((state)=> state);
- 
-  const [input, setInput] = useState({
-    email: reg_user.email,
-    password: reg_user.password,
-    name: "",
-    last_name: "",
-    avatar_image:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-    description: "",
-    phone_number: "",
-    rol: "client"
-  })
+  const [component, setComponent] = useState(null);
+  const avatarImage =
+    avatar_image ||
+    "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
 
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name] : e.target.value
-    })
-  }
-
-  const [errorAuth,setErrorAuth] = useState({
-    name: "",
-    last: "",
-    descrip: "",
-    phone: "",
-  
-});
-
-
-  const validate = {
-    text: /^[a-zA-z]+$/,
-    number: /^[0-9]+$/
-
-}
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if(!validate.text.test(input.name)){
-        setErrorAuth({...errorAuth,name:"This input only takes words.."})
-        
-
-    }
-    else if(!validate.text.test(input.last_name)) {
-      setErrorAuth({...errorAuth,last:"This input only takes words..",name:""})
-      
-
-    }
-    else if(!validate.text.test(input.description)) {
-      setErrorAuth({...errorAuth,descrip:"This input only takes words..",last:""})
-  
-
-    }
-    else if(!validate.number.test(input.phone_number)) {
-      setErrorAuth({...errorAuth,phone:"This input only takes numbers..",descrip:""})
-   
-    }
-
-    else {
-    dispatch(postProfileUser(input))
-    setInput({
-      email:"",
-      password: "",
-      name: "",
-      last_name: "",
-      avatar_image: "",
-      description: "",
-      phone_number: "",
-      rol: ""
-    })
-    navigate('/Home')
-
-  }
-  }
+  const handleOption = ({ target: { id } }) => setComponent(responses()[id]());
 
   return (
     <div className="page-seller_register">
       <BurgerButton />
-      <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
-      <section className="sel_reg-one">
-        <h1 className="profileUserTitle">Personal Info</h1>
-
-        <FormControl>
-        <MyTextField
-          required
-          label="FULL NAME"
-          value={input.name}
-          type="text"
-          name="name"
-          onChange={handleChange}
-          />
-        {<p  className="error-div">{errorAuth.name}</p>}
-
-        <MyTextField
-          required
-          label="LAST NAME"
-          value={input.last_name}
-          type="text"
-          name="last_name"
-          onChange={handleChange}
-          />
-           {<p className="error-div">{errorAuth.last}</p>}
-        <UploadImg />
-        <MyTextField
-          id="outlined-multiline-static"
-          label="DESCRIPTION"
-          required
-          multiline
-          rows={4}
-          name="description"
-          placeholder="Tell us about your business"
-          value={input.description}
-          onChange={handleChange}
-          />
-           {<p className="error-div">{errorAuth.descrip}</p>}
-
-        <MyTextField
-          required
-          label="PHONE NUMBER"
-          value={input.phone_number}
-          type="tel"
-          name="phone_number"
-          minlength="9"
-          maxlength="14"
-          onChange={handleChange}
-          />
-           {<p className="error-div">{errorAuth.phone}</p>}
-        <MyButtonTwo variant="contained" type="submit" onChange={(e)=>{handleSubmit(e)}}>Continue</MyButtonTwo>
-        </FormControl>
-      </section>
-    </form>
+      <div className={styles["profile-container"]}>
+        <div className={styles.profile}>
+          <div></div>
+          <div className={styles["avatar-container"]}>
+            <div className={styles["avatar-image"]}>
+              <img src={avatarImage} alt="Avatar" />
+            </div>
+            <div className={styles["camera-icon"]}>
+              <AiOutlineCamera />
+            </div>
+          </div>
+          <div className={styles.data}>
+            <div className={styles.fields}>
+              <div>Email: {email}</div>
+              <div>Name: {capitalize(name)}</div>
+              <div>Last name: {capitalize(last_name)}</div>
+              <div>Phone number: {phone_number}</div>
+              <hr />
+              <div>Country: {capitalize(country)}</div>
+              <div>Province state: {capitalize(province_state)}</div>
+              <div>Location: {capitalize(location)}</div>
+              <hr />
+              <div>Buyer reputation: {buyer_reputation}</div>
+              <div>Sheller reputation: {seller_reputation}</div>
+              <hr />
+              <div>Rol: {rol}</div>
+              <div>State: {state}</div>
+            </div>
+          </div>
+        </div>
+        <div className={styles["form-container"]}>
+          <div className={styles["nav-bar"]}>
+            <div id="edit" className={styles.link} onClick={handleOption}>
+              Editar perfil
+            </div>
+            <div id="history" className={styles.link} onClick={handleOption}>
+              Ver historial
+            </div>
+            <div
+              id="transactions"
+              className={styles.link}
+              onClick={handleOption}
+            >
+              Transacciones pendientes
+            </div>
+          </div>
+          <div>{component ? component : responses()["edit"]()}</div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default ProfileUser;
+
+// <MyTextField
+//   required
+//   label="LAST NAME"
+//   type="text"
+//   name="last_name"
+// />
