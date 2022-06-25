@@ -1,28 +1,14 @@
 import React from "react";
+import Pagination from '@mui/material/Pagination';
 
 
+export default function PaginationHome({value,pagination,items,pages}){
 
+    const handle = (event, value) => {pagination(value)}
 
-export default function Paginationnumber({PublicationsPerPage, allPublications}){
-    const pageNumbers = []
-    const reset=false
-    for(let i=1; i<=Math.ceil(allPublications.length/PublicationsPerPage); i++){
-        pageNumbers.push(i)
-    }
-    
-    if(pageNumbers.length>0)
-    
-    return(
-        
-        pageNumbers.length
-        // <div className="pagination2">
-                
-        //             {       pageNumbers.map(Number=>{ return(
-        //                     <div className={Styles.number} key={Number}>
-        //                     <a onClick={()=>pagination(Number)}>{Number}</a>
-        //                     </div>)
-        //                 })}
-                
-        // </div>
-    )
-}
+    console.log(value,items);
+    return  <div>
+            <Pagination variant="outlined" shape="rounded" count={pages} defaultPage={1} size="large" onChange={handle}/>
+            </div>
+
+};
