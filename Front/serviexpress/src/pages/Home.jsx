@@ -16,7 +16,6 @@ import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
 import ServicesBar from "../components/ServicesBar";
 import Styles from "./styles/Home.module.scss";
-import PaginationHome from "../components/PaginationHome";
 import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
 import Alert from "@mui/material/Alert";
@@ -77,10 +76,10 @@ export default function Home() {
     setCurrentPage((pag) => (pag = 1));
   }, [allPublications]);
 
-  // function filterforCategory1() {dispatch(getPublicationsByCategory(1))}
-
   return (
+  
     <div className={Styles.container}>
+      
       <NavBar msg={msg}></NavBar>
       {msgSearch && (
         <Alert
@@ -91,18 +90,15 @@ export default function Home() {
         </Alert>
       )}
 
-      {/* <div className="filterservice">
-        <p onClick={filterforCategory1} className="filtername"> Plumbing </p>
-        <p className="filtername">|</p> */}
-
       <FilterByCategories />
-
+    
       <div className={Styles.homepaginate}>
-        <PaginationHome
+        <Pagination
           value={allPublications.length}
           pagination={pagination}
           items={PublicationsPerPage}
-        ></PaginationHome>
+          pages={Math.ceil(allPublications.length/PublicationsPerPage)}
+        />
       </div>
       <div className={Styles.switchs}>
         <SwitchesGroup />
@@ -130,15 +126,8 @@ export default function Home() {
         )}
       </div>
 
-      {/* <div className="paginationHome">
-        <PaginationHome
-          value={allPublications.length}
-          pagination={pagination}
-          items={PublicationsPerPage}
-        ></PaginationHome>
-      </div> */}
-
-      <div className="logos"></div>
+        <div className="logos"></div>
     </div>
+    
   );
 }
