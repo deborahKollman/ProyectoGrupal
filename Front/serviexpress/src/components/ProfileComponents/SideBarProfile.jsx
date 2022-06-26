@@ -1,9 +1,22 @@
 import styles from '../styles/SideBarProfile.scss'
 import { Link } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function SideBarProfile() {
+
+  const navigate = useNavigate();
+
+
+
+  const handleClick = (e) => {
+      e.preventDefault();
+      navigate(`/profile/${e.target.name}`);
+
+  };
+
+
+
 
   return (
     <div className="sidebarr">
@@ -42,16 +55,19 @@ export default function SideBarProfile() {
            
             <span>Notifications</span>
           </li>
-          <li>
-            
-            <span>Chats</span>
-          </li>
+        
+            <li>
+              <button name='chats' onClick={handleClick}>Chats</button>
+            </li>
+    
 
           <p className="title">ORDERS</p>
-          <li>
-          
-            <span>List Orders</span>
-          </li>
+
+            <li>
+              
+              <button name='orders' onClick={handleClick}>List Orders</button>
+            </li>
+
 
         </ul>
       </div>

@@ -1,4 +1,4 @@
-const {getPayments, postPayment, postMercadopago} = require('../services/payments');
+const {getPayments, postPayment, postMercadopago, postMercadopagoSuccess2} = require('../services/payments');
 const {BAD_REQUEST, CREATED, OK} = require('../routes/helpers/status.js')
 
 exports.getPayments = async (req, res, next) => {
@@ -12,8 +12,8 @@ exports.getPayments = async (req, res, next) => {
 
 exports.postPayment = async (req, res, next) => {
     try {
-      console.log('########',req.body.idBuyer, req.body.idPublicacion)
-        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion);
+        console.log('########',req.body.idBuyer, req.body.idPublicacion)
+        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.title);
         res.status(CREATED).send(r);
      
 
@@ -23,7 +23,7 @@ exports.postPayment = async (req, res, next) => {
 };
 
 exports.postMercadopago = async(req,res,next ) => {
-  console.log(req.body.title,req.body.price,"controller");
+  console.log('POST MP',req.body.title,req.body.price,'controller');
   try {
     const r = await postMercadopago(req.body.title,req.body.price);
      res.status(CREATED).send(r);
@@ -32,6 +32,16 @@ exports.postMercadopago = async(req,res,next ) => {
   }
 };
 
+exports.postMercadopagoSuccess = async(req,res,next ) => {
+  console.log('POST success',req.body);
+  const codigoPago = 'Mercado Pago-' + req.body.payment_id + '-' + req.body.status + '-' + req.body.payment_type + '-' + req.body.merchant_order_id;
+  try {
+    const r = await postMercadopagoSuccess2(codigoPago ,req.body.title,req.body.price);
+     res.status(CREATED).send(r);
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 /* 
