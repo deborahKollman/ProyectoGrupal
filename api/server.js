@@ -40,7 +40,18 @@ server.use(
     maxAge: 24 * 60 * 60 * 1000
   })
 );
-
+server.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    proxy: true,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: 'none'
+    }
+  })
+);
 server.use(passport.initialize());
 server.use(passport.session());
 server.use(passport.authenticate('session'));
