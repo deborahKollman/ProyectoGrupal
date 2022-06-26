@@ -71,7 +71,7 @@ export default function CardSellerDetail({userid}){
 >
 
 
- <ContactCard name={user.name} perfil={user.avatar_image} id_seller={user.id}></ContactCard>
+ <ContactCard name={user.name} perfil={user.avatar_image} id_seller={user.id} handleClose={handleClose} ></ContactCard>
  
 
 </Modal>

@@ -580,7 +580,7 @@ export function sendBudget(publicationId,user_request,id_seller,comment_request,
   return async (dispatch) =>{
 
     try {
-       await axios.post("/budgets",{
+       const data = await axios.post("/budgets",{
         publicationId,
         user_request,
         id_seller,
@@ -589,10 +589,10 @@ export function sendBudget(publicationId,user_request,id_seller,comment_request,
         priority
 
        });
-
+      
       dispatch({
         type: SEND_BUDGET,
-
+        payload: data.data.id
       })
 
 

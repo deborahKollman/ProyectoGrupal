@@ -22,6 +22,7 @@ import MercadoPagoSuccess from "./components/MercadoPagoSuccess.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
 import Profile from "./pages/Profile.jsx";
+import {ListOrders,ListSellerChats} from './components/ProfileComponents/ListProfile';
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -56,6 +57,10 @@ function App() {
       <Route exact path="/myorders" element={<MyOrders />} />
       <Route exact path="/checkout" element={<Checkout />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/chats" element={<ListSellerChats/>} />
+      <Route path="/profile/orders" element={<ListOrders />} />
+
+
     </Routes>
   );
 }
