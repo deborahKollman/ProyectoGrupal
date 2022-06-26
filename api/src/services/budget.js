@@ -7,6 +7,7 @@ exports.createBudget = async (newbudget) => {
     console.log(pub)
     if (pub) {
         const budget = await Budget.create(newbudget)
+    
         console.log('BUdget:',budget)
         return budget
     } else {
@@ -61,4 +62,28 @@ exports.postChat = async (budgetId, comment, id_sender, id_receiver)=> {
     } catch (error) {
     next(error);
   }
-}
+};
+
+exports.getChat = async (id) => {
+    
+    try {
+        const chat = await Budget.findAll({
+             where: { id_seller: id },
+            include: [{
+                model: Chat
+            }]
+        
+        });
+
+
+        return chat;
+
+
+        
+    } catch (error) {
+        next(error);
+    }
+
+
+
+};

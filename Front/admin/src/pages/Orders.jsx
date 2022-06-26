@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect,useState } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,15 +13,11 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import {Avatar} from '@mui/material';
+import {useDispatch, useSelector} from 'react-redux';
+import {getOrders} from '../redux/action';
+
 
 function createData(avatar, name, calories, fat, carbs, protein) {
   return {
@@ -92,18 +88,18 @@ const headCells = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'ID',
+    label: 'ID Order',
   },
     {id: 'name',
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: 'Name ',
   },
   {
-    id: 'price',
+    id: 'serviceId',
     numeric: true,
     disablePadding: false,
-    label: 'Price',
+    label: 'ID del servicio',
   },
   {
     id: 'service',
@@ -112,10 +108,10 @@ const headCells = [
     label: 'Service',
   },
   {
-    id: 'serviceId',
+    id: 'price',
     numeric: true,
     disablePadding: false,
-    label: 'ID del servicio',
+    label: 'Price',
   },
   {
     id: 'status',
@@ -132,7 +128,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -141,17 +137,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
         {
             headCells.map((headCell) => (
            
@@ -191,29 +176,13 @@ EnhancedTableHead.propTypes = {
 };
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
-
   return (
     <Toolbar
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
       }}
     >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
         <Typography
           sx={{ flex: '1 1 100%' }}
           variant="h4"
@@ -222,21 +191,6 @@ const EnhancedTableToolbar = (props) => {
         >
          Orders
         </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
     </Toolbar>
   );
 };
@@ -246,11 +200,25 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('calories');
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const dispatch = useDispatch();
+  const orders = useSelector(state => state.orders);
+  
+   console.log(orders);
+  useEffect(() => {
+      dispatch(getOrders());
+     
+
+
+  },[dispatch])
+
+
+
+  
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -297,8 +265,6 @@ export default function EnhancedTable() {
   };
 
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -324,37 +290,28 @@ export default function EnhancedTable() {
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(orders, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                .map((order, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
+                 
+                 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, order.name)}
                       role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
+
+                      key={order.id}
                       sx={{
                         fontSize: 20,
                         
                       }}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                      </TableCell>
+
                       <TableCell >
-                      <Avatar alt="Cindy Baker" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" />
+                      <Avatar alt="avatar" src={order.publication && order.publication.album[0]} />
                       </TableCell>
                       <TableCell
                         component="th"
@@ -363,14 +320,20 @@ export default function EnhancedTable() {
                         padding="none"
                         
                       >
-                        {row.name}
+                        {order.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
-                    </TableRow>
+                      <TableCell align="center">{order.calories}</TableCell>
+                      <TableCell align="center">{order.fat}</TableCell>
+                      <TableCell align="center">{order.carbs}</TableCell>
+                      <TableCell align="center">{order.protein}</TableCell>
+                      <TableCell align="center">{order.calories}</TableCell>
+                      <TableCell align="center">{order.fat}</TableCell>
+                      <TableCell align="center">{order.carbs}</TableCell>
+                      </TableRow>
                   );
+
+
+                
                 })}
               {emptyRows > 0 && (
                 <TableRow

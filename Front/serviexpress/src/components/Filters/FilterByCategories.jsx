@@ -1,10 +1,11 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import React from 'react'
 import {filterCategories, getAllCategories, getPublicationsByCategory} from '../../redux/action'
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import stylefilter from "./Filter.module.scss"
 
 const FilterByCategories = () => {
 
@@ -28,8 +29,7 @@ const FilterByCategories = () => {
     setValue(newevent);
   } 
   return (
-
-    <Tabs sx={{ width: '100%', bgcolor: '#fcdc3c', mt: '20px', p:'1px',}}
+    <Tabs className={stylefilter.tabs}
       value={value}
       onChange={handleChange}
       variant="scrollable"
@@ -39,8 +39,10 @@ const FilterByCategories = () => {
 
       {allCategories.map((e,index) => {
         return(
-        <Tab sx={{fontSize: 12, color: 'black',  fontWeight: 500 }}
+        <Tab className={stylefilter.tab}
+       
           label={e.name} />
+          
         )
         })
       }
@@ -49,3 +51,7 @@ const FilterByCategories = () => {
 }
 
 export default FilterByCategories
+
+
+
+

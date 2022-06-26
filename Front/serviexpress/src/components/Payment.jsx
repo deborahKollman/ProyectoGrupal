@@ -1,11 +1,12 @@
 import {Elements , PaymentElement, useStripe, CardElement, useElements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
+
 import {Button, getBottomNavigationUtilityClass} from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+
 import styles from '../pages/styles/payment.module.scss'
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'; 
+
 import {useDispatch,useSelector} from 'react-redux';
 import {getById,getStripe} from '../redux/action'
 import swal from "sweetalert";
@@ -27,7 +28,9 @@ export default function Payment({price,usremail,title,album,idBuyer,idPublicacio
     const FormCreate = () => {
         const stripe = useStripe();
         const elements = useElements();
+
         const navigate = useNavigate();
+
         
         const handleSubmit = async (e) => {
             e.preventDefault();

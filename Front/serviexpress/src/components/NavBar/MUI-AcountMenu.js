@@ -13,12 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { act_logout } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import ArticleIcon from '@mui/icons-material/Article';
-import CollectionsIcon from '@mui/icons-material/Collections';
+import ArticleIcon from "@mui/icons-material/Article";
+import CollectionsIcon from "@mui/icons-material/Collections";
+import { getUser } from "../../redux/action";
 
 export default function AccountMenu({ avatar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const user = useSelector((state) => state.user);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,7 +32,7 @@ export default function AccountMenu({ avatar }) {
 
   const xDispatch = useDispatch();
   const mLogout = () => {
-    const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+    const baseURL = process.env.REACT_APP_API || "http://localhost:3001";
     fetch(`${baseURL}/login/logout`, {
       method: "POST",
       headers: {
@@ -43,9 +46,13 @@ export default function AccountMenu({ avatar }) {
       .then((data) => {
         window.sessionStorage.removeItem("token");
         xDispatch(act_logout());
-        xNavigate('/home');
+        xNavigate("/home");
       });
   };
+
+  React.useEffect(() => {
+    xDispatch(getUser());
+  }, [xDispatch]);
 
   return (
     <React.Fragment>
@@ -102,7 +109,11 @@ export default function AccountMenu({ avatar }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            xNavigate(`/profile`);
+          }}
+        >
           <Avatar src={avatar} />
           Profile
         </MenuItem>
@@ -137,7 +148,7 @@ export default function AccountMenu({ avatar }) {
           </ListItemIcon>
           My publications
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => xNavigate("/user")}>
           <ListItemIcon>
             <Settings fontSize="small" sx={{ color: "#fff" }} />
           </ListItemIcon>

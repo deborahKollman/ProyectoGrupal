@@ -13,9 +13,6 @@ exports.getPayments = async (req, res, next) => {
 exports.postPayment = async (req, res, next) => {
     try {
         console.log('########',req.body.idBuyer, req.body.idPublicacion)
-        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.title);
-        //console.log('Respuesta de stripe',r.status,'--',r.id)
-        //res.status(CREATED).send(r)
 
         if (r.status) {
           const response = {'status': r.status, id: r.id}

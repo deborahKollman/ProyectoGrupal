@@ -19,7 +19,6 @@ const UploadImg = () => {
         <Input accept="image/*" id="icon-button-file" type="file" />
         <IconButton
           color="primary"
-          aria-label="upload picture"
           component="span"
         >
           <PhotoCamera sx={{ color: "black", width: 32, height: 32 }} />
@@ -29,7 +28,7 @@ const UploadImg = () => {
   );
 };
 
-const MultiImgsUpload = ({ pStateImage, pSetStateImage }) => {
+const MultiImgsUpload = ({ pStateImage, pSetStateImage, pSetSendImg }) => {
    
   const mImgHandler = (e) => {
     const reader = new FileReader();
@@ -38,6 +37,7 @@ const MultiImgsUpload = ({ pStateImage, pSetStateImage }) => {
         pSetStateImage(reader.result);
       }
     };
+    pSetSendImg(e.target.files[0]);
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -63,9 +63,7 @@ const MultiImgsUpload = ({ pStateImage, pSetStateImage }) => {
           Upload Images
         </Button>
       </label>
-      {
-        
-      }
+      
       <MediaCard pURLimg={ pStateImage } />
     </section>
   );
