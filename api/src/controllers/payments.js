@@ -14,8 +14,19 @@ exports.postPayment = async (req, res, next) => {
     try {
         console.log('########',req.body.idBuyer, req.body.idPublicacion)
         const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.title);
-        res.status(CREATED).send(r);
+        //console.log('Respuesta de stripe',r.status,'--',r.id)
+        //res.status(CREATED).send(r)
 
+        if (r.status) {
+          const response = {'status': r.status, id: r.id}
+          console.log('Respuesta de stripe',r.status,'--',r.id)
+          res.status(CREATED).send(response);
+        } else
+        {
+          const response = {'status': 'rejected', id: r.message }
+          console.log('Respuesta de stripe',r.statusCode ,'--',r.message)
+          res.status(CREATED).send(response);
+        }
       } catch (error) {
         next(error);
       }
