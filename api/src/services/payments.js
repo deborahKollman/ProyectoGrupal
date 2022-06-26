@@ -70,8 +70,10 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
         amount,
         currency: 'USD',
         payment_method: stripeid,
+        payment_method_types: ['card'],
         confirm: true
     });
+
     savePayment(idPublication,idBuyer,stripeid,amount);
     sendBuyerMail(usremail,title,amount);
     return payment

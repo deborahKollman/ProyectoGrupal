@@ -18,10 +18,11 @@ export default function RadioButtonsGroup() {
     <FormControl component="fieldset">
       <p  className={Styles.titlefilter}>Filter for price</p>
       <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-        <FormControlLabel value="range1" control={<Radio />} label="0 to 100" />
-        <FormControlLabel value="range2" control={<Radio />} label="100 to 500" />
-        <FormControlLabel value="range3" control={<Radio />} label="greater than 500" />
         <FormControlLabel value="all" control={<Radio />} label="All" />
+        <FormControlLabel value="range1" control={<Radio />} label="0 to 500" />
+        <FormControlLabel value="range2" control={<Radio />} label="500 to 2000" />
+        <FormControlLabel value="range3" control={<Radio />} label="2000 to 4000" />
+        <FormControlLabel value="range4" control={<Radio />} label="greater than 4000" />
       </RadioGroup>
     </FormControl>
   );

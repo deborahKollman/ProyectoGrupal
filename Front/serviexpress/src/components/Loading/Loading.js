@@ -1,9 +1,9 @@
 import React from 'react';
-import './Loading.css'
+import StylesLoading from "./StylesLoading.module.scss";
 
 const Loading = () => {
     return (
-        <div className='loadback'>
+        <div className={StylesLoading.loadback}>
         </div>
     );
 };
