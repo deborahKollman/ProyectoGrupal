@@ -39,7 +39,7 @@ const initialState = {
   sendLogin: false,
   favorite_check: false,
 
-  budget: {},
+  budget: 0,
   chat: [],
 
 
@@ -281,6 +281,7 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case SEND_BUDGET:
+ 
       return {
         ...state,
         budget: action.payload,
@@ -295,7 +296,7 @@ const rootReducer = (state = initialState, action) => {
       }
 
       case GET_CHAT:
-        console.log(action.payload);
+      
         return{
             ...state,
             chat: action.payload,

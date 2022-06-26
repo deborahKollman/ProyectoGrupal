@@ -17,7 +17,8 @@ exports.getBudgetById = async (req, res, next) => {
 exports.postBudget = async (req, res, next) => {
     try {
         const r = await createBudget(req.body);
-        res.status(CREATED).send(r.message);
+      
+        res.status(CREATED).send(r);
       } catch (error) {
         next(error);
       }

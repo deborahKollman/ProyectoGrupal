@@ -4,6 +4,7 @@ import Navbar from '../NavBar/NavBar'
 import ProfileId from './ProfileId';
 import styles from '../styles/ListProfile.module.scss';
 import Chat from './Chat';
+import Orders from './Orders';
 import {getUser} from '../../redux/action';
 import {useEffect} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
@@ -116,7 +117,7 @@ export const ListOrders = () => {
             <Navbar />
             <div className={styles.container}>
             <SideBarProfile></SideBarProfile>
-        
+            <Orders></Orders>
             </div>
 
 
