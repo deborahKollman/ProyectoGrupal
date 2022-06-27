@@ -133,13 +133,13 @@ export default function Checkout() {
                       Back
                     </Button>
                   )}
-                {activeStep !== steps.length - 1 ?
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
+                  {activeStep !== steps.length - 1 ? 
+                    <Button
+                      variant="contained" 
+                      onClick={handleNext}
+                      sx={{ mt: 3, ml: 1 }}
                     
-                  >
+                    >
                     {activeStep === steps.length - 1 ? 'Buy With Card' : 'Next'}
                     
                   </Button> : null
