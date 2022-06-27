@@ -33,14 +33,14 @@ server.use(
 
 
 server.use(express.static('public'));
-server.enable('trust proxy')
-server.use(
-  cookieSession({
-    name: 'session',
-    keys: ['key1', 'key2'],
-    maxAge: 24 * 60 * 60 * 1000
-  })
-);
+server.set('trust proxy',1)
+// server.use(
+//   cookieSession({
+//     name: 'session',
+//     keys: ['key1', 'key2'],
+//     maxAge: 24 * 60 * 60 * 1000
+//   })
+// );
 server.use(
   session({
     secret: 'secret',
@@ -50,7 +50,8 @@ server.use(
     proxy: true,
     cookie: {
       maxAge: 24 * 60 * 60 * 1000,
-      sameSite: 'none'
+      sameSite: process.env.NODE_ENV === "production"?'none':'lax',
+      secure: process.env.NODE_ENV === "production"
     }
   })
 );
