@@ -24,12 +24,17 @@ const CustomerSupport = () => {
 
   return (
     <div className="page_customerSuport">
-      <section className="customerSupport-chat"  ref={refOne}>
-        <ChatWindow visible={visible} />
+      <section>
+        
+      </section>
+      <section className="customerSupport-chat">
+        <section ref={refOne}>
+          <ChatWindow visible={visible} />
+        </section>
 
         <Tooltip title="Hi!!!, How can we help you?" placement="left">
           <Avatar
-            onClick={() => setVisible(!visible)}
+            onClick={() => setVisible(true)}
             alt="Remy Sharp"
             src="https://i.ibb.co/nfPP3tS/OIP.jpg"
             sx={{ width: 56, height: 56, margin: "9px" }}
