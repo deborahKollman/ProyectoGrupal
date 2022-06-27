@@ -4,7 +4,7 @@ const {Budget, Chat, Contracts, Publication} = require('../database/postgres.js'
 exports.createBudget = async (newbudget) => {
     const { publicationId } = newbudget;
     const pub = await Publication.findOne({ where: { id: publicationId } });
-    console.log(pub)
+    console.log(newbudget)
     if (pub) {
         const budget = await Budget.create(newbudget)
     
