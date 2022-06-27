@@ -4,10 +4,14 @@ import FooterBar from '../components/FooterBar/FooterBar'
 import Styles from './styles/MyOrder.module.scss'
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
-
+import { getMyOrders } from '../redux/action';
+import { useSelector } from 'react-redux';
 
 const MyOrders = () => {
  
+  const myorders = useSelector(state => state.orders);
+  console.log(myorders)
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {

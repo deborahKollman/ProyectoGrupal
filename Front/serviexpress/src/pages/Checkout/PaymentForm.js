@@ -40,9 +40,6 @@ export default function PaymentForm() {
   console.log(myOrder);
   console.log(user);
 
-
- 
-
    const FormCreate = () => {
 
     const stripe = useStripe();
