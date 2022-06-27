@@ -67,9 +67,9 @@ router.get(
   }
 );
 
-passport.serializeUser((user, cb) => cb(null, user));
+passport.serializeUser((user, cb) => {return cb(null, user)});
 
-passport.deserializeUser((user, cb) => cb(null, user));
+passport.deserializeUser((user, cb) => {return cb(null, user)});
 
 router.post('/logout', function (req, res) {
   req.logout();
