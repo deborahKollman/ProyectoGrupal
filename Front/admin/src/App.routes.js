@@ -7,6 +7,7 @@ import {List, ListOfCategory, ListOfServices, Order} from "./pages/List";
 import { aUserInputs, aProductInputs } from "./assets/sources/FormOne.js";
 import './styles/dark.scss';
 import { useSelector } from 'react-redux';
+import Attendance from "./pages/Attendance";
 
 function App() {
   
@@ -35,6 +36,7 @@ function App() {
             <Route index element={<Order/>} />
             <Route path=":productId" element={<Single />} />
           </Route>
+          <Route path="attendance" element={<Attendance/>}/>
         </Route>
       </Routes>
     </div>

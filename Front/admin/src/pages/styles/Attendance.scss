@@ -1,0 +1,12 @@
+.page-attendance{
+    display: flex;
+    width: 100%;
+    .attendance-main{
+        flex: 6;
+
+        .main-content{
+            width: 100%;
+            height: 93%;
+        }
+    }
+}
