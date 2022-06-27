@@ -19,13 +19,6 @@ export const types = {
   CLEAR_CART: "CLEAR_CART",
 };
 
-export const myLocalStorage = () => {
-  let productsInLocalStorage = window.localStorage.getItem("service");
-  productsInLocalStorage = JSON.parse(productsInLocalStorage);
-  console.log(productsInLocalStorage);
-  return productsInLocalStorage;
-};
-
 // Para desloguearse
 export const act_logout = () => {
   return (dispatch) => {
@@ -587,23 +580,13 @@ export function sendBudget(publicationId,user_request,id_seller,comment_request,
         comment_request,
         picture_request,
         priority
-
-       });
-      
+       });      
       dispatch({
         type: SEND_BUDGET,
         payload: data.data.id
       })
-
-
-    } catch (error) {
-        console.log(error);
-    }
-
-
+    } catch (error) { console.log(error) }
   }
-
-
 
 };
 
@@ -615,18 +598,11 @@ export function postChat(budgetId, comment, id_sender, id_receiver){
           comment, 
           id_sender, 
           id_receiver
-
-        }) 
-
+       }) 
         dispatch({
           type: POST_CHAT,
-
-
         })
     }
-
-
-
 };
 
 export function getChat(id){
@@ -637,14 +613,8 @@ export function getChat(id){
           type: GET_CHAT,
           payload: chat.data,
         })
-
     }
-
-
-
 };
-
-
 
 export function updateUser(id, user) {
   return async (dispatch) => {
@@ -672,3 +642,16 @@ export const act_putPublication = async (pId, pOform) => {
     }
 }
 
+export function getMyOrders() {
+  return async (dispatch) => {
+    try {
+      const order = await axios.get(`/contracts`);
+      dispatch({
+        type: "GET_MY_ORDERS",
+        payload: order.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
