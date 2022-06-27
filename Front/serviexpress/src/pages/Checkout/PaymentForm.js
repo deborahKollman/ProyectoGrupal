@@ -12,6 +12,9 @@ import styles from '../styles/PaymentForm.module.scss';
 import {useEffect} from 'react';
 import {getUser} from '../../redux/action'
 import MercadoPago from '../../components/MercadoPago'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 const stripePromise = loadStripe("pk_test_51LBNJbA25r7eed2bkcHZIzmLbouFZsUM9b19WawYn5tGP726sLszup0jpaMqFoJxwZ1lwuZxjtlOmTh39hrBsQzk00kZiUQf6V")
 
 
@@ -44,7 +47,7 @@ export default function PaymentForm() {
 
     const stripe = useStripe();
     const elements = useElements();
-
+    const navigate = useNavigate();
 
     
      const handleSubmit = async (e) => {
@@ -60,16 +63,38 @@ export default function PaymentForm() {
           swal("error", "Error", "error");
       }
 
-      else {
+/*       else {
           
           const {id} = paymentMethod;
           
           dispatch(getStripe(id,myOrder.price,user.email,user.id,myOrder.id));
           swal("Success", "Service Purchased", "success");
+      } */
+
+      else {
+        const {id} = paymentMethod;
+        swal("Please wait...", "We are waiting for confirmation", "info")
+
+        const { data } = await axios.post("/payments", {
+            stripeid:id,
+            amount:myOrder.price,
+            usremail:user.email,
+            idBuyer: user.id,
+            idPublicacion: myOrder.id
+          });
+          if(data.status === 'succeeded') { 
+              swal("Success", "Service Purchased", "success")
+              .then((value)=>{
+                  navigate("/home", { replace: true })
+              })
+          }
+          else if(data.status === 'rejected') {
+              swal("Error", data.id ,"error") 
+              .then((value)=>{
+                  navigate("/home", { replace: true })
+              })
+          }
       }
-
-
-
     }
 
     return  <form className={styles.form}>

@@ -10,12 +10,16 @@ import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { act_themeDark, act_themeLight } from "../redux/action";
 import { useDispatch } from "react-redux";
 import CategoryIcon from "@mui/icons-material/Category";
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+
 const Sidebar = () => {
   const xDispatch = useDispatch();
+
+  const xNavigate = useNavigate();
 
   return (
     <div className="sidebarr">
@@ -71,6 +75,10 @@ const Sidebar = () => {
             <span>Notifications</span>
           </li>
           <p className="title">SERVICE</p>
+          <li onClick={() => {xNavigate('/attendance')}}>
+            <SupportAgentIcon className="iconn" />
+            <span>Customer Support</span>
+          </li>
           <li>
             <SettingsSystemDaydreamIcon className="iconn" />
             <span>System Health</span>
