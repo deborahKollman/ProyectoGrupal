@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {getPayments, postPayment, postMercadopago } = require('../controllers/payments.js');
+const {getPayments, postPayment, postMercadopago, postMercadopagoSuccess } = require('../controllers/payments.js');
 
 
 const router = Router();
@@ -7,6 +7,7 @@ const router = Router();
 router.get('/', getPayments);
 router.post('/', postPayment);
 router.post('/mercado', postMercadopago);
+router.post('/mercado/success', postMercadopagoSuccess);
 
 
 router.get('/feedback', function(req, res) {

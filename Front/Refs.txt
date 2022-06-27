@@ -9,3 +9,12 @@ https://es.fiverr.com/sellers/trabajos-freelance?source=header_nav
 
 REACT-BOOTSTRAP
 https://react-bootstrap.github.io/getting-started/introduction
+
+
+:: CHAT ENGINE
+https://chatengine.io/
+* DOCUMENTATION
+https://rest.chatengine.io/#d6dee74e-fd3c-4e6b-8594-d409fba9ee2d
+
+https://chatengine.app/
+

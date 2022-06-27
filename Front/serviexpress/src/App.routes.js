@@ -18,9 +18,12 @@ import Payment from "./components/Payment.jsx";
 import MyPublications from "./pages/MyPublications";
 import DetailEdit from "./pages/DetailEdit";
 import MercadoPago from "./components/MercadoPago.jsx";
+import MercadoPagoSuccess from "./components/MercadoPagoSuccess.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
-
+import Profile from "./pages/Profile.jsx";
+import {ListOrders,ListSellerChats} from './components/ProfileComponents/ListProfile';
+import CustomerSupport from "./pages/CustomerSupport.jsx";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -31,9 +34,9 @@ function App() {
       {rdcr_isAuth && (
         <Route exact path="/seller/add-service" element={<CreateService />} />
       )}
+      {rdcr_isAuth && <Route exact path="/user" element={<ProfileUser />} />}
 
       <Route exact path="/seller" element={<Seller />} />
-      <Route exact path="/user" element={<ProfileUser />} />
       <Route exact path="/recoverypass" element={<RecoveryPassword />} />
       <Route exact path="/register" element={<Register />} />
       <Route exact path="/confirm" element={<ConfirmPassword />} />
@@ -42,15 +45,24 @@ function App() {
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/favorites/:id" element={<Favorites />} />
-      <Route path="/mercado" element={<MercadoPago/>} />
+
+      <Route exact path="/mercado/success" element={<MercadoPagoSuccess/>} />
+      <Route exact path="/mercado" element={<MercadoPago/>} />
+
       <Route path="/payment/:id" element={<Payment />} />
       <Route exact path="/Home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/prueba" element={<Orders />} />
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
-      <Route exact path="/myorders" element={<MyOrders/>} />
-      <Route exact path="/checkout" element={<Checkout/>} />
+      <Route exact path="/myorders" element={<MyOrders />} />
+      <Route exact path="/checkout" element={<Checkout />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/chats" element={<ListSellerChats/>} />
+      <Route path="/profile/orders" element={<ListOrders />} />
+      <Route path="/support" element={<CustomerSupport />} />
+
+
     </Routes>
   );
 }

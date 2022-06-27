@@ -22,8 +22,8 @@ import MercadoPago from '../components/MercadoPago';
 import {Modal} from '@mui/material';
 import Payment from '../components/Payment';
 import swal from 'sweetalert';
-
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FooterBar from "../components/FooterBar/FooterBar";
 
 export default function Detail(){
     const {id} = useParams();
@@ -152,7 +152,7 @@ export default function Detail(){
         <div className={stylesDetail.leftSide}>
           <div>
           <Breadcrumb className={stylesDetail.anchors} >
-          <Breadcrumb.Item href="/" >Principal</Breadcrumb.Item>
+          <Breadcrumb.Item href="/" >Main</Breadcrumb.Item>
           <Breadcrumb.Item href="/home">
           Home
           </Breadcrumb.Item>
@@ -166,13 +166,12 @@ export default function Detail(){
 
           <div className={stylesDetail.subTitle}>
            <div className={stylesDetail.date}>
-                <label>Publicado el:</label>
+                <label>Published on:</label>
                <p> {detail.date}</p>
 
            </div>
-
-          <button onClick={handleAddToOrder}>Add to order</button>
           <div>      
+          <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  icon={<ShoppingCartIcon/>} onClick={handleAddToOrder} />
               <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} {...label} checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
           </div>
         </div>
@@ -194,12 +193,7 @@ export default function Detail(){
        
 
     </div>
-        <div className={stylesDetail.buyButtons}>
-        <label>Pay with: </label>
-        
-        <button onClick={handleShow} >Tarjeta</button>
-        {detail.title && detail.price && <MercadoPago title={detail.title} price={detail.price} ></MercadoPago> }
-        </div>
+
 
         <Modal
            open={show}
@@ -227,41 +221,32 @@ export default function Detail(){
           <div className={stylesDetail.cardOthers}>
  
              <Carousel>
-
              {moreUsers.map(e => {
-                return (
-                  
+                return (     
                   <Carousel.Item>
-                  <CardOthersServices user={e}></CardOthersServices>
-                 
+                  <CardOthersServices user={e}></CardOthersServices>   
                   </Carousel.Item>
-
-                )
-
-
-             })}
+                )})}
             </Carousel>
 
         </div>
 
-
-
         <div className={stylesDetail.opinion} >
           <ProfileOpinion userid={detail.userId}></ProfileOpinion>
-
         </div>
        
-    </div>
-    <CardSellerDetail userid={detail.userId}></CardSellerDetail>
+        </div>
+          <CardSellerDetail userid={detail.userId}></CardSellerDetail>
+        </div>
 
-    </div>
      <Footer></Footer>
 
-     <div className={stylesDetail.footer}>
+     <FooterBar/>
+     {/* <div className={stylesDetail.footer}>
         <MDBContainer fluid>
           &copy; 2022 Copyright: ServiExpress 
         </MDBContainer>
-      </div>
+      </div> */}
     </div>
 
    

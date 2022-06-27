@@ -1,10 +1,12 @@
 import {Elements , PaymentElement, useStripe, CardElement, useElements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-import {Button} from '@mui/material';
+
+import {Button, getBottomNavigationUtilityClass} from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 import styles from '../pages/styles/payment.module.scss'
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'; 
+
 import {useDispatch,useSelector} from 'react-redux';
 import {getById,getStripe} from '../redux/action'
 import swal from "sweetalert";
@@ -19,66 +21,62 @@ const stripePromise = loadStripe("pk_test_51LBNJbA25r7eed2bkcHZIzmLbouFZsUM9b19W
 
 
 export default function Payment({price,usremail,title,album,idBuyer,idPublicacion}){
-    
- 
-
-
-
     const dispatch = useDispatch();
     const publication = useSelector(state => state.detail);
     const dataStripe = useSelector(state => state.stripe);
 
-
     const FormCreate = () => {
-
         const stripe = useStripe();
         const elements = useElements();
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-       const {error,paymentMethod} =  await stripe.createPaymentMethod({
-            type: 'card',
-            card: elements.getElement(CardElement),
-        });
-    
-        if(error) {
-            console.log(error);
-            swal("error", "Error", "error");
-        }
 
-        else {
-            
-            const {id} = paymentMethod;
-            
-            dispatch(getStripe(id,price,usremail,idBuyer,idPublicacion));
-            swal("Success", "Service Purchased", "success");
-        }
+        const navigate = useNavigate();
+
         
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+        
+            const {error,paymentMethod} =  await stripe.createPaymentMethod({
+                type: 'card',
+                card: elements.getElement(CardElement),
+            });
+        
+            if(error) {
+                console.log(error);
+                swal("error", "Error", "error");
+            }
+
+            else {
+                const {id} = paymentMethod;
+                swal("Wait...", "Confirming transaction...", "info")
+                //const r = await dispatch(getStripe(id,price,usremail,idBuyer,idPublicacion));
+                const { data } = await axios.post("/payments", {
+                    stripeid:id,
+                    amount:price,
+                    usremail,
+                    idBuyer,
+                    idPublicacion
+                  });
+                if(data.status === 'succeeded') { 
+                    swal("Success", "Service Purchased", "success")
+                     .then((value)=>{
+                        navigate("/home", { replace: true })
+                     })
+                }
+                else if(data.status === 'rejected') {
+                     swal("Error", data.id ,"error") 
+                     .then((value)=>{
+                        navigate("/home", { replace: true })
+                     })
+                }
+            }
+        };
     
-    /* 
-        if (error) console.log(error);
-        else {
-            const {id} = paymentMethod;
-            
-            await axios.post("http://localhost:3001/payments",{
-                stripeid: id,
-                amount: 200,
-                usremail: "",
     
-    
-            })
-            
-        } */
-    
-    };
-    
-    
-    return  <form className={styles.form}>
-    <CardElement />
-    <Button variant="contained" onClick={handleSubmit} >Send</Button>
-    </form>
-    
+        return  <form className={styles.form}>
+                <CardElement />
+                <Button variant="contained" onClick={handleSubmit} >Send</Button>
+                </form>
+        
     }
 
    
@@ -92,9 +90,6 @@ export default function Payment({price,usremail,title,album,idBuyer,idPublicacio
         <div>
             <FormCreate className={styles.form}></FormCreate>
         </div>
-            
-
-  
     </Elements>
     </div> 
 };
