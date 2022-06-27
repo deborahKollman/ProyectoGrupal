@@ -41,7 +41,7 @@ const MyOrders = () => {
     },
   ];
   
-  const rows = myorders.map(order => {
+  const rows = myorders?.map(order => {
     return {
       id: order.id,
       price: order.publication.price,
