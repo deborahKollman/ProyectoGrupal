@@ -42,10 +42,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/error', async (req,res) => {
-  res.redirect(`${baseURL}/register`)
-})
-
 router.get(
   '/google',
   passport.authenticate('loginGoogle', {

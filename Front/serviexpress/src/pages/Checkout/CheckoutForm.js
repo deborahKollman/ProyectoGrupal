@@ -133,7 +133,7 @@ export default function Checkout() {
                       Back
                     </Button>
                   )}
-                  {activeStep === steps.length - 1 ? 
+                  {activeStep !== steps.length - 1 ? 
                     <Button
                       variant="contained" 
                       onClick={handleNext}
