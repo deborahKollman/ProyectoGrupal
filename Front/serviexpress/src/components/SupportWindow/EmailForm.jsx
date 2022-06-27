@@ -3,25 +3,75 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Avatar } from "@mui/material";
 import styled, { css } from "styled-components";
 import "./Styles.scss";
+import axios from "axios";
 
-const EmailForm = () => {
+const EmailForm = (props) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const getOrCreateUser = async (pCallback) => {
+    console.log(process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID);
+    try {
+      const rsp = await axios.put(
+        "https://api.chatengine.io/users/",
+        {
+          username: email,
+          secret: email,
+          email: email,
+        },
+        {
+          headers: {
+            "PRIVATE-KEY": process.env.REACT_APP_CHAT_ENGINE_PRIVATE_KEY,
+          },
+        }
+      );
+      console.log(rsp);
+      pCallback(rsp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getOrCreateChat = async (pCallback) => {
+    try {
+      const rsp = await axios.put(
+        "https://api.chatengine.io/chats/",
+        {
+          usernames: ["JALZ DELEZ", email],
+          title: "Support",
+          is_direct_chat: true,
+        },
+        {
+          headers: {
+            "Project-ID": process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID,
+            "User-Name": email,
+            "User-Secret": email,
+          },
+        }
+      );
+      console.log(rsp);
+      pCallback(rsp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     console.log("Sending Email", email);
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 2000);
-
-    
-
+    getOrCreateUser((pUser) => {
+      props.pSetUser(pUser);
+      getOrCreateChat((pChat) => {
+        setLoading(false);
+        props.pSetChat(pChat);
+        console.log(pChat, "successfully");
+      });
+    });
   };
 
   return (
-    <MySection loading={loading.toString()}>
+    <MySection pVisible2={props.pVisible} loading={loading.toString()}>
       <div style={{ height: "0px" }}>
         <div className="fontTop" />
       </div>
@@ -41,7 +91,12 @@ const EmailForm = () => {
         <Avatar
           alt="Remy Sharp"
           src="https://i.ibb.co/nfPP3tS/OIP.jpg"
-          sx={{ width: 56, height: 56, margin: "9px" }}
+          sx={{
+            width: 56,
+            height: 56,
+            margin: "9px",
+            boxShadow: "0px 5px 25px 0px rgba(0,0,0,0.5)",
+          }}
         />
 
         <div className="topText">
@@ -74,8 +129,9 @@ const MySection = styled.section`
   width: 100%;
   height: 100%;
   opacity: 1;
-  ${({ loading }) => css`
+  ${({ loading, pVisible2 }) => css`
     opacity: ${loading === "true" ? "0.7" : "1"};
+    height: ${pVisible2 ? "100%" : "0%"};
   `}
 
   .fontTop {
@@ -104,10 +160,10 @@ const MySectionUnder = styled.section`
     font-size: 24px;
     font-weight: 600;
   }
+
   .bottomText {
-    position: absolute;
     width: 100%;
-    top: 60%;
+    margin-top: 60px;
     color: #ffc107;
     font-size: 24px;
     font-weight: 600;

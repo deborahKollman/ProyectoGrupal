@@ -41,4 +41,7 @@ $ npm install @mui/icons-material
 ::LIBRARIES
 npm install @mui/material @emotion/react @emotion/styled
 $ npm install @mui/x-data-grid
+
+::CHAT ENGINE
+npm install react-chat-engine
 */

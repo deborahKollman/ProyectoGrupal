@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import ChatEngine from "./ChatEngine";
 import EmailForm from "./EmailForm";
 
 const ChatWindow = (props) => {
+
+  const [user, setUser] = useState(null);
+  const [chat, setChat] = useState(null);
+
+
   return <MySection visible={props.visible}>
 
-    <EmailForm/>
+    <EmailForm
+      pSetUser= { pU => setUser(pU) }
+      pSetChat= { pC => setChat(pC) }
+      pVisible= { user === null || chat === null }
+    />
+
+    <ChatEngine 
+      pVisible = { user !== null && chat !== null }
+      pChat= { chat }
+      pUser= { user }
+    /> 
 
   </MySection>;
 };
