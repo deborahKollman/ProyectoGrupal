@@ -77,6 +77,7 @@ const Login = () => {
   useEffect(() => {
     if (sendLogin) {
       window.localStorage.removeItem("sendLogin");
+      window.localStorage.removeItem("session");
     }
     if (errorLogin) {
       swal("Error", errorLogin, "error");
