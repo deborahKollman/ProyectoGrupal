@@ -73,7 +73,7 @@ export default function PaymentForm() {
 
       else {
         const {id} = paymentMethod;
-        swal("Wait...", "Confirming transaction...", "info")
+        swal("Please wait...", "We are waiting for confirmation", "info")
 
         const { data } = await axios.post("/payments", {
             stripeid:id,

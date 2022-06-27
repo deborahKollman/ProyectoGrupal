@@ -13,7 +13,7 @@ exports.getPayments = async (req, res, next) => {
 exports.postPayment = async (req, res, next) => {
     try {
 
-        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.title);
+        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.title,req.body.contractId);
 
 
         if (r.status) {
@@ -32,9 +32,9 @@ exports.postPayment = async (req, res, next) => {
 };
 
 exports.postMercadopago = async(req,res,next ) => {
-  console.log('POST MP',req.body.title,req.body.price,'controller');
+  console.log('POST MP',req.body.title,req.body.price,'controller',req.body.contractId);
   try {
-    const r = await postMercadopago(req.body.title,req.body.price);
+    const r = await postMercadopago(req.body.title,req.body.price,req.body.contractId);
      res.status(CREATED).send(r);
   } catch (error) {
     next(error);
@@ -44,8 +44,12 @@ exports.postMercadopago = async(req,res,next ) => {
 exports.postMercadopagoSuccess = async(req,res,next ) => {
   console.log('POST success',req.body);
   const codigoPago = 'Mercado Pago-' + req.body.payment_id + '-' + req.body.status + '-' + req.body.payment_type + '-' + req.body.merchant_order_id;
+  if (req.body.contractId === 'undefined') contractId=1
+  else {
+    contractId = req.body.contractId
+  }
   try {
-    const r = await postMercadopagoSuccess2(codigoPago ,req.body.title,req.body.price);
+    const r = await postMercadopagoSuccess2(codigoPago ,req.body.title,req.body.price,contractId);
      res.status(CREATED).send(r);
   } catch (error) {
     next(error);
