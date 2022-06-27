@@ -5,9 +5,16 @@ import Styles from './styles/MyOrder.module.scss'
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 import { getMyOrders } from '../redux/action';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 const MyOrders = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyOrders())
+  }, [dispatch]);
  
   const myorders = useSelector(state => state.orders);
   console.log(myorders)
@@ -34,13 +41,14 @@ const MyOrders = () => {
     },
   ];
   
-  const rows = [
-    { id: 1, price: '320', service: 'Plumber', status: 'completed' },
-    { id: 2, price: '1800', service: 'Mechanic', status: 'pending'},
-    { id: 3, price: '750', service: 'Nurse', status: 'completed'},
-    { id: 4, price: '150', service: 'Teacher', status: 'canceled'},
-  ];
-
+  const rows = myorders.map(order => {
+    return {
+      id: order.id,
+      price: order.publication.price,
+      service: order.publication.title,
+      status: 'completed',
+    }
+  }) 
 
   return (
     <div className={Styles.container}>

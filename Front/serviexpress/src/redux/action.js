@@ -648,7 +648,7 @@ export function getMyOrders() {
       const order = await axios.get(`/contracts`);
       dispatch({
         type: "GET_MY_ORDERS",
-        payload: order,
+        payload: order.data,
       });
     } catch (error) {
       console.log(error);
