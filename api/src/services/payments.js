@@ -19,27 +19,29 @@ exports.getPayments=async()=>{
 }
 
 
-const savePayment = async function (idPublication,idBuyer,stripeid,amount) {
+const savePayment = async function (idPublication,idBuyer,stripeid,amount,contractId) {
   // Guardo un fake contract
-  const contract = await Contract.create({"country": 'Argentina', "postal_code":2000,"city":'Rosario', "state": 'Santa Fe', "address":'San Martin', "service_date":'01/01/2020'})
+  //const contract = await Contract.create({"country": 'Argentina', "postal_code":2000,"city":'Rosario', "state": 'Santa Fe', "address":'San Martin', "service_date":'01/01/2020'})
   
-  //Relaciono la publicacion con el contrato
-  const pub = await Publication.findByPk(idPublication);
-  pub.setContracts(contract)
-
-  //Relaciono el comprador con el contrato
-  const usr = await User.findByPk(idBuyer);
-  usr.setContracts(contract)
-
-
   // Busco el contrtato
-  
-  // Guardo el pago en la base de datos
-  const pay = await Payment.create({stripeid,amount})
-  contract.setPayment(pay)
-  //console.log('El payment',payment)
+  const contract = await Contract.findByPk(contractId);
 
-}
+  if (contract) {
+    console.log('Payments Contrato:',contract);
+
+      //Relaciono la publicacion con el contrato
+    const pub = await Publication.findByPk(idPublication);
+    pub.setContracts(contract)
+
+    //Relaciono el comprador con el contrato
+    const usr = await User.findByPk(idBuyer);
+    usr.setContracts(contract)
+
+    // Guardo el pago en la base de datos
+    const pay = await Payment.create({stripeid,amount})
+    contract.setPayment(pay)
+  }
+};
 
 const sendBuyerMail = async function (usremail,title,amount) {
   const contentHtml=`
@@ -62,10 +64,11 @@ const sendBuyerMail = async function (usremail,title,amount) {
 }
 
 
-exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com', idBuyer=1, idPublication=1,title='' )=>
+exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com', idBuyer=1, idPublication=1,title='', contractId=1 )=>
 {
   try {
     //Confirmo el pago en stripe
+
     const payment = await stripe.paymentIntents.create({
         amount,
         currency: 'USD',
@@ -74,8 +77,10 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
         confirm: true
     });
 
-    savePayment(idPublication,idBuyer,stripeid,amount);
+    savePayment(idPublication,idBuyer,stripeid,amount,contractId);
     sendBuyerMail(usremail,title,amount);
+        
+    // Volver a poner----se saco para probar con Postman
     return payment
   }
   catch(error) {
@@ -85,7 +90,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
 }
 
 //exports.postMercadopago = async(title, price,usremail = 'palmabeto@hotmail.com', idBuyer=1, idPublicacion=1) =>{
-  exports.postMercadopago = async(title, price) =>{
+  exports.postMercadopago = async(title, price, contractId) =>{
     try {
         const preference = {
             items: [{
@@ -95,7 +100,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
             }
             ],
             back_urls: {
-              "success": "http://localhost:3000/mercado/success?title="+title+"&price="+price,
+              "success": "http://localhost:3000/mercado/success?title="+title+"&price="+price+"&contractId="+contractId,
               "failure": "http://localhost:3000/mercado/failure",
               "pending": "http://localhost:3000/home"
             },
@@ -115,12 +120,12 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
     }
 };
 
-exports.postMercadopagoSuccess2 = async (codigoPago ,title,price) => {
+exports.postMercadopagoSuccess2 = async (codigoPago ,title,price,contractId=1) => {
   console.log('en grabar')
   const idPublicacion=1;
   const idBuyer=1;
   const usremail='palmabeto@hotmail.com';
-  savePayment(idPublicacion,idBuyer,codigoPago,price);
+  savePayment(idPublicacion,idBuyer,codigoPago,price,contractId);
   sendBuyerMail(usremail,title,price);
 }
 
