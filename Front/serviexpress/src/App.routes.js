@@ -57,7 +57,7 @@ function App() {
       <Route exact path="/myorders" element={<MyOrders />} />
       <Route exact path="/checkout" element={<Checkout />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/profile/chats" element={<ListSellerChats/>} />
+      <Route path="/profile/chats/:idOrder" element={<ListSellerChats/>} />
       <Route path="/profile/orders" element={<ListOrders />} />
 
 

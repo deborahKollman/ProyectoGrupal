@@ -10,6 +10,7 @@ import {
   SEND_BUDGET,
   POST_CHAT,
   GET_CHAT,
+  GET_BUDGETS
   
   
 } from "./action";
@@ -41,7 +42,7 @@ const initialState = {
 
   budget: 0,
   chat: [],
-
+  budgetsId: [],
 
   rdcr_publications_by_user: [],
 };
@@ -296,12 +297,22 @@ const rootReducer = (state = initialState, action) => {
       }
 
       case GET_CHAT:
-      
+  
         return{
             ...state,
             chat: action.payload,
 
         }
+
+      case GET_BUDGETS:
+       
+
+
+          return {
+              ...state,
+              budgetsId: action.payload,
+
+          } 
 
 
     default:

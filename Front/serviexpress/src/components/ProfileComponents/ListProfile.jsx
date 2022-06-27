@@ -5,23 +5,26 @@ import ProfileId from './ProfileId';
 import styles from '../styles/ListProfile.module.scss';
 import Chat from './Chat';
 import Orders from './Orders';
-import {getUser} from '../../redux/action';
+import {getUser,getBudgets} from '../../redux/action';
 import {useEffect} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
+
 
 export const ListProfile = () => {
 
 
 
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user);  
+    const budgets = useSelector(state => state.budgetsId);
+
 
     useEffect(() => {
       dispatch(getUser());
+      dispatch(getBudgets(user.id));
 
 
-
-    },[dispatch])
+    },[dispatch,user.id])
 
 
 
@@ -113,11 +116,26 @@ export const ListSellerChats = () => {
 };
 
 export const ListOrders = () => {
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);  
+    const budgets = useSelector(state => state.budgetsId);
+
+
+    useEffect(() => {
+      dispatch(getUser());
+      dispatch(getBudgets(user.id));
+
+
+    },[dispatch,user.id])
+
+
+
+
     return <div>    
             <Navbar />
             <div className={styles.container}>
             <SideBarProfile></SideBarProfile>
-            <Orders></Orders>
+            <Orders budgets={budgets}></Orders>
             </div>
 
 

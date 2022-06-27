@@ -6,44 +6,39 @@ import Divider from '@mui/material/Divider';
 import { useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import {getChat} from '../../redux/action'
+import { useParams} from 'react-router-dom';
 
 
 export default function Chat({id}){
-
+    const {idOrder} = useParams();
     const dispatch = useDispatch();
     const chat = useSelector(state => state.chat);
-
 
     useEffect(() => {
 
 
-        dispatch(getChat(id));
+        dispatch(getChat(id,idOrder));
 
 
-    },[dispatch,id])
-    
+    },[dispatch,id,idOrder])
 
     return <div>
-      <Paper sx={{width: 700}}>
+      <Paper sx={{ minWidth: 500}}>
 
        
-        {chat && chat.map(e =>  e.chats.map(element => <List>
-          <ListItem button>
-            <ListItemText primary={element.comment} />
+        {chat && chat.map(e =>  <List sx={{display: 'flex', justifyItems: 'center'}}>
+          <ListItem button alignItems='center'>
+          <ListItemText primary={e.date_comment.slice(0,10)} />
+            <ListItemText primary={e.comment} />
             </ListItem>
                <Divider />
             </List>
 
-           )
+           
 
          )
 
         }
-        
-        
-
-
-     
    </Paper>
     </div>
 

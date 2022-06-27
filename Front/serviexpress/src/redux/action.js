@@ -11,6 +11,8 @@ export const FAVORITE_CHECK = "FAVORITE_CHECK";
 export const SEND_BUDGET = "SEND_BUDGET";
 export const POST_CHAT = "POST_CHAT";
 export const  GET_CHAT = " GET_CHAT";
+export const GET_BUDGETS = "GET_BUDGETS";
+
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -629,13 +631,13 @@ export function postChat(budgetId, comment, id_sender, id_receiver){
 
 };
 
-export function getChat(id){
+export function getChat(id,idOrder){
     return async (dispatch) => {
         const chat = await axios.get('/budgets/chat/'+id);
-        
+        const filtered = chat.data.filter(e => e.id == idOrder);
         dispatch({
           type: GET_CHAT,
-          payload: chat.data,
+          payload: filtered[0].chats,
         })
 
     }
@@ -670,5 +672,30 @@ export const act_putPublication = async (pId, pOform) => {
     } catch (error) {
       console.log(error);
     }
-}
+};
+
+export function getBudgets (id) {
+    return async (dispatch) => {
+
+      try {
+        const {data} = await axios.get(`/budgets`);
+        const filtered =  data.filter(e => e.id_seller === id);
+        
+        dispatch({
+          type: GET_BUDGETS,
+          payload: filtered,
+
+        })
+    
+      } catch (error) {
+        console.log(error);
+      }
+    
+
+
+
+    } 
+
+
+};
 

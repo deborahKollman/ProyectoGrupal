@@ -1,7 +1,7 @@
-import styles from '../styles/SideBarProfile.scss'
+
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
+import "../styles/SideBarProfile.scss";
 
 export default function SideBarProfile() {
 
