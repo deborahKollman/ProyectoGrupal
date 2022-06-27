@@ -23,12 +23,11 @@ export default function SideBarProfile() {
       <div className="center">
         <ul>
           <p className="title">BUYER</p>
-          <Link to="#" style={{ textDecoration: "none" }}>
-            <li>
+          <li>
               
-              <span>Reputation</span>
+              <button name='buyer-reputation' onClick={handleClick}>Reputation</button>
             </li>
-          </Link>
+          
           <Link to="#" style={{ textDecoration: "none" }}>
             <li>
               
@@ -43,9 +42,9 @@ export default function SideBarProfile() {
           </Link>
           <p className="title">SELLER</p>
           <li>
-            
-            <span>Reputation</span>
-          </li>
+              
+              <button name='seller-reputation' onClick={handleClick}>Reputation</button>
+            </li>
           <li>
            
             <span>Notifications</span>

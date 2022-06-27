@@ -12,7 +12,7 @@ export const SEND_BUDGET = "SEND_BUDGET";
 export const POST_CHAT = "POST_CHAT";
 export const  GET_CHAT = " GET_CHAT";
 export const GET_BUDGETS = "GET_BUDGETS";
-
+export const CREATE_USER_CHAT = "CREATE_USER_CHAT"
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -695,6 +695,96 @@ export function getBudgets (id) {
 
 
     } 
+
+
+};
+
+
+export function createUserChat(user,userName,text,pass="algo") {
+
+  return async () => {
+      
+      try {
+          const chat = await axios.put('https://api.chatengine.io/chats/',
+          {
+            usernames: [userName],
+            title: "I want a budget",
+            is_direct_chat: false
+
+            
+        },{
+          headers: {
+          'Project-ID': 'c8321e81-0c9e-42ff-bddc-7b31245f4786',
+          "User-Name": user,
+          "User-Secret": pass,
+        
+        },
+        }
+          
+          );
+
+
+        
+      try {
+         await axios.post(`https://api.chatengine.io/chats/${chat.data.id}/messages/`,
+        {
+          text: text,
+
+          
+      },{
+        headers: {
+        'Project-ID': 'c8321e81-0c9e-42ff-bddc-7b31245f4786',
+        "User-Name": user,
+        "User-Secret": pass,
+      
+      },
+      }
+        
+        );
+  
+      
+    } catch (error) {
+        console.log(error);
+    }
+
+      } catch (error) {
+          console.log(error);
+      }
+
+
+
+
+  }
+
+
+
+};
+
+
+
+export function getMyChat(user,pass) {
+
+  return async (dispatch) => {
+
+      try {
+        const chat =  await axios.get('https://api.chatengine.io/chats/',{
+          headers: {'Project-ID': process.env.REACT_APP_CHAT_ENGINE_PRIVATE_KEY,
+          "User-Name": user,
+          "User-Secret": pass,
+          }
+        });
+        
+      
+        
+      } catch (error) {
+          console.log(error);
+      }
+
+
+
+
+  }
+
 
 
 };

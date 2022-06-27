@@ -8,7 +8,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { useState, useEffect } from 'react';
 import {useSelector,useDispatch } from 'react-redux';
 import {useParams , useNavigate} from 'react-router-dom';
-import {getUser,sendBudget,postChat} from '../redux/action'
+import {getUser,sendBudget,postChat,createUserChat,sendMessageChat,getUserById} from '../redux/action'
 import swal from 'sweetalert';
 
 const Input = styled('input')({
@@ -23,7 +23,7 @@ export default function ContactCard({name,perfil,id_seller,handleClose}){
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const budget = useSelector(state => state.budget)
-
+    const seller = useSelector(state => state.userId)
 
     const [text, setText] = useState({
       publicationId: id,
@@ -37,13 +37,12 @@ export default function ContactCard({name,perfil,id_seller,handleClose}){
 
       useEffect(() => {
           dispatch(getUser());
+          dispatch(getUserById(id_seller))
 
 
+      },[dispatch,id_seller])
 
-      },[dispatch])
-
-
-
+      console.log(process.env.REACT_APP_CHAT_ORDERS_ID);
 
      const handleSubmit = (e) => {
         e.preventDefault();
@@ -58,8 +57,10 @@ export default function ContactCard({name,perfil,id_seller,handleClose}){
 
         })
 
+        dispatch(createUserChat(user.name,seller.name,text.comment_request));
+
         handleClose();
-        //dispatch(postChat(2,text.comment_request,user.id,27));
+        
 
     };
 

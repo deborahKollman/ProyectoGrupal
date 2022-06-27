@@ -10,7 +10,8 @@ import {
   SEND_BUDGET,
   POST_CHAT,
   GET_CHAT,
-  GET_BUDGETS
+  GET_BUDGETS,
+  CREATE_USER_CHAT,
   
   
 } from "./action";
@@ -306,13 +307,17 @@ const rootReducer = (state = initialState, action) => {
 
       case GET_BUDGETS:
        
-
-
-          return {
+         return {
               ...state,
               budgetsId: action.payload,
 
           } 
+      case CREATE_USER_CHAT:
+          return {
+              ...state,
+
+          }
+
 
 
     default:

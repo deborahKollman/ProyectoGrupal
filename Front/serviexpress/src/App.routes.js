@@ -22,7 +22,7 @@ import MercadoPagoSuccess from "./components/MercadoPagoSuccess.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
 import Profile from "./pages/Profile.jsx";
-import {ListOrders,ListSellerChats} from './components/ProfileComponents/ListProfile';
+import {ListOrders,ListSellerChats, ListBuyerReputation, ListSellerReputation} from './components/ProfileComponents/ListProfile';
 import CustomerSupport from "./pages/CustomerSupport.jsx";
 
 function App() {
@@ -58,8 +58,10 @@ function App() {
       <Route exact path="/myorders" element={<MyOrders />} />
       <Route exact path="/checkout" element={<Checkout />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/profile/chats/:idOrder" element={<ListSellerChats/>} />
+      <Route path="/profile/chats" element={<ListSellerChats/>} />
       <Route path="/profile/orders" element={<ListOrders />} />
+      <Route path="/profile/seller-reputation" element={<ListSellerReputation />} />
+      <Route path="/profile/buyer-reputation" element={<ListBuyerReputation />} />
       <Route path="/support" element={<CustomerSupport />} />
 
 
