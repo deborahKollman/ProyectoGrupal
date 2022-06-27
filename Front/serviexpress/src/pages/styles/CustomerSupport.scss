@@ -1,0 +1,10 @@
+.page_customerSuport{
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    .customerSupport-chat{
+        background-color: rgba(0, 7, 5, 0.527);
+        padding: 40px;
+    }
+}
