@@ -27,14 +27,11 @@ export default function PaymentForm() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  const order = useSelector(state => state.orders);
 
   useEffect(() => {
     dispatch(getUser());
-
-
-
   },[dispatch]);
-
 
 
   console.log(myOrder);
@@ -73,12 +70,14 @@ export default function PaymentForm() {
         swal("Please wait...", "We are waiting for confirmation", "info")
 
         const { data } = await axios.post("/payments", {
+            contractId: order.id,
             stripeid:id,
             amount:myOrder.price,
             usremail:user.email,
             idBuyer: user.id,
             idPublicacion: myOrder.id
           });
+          console.log(order.id)
           if(data.status === 'succeeded') { 
               swal("Success", "Service Purchased", "success")
               .then((value)=>{
