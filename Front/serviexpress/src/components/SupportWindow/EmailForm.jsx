@@ -25,8 +25,7 @@ const EmailForm = (props) => {
           },
         }
       );
-      console.log(rsp);
-      pCallback(rsp);
+      pCallback(rsp.data);
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +48,7 @@ const EmailForm = (props) => {
           },
         }
       );
-      console.log(rsp);
-      pCallback(rsp);
+      pCallback(rsp.data);
     } catch (error) {
       console.log(error);
     }
@@ -59,16 +57,15 @@ const EmailForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Sending Email", email);
-    getOrCreateUser((pUser) => {
-      props.pSetUser(pUser);
-      getOrCreateChat((pChat) => {
-        setLoading(false);
-        props.pSetChat(pChat);
-        console.log(pChat, "successfully");
+    
+    getOrCreateUser((user) => {
+        props.pSetUser && props.pSetUser(user);
+        getOrCreateChat((chat) => {
+          setLoading(false);
+          props.pSetChat && props.pSetChat(chat);
+        });
       });
-    });
-  };
+    }
 
   return (
     <MySection pVisible2={props.pVisible} loading={loading.toString()}>
