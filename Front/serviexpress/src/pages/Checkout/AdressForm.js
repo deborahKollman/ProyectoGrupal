@@ -4,47 +4,45 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import FormControl from '@mui/material/FormControl';
-import { Button } from '@mui/material';
+import Input from '@mui/material/Input';
+import { Button, InputLabel } from '@mui/material';
 import swal from 'sweetalert';
 import { useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { postForm } from '../../redux/action';
+import { postForm2} from '../../redux/action';
 
 export default function AddressForm() {
+
   
   const check = /\S+/;
   const regExpr = /^[a-z]+$/i;
-
+  
   const dispatch = useDispatch();
+  const [errors, setErrors] = useState({})
+  
+  // useEffect(() => {
+  //   dispatch(getUser());
+  // }, [dispatch]);
+  
   const me = useSelector(state => state.user)
   console.log(me.id)
-  const [errors, setErrors] = useState({})
-
   let myOrderSelected = JSON.parse(localStorage.getItem('order'))
   
   const validate = (input) => {
-    let temp = { ...errors }
+    let errors = { }
     if (!check.test(input.address) || !regExpr.test(input.address)) 
-        temp.address = "This field is required."
+        errors.address = "This field is required."
     
     if (!check.test(input.city) || !regExpr.test(input.city)) 
-        temp.city = "This field is required."
+        errors.city = "This field is required."
     
     if (!check.test(input.state) || !regExpr.test(input.state))
-        temp.state = "This field is required."
+        errors.state = "This field is required."
   
     if (!check.test(input.country) || !regExpr.test(input.country))
-        temp.country = "This field is required."
-  
-    if (typeof input.postal_code !== "number")
-        temp.postal_code = "Zip code must be a number."
-  
-    setErrors({
-        ...temp
-    })
+        errors.country = "This field is required."
 
-    return temp
+    return errors
   }
 
 
@@ -59,7 +57,7 @@ export default function AddressForm() {
     city: '',
     postal_code: '',
     service_date: new Date(),
-
+    time: ''
   }) 
   
   function handleChange(e) {
@@ -77,7 +75,7 @@ function handleSubmit(e) {
   e.preventDefault();  
   setErrors(validate(input))
   if(input.address && input.city && input.state && input.country && input.postal_code && input.contract_date) { 
-    dispatch(postForm(input))
+    dispatch(postForm2(input))
     console.log(input)
     swal({
       title: 'Completed',
@@ -93,16 +91,10 @@ function handleSubmit(e) {
       state: '',
       city: '',
       postal_code: '',
-      service_date: new Date()
+      service_date: new Date(),
+      time: ''
     })
   }
-  else {
-    swal({
-      title: 'Please complete the form',
-      icon: 'error'
-    })
-  }
-
 }
 
   return (
@@ -121,7 +113,7 @@ function handleSubmit(e) {
           id='address'
           fullWidth
           value={input.address}
-          error={errors.address}
+          helperText={errors.address}
           onChange={(e) => { handleChange(e) }}
           name='address'
           label="Address"
@@ -130,7 +122,7 @@ function handleSubmit(e) {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <p>Date</p>
+          <InputLabel>Date</InputLabel>
           <input
             required
             type="date"
@@ -139,15 +131,27 @@ function handleSubmit(e) {
             label="Contract day"
             onChange={(e) => { handleChange(e) }}
             />
+         <Grid item xs={12} sm={6}>
+            <InputLabel>Time</InputLabel>
+            <input
+            required
+            name='time'
+            type='time'
+            value={input.time}
+            onChange={(e) => { handleChange(e) }}
+             />
+          </Grid>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <TextField
+          <InputLabel>City</InputLabel>
+          <Input
+            type='text'
             required
             id="city"
             name="city"
             value={input.city}
-            error={errors.city}
+            helperText={errors.city}
             label="City"
             fullWidth
             variant="standard"
@@ -160,7 +164,7 @@ function handleSubmit(e) {
             id="state"
             name="state"
             value={input.state}
-            error={errors.state}
+            helperText={errors.state}
             label="State/Province/Region"
             fullWidth
             variant="standard"
@@ -168,12 +172,14 @@ function handleSubmit(e) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <InputLabel>Zip code:</InputLabel>
+          <Input
+            type='number'
             required
             id="zip"
             name="postal_code"
             value={input.postal_code}
-            error={errors.postal_code}
+            helperText={errors.postal_code}
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
@@ -187,7 +193,7 @@ function handleSubmit(e) {
             id="country"
             name="country"
             value={input.country}
-            error={errors.country}
+            helperText={errors.country}
             label="Country"
             fullWidth
             autoComplete="shipping country"

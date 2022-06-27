@@ -10,7 +10,6 @@ import RecoveryPassword from "./pages/RecoveryPassword.jsx";
 import Seller from "./pages/Seller.jsx";
 import ProfileUser from "./pages/ProfileUser.jsx";
 import Favorites from "./pages/Favorites";
-import Orders from "./pages/Orders";
 import Home from "./pages/Home";
 import CreateService from "./pages/CreateService";
 import { useSelector } from "react-redux";
@@ -29,7 +28,7 @@ function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
   return (
     <Routes>
-      {rdcr_isAuth && <Route exact path="/orders" element={<Orders />} />}
+      {rdcr_isAuth && <Route exact path="/orders" element={<MyOrders />} />}
       {rdcr_isAuth && <Route exact path="/favorites" element={<Favorites />} />}
       {rdcr_isAuth && (
         <Route exact path="/seller/add-service" element={<CreateService />} />
@@ -50,9 +49,8 @@ function App() {
       <Route exact path="/mercado" element={<MercadoPago/>} />
 
       <Route path="/payment/:id" element={<Payment />} />
-      <Route exact path="/Home" element={<Home />} />
+      <Route exact path="/home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/prueba" element={<Orders />} />
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
       <Route exact path="/myorders" element={<MyOrders />} />
@@ -63,8 +61,6 @@ function App() {
       <Route path="/profile/seller-reputation" element={<ListSellerReputation />} />
       <Route path="/profile/buyer-reputation" element={<ListBuyerReputation />} />
       <Route path="/support" element={<CustomerSupport />} />
-
-
     </Routes>
   );
 }
