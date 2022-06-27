@@ -12,63 +12,20 @@ import {useDispatch} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { postForm } from '../../redux/action';
 
-  const check = /\S+/;
-  const regExpr = /^[a-z]+$/i;
-  const regNum = /^\d+$/;
-
-// function validate(input) {
-//   let errors = {}
-//   if (!check.test(input.adress) || !check.test(input.state) || !check.test(input.city) ) {
-//    errors.adress = swal({
-//       title: 'Please, fill all the fields',
-//       icon: 'warning'
-//     })
-//   }
-//   // if(!regExpr.test(input.city) || !regExpr.test(input.state) || !regExpr.test(input.country)) {
-//   //   swal({
-//   //     title: 'Incorrect type of data',
-//   //     icon: 'warning'
-//   //   })
-//   // }
-//   if(!regNum.test(input.postal_code)) {
-//     errors.postal_code = swal({
-//       title: 'Zip code must be a number',
-//       icon: 'warning'
-//     })
-//   }
-// }
+  
 
 export default function AddressForm({getStepContent, setActiveStep}) {
 
   const dispatch = useDispatch();
-  const [errors, setError] = useState({})
+
   let myOrderSelected = JSON.parse(localStorage.getItem('order'))
-
   let todaysDate = new Date();
-   
-  const [input, setInput] = useState({
-    //id: myOrderSelected.id,
-    publication: myOrderSelected.id,
-    user: 3,
-    contract_date: '',
-    country: '',
-    state: '',
-    city: '',
-    address: '',
-    postal_code: '',
-    service_date: todaysDate,
-})
 
-function handleChange(e) {
-  setInput({
-    ...input,
-    [e.target.name] : e.target.value
-  })
-  // setError(validate({
-  //   ...input,
-  //   [e.target.name] : e.target.value
-  // }))
-}
+  const [input, setInput] = useState('')
+  
+  const [errors, setError] = useState(false)
+  const [leyenda, setLeyenda] = useState('')
+
 
 function handleSubmit(e) {
   e.preventDefault();  
@@ -79,17 +36,7 @@ function handleSubmit(e) {
       title: 'Completed',
       icon: 'success'
     })
-    setInput({
-      //id: '',
-      contract_date: '',
-      country: '',
-      postal_code: '',
-      state: '',
-      city: '',
-      address: '',
-      service_date: todaysDate,
-    })
-
+    setInput('')
   }
   else {
     //setError(validate(input))
@@ -108,7 +55,30 @@ function handleSubmit(e) {
       <Grid container spacing={3}>
 
         <Grid item xs={12} sm={6}>
-          <TextField
+        <TextField
+          fullWidth
+          onChange={(e) => {
+            setInput(e.target.value);
+            if (input.length === 0) {
+              setError(true)
+              setLeyenda('Complete this field')
+            }
+            else if (input.length < 1) {
+              setError(true)
+              setLeyenda('Please enter your address')
+            } 
+            else {
+              setError(false)
+              setLeyenda('')
+            }
+          }}
+          error={errors}
+          helperText={leyenda}
+          name='address'
+          label="Address"
+          variant="standard"
+        />
+          {/* <TextField
             required
             id="address1"
             name="address"
@@ -118,7 +88,7 @@ function handleSubmit(e) {
             autoComplete="shipping address-line1"
             variant="standard"
             onChange={(e) => handleChange(e)}
-          />
+          /> */}
           {errors.address? errors.adress : null}
         </Grid>
 
@@ -131,7 +101,7 @@ function handleSubmit(e) {
             name="contract_date"
             value={input.contract_date}
             label="Contract day"
-            onChange={(e) => handleChange(e)}
+ 
             />
         </Grid>
 
@@ -145,7 +115,7 @@ function handleSubmit(e) {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
-            onChange={(e) => handleChange(e)}
+           
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -156,7 +126,7 @@ function handleSubmit(e) {
             label="State/Province/Region"
             fullWidth
             variant="standard"
-            onChange={(e) => handleChange(e)}
+           
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -169,7 +139,7 @@ function handleSubmit(e) {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
-            onChange={(e) => handleChange(e)}
+         
           />
           {errors.postal_code? errors.postal_code : null}
         </Grid>
@@ -183,7 +153,7 @@ function handleSubmit(e) {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
-            onChange={(e) => handleChange(e)}
+           
           />
         </Grid>
         <Grid item xs={12}>
