@@ -15,7 +15,7 @@ import Detail from "../../pages/Detail";
 const logo = require("../../assets/icons/log.png");
 
 //=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
-const BurgerButton = ({ msg }) => {
+const BurgerButton = ({ msg,aux }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
@@ -64,8 +64,11 @@ const BurgerButton = ({ msg }) => {
           </StyledBurger>
         </IconButton>
       </div>
+       
+       {!aux ? <SearchGroup msg={msg} /> : null
 
-      <SearchGroup msg={msg} />
+       }
+
       {window.location.href.includes("ome") ? (
         <Button
           variant="text"
@@ -102,7 +105,7 @@ const BurgerButton = ({ msg }) => {
         </li>
       </ListNav>
 
-      {!open && <NavigationBar />}
+      {open && <NavigationBar />}
     </MyHeader>
   );
 };
