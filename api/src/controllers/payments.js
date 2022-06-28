@@ -1,4 +1,9 @@
-const { getPayments, postPayment, postMercadopago, postMercadopagoSuccess2 } = require('../services/payments');
+const {
+  getPayments,
+  postPayment,
+  postMercadopago,
+  postMercadopagoSuccess2
+} = require('../services/payments');
 const { BAD_REQUEST, CREATED, OK } = require('../routes/helpers/status.js');
 
 exports.getPayments = async (req, res, next) => {
@@ -11,15 +16,16 @@ exports.getPayments = async (req, res, next) => {
 };
 
 exports.postPayment = async (req, res, next) => {
-<<<<<<< HEAD
   try {
-    const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion, req.body.title, req.body.contractId);
-=======
-    try {
-      //console.log('***En payment de stripe**:',req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,'contrato:',req.body.contractId)
-        const r = await postPayment(req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,req.body.contractId);
-
->>>>>>> 1e2a103a0941086d1aeddbbf988060c5882fcf80
+    //console.log('***En payment de stripe**:',req.body.stripeid, req.body.amount, req.body.usremail, req.body.idBuyer, req.body.idPublicacion,'contrato:',req.body.contractId)
+    const r = await postPayment(
+      req.body.stripeid,
+      req.body.amount,
+      req.body.usremail,
+      req.body.idBuyer,
+      req.body.idPublicacion,
+      req.body.contractId
+    );
 
     if (r.status) {
       const response = { status: r.status, id: r.id };
@@ -35,44 +41,45 @@ exports.postPayment = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
-exports.postMercadopago = async(req, res, next) => {
-  console.log('POST MP', req.body.title, req.body.price, 'controller', req.body.contractId);
-  try {
-    const r = await postMercadopago(req.body.title, req.body.price, req.body.contractId);
-    res.status(CREATED).send(r);
-=======
-exports.postMercadopago = async(req,res,next ) => {
+exports.postMercadopago = async (req, res, next) => {
   //console.log('POST MP',req.body.title,req.body.price,'controller',req.body.contractId,req.body.usremail);
   try {
-    const r = await postMercadopago(req.body.title,req.body.price,req.body.contractId,req.body.usremail);
-     res.status(CREATED).send(r);
->>>>>>> 1e2a103a0941086d1aeddbbf988060c5882fcf80
+    const r = await postMercadopago(
+      req.body.title,
+      req.body.price,
+      req.body.contractId,
+      req.body.usremail
+    );
+    res.status(CREATED).send(r);
   } catch (error) {
     next(error);
   }
 };
 
-<<<<<<< HEAD
-exports.postMercadopagoSuccess = async(req, res, next) => {
-  console.log('POST success', req.body);
-=======
-exports.postMercadopagoSuccess = async(req,res,next ) => {
+exports.postMercadopagoSuccess = async (req, res, next) => {
   //console.log('POST success',req.body);
->>>>>>> 1e2a103a0941086d1aeddbbf988060c5882fcf80
-  const codigoPago = 'Mercado Pago-' + req.body.payment_id + '-' + req.body.status + '-' + req.body.payment_type + '-' + req.body.merchant_order_id;
+  const codigoPago =
+    'Mercado Pago-' +
+    req.body.payment_id +
+    '-' +
+    req.body.status +
+    '-' +
+    req.body.payment_type +
+    '-' +
+    req.body.merchant_order_id;
   if (req.body.contractId === 'undefined') contractId = 1;
   else {
     contractId = req.body.contractId;
   }
   try {
-<<<<<<< HEAD
-    const r = await postMercadopagoSuccess2(codigoPago, req.body.title, req.body.price, contractId);
+    const r = await postMercadopagoSuccess2(
+      codigoPago,
+      req.body.title,
+      req.body.price,
+      contractId,
+      req.body.usremail
+    );
     res.status(CREATED).send(r);
-=======
-    const r = await postMercadopagoSuccess2(codigoPago ,req.body.title,req.body.price,contractId,req.body.usremail);
-     res.status(CREATED).send(r);
->>>>>>> 1e2a103a0941086d1aeddbbf988060c5882fcf80
   } catch (error) {
     next(error);
   }
