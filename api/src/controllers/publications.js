@@ -1,4 +1,4 @@
-const { BAD_REQUEST, OK } = require('../routes/helpers/status.js')
+const { BAD_REQUEST, OK } = require('../routes/helpers/status.js');
 const {
   getPublications,
   getPublicationDetails,
@@ -18,7 +18,8 @@ exports.getPublications = async (req, res, next) => {
     const { title = '' } = req.query;
     const { cat_id } = req.query;
     const r = await getPublications(offset, limit, title, cat_id);
-    res.json(r);
+    if (r.length>0) res.json(r);
+    else res.status(404).send('Not found')
   } catch (error) {
     next(error);
   }
@@ -58,8 +59,8 @@ exports.postPublication = async (req, res, next) => {
       categoryId,
       services
     } = req.body;
-    var album = null;
-    if(req.files){
+    let album = null;
+    if (req.files) {
       if (!process.env.API) {
         album = req.files.map(
           (e) =>
@@ -130,9 +131,9 @@ exports.deletePublication = async (req, res, next) => {
 
 exports.updatePublication = async (req, res, next) => {
   try {
-    var changes = req.body
-    if(req.files){
-      var album;
+    const changes = req.body;
+    if (req.files) {
+      let album;
       if (!process.env.API) {
         album = req.files.map(
           (e) =>
@@ -158,12 +159,11 @@ exports.updatePublication = async (req, res, next) => {
     }
     const { id } = req.params;
     const update = await updatePublication(id, changes);
-    if(update.err_message){
+    if (update.err_message) {
       res.status(BAD_REQUEST).send(update.err_message);
-    }else{
+    } else {
       res.status(OK).json(update);
     }
-    
   } catch (error) {
     next(error);
   }
@@ -173,13 +173,12 @@ exports.getPublicationsByUserId = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const r = await getPublicationsByUserId(userId);
-    if(r.err_message){
-      res.status(BAD_REQUEST).send(r.err_message)
-    }
-    else{
-      res.status(OK).json(r)
+    if (r.err_message) {
+      res.status(BAD_REQUEST).send(r.err_message);
+    } else {
+      res.status(OK).json(r);
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};

@@ -2,37 +2,30 @@ import  { useState } from "react";
 // import {getVideoGameByName} from '../../redux/action'
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import swal from "sweetalert";
 import { getPublicationsName } from "../redux/action";
 
 
 
 const SearchGroup = ({msg}) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const publicarionname = useSelector((state) => state.publicarionName);
+  const [name, setName] = useState();
   const publication = useSelector((state) => state.Publications);
-  const [crntSearch, setSearch] = useState("");
 
   function handleInputChange(e) {
     e.preventDefault();
     setName(e.target.value);
-    
   }
+
   function handleSubmit(e) {
-    e.preventDefault();
-    
-    if(name === "") msg("Empty field");
-    else {
-       
+    e.preventDefault();   
+    if(name === "") swal({text: "Please enter a name", icon: "warning"});
+    else {     
         dispatch(getPublicationsName(name));
-        publication.length < 1 ? msg("No match found") : msg("");
-     }
-       
-    setName("");
-    
+        // publication.length < 1 ? msg("No match found") : msg("");
+        setName("");
+     }    
   }
-
-
 
   return (
     <MyForm onSubmit={handleSubmit} className="header-input-container">
@@ -44,7 +37,7 @@ const SearchGroup = ({msg}) => {
         type="text"
         value={name}
       />
-      <button onClick={handleSubmit} className="second-icon" />
+      <button onClick={(e) => handleSubmit(e)} className="second-icon" />
     </MyForm>
   );
 };

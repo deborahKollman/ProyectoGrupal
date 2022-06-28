@@ -27,14 +27,14 @@ export default function PaymentForm() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  const orders = useSelector(state => state.orders);
+  const contract = useSelector(state => state.contract);
+  
+  console.log(orders.map(el => el.id))
 
   useEffect(() => {
     dispatch(getUser());
-
-
-
   },[dispatch]);
-
 
 
   console.log(myOrder);
@@ -73,6 +73,7 @@ export default function PaymentForm() {
         swal("Please wait...", "We are waiting for confirmation", "info")
 
         const { data } = await axios.post("/payments", {
+            contractId: contract.id,
             stripeid:id,
             amount:myOrder.price,
             usremail:user.email,
@@ -88,7 +89,7 @@ export default function PaymentForm() {
           else if(data.status === 'rejected') {
               swal("Error", data.id ,"error") 
               .then((value)=>{
-                  navigate("/home", { replace: true })
+                  navigate("/checkout", { replace: true })
               })
           }
       }
@@ -186,7 +187,7 @@ export default function PaymentForm() {
 
       <FormCreate></FormCreate>
 
-      <MercadoPago title={myOrder.title} price={myOrder.price} ></MercadoPago> 
+      <MercadoPago title={myOrder.title} price={myOrder.price} contractId={contract.id} usremail={user.email} ></MercadoPago> 
       </Elements>
 
   );

@@ -11,7 +11,7 @@ const KEY = "TEST-10a9dd6f-c776-453e-8883-6a445a935c93"
 const FORM_ID = 'payment-form';
 
 
-export default function MercadoPago({title,price}) {
+export default function MercadoPago({title,price,contractId,usremail}) {
 
   const mercado = useSelector(state => state.mercadoPago);
   const dispatch = useDispatch();
@@ -19,8 +19,8 @@ export default function MercadoPago({title,price}) {
 
 
   useEffect(() => {
-  
-   dispatch(getMercadoPago(title,price));
+
+   dispatch(getMercadoPago(title,price,contractId,usremail));
  
 
   }, [dispatch]);

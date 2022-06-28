@@ -7,7 +7,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
-const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
+const baseURL = process.env.CLIENT_URL || 'http://localhost:3000';
 
 const loginGoogle = new GoogleStrategy(
   {
@@ -37,7 +37,10 @@ router.get('/', async (req, res) => {
   if (user) {
     return res.send(user);
   } else {
-    res.send({ message: 'Este usuario no registrado', status: 401 });
+    res.send({
+      message: 'Al parecer este usuario no esta registrado 😮',
+      status: 401
+    });
     // openhandle detected!
   }
 });

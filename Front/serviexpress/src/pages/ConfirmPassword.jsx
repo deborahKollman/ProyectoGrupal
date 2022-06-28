@@ -52,9 +52,9 @@ const ConfirmPassword = () => {
         password: "",
         confirmPassword: "",
       });
-      navigate("/home");
+      swal("Felicidades 🎉", "Usuario registrado correctamente", "success");
+      navigate("/login");
     } else {
-      // swal("Error", "Por favor, revisa los errores", "error");
       sweetalert("Error", "Por favor, revisa los errores", "error");
     }
   };

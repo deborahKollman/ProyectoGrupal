@@ -16,6 +16,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ArticleIcon from "@mui/icons-material/Article";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import { getUser } from "../../redux/action";
+import swal from "sweetalert";
 
 export default function AccountMenu({ avatar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -46,6 +47,7 @@ export default function AccountMenu({ avatar }) {
       .then((data) => {
         window.sessionStorage.removeItem("token");
         xDispatch(act_logout());
+        swal("succes", "cierre de sesión correcto", "success");
         xNavigate("/home");
       });
   };

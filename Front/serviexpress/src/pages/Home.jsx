@@ -18,6 +18,7 @@ import ServicesBar from "../components/ServicesBar";
 import Styles from "./styles/Home.module.scss";
 import Carousel from "react-bootstrap/Carousel";
 import stylesDetail from "./styles/stylesDetail.module.scss";
+import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -29,8 +30,10 @@ export default function Home() {
   const dispatch = useDispatch();
   const allPublications = useSelector((state) => state.Publications);
   const SwichL = useSelector((state) => state.switchloading);
-  console.log(SwichL);
-  console.log(allPublications);
+
+  // console.log(SwichL);
+  // console.log(allPublications);
+
   const [CurrentPage, setCurrentPage] = useState(1);
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
@@ -59,6 +62,7 @@ export default function Home() {
     if (!Object.keys(user).length && sendLogin) {
       dispatch(getUser());
       window.localStorage.removeItem("sendLogin");
+      navigate("/login");
     }
 
     if (session && !errorLogin && rdcr_isAuth) {
@@ -77,9 +81,7 @@ export default function Home() {
   }, [allPublications]);
 
   return (
-  
     <div className={Styles.container}>
-      
       <NavBar msg={msg}></NavBar>
       {msgSearch && (
         <Alert
@@ -91,43 +93,49 @@ export default function Home() {
       )}
 
       <FilterByCategories />
-    
-      <div className={Styles.homepaginate}>
-        <Pagination
-          value={allPublications.length}
-          pagination={pagination}
-          items={PublicationsPerPage}
-          pages={Math.ceil(allPublications.length/PublicationsPerPage)}
-        />
-      </div>
+
       <div className={Styles.switchs}>
         <SwitchesGroup />
       </div>
-      <div className={Styles.serviceshome}>
-        {SwichL === true || allPublications.length === 0 ? (
+
+      <div>
+        <div className={Styles.homepaginate}>
+          <Pagination
+            value={allPublications.length}
+            pagination={pagination}
+            items={PublicationsPerPage}
+            pages={Math.ceil(allPublications.length / PublicationsPerPage)}
+          />
+        </div>
+
+        {allPublications.length > 0 ? (
+          <div className={Styles.serviceshome}>
+            {/* {SwichL === true || allPublications.length === 0 ? (
           <Loading></Loading>
+        ) : ( */}
+            {currentServices?.map((e) => {
+              return (
+                <div>
+                  <CardPublications
+                    key={e.id}
+                    id={e.id}
+                    album={e.album}
+                    title={e.title}
+                    summary={e.detail_resume}
+                    userId={e.userId}
+                    price={e.price}
+                    // opinions= {e.opinions}
+                  />
+                </div>
+              );
+            })}
+          </div>
         ) : (
-          currentServices?.map((e) => {
-            return (
-              <div>
-                <CardPublications
-                  key={e.id}
-                  id={e.id}
-                  album={e.album}
-                  title={e.title}
-                  summary={e.detail_resume}
-                  userId={e.userId}
-                  price={e.price}
-                  // opinions= {e.opinions}
-                />
-              </div>
-            );
-          })
+          <CircularProgress />
         )}
       </div>
 
-        <div className="logos"></div>
+      <div className="logos"></div>
     </div>
-    
   );
 }

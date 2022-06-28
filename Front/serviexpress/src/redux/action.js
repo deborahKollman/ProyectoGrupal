@@ -10,7 +10,7 @@ export const GET_STRIPE = "GET_STRIPE";
 export const FAVORITE_CHECK = "FAVORITE_CHECK";
 export const SEND_BUDGET = "SEND_BUDGET";
 export const POST_CHAT = "POST_CHAT";
-export const  GET_CHAT = " GET_CHAT";
+export const GET_CHAT = " GET_CHAT";
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -65,6 +65,7 @@ export const getUser = () => {
         payload: data,
       });
     } else {
+      console.debug(data);
       dispatch({
         type: "USER_LOGIN_ERROR",
         payload: data.message,
@@ -243,14 +244,23 @@ export function getPublicationsName(name) {
           payload: responese.data,
         });
       })
-      .catch(function () {
-        swal({
-          title: "ERROR",
-          text: "Not Found",
-          icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
-          dangerMode: true,
-        });
-      });
+      .catch((error) => {
+        dispatch({
+          type: "GET_PUBLICATIONS_NAME",
+          payload: swal({
+            title: "No matches found",
+            icon: "error",
+          })
+        })
+      })
+      // .catch(function () {
+      //   swal({
+      //     title: "ERROR",
+      //     text: "Not Found",
+      //     icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
+      //     dangerMode: true,
+      //   });
+      // });
   };
 }
 
@@ -382,7 +392,10 @@ export function getErrorRegister() {
         payload: data,
       });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: "GET_ERROR_REGISTER_ERROR",
+        payload: error,
+      });
     }
   };
 }
@@ -405,9 +418,9 @@ export function clearUserRegister() {
   };
 }
 
-export function getMercadoPago(title, price) {
+export function getMercadoPago(title, price, contractId,usremail) {
   return async (dispatch) => {
-    const { data } = await axios.post(`/payments/mercado`, { title, price });
+    const { data } = await axios.post(`/payments/mercado`, { title, price, contractId,usremail });
 
     dispatch({
       type: GET_MERCADOPAGO,
@@ -526,11 +539,12 @@ export function act_getPublicationByUser(pId) {
     }
   };
 }
-export function postForm(input) {
+export function postForm2(input) {
   return async (dispatch) => {
     try {
+      console.log('post-form2')
       let checkoutform = await axios.post(`/contracts`, input);
-      dispatch({ type: "POST_FORM", checkoutform });
+      dispatch({ type: "POST_FORM2", payload: checkoutform.data });
     } catch (error) {
       console.log(error);
     }
@@ -565,15 +579,19 @@ export function filterprice(value) {
       console.log(error);
     }
   };
+}
 
-};
-
-
-export function sendBudget(publicationId,user_request,id_seller,comment_request,picture_request,priority){
-  return async (dispatch) =>{
-
+export function sendBudget(
+  publicationId,
+  user_request,
+  id_seller,
+  comment_request,
+  picture_request,
+  priority,
+) {
+  return async (dispatch) => {
     try {
-       const data = await axios.post("/budgets",{
+      const data = await axios.post("/budgets", {
         publicationId,
         user_request,
         id_seller,
