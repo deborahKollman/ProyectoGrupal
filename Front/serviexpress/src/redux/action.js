@@ -10,7 +10,7 @@ export const GET_STRIPE = "GET_STRIPE";
 export const FAVORITE_CHECK = "FAVORITE_CHECK";
 export const SEND_BUDGET = "SEND_BUDGET";
 export const POST_CHAT = "POST_CHAT";
-export const  GET_CHAT = " GET_CHAT";
+export const GET_CHAT = " GET_CHAT";
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -72,6 +72,7 @@ export const getUser = () => {
         payload: data,
       });
     } else {
+      console.debug(data);
       dispatch({
         type: "USER_LOGIN_ERROR",
         payload: data.message,
@@ -389,7 +390,10 @@ export function getErrorRegister() {
         payload: data,
       });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: "GET_ERROR_REGISTER_ERROR",
+        payload: error,
+      });
     }
   };
 }
@@ -572,79 +576,62 @@ export function filterprice(value) {
       console.log(error);
     }
   };
+}
 
-};
-
-
-export function sendBudget(publicationId,user_request,id_seller,comment_request,picture_request,priority){
-  return async (dispatch) =>{
-
+export function sendBudget(
+  publicationId,
+  user_request,
+  id_seller,
+  comment_request,
+  picture_request,
+  priority,
+) {
+  return async (dispatch) => {
     try {
-       const data = await axios.post("/budgets",{
+      const data = await axios.post("/budgets", {
         publicationId,
         user_request,
         id_seller,
         comment_request,
         picture_request,
-        priority
+        priority,
+      });
 
-       });
-      
       dispatch({
         type: SEND_BUDGET,
-        payload: data.data.id
-      })
-
-
+        payload: data.data.id,
+      });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
+  };
+}
 
+export function postChat(budgetId, comment, id_sender, id_receiver) {
+  return async (dispatch) => {
+    axios.post("/budgets/chat", {
+      budgetId,
+      comment,
+      id_sender,
+      id_receiver,
+    });
 
-  }
+    dispatch({
+      type: POST_CHAT,
+    });
+  };
+}
 
+export function getChat(id) {
+  return async (dispatch) => {
+    const chat = await axios.get("/budgets/chat/" + id);
 
-
-};
-
-
-export function postChat(budgetId, comment, id_sender, id_receiver){
-    return async (dispatch) =>{
-        axios.post("/budgets/chat",{
-          budgetId, 
-          comment, 
-          id_sender, 
-          id_receiver
-
-        }) 
-
-        dispatch({
-          type: POST_CHAT,
-
-
-        })
-    }
-
-
-
-};
-
-export function getChat(id){
-    return async (dispatch) => {
-        const chat = await axios.get('/budgets/chat/'+id);
-        
-        dispatch({
-          type: GET_CHAT,
-          payload: chat.data,
-        })
-
-    }
-
-
-
-};
-
-
+    dispatch({
+      type: GET_CHAT,
+      payload: chat.data,
+    });
+  };
+}
 
 export function updateUser(id, user) {
   return async (dispatch) => {
@@ -657,18 +644,15 @@ export function updateUser(id, user) {
 }
 
 export const act_putPublication = async (pId, pOform) => {
-    try {
-      const responce = await axios.put(`/publications/${pId}`, pOform,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      return responce.data;
-    } catch (error) {
-      console.log(error);
-    }
-}
-
+  try {
+    const responce = await axios.put(`/publications/${pId}`, pOform, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    return responce.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { BsWindowSidebar } from "react-icons/bs";
 import Detail from "../../pages/Detail";
 
-
 const logo = require("../../assets/icons/log.png");
 
 //=>=>=>=>==>=>=>=>=>==> COMPONENT -------------------------
@@ -20,14 +19,14 @@ const BurgerButton = ({ msg }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
-  const nav = useNavigate()
+  const nav = useNavigate();
   const mReloadOpen = () => {
     setOpen(!open);
   };
 
   const { user } = useSelector((state) => state);
   const { rdcr_isAuth } = useSelector((state) => state);
-  const detail = useSelector(state => state.detail);
+  const detail = useSelector((state) => state.detail);
 
   useEffect(() => {
     if (Object.keys(user)?.length > 0) {
@@ -39,15 +38,19 @@ const BurgerButton = ({ msg }) => {
   }, [avatar, rdcr_isAuth]);
 
   function handleRefresh(e) {
-    e.preventDefault()
+    e.preventDefault();
     // window.location.reload(e)
-    dispatch(getPublications())
+    dispatch(getPublications());
   }
 
   return (
     <MyHeader pOpen={open}>
       <div className="initial">
-        <div onClick={() => {nav(`/Home`)}}>
+        <div
+          onClick={() => {
+            nav(`/Home`);
+          }}
+        >
           <figure>
             <img src={logo} alt="" />
           </figure>
@@ -63,19 +66,22 @@ const BurgerButton = ({ msg }) => {
       </div>
 
       <SearchGroup msg={msg} />
-        {window.location.href.includes("ome")?
-          <Button
+      {window.location.href.includes("ome") ? (
+        <Button
           variant="text"
-          onClick={(e) => {handleRefresh(e)}}
+          onClick={(e) => {
+            handleRefresh(e);
+          }}
           sx={{
             color: "black",
             fontSize: 12,
           }}
         >
-        🧹(clean filter)
-        </Button> :
+          🧹(clean filter)
+        </Button>
+      ) : (
         true
-      }
+      )}
       {!rdcr_isAuth ? <InitialSession /> : <LoginSession avatar={avatar} />}
 
       <ListNav pOpen={open}>

@@ -26,9 +26,9 @@ exports.checkUser = async (usr) => {
   }
 };
 
-exports.getAllUsers = async ({page, offset, limit}) => {
+exports.getAllUsers = async ({ page, offset, limit }) => {
   const users = await User.findAll({
-    where: { rol: 'client'},
+    where: { rol: 'client' },
     offset: (page - 1) * offset,
     limit,
     order: [['id', 'ASC']]
@@ -42,27 +42,27 @@ exports.getAllUsers = async ({page, offset, limit}) => {
       +page >= Math.ceil(count / limit)
         ? null
         : `http://localhost:3001/users?page=${
-            +page + 1
-          }&offset=${offset}&limit=${limit}`,
+          +page + 1
+        }&offset=${offset}&limit=${limit}`,
     previous:
       +page <= 1
         ? null
         : `http://localhost:3001/users?page=${
-            +page - 1
-          }&offset=${offset}&limit=${limit}`,
+          +page - 1
+        }&offset=${offset}&limit=${limit}`,
     users
   };
-}
+};
 
 exports.getAllActiveUsers = async ({ page, offset, limit }) => {
   const users = await User.findAll({
-    where: {[Op.and]:[{ rol: 'client'},{state:'Active'}] },
+    where: { [Op.and]: [{ rol: 'client' }, { state: 'Active' }] },
     offset: (page - 1) * offset,
     limit,
     order: [['id', 'ASC']]
   });
   const count = await User.count({
-    where:{state:'Active'}
+    where: { state: 'Active' }
   });
 
   return {
@@ -72,14 +72,14 @@ exports.getAllActiveUsers = async ({ page, offset, limit }) => {
       +page >= Math.ceil(count / limit)
         ? null
         : `http://localhost:3001/users?page=${
-            +page + 1
-          }&offset=${offset}&limit=${limit}`,
+          +page + 1
+        }&offset=${offset}&limit=${limit}`,
     previous:
       +page <= 1
         ? null
         : `http://localhost:3001/users?page=${
-            +page - 1
-          }&offset=${offset}&limit=${limit}`,
+          +page - 1
+        }&offset=${offset}&limit=${limit}`,
     users
   };
 };
@@ -142,16 +142,16 @@ exports.updatePassword = async (email, password) => {
 exports.deleteUser = async (id) => {
   const user = await User.findByPk(id);
   if (user) {
-    await User.update({state:'Inactive'}, { where: { id } });
+    await User.update({ state: 'Inactive' }, { where: { id } });
     const pub = await Publication.findAll({
-      where:{userId:id},
-      attributes:['id']
-    })
-    const pubsId=pub.map((elem)=>{
-      return elem.dataValues.id
-    })
-    for(let i=0;i<pubsId.length;i++){
-      await Publication.update({state:'Inactive'}, { where: { id:pubsId[i]} })
+      where: { userId: id },
+      attributes: ['id']
+    });
+    const pubsId = pub.map((elem) => {
+      return elem.dataValues.id;
+    });
+    for (let i = 0; i < pubsId.length; i++) {
+      await Publication.update({ state: 'Inactive' }, { where: { id: pubsId[i] } });
     }
     return { message: 'User deleted successfully' };
   }
@@ -234,7 +234,7 @@ exports.getFavorites = async (id) => {
   if (!user) {
     return { err_msg: 'User not found' };
   }
- 
+
   return favorites;
 };
 

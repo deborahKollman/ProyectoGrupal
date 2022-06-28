@@ -15,7 +15,7 @@ OAuth2.setCredentials({ refresh_token: acountTransport.auth.refreshToken });
 router.post('/', (req, res) => {
   const { email } = req.body;
   const { type } = req.query;
-  const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
+  const baseURL = process.env.CLIENT_URL || 'http://localhost:3000';
   const response = {
     recovery: `
     <h2>Confirm you email account</h2>

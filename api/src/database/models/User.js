@@ -81,7 +81,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.JSON),
         defaultValue: []
       },
-      state:{
+      state: {
         type: DataTypes.STRING,
         defaultValue: 'Active'
       }

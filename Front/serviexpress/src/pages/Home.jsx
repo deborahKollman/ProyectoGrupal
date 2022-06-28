@@ -29,8 +29,8 @@ export default function Home() {
   const dispatch = useDispatch();
   const allPublications = useSelector((state) => state.Publications);
   const SwichL = useSelector((state) => state.switchloading);
-  console.log(SwichL);
-  console.log(allPublications);
+  // console.log(SwichL);
+  // console.log(allPublications);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
@@ -59,6 +59,7 @@ export default function Home() {
     if (!Object.keys(user).length && sendLogin) {
       dispatch(getUser());
       window.localStorage.removeItem("sendLogin");
+      navigate("/login");
     }
 
     if (session && !errorLogin && rdcr_isAuth) {
@@ -77,9 +78,7 @@ export default function Home() {
   }, [allPublications]);
 
   return (
-  
     <div className={Styles.container}>
-      
       <NavBar msg={msg}></NavBar>
       {msgSearch && (
         <Alert
@@ -91,13 +90,13 @@ export default function Home() {
       )}
 
       <FilterByCategories />
-    
+
       <div className={Styles.homepaginate}>
         <Pagination
           value={allPublications.length}
           pagination={pagination}
           items={PublicationsPerPage}
-          pages={Math.ceil(allPublications.length/PublicationsPerPage)}
+          pages={Math.ceil(allPublications.length / PublicationsPerPage)}
         />
       </div>
       <div className={Styles.switchs}>
@@ -126,8 +125,7 @@ export default function Home() {
         )}
       </div>
 
-        <div className="logos"></div>
+      <div className="logos"></div>
     </div>
-    
   );
 }
