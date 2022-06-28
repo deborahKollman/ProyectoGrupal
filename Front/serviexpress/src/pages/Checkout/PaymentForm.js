@@ -27,7 +27,9 @@ export default function PaymentForm() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const order = useSelector(state => state.orders);
+  const orders = useSelector(state => state.orders);
+  
+  console.log(orders.map(el => el.id))
 
   useEffect(() => {
     dispatch(getUser());
@@ -70,14 +72,14 @@ export default function PaymentForm() {
         swal("Please wait...", "We are waiting for confirmation", "info")
 
         const { data } = await axios.post("/payments", {
-            contractId: order.id,
+            contractId: orders.map(el => el.id),
             stripeid:id,
             amount:myOrder.price,
             usremail:user.email,
             idBuyer: user.id,
             idPublicacion: myOrder.id
           });
-          console.log(order.id)
+          console.log(orders.id)
           if(data.status === 'succeeded') { 
               swal("Success", "Service Purchased", "success")
               .then((value)=>{

@@ -49,7 +49,7 @@ function App() {
       <Route exact path="/mercado" element={<MercadoPago/>} />
 
       <Route path="/payment/:id" element={<Payment />} />
-      <Route exact path="/Home" element={<Home />} />
+      <Route exact path="/home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route exact path="/MyPublications" element={<MyPublications />} />
       <Route exact path="/DetailEdit" element={<DetailEdit />} />
