@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "./styles/Widget.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-
+import { act_getUsersCount, getOrders } from '../redux/action.js'
 
 const Widget = ({ type }) => {
-    let data;
+  const { rdcr_users_count, orders } = useSelector((state) => state)  
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(act_getUsersCount())
+    dispatch(getOrders())
+  },[dispatch, rdcr_users_count, orders])
+
+
+  let data;
   
     //temporary
-    const amount = 100;
     const diff = 20;
   
     switch (type) {
       case "user":
         data = {
           title: "USERS",
+          count: rdcr_users_count,
           isMoney: false,
-          link: "See all users",
+          link_title: "See all users",
+          link: '/users',
           icon: (
             <PersonOutlinedIcon
               className="icon"
@@ -34,8 +47,10 @@ const Widget = ({ type }) => {
       case "order":
         data = {
           title: "ORDERS",
+          count: orders.length,
           isMoney: false,
-          link: "View all orders",
+          link: '/orders',
+          link_title: "View all orders",
           icon: (
             <ShoppingCartOutlinedIcon
               className="icon"
@@ -51,7 +66,8 @@ const Widget = ({ type }) => {
         data = {
           title: "EARNINGS",
           isMoney: true,
-          link: "View net earnings",
+          count: 100,
+          link_title: "View net earnings",
           icon: (
             <MonetizationOnOutlinedIcon
               className="icon"
@@ -64,7 +80,8 @@ const Widget = ({ type }) => {
         data = {
           title: "BALANCE",
           isMoney: true,
-          link: "See details",
+          count: 100,
+          link_title: "See details",
           icon: (
             <AccountBalanceWalletOutlinedIcon
               className="icon"
@@ -81,13 +98,13 @@ const Widget = ({ type }) => {
     }
   
     return (
-      <div className="widget">
+      <div className="widget"> 
         <div className="left">
           <span className="title">{data.title}</span>
           <span className="counter">
-            {data.isMoney && "$"} {amount}
+            {data.isMoney && "$"} {data.count}
           </span>
-          <span className="link">{data.link}</span>
+          <Link to={`${data.link}`} className="link">{data.link_title}</Link>
         </div>
         <div className="right">
           <div className="percentage positive">
