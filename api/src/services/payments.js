@@ -1,20 +1,23 @@
 require('dotenv').config();
-const { Payment, Contract, Publication, User } = require('../database/postgres.js');
-const Stripe = require('stripe');
+const { Payment, Contract, Publication, User }=require('../database/postgres.js')
+const Stripe = require('stripe')
 const axios = require('axios');
 
-const stripe = new Stripe(process.env.STRIPEPRVKEY);
+const stripe = new Stripe(process.env.STRIPEPRVKEY)
+
 
 const mercadopago = require('mercadopago');
 
 mercadopago.configure({
-  access_token: process.env.MERCADOKEY
+	access_token: process.env.MERCADOKEY,
 });
+  
 
-exports.getPayments = async() => {
-  const services = await Payment.findAll();
-  return services;
-};
+exports.getPayments=async()=>{
+    const services=await Payment.findAll()
+    return services;
+}
+
 
 const savePayment = async function (stripeid,amount,contractId) {
 
@@ -27,13 +30,13 @@ const savePayment = async function (stripeid,amount,contractId) {
     //console.log('Payments Contrato:',contract);
 
     // Guardo el pago en la base de datos
-    const pay = await Payment.create({ stripeid, amount });
-    contract.setPayment(pay);
+    const pay = await Payment.create({stripeid,amount})
+    contract.setPayment(pay)
   }
 };
 
-const sendBuyerMail = async function (usremail, title, amount) {
-  const contentHtml = `
+const sendBuyerMail = async function (usremail,title,amount) {
+  const contentHtml=`
   <div style="background-color: rgb(242, 229, 206)">
   <h1 style="background-color: rgb(255, 222, 6)">Payment Confirmation</h1>
   <ul>
@@ -43,26 +46,27 @@ const sendBuyerMail = async function (usremail, title, amount) {
     </ul>
   <p style="background-color: rgb(255, 222, 6)">Your payment has been registered</p>
   </div>
-  `;
-  // Envio el mail al comprador
-  const sendmail = await axios.post('http://localhost:3001/emailpayment', {
-    email: usremail,
-    subject: 'Servi Express - Payment Confirmation',
-    html: contentHtml
-  });
-};
+  `
+      //Envio el mail al comprador
+      const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
+        "email":usremail,
+        "subject": "Servi Express - Payment Confirmation",
+        "html": contentHtml
+  })
+}
+
 
 exports.postPayment = async(stripeid, amount, usremail, idBuyer, idPublication, contractId )=>
 {
   try {
-    // Confirmo el pago en stripe
+    //Confirmo el pago en stripe
 
     const payment = await stripe.paymentIntents.create({
-      amount,
-      currency: 'USD',
-      payment_method: stripeid,
-      payment_method_types: ['card'],
-      confirm: true
+        amount,
+        currency: 'USD',
+        payment_method: stripeid,
+        payment_method_types: ['card'],
+        confirm: true
     });
 
     savePayment(stripeid,amount,contractId);
@@ -114,16 +118,8 @@ exports.postMercadopagoSuccess2 = async (codigoPago ,title,price,contractId,usre
   sendBuyerMail(usremail,title,price);
 }
 
-exports.postMercadopagoSuccess2 = async (codigoPago, title, price, contractId = 1) => {
-  console.log('en grabar');
-  const idPublicacion = 1;
-  const idBuyer = 1;
-  const usremail = 'palmabeto@hotmail.com';
-  savePayment(idPublicacion, idBuyer, codigoPago, price, contractId);
-  sendBuyerMail(usremail, title, price);
-};
 
-/*
+/* 
 exports.getServiceById=async(id)=>{
     const service=await Service.findOne({
         where:{id:id},
@@ -134,27 +130,22 @@ exports.getServiceById=async(id)=>{
           }
         }
     })
-
+    
     return service;
 };
-
 exports.postService=async(name,categories=[])=>{
     const service=await Service.create({name:name});
     service.setCategories(categories)
-
     return {message:'Service updated successfully'}
 }
-
 exports.updateService=async(id,name)=>{
   const service=await Service.findById(id);
-
   if(!service){
     return {err_message:'Service not found'}
   }
   service.update({name});
   return {message:'Service updated successfully'}
 }
-
 exports.deleteService=async(id)=>{
   const service= await Service.findById(id);
   if(!service){
