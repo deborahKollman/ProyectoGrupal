@@ -25,11 +25,9 @@ export default function Chat({id}){
 
     },[dispatch,id,idOrder])
     
-    return <div>
-      <Paper sx={{ minWidth: 1100}}> 
-
+    return <div style={{ display: 'flex', alignItems: 'center'}}>
+      <Paper sx={{ minWidth: 1100}}>
        
-
       <ChatEngine
 			height='70vh'
       
@@ -38,12 +36,11 @@ export default function Chat({id}){
 			projectID={process.env.REACT_APP_CHAT_ORDERS_ID}
 
       
-         renderChatSettings={(chatAppState) => {
-           
-        
-      }}
+   
 
 		/>
+
+  
       
 {/*         {chat && chat.map(e =>  <List sx={{display: 'flex', justifyItems: 'center'}}>
           <ListItem button alignItems='center'>

@@ -14,7 +14,7 @@ export const  GET_CHAT = " GET_CHAT";
 export const GET_BUDGETS = "GET_BUDGETS";
 export const CREATE_USER_CHAT = "CREATE_USER_CHAT";
 export const CREATE_USER_CHAT_ENGINE = 'CREATE_USER_CHAT_ENGINE'; 
-
+export const NOTIFICATIONS = "NOTIFICATIONS";
 
 
 
@@ -808,4 +808,13 @@ export function createUserChatEngine(email,pass){
           console.log(error);
         }
     }
+};
+
+
+export function notifications(){
+
+    
+
+
+
 };

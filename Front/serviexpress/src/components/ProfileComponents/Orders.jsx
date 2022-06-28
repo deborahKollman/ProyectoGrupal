@@ -186,7 +186,7 @@ export default function Orders({budgets}) {
                 {budget.date_request.slice(0,10)}
               </TableCell>
               
-              <Button variant='contained' name={budget.id} onClick={handleBtn}>Contact</Button>
+              <Button variant='contained' disabled={budget.state === 'pending' ? true : false} name={budget.id} onClick={handleBtn}>{budget.state === 'pending' ? 'Pending' : 'Coment'}</Button>
 
 
 
