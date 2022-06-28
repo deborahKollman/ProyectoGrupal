@@ -23,7 +23,8 @@ server.use(
     origin: [
       'http://localhost:3000',
       'http://localhost:4000',
-      'https://serviexpress-client.vercel.app'
+      'https://serviexpress-client.vercel.app',
+      'https://servi-express-admin.vercel.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
