@@ -29,7 +29,7 @@ function App() {
   return (
     <Routes>
       {rdcr_isAuth && <Route exact path="/orders" element={<MyOrders />} />}
-      {rdcr_isAuth && <Route exact path="/favorites" element={<Favorites />} />}
+      {rdcr_isAuth && <Route exact path="/favorites/:id" element={<Favorites />} />}
       {rdcr_isAuth && (
         <Route exact path="/seller/add-service" element={<CreateService />} />
       )}
@@ -44,7 +44,7 @@ function App() {
       <Route exact path="/login/:registerError" element={<Login />} />
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
-      <Route path="/favorites/:id" element={<Favorites />} />
+     
 
       <Route exact path="/mercado/success" element={<MercadoPagoSuccess />} />
       <Route exact path="/mercado" element={<MercadoPago />} />
