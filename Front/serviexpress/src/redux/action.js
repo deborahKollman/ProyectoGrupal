@@ -243,14 +243,23 @@ export function getPublicationsName(name) {
           payload: responese.data,
         });
       })
-      .catch(function () {
-        swal({
-          title: "ERROR",
-          text: "Not Found",
-          icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
-          dangerMode: true,
-        });
-      });
+      .catch((error) => {
+        dispatch({
+          type: "GET_PUBLICATIONS_NAME",
+          payload: swal({
+            title: "No matches found",
+            icon: "error",
+          })
+        })
+      })
+      // .catch(function () {
+      //   swal({
+      //     title: "ERROR",
+      //     text: "Not Found",
+      //     icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
+      //     dangerMode: true,
+      //   });
+      // });
   };
 }
 
