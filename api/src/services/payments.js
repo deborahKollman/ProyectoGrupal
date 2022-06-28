@@ -29,14 +29,6 @@ const savePayment = async function (idPublication,idBuyer,stripeid,amount,contra
   if (contract) {
     console.log('Payments Contrato:',contract);
 
-      //Relaciono la publicacion con el contrato
-    const pub = await Publication.findByPk(idPublication);
-    pub.setContracts(contract)
-
-    //Relaciono el comprador con el contrato
-    const usr = await User.findByPk(idBuyer);
-    usr.setContracts(contract)
-
     // Guardo el pago en la base de datos
     const pay = await Payment.create({stripeid,amount})
     contract.setPayment(pay)

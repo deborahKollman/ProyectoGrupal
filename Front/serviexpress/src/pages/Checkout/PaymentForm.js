@@ -87,7 +87,7 @@ export default function PaymentForm() {
           else if(data.status === 'rejected') {
               swal("Error", data.id ,"error") 
               .then((value)=>{
-                  navigate("/home", { replace: true })
+                  navigate("/checkout", { replace: true })
               })
           }
       }
