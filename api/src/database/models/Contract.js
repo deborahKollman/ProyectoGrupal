@@ -38,6 +38,10 @@ module.exports = (sequelize) => {
       service_date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
+      },
+      status: {
+        type: DataTypes.ENUM('In progress', 'Completed'),
+        defaultValue: 'In progress'
       }
     },
     {
