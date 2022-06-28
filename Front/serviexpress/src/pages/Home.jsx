@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
   swich_loading,
   getPublicationsByCategory,
   getAllCategories,
+  getFavorites
 } from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import FilterByCategories from "../components/Filters/FilterByCategories";
@@ -17,13 +18,14 @@ import NavBar from "../components/NavBar/NavBar";
 import ServicesBar from "../components/ServicesBar";
 import Styles from "./styles/Home.module.scss";
 import Carousel from "react-bootstrap/Carousel";
-import stylesDetail from "./styles/stylesDetail.module.scss";
+// import stylesDetail from "./styles/stylesDetail.module.scss";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import SwitchesGroup from "../components/Filters/switchprice";
+import FooterBar from "../components/FooterBar/FooterBar";
+import Sidebar from "../components/Home/Sidebar";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -38,10 +40,15 @@ export default function Home() {
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
-  const currentServices = allPublications.slice(
-    indexOfFirstPublication,
-    indexOfLastPublication,
-  );
+  let currentServices;
+  if(allPublications.length > 0) {
+    currentServices = allPublications.slice(
+      indexOfFirstPublication,
+      indexOfLastPublication
+    );
+  } else {
+    currentServices = [];
+  }
   const { user, errorLogin, rdcr_isAuth } = useSelector((state) => state);
   const [msgSearch, SetMsgSearch] = useState("");
   const sendLogin = window.localStorage.getItem("sendLogin");
@@ -71,9 +78,11 @@ export default function Home() {
     }
 
     dispatch(getAllCategories());
+    dispatch(getFavorites(user.id))
     setTimeout(() => {
       dispatch(getPublications());
     }, 1000);
+
   }, [dispatch, errorLogin, navigate, sendLogin, rdcr_isAuth, user, session]);
 
   useEffect(() => {
@@ -81,7 +90,7 @@ export default function Home() {
   }, [allPublications]);
 
   return (
-    <div className={Styles.container}>
+    <Fragment>
       <NavBar msg={msg}></NavBar>
       {msgSearch && (
         <Alert
@@ -92,50 +101,50 @@ export default function Home() {
         </Alert>
       )}
 
-      <FilterByCategories />
+      <main className={Styles.Home_Main}>
+        <FilterByCategories />
 
-      <div className={Styles.switchs}>
-        <SwitchesGroup />
-      </div>
+        <div className={Styles.Home_Main_Content}>
+          <section className={Styles.MainSidebar}>
+            <Sidebar/>
+          </section>
 
-      <div>
-        <div className={Styles.homepaginate}>
-          <Pagination
-            value={allPublications.length}
-            pagination={pagination}
-            items={PublicationsPerPage}
-            pages={Math.ceil(allPublications.length / PublicationsPerPage)}
-          />
+          <section className={Styles.MainCards}>
+            <div className={Styles.homepaginate}>
+              <Pagination
+                value={allPublications.length}
+                pagination={pagination}
+                items={PublicationsPerPage}
+                pages={Math.ceil(allPublications.length / PublicationsPerPage)}
+              />
+            </div>
+
+            {allPublications.length > 0 ? (
+              <section className={Styles.serviceshome}>
+                {currentServices?.map((e, i) => {
+                  return (
+                    <div>
+                      <CardPublications
+                        key={i}
+                        id={e.id}
+                        album={e.album}
+                        title={e.title}
+                        summary={e.detail_resume}
+                        userId={e.userId}
+                        price={e.price}
+                      />
+                    </div>
+                  );
+                })}
+              </section>
+            ) : (
+              <CircularProgress sx={{ margin: "30vh 40vw" }} />
+            )}
+          </section>
         </div>
+      </main>
 
-        {allPublications.length > 0 ? (
-          <div className={Styles.serviceshome}>
-            {/* {SwichL === true || allPublications.length === 0 ? (
-          <Loading></Loading>
-        ) : ( */}
-            {currentServices?.map((e) => {
-              return (
-                <div>
-                  <CardPublications
-                    key={e.id}
-                    id={e.id}
-                    album={e.album}
-                    title={e.title}
-                    summary={e.detail_resume}
-                    userId={e.userId}
-                    price={e.price}
-                    // opinions= {e.opinions}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <CircularProgress />
-        )}
-      </div>
-
-      <div className="logos"></div>
-    </div>
+      <FooterBar />
+    </Fragment>
   );
 }

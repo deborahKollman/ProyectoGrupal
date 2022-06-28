@@ -20,7 +20,7 @@ const ChatEngine = (props) => {
       {showChat && (
         <ChatEngineWrapper>
           <Socket
-            projectID={process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
+            projectID='a937c2a4-688e-4dd6-be3e-018b9dff09fb'
             userName={pUser.email}
             userSecret={pUser.email}
           />
