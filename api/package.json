@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest routes --verbose --detectOpenHandles",
     "test:watch": "npm run test -- --watchAll",
-    "dev": "nodemon index.js",
+    "dev": "nodemon index.js && npm run format",
     "start": "node index.js",
     "format": "eslint --fix --ext .js,.jsx ."
   },

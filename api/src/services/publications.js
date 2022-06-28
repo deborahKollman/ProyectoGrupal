@@ -66,34 +66,34 @@ exports.postPublication = async (
   userId,
   services
 ) => {
-  if(!userId){
-    return {err_msg:'Must send userId'}
+  if (!userId) {
+    return { err_msg: 'Must send userId' };
   }
   const user = await User.findOne({ where: { id: userId } });
-  if(user){
-    if(!categoryId){
-      return {err_msg:'Must send categoryId'}
+  if (user) {
+    if (!categoryId) {
+      return { err_msg: 'Must send categoryId' };
     }
-    const category = await Category.findOne({ where: {id:categoryId}});
-    if(category){
-      if(services){
-        var serv=[];
-        if(Array.isArray(services)){
-          for(let i=0;i<services.length;i++){
-            var servM = await Service.findOne({where:{id:services[i]}})
-            if(!servM){return {err_msg:'Service not found'}}
-            serv.push(servM)
+    const category = await Category.findOne({ where: { id: categoryId } });
+    if (category) {
+      if (services) {
+        var serv = [];
+        if (Array.isArray(services)) {
+          for (let i = 0; i < services.length; i++) {
+            var servM = await Service.findOne({ where: { id: services[i] } });
+            if (!servM) { return { err_msg: 'Service not found' }; }
+            serv.push(servM);
           }
-        }else{
-          if(typeof services ==='string'){
-            services = services.split(',')
-          }else{
-            serv.push(services)
+        } else {
+          if (typeof services === 'string') {
+            services = services.split(',');
+          } else {
+            serv.push(services);
           }
-          for(let i=0;i<services.length;i++){
-            var servM = await Service.findOne({where:{id:services[i]}})
-            if(!servM){return {err_msg:'Service not found'}}
-            serv.push(servM)
+          for (let i = 0; i < services.length; i++) {
+            var servM = await Service.findOne({ where: { id: services[i] } });
+            if (!servM) { return { err_msg: 'Service not found' }; }
+            serv.push(servM);
           }
         }
       }
@@ -111,9 +111,9 @@ exports.postPublication = async (
       publication.setServices(serv);
       return publication;
     }
-    return {err_msg:'Category not found'}
+    return { err_msg: 'Category not found' };
   }
-  return {err_msg:'User not found'}
+  return { err_msg: 'User not found' };
 };
 
 exports.getPublicationsByTitle = (title) => {
@@ -128,61 +128,61 @@ exports.getPublicationsByTitle = (title) => {
 };
 
 exports.updatePublication = async (id, publicationChanges) => {
-  var publication = await Publication.findOne({where:{id}})
-  if(publication){
-    await Publication.update({...publicationChanges}, {
+  var publication = await Publication.findOne({ where: { id } });
+  if (publication) {
+    await Publication.update({ ...publicationChanges }, {
       where: { id }
     });
-    if(publicationChanges.categoryId){
-      const cat = publicationChanges.categoryId
-      const category = await Category.findOne({where:{id:cat}});
-      if(category){
+    if (publicationChanges.categoryId) {
+      const cat = publicationChanges.categoryId;
+      const category = await Category.findOne({ where: { id: cat } });
+      if (category) {
         publication.setCategory(category);
-      }else{
-        return {err_message:'Category not found'}
+      } else {
+        return { err_message: 'Category not found' };
       }
     }
-    if(publicationChanges.services){
-      var services = publicationChanges.services
-      var serv=[];
-      if(Array.isArray(services)){
-        for(let i=0;i<services.length;i++){
-          var servM = await Service.findOne({where:{id:services[i]}})
-          if(!servM){return {err_msg:'Service not found'}}
-          serv.push(servM)
+    if (publicationChanges.services) {
+      let services = publicationChanges.services;
+      const serv = [];
+      if (Array.isArray(services)) {
+        for (let i = 0; i < services.length; i++) {
+          var servM = await Service.findOne({ where: { id: services[i] } });
+          if (!servM) { return { err_msg: 'Service not found' }; }
+          serv.push(servM);
         }
-      }else{
-        if(services){
-          services = services.split(',')
-          for(let i=0;i<services.length;i++){
-            var servM = await Service.findOne({where:{id:services[i]}})
-            if(!servM){return {err_msg:'Service not found'}}
-            serv.push(servM)
+      } else {
+        if (services) {
+          services = services.split(',');
+          for (let i = 0; i < services.length; i++) {
+            var servM = await Service.findOne({ where: { id: services[i] } });
+            if (!servM) { return { err_msg: 'Service not found' }; }
+            serv.push(servM);
           }
         }
       }
       publication.setServices(serv);
     }
-    var publication = await Publication.findOne({where:{id}})
+    var publication = await Publication.findOne({ where: { id } });
     return publication;
   }
-  return {err_message:'Publication not found'}
+  return { err_message: 'Publication not found' };
 };
 
 exports.deletePublication = (id) => {
 /*   const publicationDelete = Publication.destroy({
     where: { id }
   }); */
-  const publicationDelete = Publication.update (
+  const publicationDelete = Publication.update(
     {
-      state: 'Inactive',
+      state: 'Inactive'
     },
     {
       where: {
-        id: id,
+        id
       }
     }
-  )
+  );
   return publicationDelete;
 };
 
@@ -197,14 +197,14 @@ exports.getPublicationsByCategory = (cat_id) => {
 
 exports.getPublicationsByUserId = async (id) => {
   const user = await User.findOne({
-    where: {id}
-  })
-  if(user){
+    where: { id }
+  });
+  if (user) {
     const publications = await Publication.findAll({
-      where: {userId: id}
-    })
+      where: { userId: id }
+    });
 
-    return publications
+    return publications;
   }
-  return {err_message: 'User not found'}
-}
+  return { err_message: 'User not found' };
+};

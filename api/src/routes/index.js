@@ -14,20 +14,20 @@ fs.readdirSync(__dirname).forEach((file) => {
 });
 
 // solo para las imagenes de carga base de prueba
-router.get('/public/img/test/:id', (req, res)=>{
+router.get('/public/img/test/:id', (req, res) => {
   const file = req.params.id;
-  res.download('./public/img/test/'+file, file)
+  res.download('./public/img/test/' + file, file);
 });
 //
 
-router.get('/public/img/pub/:id', (req, res)=>{
+router.get('/public/img/pub/:id', (req, res) => {
   const file = req.params.id;
-  res.download('./public/img/pub/'+file, file)
+  res.download('./public/img/pub/' + file, file);
 });
 
-router.get('/cargabase', (req,res)=>{
+router.get('/cargabase', (req, res) => {
   fx();
-  res.send('ok')
+  res.send('ok');
 });
 
 router.get('/', (req, res) => {

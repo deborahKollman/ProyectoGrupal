@@ -10,7 +10,7 @@ export const GET_STRIPE = "GET_STRIPE";
 export const FAVORITE_CHECK = "FAVORITE_CHECK";
 export const SEND_BUDGET = "SEND_BUDGET";
 export const POST_CHAT = "POST_CHAT";
-export const  GET_CHAT = " GET_CHAT";
+export const GET_CHAT = " GET_CHAT";
 
 export const types = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -65,6 +65,7 @@ export const getUser = () => {
         payload: data,
       });
     } else {
+      console.debug(data);
       dispatch({
         type: "USER_LOGIN_ERROR",
         payload: data.message,
@@ -391,7 +392,10 @@ export function getErrorRegister() {
         payload: data,
       });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: "GET_ERROR_REGISTER_ERROR",
+        payload: error,
+      });
     }
   };
 }
@@ -575,15 +579,19 @@ export function filterprice(value) {
       console.log(error);
     }
   };
+}
 
-};
-
-
-export function sendBudget(publicationId,user_request,id_seller,comment_request,picture_request,priority){
-  return async (dispatch) =>{
-
+export function sendBudget(
+  publicationId,
+  user_request,
+  id_seller,
+  comment_request,
+  picture_request,
+  priority,
+) {
+  return async (dispatch) => {
     try {
-       const data = await axios.post("/budgets",{
+      const data = await axios.post("/budgets", {
         publicationId,
         user_request,
         id_seller,

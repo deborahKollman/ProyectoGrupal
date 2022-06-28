@@ -21,7 +21,10 @@ import MercadoPagoSuccess from "./components/MercadoPagoSuccess.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
 import Checkout from "./pages/Checkout/CheckoutForm.js";
 import Profile from "./pages/Profile.jsx";
-import {ListOrders,ListSellerChats} from './components/ProfileComponents/ListProfile';
+import {
+  ListOrders,
+  ListSellerChats,
+} from "./components/ProfileComponents/ListProfile";
 import CustomerSupport from "./pages/CustomerSupport.jsx";
 
 function App() {
@@ -39,14 +42,15 @@ function App() {
       <Route exact path="/recoverypass" element={<RecoveryPassword />} />
       <Route exact path="/register" element={<Register />} />
       <Route exact path="/confirm" element={<ConfirmPassword />} />
-      <Route exact path="/sendEmail/:type" element={<SendEmail />} />
+      <Route exact path="/sendEmail/:type/:userEmail" element={<SendEmail />} />
       <Route exact path="/login" element={<Login />} />
+      <Route exact path="/login/:registerError" element={<Login />} />
       <Route exact path="/" element={<LandingPage />} />
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/favorites/:id" element={<Favorites />} />
 
-      <Route exact path="/mercado/success" element={<MercadoPagoSuccess/>} />
-      <Route exact path="/mercado" element={<MercadoPago/>} />
+      <Route exact path="/mercado/success" element={<MercadoPagoSuccess />} />
+      <Route exact path="/mercado" element={<MercadoPago />} />
 
       <Route path="/payment/:id" element={<Payment />} />
       <Route exact path="/home" element={<Home />} />
@@ -56,7 +60,7 @@ function App() {
       <Route exact path="/myorders" element={<MyOrders />} />
       <Route exact path="/checkout" element={<Checkout />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/profile/chats" element={<ListSellerChats/>} />
+      <Route path="/profile/chats" element={<ListSellerChats />} />
       <Route path="/profile/orders" element={<ListOrders />} />
       <Route path="/support" element={<CustomerSupport />} />
     </Routes>

@@ -7,20 +7,18 @@ import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
 import Alert from "@mui/material/Alert";
 import swal from "sweetalert";
-
 import "./styles/Login.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getUserr,
   getErrorRegister,
   clearErrorRegister,
   loginUser,
   clearErrorLogin,
   clearErrorDataLogin,
 } from "../redux/action";
-const baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+const baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 const validate = ({ email, password }) => {
   let error = "";
@@ -35,16 +33,15 @@ const validate = ({ email, password }) => {
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { errorLogin, errorDataLogin, rdcr_isAuth } = useSelector(
-    (state) => state,
-  );
+  const { errorLogin, errorDataLogin, rdcr_isAuth, errorRegister } =
+    useSelector((state) => state);
 
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
-
+  const { registerError } = useParams();
   const loginGoogle = () => {
     window.localStorage.setItem("session", true);
     window.localStorage.setItem("sendLogin", true);
@@ -75,12 +72,16 @@ const Login = () => {
   };
 
   useEffect(() => {
+    if (registerError) {
+      swal("Hubo algun error", "Al parecer ya estas registrado", "error");
+      navigate("/login");
+    }
     if (sendLogin) {
       window.localStorage.removeItem("sendLogin");
       window.localStorage.removeItem("session");
     }
     if (errorLogin) {
-      swal("Error", errorLogin, "error");
+      swal("Hubo algun error", errorLogin, "error");
       dispatch(clearErrorLogin());
     }
     if (errorDataLogin) {
@@ -90,9 +91,16 @@ const Login = () => {
     if (rdcr_isAuth && !sendLogin) {
       swal("Inicio de sesión correcto", "Logeado", "success");
       navigate("/home");
-      // si no da error es una feature 😂
     }
-  }, [dispatch, errorLogin, errorDataLogin, rdcr_isAuth, navigate, sendLogin]);
+  }, [
+    dispatch,
+    errorLogin,
+    errorDataLogin,
+    rdcr_isAuth,
+    navigate,
+    sendLogin,
+    registerError,
+  ]);
 
   return (
     <div className="page-login">

@@ -1,6 +1,5 @@
 const { Router } = require('express');
-const {getPayments, postPayment, postMercadopago, postMercadopagoSuccess } = require('../controllers/payments.js');
-
+const { getPayments, postPayment, postMercadopago, postMercadopagoSuccess } = require('../controllers/payments.js');
 
 const router = Router();
 
@@ -9,20 +8,17 @@ router.post('/', postPayment);
 router.post('/mercado', postMercadopago);
 router.post('/mercado/success', postMercadopagoSuccess);
 
-
 router.get('/feedback', function(req, res) {
-	res.json({
-		Payment: req.query.payment_id,
-		Status: req.query.status,
-		MerchantOrder: req.query.merchant_order_id
-	});
+  res.json({
+    Payment: req.query.payment_id,
+    Status: req.query.status,
+    MerchantOrder: req.query.merchant_order_id
+  });
 });
 
 /*
 
 router.get('/:id',getServiceById);
-
-
 
 router.put('/:id',updateService);
 
