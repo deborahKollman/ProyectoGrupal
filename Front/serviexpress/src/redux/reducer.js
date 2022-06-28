@@ -12,7 +12,7 @@ import {
   GET_CHAT,
   GET_BUDGETS,
   CREATE_USER_CHAT,
-  
+  CREATE_USER_CHAT_ENGINE,
   
 } from "./action";
 const initialState = {
@@ -67,7 +67,7 @@ const rootReducer = (state = initialState, action) => {
         Publications: action.payload,
       };
     case "GET_CATEGORIES":
-      console.log("red", action.payload);
+   
       return {
         ...state,
         categories: action.payload,
@@ -332,7 +332,11 @@ const rootReducer = (state = initialState, action) => {
 
           }
 
+      case CREATE_USER_CHAT_ENGINE:
+        return {
+            ...state,
 
+        }
 
     default:
       return state;

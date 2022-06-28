@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import GoogleIcon from "@mui/icons-material/Google";
 import Alert from "@mui/material/Alert";
 import swal from "sweetalert";
+import {createUserChatEngine,getUser} from '../redux/action'
 
 import "./styles/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,6 +33,8 @@ const validate = ({ email, password }) => {
   return error;
 };
 
+
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,8 +54,11 @@ const Login = () => {
     window.open(`${baseURL}/login/google`, "_self");
   };
   const sendLogin = window.localStorage.getItem("sendLogin");
+  const user = useSelector(state => state.user);
+
   const loginLocal = () => {
     setError(validate(form));
+    
     if (!error) {
       dispatch(
         loginUser({
@@ -60,6 +66,8 @@ const Login = () => {
           password: form.password,
         }),
       );
+      dispatch(createUserChatEngine(form.email,form.email))
+   
       setForm({
         email: "",
         password: "",
@@ -76,6 +84,7 @@ const Login = () => {
 
   useEffect(() => {
     if (sendLogin) {
+      console.log(window.localStorage.getItem("sendLogin"));
       window.localStorage.removeItem("sendLogin");
       window.localStorage.removeItem("session");
     }
@@ -87,12 +96,17 @@ const Login = () => {
       swal("Error", errorDataLogin, "error");
       dispatch(clearErrorDataLogin());
     }
-    if (rdcr_isAuth && !sendLogin) {
+    if (rdcr_isAuth && !sendLogin) {  
+/*       dispatch(getUser());
+      console.log(user);
+      dispatch(createUserChatEngine(user.email,user.email)); */
+
+      
       swal("Inicio de sesión correcto", "Logeado", "success");
       navigate("/home");
       // si no da error es una feature 😂
     }
-  }, [dispatch, errorLogin, errorDataLogin, rdcr_isAuth, navigate, sendLogin]);
+  }, [dispatch, errorLogin, errorDataLogin, rdcr_isAuth, navigate, sendLogin,form.email]);
 
   return (
     <div className="page-login">

@@ -28,7 +28,7 @@ const fxpub = async function() {
             "detail":"Más de 25 años ofreciendo nuestros servicios garantizan nuestro compromiso de excelencia y calidad acorde al precio pactado por los trabajos. Además, somos técnicos matriculados para todo el rubro de la construcción e instalaciones, por lo cual brindamos todos los servicios que requieran sus obras.",
             "detail_resume": "Cielo raso - placas - PVC - Machimbres",
             "price": 6300,
-            "userId": 8,
+            "userId": 2,
             "categoryId":1,
             "services": [2]})
          

@@ -42,7 +42,7 @@ export default function ContactCard({name,perfil,id_seller,handleClose}){
 
       },[dispatch,id_seller])
 
-      console.log(process.env.REACT_APP_CHAT_ORDERS_ID);
+ 
 
      const handleSubmit = (e) => {
         e.preventDefault();
@@ -57,7 +57,7 @@ export default function ContactCard({name,perfil,id_seller,handleClose}){
 
         })
 
-        dispatch(createUserChat(user.name,seller.name,text.comment_request));
+        dispatch(createUserChat(user.email,seller.email,text.comment_request,user.email));
 
         handleClose();
         

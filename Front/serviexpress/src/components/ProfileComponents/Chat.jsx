@@ -24,27 +24,27 @@ export default function Chat({id}){
 
 
     },[dispatch,id,idOrder])
-
+    
     return <div>
       <Paper sx={{ minWidth: 1100}}> 
 
-     
+       
 
       <ChatEngine
 			height='70vh'
       
-			userName={user.name}
-			userSecret="algo"
-			projectID='c8321e81-0c9e-42ff-bddc-7b31245f4786'
+			userName={user.email}
+			userSecret={user.email}
+			projectID={process.env.REACT_APP_CHAT_ORDERS_ID}
 
-
+      
          renderChatSettings={(chatAppState) => {
            
         
       }}
 
 		/>
-           
+      
 {/*         {chat && chat.map(e =>  <List sx={{display: 'flex', justifyItems: 'center'}}>
           <ListItem button alignItems='center'>
           <ListItemText primary={e.date_comment.slice(0,10)} />

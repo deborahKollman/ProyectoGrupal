@@ -24,9 +24,10 @@ export default function ReputationBuyer(){
 
     },[dispatch])
 
+    let ar = [1,2,3,4,5,6]
     console.log(user);
      return <div>
-            <Stack>
+            <Stack  alignItems="center">
               <Avatar alt="Avatar" src={user.avatar_image}  sx={{ width: 100, height: 100 }}/>
               <Typography gutterBottom variant="h2" component="div">
                 {user.name + "  " + user.last_name}
@@ -35,8 +36,8 @@ export default function ReputationBuyer(){
             As Buyer..
           </Typography>
 
-            <Stack>
-            {user.buyer_opinions && user.buyer_opinions.map(e => <Card sx={{ maxWidth: 345 }}>
+            <Stack    direction="row" >
+            {user.buyer_opinions && ar.map(e => <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
           <CardMedia
             component="img"

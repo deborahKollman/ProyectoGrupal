@@ -5,7 +5,7 @@ const fxuser = async function() {
     try {
         const juan=await User.create(
             {email:'nnxx@hotmail.com', 
-            password: '123456', 
+            password: '123456789', 
             name: 'Juan', 
             last_name: 'Perez',
             country: 'Peru',
@@ -23,9 +23,32 @@ const fxuser = async function() {
             seller_opinions:[{commenter:"Fulano Perez",comment:"Que buen servicio",rating:5},{commenter:"Mengano Gomez",comment:"Trabajo decente, medio caro",rating:3}],
         })
         juan.createFavorite()
+        const leo = await User.create(
+            {email:'leonardo@gmail.com', 
+            password: 'leo1234', 
+            name: 'Leonardo ', 
+            last_name: 'Aguirre',
+            country: 'Mexico',
+            province_state: 'Jalisco',
+            rol: 'client' ,
+            description: "Seller Prueba",
+            avatar_image: "https://lh3.googleusercontent.com/a-/AOh14GgBHQmhGGJRY48XGosIktPoELevkD2Kvk_2Nm13JA=s96-c",
+            buyer_reputation: 4,  
+            buyer_opinions:[
+            {commenter:"Jorge Fernandez",comment:"Actitud negativa y muy caro",rating:2,buyer_avatar: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Alicia Sanchez",comment:"Buen trabajo",rating:4,buyer_avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+            {commenter:"Damian Juarez",comment:"Lo recomiendo muchisimo",rating:5,buyer_avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}
+        ],
+            seller_reputation: 4,
+            seller_opinions:[{commenter:"Jorge Juarez",comment:"Mal Servicio",rating:1},{commenter:"Jhonatan Perez",comment:"Muy puntual y responsable",rating:5}],
+        }
+
+
+        )
+
         const fernando=await User.create(
             {email:'fer@hotmail.com', 
-            password: '123456', 
+            password: '123456789', 
             name: 'Fernando', 
             last_name: 'Fernandez',
             country: 'Argentina',
