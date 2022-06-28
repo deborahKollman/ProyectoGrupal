@@ -4,7 +4,6 @@ export const GET_ORDERS = "GET_ORDERS";
 
 
  
- const URL = "http://localhost:3001";
  
 export const act_themeTogle = () => {
   return {
@@ -15,9 +14,9 @@ export const act_themeTogle = () => {
 export const act_getAllUsers = () => {
   return async (dispatch) => {
     try {
-      console.log("first");
+      
       const { data } = await axios.get(`/users`);
-      console.log("second", data);
+      
       dispatch({
         type: "GET_ALL_USERS",
         payload: data.users,
@@ -27,6 +26,20 @@ export const act_getAllUsers = () => {
     }
   };
 };
+
+export const act_getUsersCount = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/users`);
+      dispatch({
+        type: "GET_USERS_COUNT",
+        payload: data.count,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 
 export function act_getUserById(pIdentity) {
   return async (dispatch) => {
@@ -140,7 +153,7 @@ export function getOrders(){
 
     return async (dispatch) => {
       try {
-         const {data} = await axios.get(`${URL}/contracts`);
+         const {data} = await axios.get(`/contracts`);
 
          dispatch({
             type: GET_ORDERS,

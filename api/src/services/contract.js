@@ -18,7 +18,7 @@ exports.getContracts = async () => {
         model: Publication
       }
     ],
-    order: [['id', 'ASC']]
+    order: [['id', 'DESC']]
   });
   return contract;
 };

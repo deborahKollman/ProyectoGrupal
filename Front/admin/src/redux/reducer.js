@@ -3,6 +3,7 @@ import { GET_ORDERS } from "./action";
  
 const initialState = {
   rdcr_darkMode: false,
+  rdcr_users_count: 0,
   rdcr_users: [],
   rdcr_user: {},
   rdcr_categories: [],
@@ -25,6 +26,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         rdcr_users: payload,
+      };
+    }
+    case "GET_USERS_COUNT": {
+      return {
+        ...state,
+        rdcr_users_count: payload,
       };
     }
     case "GET_USER_BY_ID": {
