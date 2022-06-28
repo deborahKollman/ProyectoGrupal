@@ -66,6 +66,7 @@ const Widget = ({ type }) => {
         data = {
           title: "EARNINGS",
           isMoney: true,
+          link: '/home',
           count: 100,
           link_title: "View net earnings",
           icon: (
@@ -82,6 +83,7 @@ const Widget = ({ type }) => {
           isMoney: true,
           count: 100,
           link_title: "See details",
+          link: '/home',
           icon: (
             <AccountBalanceWalletOutlinedIcon
               className="icon"
@@ -104,7 +106,7 @@ const Widget = ({ type }) => {
           <span className="counter">
             {data.isMoney && "$"} {data.count}
           </span>
-          <Link to={`${data.link}`} className="link">{data.link_title}</Link>
+          <Link to={`${data.link}`} style={{ textDecoration: "none" }} className="link">{data.link_title}</Link>
         </div>
         <div className="right">
           <div className="percentage positive">
