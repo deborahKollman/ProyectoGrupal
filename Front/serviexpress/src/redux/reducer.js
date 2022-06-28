@@ -289,6 +289,12 @@ const rootReducer = (state = initialState, action) => {
         ...state
       }
 
+      case 'POST_FORM2':
+        return {
+          ...state,
+          contract: action.payload
+        }
+      
     case SEND_BUDGET:
  
       return {

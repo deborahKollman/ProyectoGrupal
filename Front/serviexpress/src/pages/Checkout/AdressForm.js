@@ -9,7 +9,7 @@ import { Button, InputLabel } from '@mui/material';
 import swal from 'sweetalert';
 import { useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { postForm} from '../../redux/action';
+import { postForm2} from '../../redux/action';
 
 export default function AddressForm() {
 
@@ -75,7 +75,7 @@ function handleSubmit(e) {
   e.preventDefault();  
   setErrors(validate(input))
   if(input.address && input.city && input.state && input.country && input.postal_code && input.contract_date) { 
-    dispatch(postForm(input))
+    dispatch(postForm2(input))
     console.log(input)
     swal({
       title: 'Completed',
