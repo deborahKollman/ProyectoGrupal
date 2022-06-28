@@ -19,7 +19,7 @@ exports.getPayments=async()=>{
 }
 
 
-const savePayment = async function (idPublication,idBuyer,stripeid,amount,contractId) {
+const savePayment = async function (stripeid,amount,contractId) {
   // Guardo un fake contract
   //const contract = await Contract.create({"country": 'Argentina', "postal_code":2000,"city":'Rosario', "state": 'Santa Fe', "address":'San Martin', "service_date":'01/01/2020'})
   
@@ -69,7 +69,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
         confirm: true
     });
 
-    savePayment(idPublication,idBuyer,stripeid,amount,contractId);
+    savePayment(stripeid,amount,contractId);
     sendBuyerMail(usremail,title,amount);
         
     // Volver a poner----se saco para probar con Postman
@@ -101,9 +101,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
 
       const data = await mercadopago.preferences.create(preference);
       const respId = data.body.id;
-      //savePayment(idPublicacion,idBuyer,respId,price);
-      //sendBuyerMail(usremail,title,price);
-      //this.postPayment(respId,price,usremail, idBuyer, idPublicacion,title)
+
       console.log('Respond ID de MP:', respId);
       return respId;
       
@@ -114,10 +112,8 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
 
 exports.postMercadopagoSuccess2 = async (codigoPago ,title,price,contractId=1) => {
   console.log('en grabar')
-  const idPublicacion=1;
-  const idBuyer=1;
-  const usremail='palmabeto@hotmail.com';
-  savePayment(idPublicacion,idBuyer,codigoPago,price,contractId);
+  // const usremail='palmabeto@hotmail.com';
+  savePayment(codigoPago,price,contractId);
   sendBuyerMail(usremail,title,price);
 }
 
