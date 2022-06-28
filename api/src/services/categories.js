@@ -3,65 +3,64 @@ const { Category, Service } = require('../database/postgres.js');
 
 exports.getCategories = async () => {
   // Retorna un arreglo de servicios, y por cada uno, en forma anidada, los servicios
-//Esto son algunos datos agregados
-  
+// Esto son algunos datos agregados
+
   const categories = await Category.findAll({
-    include:{
-      model:Service,
-      through:{
-        attributes:[]
+    include: {
+      model: Service,
+      through: {
+        attributes: []
       }
     }
   });
-  
+
   return categories;
 };
 
 exports.getCategoriesOnly = async () => {
-  //Esta funcion solo retorna categorias
+  // Esta funcion solo retorna categorias
   const categories = await Category.findAll();
-  
+
   return categories;
-}
-
-exports.getCategorieById=async(id)=>{
-  const category= await Category.findOne({
-    where:{id:id},
-    include:{
-      model:Service,
-      through:{
-        attributes:[]
-      }
-    }
-  })
-
-  return category
 };
 
-exports.postCategory=async(name,services=[])=>{
-  const category=await Category.create({name:name});
-  category.setServices(services)
+exports.getCategorieById = async(id) => {
+  const category = await Category.findOne({
+    where: { id },
+    include: {
+      model: Service,
+      through: {
+        attributes: []
+      }
+    }
+  });
 
-  return {message:'Category added successfully'};
-}
+  return category;
+};
+
+exports.postCategory = async(name, services = []) => {
+  const category = await Category.create({ name });
+  category.setServices(services);
+
+  return { message: 'Category added successfully' };
+};
 
 exports.deleteCategory = async (id) => {
   // Elimina una categoria
-  const category = await Category.findByPk(id)
-  if(!category){
-    return {err_message:'Category not found'}
+  const category = await Category.findByPk(id);
+  if (!category) {
+    return { err_message: 'Category not found' };
   }
-  await Category.destroy({where:{id:id}});
-  return {message:'Category deleted successfully'}
+  await Category.destroy({ where: { id } });
+  return { message: 'Category deleted successfully' };
 };
 
 exports.updateCategory = async (id, name) => {
   // Actualiza una categoria
   const category = await Category.findByPk(id);
-  if(!category){
-    return {err_message:'Category not found'}
+  if (!category) {
+    return { err_message: 'Category not found' };
   }
   await category.update({ name });
-  return {message:'Category updated successfully'};
-}
-
+  return { message: 'Category updated successfully' };
+};

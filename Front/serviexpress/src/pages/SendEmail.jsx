@@ -27,10 +27,10 @@ const validate = (form) => {
 };
 
 const SendEmail = () => {
-  const { type } = useParams();
+  const { type, userEmail } = useParams();
 
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(userEmail || "");
   const [errors, setErrors] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();

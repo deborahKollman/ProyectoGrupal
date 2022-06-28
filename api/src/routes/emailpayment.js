@@ -16,8 +16,8 @@ OAuth2.setCredentials({ refresh_token: acountTransport.auth.refreshToken });
 router.post('/', (req, res) => {
   const { email } = req.body;
   const { type } = req.query;
-  const { subject , html} = req.body
-  const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
+  const { subject, html } = req.body;
+  const baseURL = process.env.CLIENT_URL || 'http://localhost:3000';
   const response = {
     recovery: `
     <h2>Confirm you email account</h2>
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
   };
   async function sendMail() {
     try {
-      //const accessToken = await OAuth2.getAccessToken();
+      // const accessToken = await OAuth2.getAccessToken();
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -50,16 +50,16 @@ router.post('/', (req, res) => {
           user: acountTransport.auth.user,
           clientId: acountTransport.auth.clientId,
           clientSecret: acountTransport.auth.clientSecret,
-          refreshToken: acountTransport.auth.refreshToken,
-          //accessToken
-        } 
+          refreshToken: acountTransport.auth.refreshToken
+          // accessToken
+        }
       });
       const mailOptions = {
         from: 'Servi Express - Services',
         to: email,
         html,
         subject
-        //text
+        // text
       };
 
       const info = await transporter.sendMail(mailOptions);

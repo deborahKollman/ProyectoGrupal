@@ -11,7 +11,6 @@ import { getUser } from "../../redux/action";
 import { useEffect } from "react";
 
 const NavigationBar = () => {
-  
   const [showFixed, setShowFixed] = useState(false);
 
   const handleScroll = () => {
@@ -28,20 +27,15 @@ const NavigationBar = () => {
 
   const dispatch = useDispatch();
 
-  const handleFav = () =>{
-      console.log("hola");
-      
+  const handleFav = () => {
+    console.log("hola");
   };
 
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-      dispatch(getUser())
-
-
-  },[]);
-
-
+    // dispatch(getUser())
+  }, []);
 
   const renderList = (fixed) => (
     <List fixed={fixed}>
@@ -67,7 +61,6 @@ const NavigationBar = () => {
         onClick={() => {
           mNavigation(`favorites/${user.id}`);
         }}
-        
       />
 
       <BottomNavigationAction

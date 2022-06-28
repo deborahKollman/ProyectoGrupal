@@ -23,14 +23,13 @@ server.use(
     origin: [
       'http://localhost:3000',
       'http://localhost:4000',
-      'https://serviexpress-client.vercel.app'
+      'https://serviexpress-client.vercel.app',
+      'https://servi-express-admin.vercel.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   })
 );
-
-
 
 server.use(express.static('public'));
 server.set('trust proxy',1)
@@ -60,9 +59,9 @@ server.use(passport.session());
 server.use(passport.authenticate('session'));
 
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Methods',  'true');
-  res.header('Access-Control-Allow-Headers', 
-  'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'true');
+  res.header('Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });

@@ -84,7 +84,7 @@ const Login = () => {
 
   useEffect(() => {
     if (sendLogin) {
-      console.log(window.localStorage.getItem("sendLogin"));
+      
       window.localStorage.removeItem("sendLogin");
       window.localStorage.removeItem("session");
     }
@@ -100,8 +100,6 @@ const Login = () => {
 /*       dispatch(getUser());
       console.log(user);
       dispatch(createUserChatEngine(user.email,user.email)); */
-
-      
       swal("Inicio de sesión correcto", "Logeado", "success");
       navigate("/home");
       // si no da error es una feature 😂

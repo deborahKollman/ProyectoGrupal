@@ -6,8 +6,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
-const baseURL = process.env.CLIENT_URL || 'http://localhost:3000'
-
+const baseURL = process.env.CLIENT_URL || 'http://localhost:3000';
 
 const registerGoogle = new GoogleStrategy(
   {
@@ -45,11 +44,12 @@ passport.serializeUser((user, cb) => cb(null, user));
 passport.deserializeUser((user, cb) => cb(null, user));
 
 router.get('/error', (req, res) => {
-  if (Object.keys(req.sessionStore.sessions).length > 0) {
-    res.send({ message: 'User already registered' });
-  } else {
-    res.send({ message: '' });
-  }
+  // if (Object.keys(req.sessionStore.sessions).length > 0) {
+  //   res.send({ message: 'User already registered' });
+  // } else {
+  //   res.send({ message: '' });
+  // }
+  res.send({ message: 'User already registered' });
 });
 
 router.get('/success', async (req, res) => {
@@ -89,9 +89,9 @@ router.get(
   }),
   (req, res) => {
     if (req.user.message) {
-      res.redirect(`${baseURL}/login`);
+      res.redirect(`${baseURL}/login/exist`);
     } else {
-      res.redirect(`${baseURL}/sendEmail/confirm`);
+      res.redirect(`${baseURL}/sendEmail/confirm/${req.user.email}`);
     }
   }
 );

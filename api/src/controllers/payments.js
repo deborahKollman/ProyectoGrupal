@@ -66,7 +66,6 @@ exports.getServiceById =async (req, res, next) => {
     next(error);
   }
 };
-
 exports.postService=async(req,res,next)=>{
   try {
     //req.body.categories: array de ids de categories
@@ -76,7 +75,6 @@ exports.postService=async(req,res,next)=>{
     next(error);
   }
 }
-
 exports.updateService=async(req,res,next)=>{
   try {
     //req.body.categories: array de ids de categories
@@ -86,13 +84,11 @@ exports.updateService=async(req,res,next)=>{
     }
     else{
       res.status(OK).send(r.message);
-
     }
   } catch (error) {
     next(error);
   }
 }
-
 exports.deleteService=async(req,res,next)=>{
   try {
     //req.body.categories: array de ids de categories
@@ -102,7 +98,6 @@ exports.deleteService=async(req,res,next)=>{
     }
     else{
       res.status(OK).send(r.message);
-
     }
   } catch (error) {
     next(error);
