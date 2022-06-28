@@ -283,6 +283,11 @@ const rootReducer = (state = initialState, action) => {
         orders: action.payload
       }
     }
+    
+    case 'POST_FORM':
+      return {
+        ...state
+      }
 
     case SEND_BUDGET:
  
