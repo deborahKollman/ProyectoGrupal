@@ -19,13 +19,6 @@ export const types = {
   CLEAR_CART: "CLEAR_CART",
 };
 
-export const myLocalStorage = () => {
-  let productsInLocalStorage = window.localStorage.getItem("service");
-  productsInLocalStorage = JSON.parse(productsInLocalStorage);
-  console.log(productsInLocalStorage);
-  return productsInLocalStorage;
-};
-
 // Para desloguearse
 export const act_logout = () => {
   return (dispatch) => {
@@ -251,14 +244,23 @@ export function getPublicationsName(name) {
           payload: responese.data,
         });
       })
-      .catch(function () {
-        swal({
-          title: "ERROR",
-          text: "Not Found",
-          icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
-          dangerMode: true,
-        });
-      });
+      .catch((error) => {
+        dispatch({
+          type: "GET_PUBLICATIONS_NAME",
+          payload: swal({
+            title: "No matches found",
+            icon: "error",
+          })
+        })
+      })
+      // .catch(function () {
+      //   swal({
+      //     title: "ERROR",
+      //     text: "Not Found",
+      //     icon: "https://filestore.community.support.microsoft.com/api/images/ext?url=https%3A%2F%2Fanswersstaticfilecdnv2.azureedge.net%2Fstatic%2Fimages%2Fimage-not-found.jpg",
+      //     dangerMode: true,
+      //   });
+      // });
   };
 }
 
@@ -416,9 +418,9 @@ export function clearUserRegister() {
   };
 }
 
-export function getMercadoPago(title, price) {
+export function getMercadoPago(title, price, contractId,usremail) {
   return async (dispatch) => {
-    const { data } = await axios.post(`/payments/mercado`, { title, price });
+    const { data } = await axios.post(`/payments/mercado`, { title, price, contractId,usremail });
 
     dispatch({
       type: GET_MERCADOPAGO,
@@ -537,11 +539,12 @@ export function act_getPublicationByUser(pId) {
     }
   };
 }
-export function postForm(input) {
+export function postForm2(input) {
   return async (dispatch) => {
     try {
+      console.log('post-form2')
       let checkoutform = await axios.post(`/contracts`, input);
-      dispatch({ type: "POST_FORM", checkoutform });
+      dispatch({ type: "POST_FORM2", payload: checkoutform.data });
     } catch (error) {
       console.log(error);
     }
@@ -594,44 +597,42 @@ export function sendBudget(
         id_seller,
         comment_request,
         picture_request,
-        priority,
-      });
-
+        priority
+       });      
       dispatch({
         type: SEND_BUDGET,
-        payload: data.data.id,
-      });
-    } catch (error) {
-      console.log(error);
+        payload: data.data.id
+      })
+    } catch (error) { console.log(error) }
+  }
+
+};
+
+
+export function postChat(budgetId, comment, id_sender, id_receiver){
+    return async (dispatch) =>{
+        axios.post("/budgets/chat",{
+          budgetId, 
+          comment, 
+          id_sender, 
+          id_receiver
+       }) 
+        dispatch({
+          type: POST_CHAT,
+        })
     }
-  };
-}
+};
 
-export function postChat(budgetId, comment, id_sender, id_receiver) {
-  return async (dispatch) => {
-    axios.post("/budgets/chat", {
-      budgetId,
-      comment,
-      id_sender,
-      id_receiver,
-    });
-
-    dispatch({
-      type: POST_CHAT,
-    });
-  };
-}
-
-export function getChat(id) {
-  return async (dispatch) => {
-    const chat = await axios.get("/budgets/chat/" + id);
-
-    dispatch({
-      type: GET_CHAT,
-      payload: chat.data,
-    });
-  };
-}
+export function getChat(id){
+    return async (dispatch) => {
+        const chat = await axios.get('/budgets/chat/'+id);
+        
+        dispatch({
+          type: GET_CHAT,
+          payload: chat.data,
+        })
+    }
+};
 
 export function updateUser(id, user) {
   return async (dispatch) => {
@@ -644,15 +645,31 @@ export function updateUser(id, user) {
 }
 
 export const act_putPublication = async (pId, pOform) => {
-  try {
-    const responce = await axios.put(`/publications/${pId}`, pOform, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    return responce.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+    try {
+      const responce = await axios.put(`/publications/${pId}`, pOform,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      return responce.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+export function getMyOrders() {
+  return async (dispatch) => {
+    try {
+      const order = await axios.get(`/contracts`);
+      dispatch({
+        type: "GET_MY_ORDERS",
+        payload: order.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

@@ -76,6 +76,10 @@ const Login = () => {
       swal("Hubo algun error", "Al parecer ya estas registrado", "error");
       navigate("/login");
     }
+    if (sendLogin) {
+      window.localStorage.removeItem("sendLogin");
+      window.localStorage.removeItem("session");
+    }
     if (errorLogin) {
       swal("Hubo algun error", errorLogin, "error");
       dispatch(clearErrorLogin());

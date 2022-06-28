@@ -1,5 +1,8 @@
 const { User, Favorite, Publication, Op } = require('../database/postgres.js');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
+
+const baseURL = process.env.API || 'http://localhost:3001'
 
 /* exports.checkUser = async(usr, password) => {
   // Chequea si el usuario existe y si la clave es correcta
@@ -41,15 +44,15 @@ exports.getAllUsers = async ({ page, offset, limit }) => {
     next:
       +page >= Math.ceil(count / limit)
         ? null
-        : `http://localhost:3001/users?page=${
-          +page + 1
-        }&offset=${offset}&limit=${limit}`,
+        : `${baseURL}/users?page=${
+            +page + 1
+          }&offset=${offset}&limit=${limit}`,
     previous:
       +page <= 1
         ? null
-        : `http://localhost:3001/users?page=${
-          +page - 1
-        }&offset=${offset}&limit=${limit}`,
+        : `${baseURL}/users?page=${
+            +page - 1
+          }&offset=${offset}&limit=${limit}`,
     users
   };
 };
@@ -71,15 +74,15 @@ exports.getAllActiveUsers = async ({ page, offset, limit }) => {
     next:
       +page >= Math.ceil(count / limit)
         ? null
-        : `http://localhost:3001/users?page=${
-          +page + 1
-        }&offset=${offset}&limit=${limit}`,
+        : `${baseURL}/users?page=${
+            +page + 1
+          }&offset=${offset}&limit=${limit}`,
     previous:
       +page <= 1
         ? null
-        : `http://localhost:3001/users?page=${
-          +page - 1
-        }&offset=${offset}&limit=${limit}`,
+        : `${baseURL}/users?page=${
+            +page - 1
+          }&offset=${offset}&limit=${limit}`,
     users
   };
 };

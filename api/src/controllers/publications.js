@@ -18,7 +18,8 @@ exports.getPublications = async (req, res, next) => {
     const { title = '' } = req.query;
     const { cat_id } = req.query;
     const r = await getPublications(offset, limit, title, cat_id);
-    res.json(r);
+    if (r.length>0) res.json(r);
+    else res.status(404).send('Not found')
   } catch (error) {
     next(error);
   }

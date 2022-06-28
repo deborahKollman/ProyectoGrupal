@@ -84,11 +84,10 @@ const initialState = {
   mailSend: false,
   sendLogin: false,
   favorite_check: false,
-
   budget: 0,
   chat: [],
-
   rdcr_publications_by_user: [],
+  orders: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -331,6 +330,23 @@ const rootReducer = (state = initialState, action) => {
         rdcr_publications_by_user: payload,
       };
     }
+    case "GET_MY_ORDERS": {
+      return {
+        ...state,
+        orders: action.payload,
+      };
+    }
+
+    case "POST_FORM":
+      return {
+        ...state,
+      };
+
+    case "POST_FORM2":
+      return {
+        ...state,
+        contract: action.payload,
+      };
 
     case SEND_BUDGET:
       return {
@@ -348,7 +364,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         chat: action.payload,
       };
-
     default:
       return state;
   }

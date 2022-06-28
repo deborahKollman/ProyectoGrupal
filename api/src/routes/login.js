@@ -16,17 +16,16 @@ const loginGoogle = new GoogleStrategy(
     callbackURL: '/login/oauth2/redirect/google'
   },
   async (_, profile, cb) => {
-    const user = await User.findOne({
-      where: {
-        email: profile.emails[0].value
+      const user = await User.findOne({
+        where: {
+          email: profile.emails[0].value
+        }
+      });
+      if (user) {
+        return cb(null, user);
       }
-    });
-
-    if (user) {
-      return cb(null, user);
+      return cb(null, { message: 'Incorrect username or password' });
     }
-    return cb(null, { message: 'Error' });
-  }
 );
 
 // force use because name is not unique
@@ -53,6 +52,7 @@ router.get(
   })
 );
 
+
 router.get(
   '/oauth2/redirect/google',
   passport.authenticate('loginGoogle', {
@@ -60,13 +60,17 @@ router.get(
     failureMessage: true
   }),
   function (req, res) {
-    res.redirect(`${baseURL}/home`);
+    if(!req.user.message){
+      res.redirect(`${baseURL}/home`);
+    }else{
+      res.redirect(`${baseURL}/login`);
+    }
   }
 );
 
-passport.serializeUser((user, cb) => cb(null, user));
+passport.serializeUser((user, cb) => {return cb(null, user)});
 
-passport.deserializeUser((user, cb) => cb(null, user));
+passport.deserializeUser((user, cb) => {return cb(null, user)});
 
 router.post('/logout', function (req, res) {
   req.logout();

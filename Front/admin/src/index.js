@@ -38,8 +38,8 @@ npm i axios
 
 npm install @mui/material @emotion/react @emotion/styled
 
-  495  npm install --save redux-devtools-extension --force
-  497  npm install react-redux --force
+495  npm install --save redux-devtools-extension --force
+497  npm install react-redux --force
 
 npm i react-circular-progressbar --force
 npm install recharts --force
@@ -49,11 +49,16 @@ $ npm i @mui/x-data-grid --force
 586  npm i @coreui/react --force
 $ npm i @coreui/icons --force
 $ npm install react-bootstrap bootstrap --force
-  595  npm install @coreui/coreui --force
+595  npm install @coreui/coreui --force
 
   
 :: STYLES
 npm install --save styled-components
 npm install sass
 npm i @mui/styles
+
+::
+CustomerSupport
+660  npm install react-chat-engine --force
+
 */

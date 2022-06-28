@@ -1,9 +1,14 @@
-const { Budget, Chat, Contracts, Publication } = require('../database/postgres.js');
+const {
+  Budget,
+  Chat,
+  Contracts,
+  Publication
+} = require('../database/postgres.js');
 
 exports.createBudget = async (newbudget) => {
   const { publicationId } = newbudget;
   const pub = await Publication.findOne({ where: { id: publicationId } });
-  console.log(pub);
+  console.log(newbudget);
   if (pub) {
     const budget = await Budget.create(newbudget);
 
@@ -21,32 +26,33 @@ exports.createBudget = async (newbudget) => {
 
 exports.getBudgets = async () => {
   const budget = await Budget.findAll({
-    include: [{
-      model: Chat
-      // attributes:{exclude:['buyer_reputation','buyer_opinions','seller_reputation','seller_opinions']}
-    }],
+    include: [
+      {
+        model: Chat
+        // attributes:{exclude:['buyer_reputation','buyer_opinions','seller_reputation','seller_opinions']}
+      }
+    ],
     order: [['id', 'ASC']]
   });
   return budget;
 };
 
-exports.getBudgetById = async () => {
+exports.getBudgetById = async () => {};
 
-};
+exports.updateBudget = async () => {};
 
-exports.updateBudget = async () => {
-
-};
-
-exports.deleteBudget = async () => {
-
-};
+exports.deleteBudget = async () => {};
 
 exports.postChat = async (budgetId, comment, id_sender, id_receiver) => {
   try {
     const budget = await Budget.findOne({ where: { id: budgetId } });
 
-    const chat = await Chat.create({ budgetId, comment, id_sender, id_receiver });
+    const chat = await Chat.create({
+      budgetId,
+      comment,
+      id_sender,
+      id_receiver
+    });
 
     if (chat) {
       console.log(budget);
@@ -66,10 +72,11 @@ exports.getChat = async (id) => {
   try {
     const chat = await Budget.findAll({
       where: { id_seller: id },
-      include: [{
-        model: Chat
-      }]
-
+      include: [
+        {
+          model: Chat
+        }
+      ]
     });
 
     return chat;
