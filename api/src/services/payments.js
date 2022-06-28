@@ -20,14 +20,14 @@ exports.getPayments=async()=>{
 
 
 const savePayment = async function (stripeid,amount,contractId) {
-  // Guardo un fake contract
-  //const contract = await Contract.create({"country": 'Argentina', "postal_code":2000,"city":'Rosario', "state": 'Santa Fe', "address":'San Martin', "service_date":'01/01/2020'})
-  
+
+    
   // Busco el contrtato
+
   const contract = await Contract.findByPk(contractId);
 
   if (contract) {
-    console.log('Payments Contrato:',contract);
+    //console.log('Payments Contrato:',contract);
 
     // Guardo el pago en la base de datos
     const pay = await Payment.create({stripeid,amount})
@@ -56,7 +56,7 @@ const sendBuyerMail = async function (usremail,title,amount) {
 }
 
 
-exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com', idBuyer=1, idPublication=1,title='', contractId=1 )=>
+exports.postPayment = async(stripeid, amount, usremail, idBuyer, idPublication, contractId )=>
 {
   try {
     //Confirmo el pago en stripe
@@ -70,10 +70,12 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
     });
 
     savePayment(stripeid,amount,contractId);
-    sendBuyerMail(usremail,title,amount);
+
+    const pub = await Publication.findByPk(idPublication)
+
+    sendBuyerMail(usremail,pub.title,amount);
         
-    // Volver a poner----se saco para probar con Postman
-    return payment
+      return payment
   }
   catch(error) {
         console.log(error)
@@ -82,7 +84,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
 }
 
 //exports.postMercadopago = async(title, price,usremail = 'palmabeto@hotmail.com', idBuyer=1, idPublicacion=1) =>{
-  exports.postMercadopago = async(title, price, contractId) =>{
+  exports.postMercadopago = async(title, price, contractId,usremail) =>{
     try {
         const preference = {
             items: [{
@@ -92,7 +94,7 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
             }
             ],
             back_urls: {
-              "success": "http://localhost:3000/mercado/success?title="+title+"&price="+price+"&contractId="+contractId,
+              "success": "http://localhost:3000/mercado/success?title="+title+"&price="+price+"&contractId="+contractId+"&usremail="+usremail,
               "failure": "http://localhost:3000/mercado/failure",
               "pending": "http://localhost:3000/home"
             },
@@ -110,9 +112,8 @@ exports.postPayment = async(stripeid, amount, usremail = 'palmabeto@hotmail.com'
     }
 };
 
-exports.postMercadopagoSuccess2 = async (codigoPago ,title,price,contractId=1) => {
-  console.log('en grabar')
-  // const usremail='palmabeto@hotmail.com';
+exports.postMercadopagoSuccess2 = async (codigoPago ,title,price,contractId,usremail) => {
+  //console.log('en grabar')
   savePayment(codigoPago,price,contractId);
   sendBuyerMail(usremail,title,price);
 }

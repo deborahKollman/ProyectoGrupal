@@ -414,9 +414,9 @@ export function clearUserRegister() {
   };
 }
 
-export function getMercadoPago(title, price) {
+export function getMercadoPago(title, price, contractId,usremail) {
   return async (dispatch) => {
-    const { data } = await axios.post(`/payments/mercado`, { title, price });
+    const { data } = await axios.post(`/payments/mercado`, { title, price, contractId,usremail });
 
     dispatch({
       type: GET_MERCADOPAGO,
@@ -535,11 +535,12 @@ export function act_getPublicationByUser(pId) {
     }
   };
 }
-export function postForm(input) {
+export function postForm2(input) {
   return async (dispatch) => {
     try {
+      console.log('post-form2')
       let checkoutform = await axios.post(`/contracts`, input);
-      dispatch({ type: "POST_FORM", checkoutform });
+      dispatch({ type: "POST_FORM2", payload: checkoutform.data });
     } catch (error) {
       console.log(error);
     }

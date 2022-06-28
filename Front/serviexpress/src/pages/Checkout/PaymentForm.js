@@ -28,6 +28,7 @@ export default function PaymentForm() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const orders = useSelector(state => state.orders);
+  const contract = useSelector(state => state.contract);
   
   console.log(orders.map(el => el.id))
 
@@ -72,14 +73,13 @@ export default function PaymentForm() {
         swal("Please wait...", "We are waiting for confirmation", "info")
 
         const { data } = await axios.post("/payments", {
-            contractId: orders.map(el => el.id),
+            contractId: contract.id,
             stripeid:id,
             amount:myOrder.price,
             usremail:user.email,
             idBuyer: user.id,
             idPublicacion: myOrder.id
           });
-          console.log(orders.id)
           if(data.status === 'succeeded') { 
               swal("Success", "Service Purchased", "success")
               .then((value)=>{
@@ -187,7 +187,7 @@ export default function PaymentForm() {
 
       <FormCreate></FormCreate>
 
-      <MercadoPago title={myOrder.title} price={myOrder.price} ></MercadoPago> 
+      <MercadoPago title={myOrder.title} price={myOrder.price} contractId={contract.id} usremail={user.email} ></MercadoPago> 
       </Elements>
 
   );
