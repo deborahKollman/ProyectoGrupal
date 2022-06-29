@@ -23,8 +23,8 @@ import Alert from "@mui/material/Alert";
 import { flexbox } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import SwitchesGroup from "../components/Filters/switchprice";
 import FooterBar from "../components/FooterBar/FooterBar";
+import Sidebar from "../components/Home/Sidebar";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -39,10 +39,15 @@ export default function Home() {
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
-  const currentServices = allPublications.slice(
-    indexOfFirstPublication,
-    indexOfLastPublication
-  );
+  let currentServices;
+  if(allPublications.length > 0) {
+    currentServices = allPublications.slice(
+      indexOfFirstPublication,
+      indexOfLastPublication
+    );
+  } else {
+    currentServices = [];
+  }
   const { user, errorLogin, rdcr_isAuth } = useSelector((state) => state);
   const [msgSearch, SetMsgSearch] = useState("");
   const sendLogin = window.localStorage.getItem("sendLogin");
@@ -97,8 +102,8 @@ export default function Home() {
         <FilterByCategories />
 
         <div className={Styles.Home_Main_Content}>
-          <section className={Styles.MainSidebar}> 
-            <SwitchesGroup />
+          <section className={Styles.MainSidebar}>
+            <Sidebar/>
           </section>
 
           <section className={Styles.MainCards}>
@@ -113,11 +118,11 @@ export default function Home() {
 
             {allPublications.length > 0 ? (
               <section className={Styles.serviceshome}>
-                {currentServices?.map((e) => {
+                {currentServices?.map((e, i) => {
                   return (
                     <div>
                       <CardPublications
-                        key={e.id}
+                        key={i}
                         id={e.id}
                         album={e.album}
                         title={e.title}
@@ -130,7 +135,7 @@ export default function Home() {
                 })}
               </section>
             ) : (
-              <CircularProgress sx={{margin: '30vh 40vw'}}/>
+              <CircularProgress sx={{ margin: "30vh 40vw" }} />
             )}
           </section>
         </div>

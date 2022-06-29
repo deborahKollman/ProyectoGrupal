@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MyHeader, ListNav, StyledBurger } from "./NavBar-StyleComp";
-import SearchGroup from "../SearchGroup";
-import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
 import NavigationBar from "./NavigationBar";
 import { InitialSession, LoginSession } from "./SubComponents";
 import { IconButton } from "@mui/material";
-import { getPublications, getUser } from "../../redux/action";
+import {  getUser } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
-import { BsWindowSidebar } from "react-icons/bs";
-import Detail from "../../pages/Detail";
 
 const logo = require("../../assets/icons/log.png");
 
@@ -24,9 +20,7 @@ const BurgerButton = ({ msg,aux }) => {
     setOpen(!open);
   };
 
-  const { user } = useSelector((state) => state);
-  const { rdcr_isAuth } = useSelector((state) => state);
-  const detail = useSelector((state) => state.detail);
+  const { user, rdcr_isAuth } = useSelector((state) => state);
 
   useEffect(() => {
     if (Object.keys(user)?.length > 0) {
@@ -35,13 +29,7 @@ const BurgerButton = ({ msg,aux }) => {
     if (!rdcr_isAuth && user.password) {
       dispatch(getUser());
     }
-  }, [avatar, rdcr_isAuth]);
-
-  function handleRefresh(e) {
-    e.preventDefault();
-    // window.location.reload(e)
-    dispatch(getPublications());
-  }
+  }, [avatar, rdcr_isAuth, dispatch, user]);
 
   return (
     <MyHeader pOpen={open}>
@@ -64,27 +52,8 @@ const BurgerButton = ({ msg,aux }) => {
           </StyledBurger>
         </IconButton>
       </div>
-       
-       {!aux ? <SearchGroup msg={msg} /> : null
-
-       }
-
-      {window.location.href.includes("ome") ? (
-        <Button
-          variant="text"
-          onClick={(e) => {
-            handleRefresh(e);
-          }}
-          sx={{
-            color: "black",
-            fontSize: 12,
-          }}
-        >
-          🧹(clean filter)
-        </Button>
-      ) : (
-        true
-      )}
+ 
+      
       {!rdcr_isAuth ? <InitialSession /> : <LoginSession avatar={avatar} />}
 
       <ListNav pOpen={open}>
@@ -105,7 +74,7 @@ const BurgerButton = ({ msg,aux }) => {
         </li>
       </ListNav>
 
-      {open && <NavigationBar />}
+      {!open && <NavigationBar />}
     </MyHeader>
   );
 };
