@@ -42,7 +42,7 @@ export default function Home() {
   const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
   let currentServices;
   if(allPublications.length > 0) {
-    currentServices = allPublications.slice(
+    currentServices = allPublications?.slice(
       indexOfFirstPublication,
       indexOfLastPublication
     );
