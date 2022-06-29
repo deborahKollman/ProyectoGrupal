@@ -1,6 +1,5 @@
 import { GET_ORDERS } from "./action";
 
- 
 const initialState = {
   rdcr_darkMode: false,
   rdcr_users_count: 0,
@@ -11,10 +10,12 @@ const initialState = {
   rdcr_services: [],
   rdcr_servicesBckp: [],
   orders: [],
+  rdcr_admin: {},
+  loginSucess: false,
 };
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  const { rdcr_darkMode,  rdcr_servicesBckp} = state;
+  const { rdcr_darkMode, rdcr_servicesBckp } = state;
   switch (type) {
     case "TOGGLE": {
       return {
@@ -62,21 +63,21 @@ const rootReducer = (state = initialState, action) => {
     case "CLEAR_SERVICES": {
       return {
         ...state,
-        rdcr_services: [...rdcr_servicesBckp]
+        rdcr_services: [...rdcr_servicesBckp],
       };
     }
     case GET_ORDERS:
       return {
         ...state,
         orders: action.payload,
-
-
-      }
-
-
-
-
-    default: return state; 
+      };
+    case "LOGIN_ADMIN":
+      return {
+        ...state,
+        loginSucess: true,
+      };
+    default:
+      return state;
   }
 };
 

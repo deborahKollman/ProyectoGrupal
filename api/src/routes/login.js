@@ -16,16 +16,16 @@ const loginGoogle = new GoogleStrategy(
     callbackURL: '/login/oauth2/redirect/google'
   },
   async (_, profile, cb) => {
-      const user = await User.findOne({
-        where: {
-          email: profile.emails[0].value
-        }
-      });
-      if (user) {
-        return cb(null, user);
+    const user = await User.findOne({
+      where: {
+        email: profile.emails[0].value
       }
-      return cb(null, { message: 'Incorrect username or password' });
+    });
+    if (user) {
+      return cb(null, user);
     }
+    return cb(null, { message: 'Incorrect username or password' });
+  }
 );
 
 // force use because name is not unique
@@ -52,7 +52,6 @@ router.get(
   })
 );
 
-
 router.get(
   '/oauth2/redirect/google',
   passport.authenticate('loginGoogle', {
@@ -60,17 +59,22 @@ router.get(
     failureMessage: true
   }),
   function (req, res) {
-    if(!req.user.message){
-      res.redirect(`${baseURL}/home`);
-    }else{
-      res.redirect(`${baseURL}/login`);
-    }
+    // if (!req.user.message) {
+    //   res.redirect(`${baseURL}/home`);
+    // } else {
+    //   res.redirect(`${baseURL}/login`);
+    // }
+    res.redirect(`${baseURL}/home`);
   }
 );
 
-passport.serializeUser((user, cb) => {return cb(null, user)});
+passport.serializeUser((user, cb) => {
+  return cb(null, user);
+});
 
-passport.deserializeUser((user, cb) => {return cb(null, user)});
+passport.deserializeUser((user, cb) => {
+  return cb(null, user);
+});
 
 router.post('/logout', function (req, res) {
   req.logout();
@@ -97,12 +101,25 @@ passport.use(
   })
 );
 
+/* router.get('/admin', (req, res) => {
+  console.log('Logeado');
+  res.redirect('http://localhost:4000/home/true');
+});
+*/
+
 router.post(
   '/',
   passport.authenticate('local', {
     failureRedirect: '/login/local/error'
   }),
   (req, res) => {
+    const { admin } = req.query;
+    if (req.user.rol === 'admin' && admin) {
+      return res.status(200).send({
+        message: 'Login successfully'
+      });
+    }
+
     return res.status(200).send(req.user);
   }
 );
