@@ -39,10 +39,10 @@ const FilterByCategories = () => {
 
       {allCategories.map((e,index) => {
         return(
-        <Tab className={stylefilter.tab}
-       
+        <Tab 
+          key={index}
+          className={stylefilter.tab}
           label={e.name} />
-          
         )
         })
       }
