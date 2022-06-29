@@ -14,7 +14,7 @@ export const act_themeTogle = () => {
 export const act_getAllUsers = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/users`);
+      const { data } = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({
         type: "GET_ALL_USERS",
         payload: data.users,
@@ -28,7 +28,7 @@ export const act_getAllUsers = () => {
 export const act_getUsersCount = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/users`);
+      const { data } = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({
         type: "GET_USERS_COUNT",
         payload: data.count,
