@@ -24,7 +24,7 @@ const Sidebar = () => {
   return (
     <div className="sidebarr">
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none", textAlign: "center" }}>
+        <Link to="/home" style={{ textDecoration: "none", textAlign: "center" }}>
           <img
             className="logo"
             src="https://i.ibb.co/sbkstqQ/log.png"

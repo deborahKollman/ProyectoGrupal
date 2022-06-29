@@ -11,7 +11,7 @@ import {
   getFavorites
 } from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
-import FilterByCategories from "../components/Filters/FilterByCategories";
+//import FilterByCategories from "../components/Filters/FilterByCategories";
 import Pagination from "../components/Pagination/Pagination";
 import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
@@ -26,11 +26,13 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import FooterBar from "../components/FooterBar/FooterBar";
 import Sidebar from "../components/Home/Sidebar";
+import {FilterByCategories,RadioButtonsGroup2} from "../components/Filters/Filters";
 
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allPublications = useSelector((state) => state.Publications);
+  const PublicationsCategory = useSelector((state) => state.Publications_by_categories)
   const SwichL = useSelector((state) => state.switchloading);
 
   // console.log(SwichL);
@@ -89,9 +91,24 @@ export default function Home() {
     setCurrentPage((pag) => (pag = 1));
   }, [allPublications]);
 
+  useEffect(()=>{
+    setTimeout(() => {
+      if(allPublications.length===0 && PublicationsCategory.length!==0)
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
+    }, 1000);
+  },[allPublications])
+
   return (
     <Fragment>
       <NavBar msg={msg}></NavBar>
+      
+      <div className={Styles.filtercategories}>
+        <FilterByCategories />
+      </div>
+
       {msgSearch && (
         <Alert
           severity="error"
@@ -102,7 +119,7 @@ export default function Home() {
       )}
 
       <main className={Styles.Home_Main}>
-        <FilterByCategories />
+        {/* <FilterByCategories /> */}
 
         <div className={Styles.Home_Main_Content}>
           <section className={Styles.MainSidebar}>
@@ -117,6 +134,9 @@ export default function Home() {
                 items={PublicationsPerPage}
                 pages={Math.ceil(allPublications.length / PublicationsPerPage)}
               />
+              <div className={Styles.switchprice} >
+                <RadioButtonsGroup2/>  
+              </div>
             </div>
 
             {allPublications.length > 0 ? (

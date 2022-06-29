@@ -94,6 +94,7 @@ const initialState = {
 
   rdcr_publications_by_user: [],
   orders: [],
+  Publications_by_categories: [],
   review: []
 };
 
@@ -159,11 +160,25 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: [...filtered],
       };
-    case "FILTER_PRICE":
-      return {
-        ...state,
-        Publications: action.payload,
-      };
+
+      case "FILTER_PRICE":
+        let filteredCategories = state.Publications_by_categories
+        let response =
+        action.payload === "range1"
+            ? filteredCategories.filter((a) => a.price < 500)
+            : action.payload === "range2"
+            ? filteredCategories.filter((a) => a.price >= 500 && a.price < 2000)
+            : action.payload === "range3"
+            ? filteredCategories.filter((a) => a.price >= 2000 && a.price < 4000)
+            : action.payload === "range4"
+            ? filteredCategories.filter((a) => a.price >= 4000)
+            : action.payload === "all"
+            ? filteredCategories
+            : filteredCategories
+        return {
+          ...state,
+          Publications: response,
+        };
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",
@@ -188,6 +203,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_PUBLICATIONS_BY_CATEGORIES":
       return {
         ...state,
+        Publications_by_categories: [...action.payload],
         Publications: action.payload,
       };
 
