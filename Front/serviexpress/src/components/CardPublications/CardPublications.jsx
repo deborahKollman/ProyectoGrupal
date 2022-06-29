@@ -17,6 +17,7 @@ const users = useSelector((state) => state.users);
 const favorites = useSelector((state) => state.favorites)
 const user = users.find((u)=>u.id===userId)
 const userLogin = useSelector(state => state.user)
+const rdcr_isAuth = useSelector(state => state.rdcr_isAuth)
 const score = user.seller_reputation
 
 const [checked, setChecked] = useState(false);
@@ -44,7 +45,8 @@ const totalStar = 5-score;
   };
 
   useEffect (()=>{
-    favorites.publications.filter((e)=>e.id===id).length > 0 ? setChecked(true) :  setChecked(false);
+    if (rdcr_isAuth)
+      favorites.publications.filter((e)=>e.id===id).length > 0 ? setChecked(true) :  setChecked(false);
   },[])
 
   return (
