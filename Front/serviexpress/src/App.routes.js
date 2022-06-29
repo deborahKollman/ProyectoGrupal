@@ -23,6 +23,7 @@ import Checkout from "./pages/Checkout/CheckoutForm.js";
 import Profile from "./pages/Profile.jsx";
 import {ListOrders,ListSellerChats, ListBuyerReputation, ListSellerReputation} from './components/ProfileComponents/ListProfile';
 import CustomerSupport from "./pages/CustomerSupport.jsx";
+import Review from "./pages/Review.jsx";
 
 function App() {
   const { rdcr_isAuth } = useSelector((state) => state);
@@ -62,6 +63,7 @@ function App() {
       <Route path="/profile/seller-reputation" element={<ListSellerReputation />} />
       <Route path="/profile/buyer-reputation" element={<ListBuyerReputation />} />
       <Route path="/support" element={<CustomerSupport />} />
+      <Route path="/review" element={<Review />} />
     </Routes>
   );
 }

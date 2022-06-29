@@ -383,14 +383,6 @@ export function confirmPassword(form) {
   };
 }
 
-export function myLocalStorageTwo() {
-  //Ojo al piojo:: hay 2 de estas cuidado se cruzen
-  let productsInLocalStorage = localStorage.getItem("itemCar");
-  productsInLocalStorage = JSON.parse(productsInLocalStorage);
-
-  return productsInLocalStorage;
-}
-
 export function getErrorRegister() {
   return async (dispatch) => {
     try {
@@ -584,7 +576,10 @@ export function filterprice(value) {
 
       dispatch({ type: "FILTER_PRICE", payload: response });
     } catch (error) {
-      console.log(error);
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
     }
   };
 }
@@ -788,6 +783,18 @@ export function getMyOrders() {
       console.log(error);
     }
   };
+}
+
+export function postReview(id) {
+   return async (dispatch) => {
+    try {
+      const review = await axios.post(`/contracts/review/${id}`);
+      dispatch({
+        type: "POST_REVIEW",
+        payload: review.data,
+      });  
+    } catch (error) { console.log(error) }
+   }
 }
 
 
