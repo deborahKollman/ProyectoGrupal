@@ -12,6 +12,12 @@ const initialState = {
   orders: [],
   rdcr_admin: {},
   loginSucess: false,
+  orders_percentage: 0,
+  payments_today: [],
+  payments_today_length: 0,
+  payments_today_amount: 0,
+  publications: [],
+  publications_year: [],
 };
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -66,16 +72,58 @@ const rootReducer = (state = initialState, action) => {
         rdcr_services: [...rdcr_servicesBckp],
       };
     }
-    case GET_ORDERS:
+    case GET_ORDERS: {
       return {
         ...state,
         orders: action.payload,
       };
-    case "LOGIN_ADMIN":
+    }
+    case "LOGIN_ADMIN": {
       return {
         ...state,
         loginSucess: true,
       };
+    }
+    case "GET_ALL_PUBLICATIONS": {
+      return {
+        ...state,
+        publications: action.payload,
+      };
+    }
+    case "GET_CONTRACTS_PERCENTAGE": {
+      return {
+        ...state,
+        orders_percentage: parseInt(action.payload),
+      };
+    }
+    case "GET_PAYMENTS_TODAY": {
+      return {
+        ...state,
+        payments_today: action.payload,
+      };
+    }
+    case "GET_PAYMENTS_TODAY_LENGTH": {
+      return {
+        ...state,
+        payments_today_length: action.payload.length,
+      };
+    }
+    case "GET_PAYMENTS_TODAY_AMOUNT": {
+      var amount = 0;
+      action.payload.forEach((elem) => {
+        amount += elem.amount;
+      });
+      return {
+        ...state,
+        payments_today_amount: amount,
+      };
+    }
+    case "GET_PUBLICATIONS_YEAR": {
+      return {
+        ...state,
+        publications_year: action.payload,
+      };
+    }
     default:
       return state;
   }
