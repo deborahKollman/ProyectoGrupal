@@ -27,7 +27,7 @@ const Chart = ({ aspect, title }) => {
   
   useEffect(() => {
     dispatch(getPublicationByYear())
-  },[dispatch,publications_year])
+  },[dispatch])
 
   
   
