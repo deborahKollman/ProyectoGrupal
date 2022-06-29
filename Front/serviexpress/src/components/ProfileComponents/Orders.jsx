@@ -18,6 +18,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { DataGrid } from "@mui/x-data-grid";
 import {useNavigate,Link} from 'react-router-dom'
 
 
@@ -136,7 +137,8 @@ export default function Orders({budgets}) {
          List Orders
           </Typography>
     </Toolbar>
-    <TableRow  >
+    <DataGrid>
+    <TableRow  style={{fontSize: 20}}>
               <TableCell  >
               Order ID
               </TableCell>
@@ -159,7 +161,7 @@ export default function Orders({budgets}) {
 
 
             </TableRow>
-
+      </DataGrid>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
           {(rowsPerPage > 0
