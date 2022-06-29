@@ -37,8 +37,14 @@ const MyOrders = () => {
       field: 'status',
       headerName: 'STATUS',
       sortable: true,
-      width: 120,
+      width: 100,
     },
+    {
+      field: 'review',
+      headerName: 'REVIEW',
+      sortable: false,
+      width: 300,
+    }
   ];
   
   const rows = myorders?.map(order => {
@@ -46,7 +52,7 @@ const MyOrders = () => {
       id: order.id,
       price: order.publication.price,
       service: order.publication.title,
-      status: 'completed',
+      status: order.status,
     }
   }) 
 
