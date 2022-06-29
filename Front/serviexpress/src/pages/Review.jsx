@@ -12,13 +12,16 @@ import { useNavigate } from 'react-router-dom'
 import swal from 'sweetalert'
 
 const Review = () => {
-
+  
+  const myorder = JSON.parse(localStorage.getItem('order'))
+  console.log(myorder.id)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [input, setInput] = useState({
     review: '',
-    rating: ''
+    rating: '',
+    id: myorder.id
   })
 
   const [rating, setRating] = useState()
@@ -34,6 +37,7 @@ const Review = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(postReview(input))
+    console.log(input)
     swal({
       title: "Review Submitted",
       text: "Thank you for your review!",
@@ -41,7 +45,8 @@ const Review = () => {
     })
     setInput({
       review: '',
-      rating: ''
+      rating: '',
+      id: myorder.id
     })
     navigate('/home')
   }
@@ -54,7 +59,7 @@ const Review = () => {
         <h4>Give us your review!</h4>
 
         <Form onSubmit={handleSubmit}>
-         <Form.Control as="textarea" rows={10} placeholder="Write something..." onChange={(e) => handleChange(e)}/>
+         <Form.Control as="textarea" rows={10} placeholder="Write something..." name='review' value={input.review} onChange={(e) => handleChange(e)}/>
 
 
         {[...Array(5)].map((star, i) => {
