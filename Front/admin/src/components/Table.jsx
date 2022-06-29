@@ -70,7 +70,7 @@ const List = () => {
 
   useEffect(() => {
     dispatch(getOrders())
-  },[dispatch, orders])
+  },[dispatch])
 
 
   return (
