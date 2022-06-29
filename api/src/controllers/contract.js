@@ -39,7 +39,7 @@ exports.getContractsPercentage = async (req,res,next) => {
 exports.postContract = async (req, res, next) => {
   try {
     const { user, publication, country, postal_code, state, city, address, service_date, status } = { ...req.body };
-    const r = await createContract(user, publication, country, postal_code, state, city, address, service_date, status);
+    const r = await createContract(user, publication, country, postal_code, state, city, address, service_date);
     if (r.err_message) {
       res.status(BAD_REQUEST).send(r.err_message);
     } else {
