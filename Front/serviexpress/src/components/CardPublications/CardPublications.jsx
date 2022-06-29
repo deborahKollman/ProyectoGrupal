@@ -45,9 +45,12 @@ const totalStar = 5-score;
   };
 
   useEffect (()=>{
-    if (rdcr_isAuth)
+    if (rdcr_isAuth && favorites.publications)
       favorites.publications.filter((e)=>e.id===id).length > 0 ? setChecked(true) :  setChecked(false);
-  },[])
+    else {
+      setChecked(false);
+    }
+  },[favorites])
 
   return (
     <div className={StylesCard.comp_card_publication}>
@@ -88,7 +91,7 @@ const totalStar = 5-score;
             </div>
             <div className={StylesCard.like}>
             {/* <Checkbox  icon={<FavoriteBorder/>} checkedIcon={<Favorite />} /> */}
-            <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} checkedIcon={<Favorite />} />
+            <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} disabled={!rdcr_isAuth} checkedIcon={<Favorite />} />
             </div>
            </div>
           </div>
