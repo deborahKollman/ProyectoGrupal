@@ -8,6 +8,7 @@ import {
   swich_loading,
   getPublicationsByCategory,
   getAllCategories,
+  getFavorites
 } from "../redux/action";
 import CardPublications from "../components/CardPublications/CardPublications";
 import FilterByCategories from "../components/Filters/FilterByCategories";
@@ -72,9 +73,11 @@ export default function Home() {
     }
 
     dispatch(getAllCategories());
+    dispatch(getFavorites(user.id))
     setTimeout(() => {
       dispatch(getPublications());
     }, 1000);
+
   }, [dispatch, errorLogin, navigate, sendLogin, rdcr_isAuth, user, session]);
 
   useEffect(() => {

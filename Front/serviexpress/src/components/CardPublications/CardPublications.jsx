@@ -5,7 +5,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import { BsStarFill, BsStar } from 'react-icons/bs'
 import Carousel from 'react-bootstrap/Carousel';
-import {addToFavorites, removeFavorites} from "../../redux/action"
+import {addToFavorites, getFavorites, removeFavorites} from "../../redux/action"
 import { useDispatch, useSelector } from "react-redux";
 import StylesCard from "./CardPublication.module.scss";
 
@@ -14,9 +14,11 @@ const CardPublications = ({ id, summary, album, title, price, userId }) => {
 const dispatch = useDispatch()
 
 const users = useSelector((state) => state.users);
+const favorites = useSelector((state) => state.favorites)
 const user = users.find((u)=>u.id===userId)
 const userLogin = useSelector(state => state.user)
 const score = user.seller_reputation
+
 const [checked, setChecked] = useState(false);
 const [msgAlert, setMsg] = useState("");
 const heartChange = (event) => {
@@ -40,6 +42,11 @@ const totalStar = 5-score;
   for (let i = 0; i < totalStar; i++) {
     scoreStarTotal.push(i);
   };
+
+  useEffect (()=>{
+    favorites.publications.filter((e)=>e.id===id).length > 0 ? setChecked(true) :  setChecked(false);
+  },[])
+
   return (
     <div className={StylesCard.comp_card_publication}>
       <div className={StylesCard.card}>
