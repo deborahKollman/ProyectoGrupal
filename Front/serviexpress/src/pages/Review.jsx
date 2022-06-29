@@ -8,20 +8,21 @@ import {FaStar} from 'react-icons/fa'
 import { useState } from 'react'
 import { postReview } from '../redux/action'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import swal from 'sweetalert'
 
-const Review = () => {
-  
-  const myorder = JSON.parse(localStorage.getItem('order'))
-  console.log(myorder.id)
+const Review = ({orderid}) => {
+
+  const {id} = useParams()
+  console.log(id)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [input, setInput] = useState({
     review: '',
     rating: '',
-    id: myorder.id
+    id: id,
   })
 
   const [rating, setRating] = useState()
@@ -46,7 +47,7 @@ const Review = () => {
     setInput({
       review: '',
       rating: '',
-      id: myorder.id
+      id: id
     })
     navigate('/home')
   }
