@@ -137,7 +137,7 @@ export default function Orders({budgets}) {
          List Orders
           </Typography>
     </Toolbar>
-    <DataGrid>
+    
     <TableRow  style={{fontSize: 20}}>
               <TableCell  >
               Order ID
@@ -161,7 +161,7 @@ export default function Orders({budgets}) {
 
 
             </TableRow>
-      </DataGrid>
+     
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
           {(rowsPerPage > 0
