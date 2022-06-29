@@ -2,9 +2,6 @@ import axios from "axios";
 
 export const GET_ORDERS = "GET_ORDERS";
 
-
- 
- 
 export const act_themeTogle = () => {
   return {
     type: "TOGGLE",
@@ -14,7 +11,6 @@ export const act_themeTogle = () => {
 export const act_getAllUsers = () => {
   return async (dispatch) => {
     try {
-      
       const { data } = await axios.get(`/users`, {
         withCredentials: true,
         headers: {
@@ -22,7 +18,7 @@ export const act_getAllUsers = () => {
           "Access-Control-Allow-Origin": "*",
         },
       });
-      
+
       dispatch({
         type: "GET_ALL_USERS",
         payload: data.users,
@@ -51,23 +47,21 @@ export const act_getUsersCount = () => {
       console.log(error.message);
     }
   };
-}
+};
 
 export function act_getUserById(pIdentity) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `/users/${pIdentity}`, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      dispatch({ 
-        type: "GET_USER_BY_ID", 
-        payload: data.user 
+      const { data } = await axios.get(`/users/${pIdentity}`, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+      dispatch({
+        type: "GET_USER_BY_ID",
+        payload: data.user,
       });
     } catch (error) {
       console.log(error);
@@ -75,34 +69,34 @@ export function act_getUserById(pIdentity) {
   };
 }
 
-export async function act_getOneCategory (pIdentity) {
+export async function act_getOneCategory(pIdentity) {
   try {
-    const { data } = await axios.get( `/categories/${pIdentity}` , {
+    const { data } = await axios.get(`/categories/${pIdentity}`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
     });
-    return data
-  } catch (error) {console.log(error);}
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function act_getAllCategories() {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `/categories/only`, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      dispatch({ 
-        type: "GET_ALL_CATEGORIES", 
-        payload: data
+      const { data } = await axios.get(`/categories/only`, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+      dispatch({
+        type: "GET_ALL_CATEGORIES",
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -113,42 +107,36 @@ export function act_getAllCategories() {
 export const act_postCategory = (oCategory) => {
   return async () => {
     try {
-      const data = await axios.post(
-        `/categories`,
-        oCategory, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const data = await axios.post(`/categories`, oCategory, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const act_deleteCategory = (pIdentity) => {
   return async () => {
     try {
-      const data = await axios.delete(
-        `/categories/${pIdentity}`, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const data = await axios.delete(`/categories/${pIdentity}`, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
-}
-
+  };
+};
 
 export const act_getAllServices = () => {
   return async (dispatch) => {
@@ -173,15 +161,13 @@ export const act_getAllServices = () => {
 export const act_filterServicesByCategory = (pObj) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `/services/category/${pObj.id}`, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const { data } = await axios.get(`/services/category/${pObj.id}`, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
       //add foreign key to services
       data.forEach((pI) => {
         pI.categories = [pObj];
@@ -195,42 +181,57 @@ export const act_filterServicesByCategory = (pObj) => {
       console.log(error.message);
     }
   };
-}
+};
 
 export const act_clearServices = () => {
   return {
     type: "CLEAR_SERVICES",
   };
-}
-
-export function getOrders(){
-
-    return async (dispatch) => {
-      try {
-         const {data} = await axios.get(`/contracts`, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        });
-
-         dispatch({
-            type: GET_ORDERS,
-            payload: data,
-         })
-
-        
-      } catch (error) {
-          console.log(error);
-      }
-
-    }
-
-
 };
 
-export function getPublications(){
+export function getOrders() {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/contracts`, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+
+      dispatch({
+        type: GET_ORDERS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function login(payload) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post("/login?admin=true", payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+
+      dispatch({
+        type: "LOGIN_ADMIN",
+        payload: data.message,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getPublications() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/publications`, {
@@ -240,7 +241,7 @@ export function getPublications(){
           "Access-Control-Allow-Origin": "*",
         },
       });
-      
+
       dispatch({
         type: "GET_ALL_PUBLICATIONS",
         payload: data,
@@ -251,7 +252,7 @@ export function getPublications(){
   };
 }
 
-export function getContractsPercentage(){
+export function getContractsPercentage() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/contracts/percentage`, {
@@ -261,19 +262,19 @@ export function getContractsPercentage(){
           "Access-Control-Allow-Origin": "*",
         },
       });
-      
+
       dispatch({
         type: "GET_CONTRACTS_PERCENTAGE",
         payload: data,
       });
-      console.log(data,parseInt(data))
+      console.log(data, parseInt(data));
     } catch (error) {
       console.log(error.message);
     }
   };
 }
 
-export function getTodayPayments(datas){
+export function getTodayPayments(datas) {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/payments`, {
@@ -283,19 +284,19 @@ export function getTodayPayments(datas){
           "Access-Control-Allow-Origin": "*",
         },
       });
-      if(datas === 'all'){
+      if (datas === "all") {
         dispatch({
           type: "GET_PAYMENTS_TODAY",
           payload: data,
         });
       }
-      if(datas === 'length'){
+      if (datas === "length") {
         dispatch({
           type: "GET_PAYMENTS_TODAY_LENGTH",
           payload: data,
         });
       }
-      if(datas === 'amount'){
+      if (datas === "amount") {
         dispatch({
           type: "GET_PAYMENTS_TODAY_AMOUNT",
           payload: data,
@@ -307,7 +308,7 @@ export function getTodayPayments(datas){
   };
 }
 
-export function getPublicationByYear(){
+export function getPublicationByYear() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/publications/year`, {
@@ -317,12 +318,11 @@ export function getPublicationByYear(){
           "Access-Control-Allow-Origin": "*",
         },
       });
-      
+
       dispatch({
         type: "GET_PUBLICATIONS_YEAR",
         payload: data,
       });
-      
     } catch (error) {
       console.log(error.message);
     }

@@ -1,1 +1,8 @@
 // @import '@coreui/coreui/dist/css/coreui.min.css'
+$color-error: red;
+
+.error {
+  color: $color-error;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}

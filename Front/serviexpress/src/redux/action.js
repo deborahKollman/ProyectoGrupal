@@ -552,7 +552,7 @@ export function postForm2(input) {
   };
 }
 
-export function filterprice(value) {
+/* export function filterprice(value) {
   return async (dispatch) => {
     try {
       let response =
@@ -582,7 +582,7 @@ export function filterprice(value) {
       })
     }
   };
-}
+} */
 
 export function sendBudget(
   publicationId,
@@ -795,6 +795,22 @@ export function postReview(id) {
       });  
     } catch (error) { console.log(error) }
    }
+}
+
+export function filterprice(value) {
+  return (dispatch) => {
+    try {
+      let response = value
+   
+
+      dispatch({ type: "FILTER_PRICE", payload: response });
+    } catch (error) {
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
+    }
+  };
 }
 
 
