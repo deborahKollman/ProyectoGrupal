@@ -57,8 +57,8 @@ const totalStar = 5-score;
           
             <div>
              <Carousel fade>
-               {album?.map(e => {
-                return <Carousel.Item>
+               {album?.map((e,i) => {
+                return <Carousel.Item key={i}>
                 <img src={e} alt="First slide"
                    />
             </Carousel.Item>
