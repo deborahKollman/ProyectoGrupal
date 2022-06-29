@@ -88,6 +88,7 @@ const initialState = {
   chat: [],
   rdcr_publications_by_user: [],
   orders: [],
+  review: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -347,6 +348,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         contract: action.payload,
       };
+    case "POST_REVIEW":
+      return {
+        ...state,
+        review: action.payload,
+      }
 
     case SEND_BUDGET:
       return {
