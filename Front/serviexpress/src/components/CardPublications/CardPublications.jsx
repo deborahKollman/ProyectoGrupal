@@ -46,7 +46,7 @@ const totalStar = 5-score;
 
   useEffect (()=>{
     if (rdcr_isAuth)
-      favorites.publications.filter((e)=>e.id===id).length > 0 ? setChecked(true) :  setChecked(false);
+      favorites.publications?.filter((e)=>e.id===id).length > 0 ? setChecked(true) :  setChecked(false);
   },[])
 
   return (

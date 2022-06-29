@@ -21,8 +21,9 @@ const Seller = () => {
         />
         <article>
           <h2>Work Your Way You bring the skill. We'll make earning easy</h2>
-          <MyButton>
-            <Link to="/seller/register">Registrarse</Link>
+          <MyButton sx={{color: "black", fontWeight: "bold"}}>
+            {/* <Link to="/seller/register">Registrarse</Link> */}
+            More Information
           </MyButton>
         </article>
       </figure>
