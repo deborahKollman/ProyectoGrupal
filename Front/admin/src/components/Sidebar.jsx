@@ -15,16 +15,23 @@ import { act_themeDark, act_themeLight } from "../redux/action";
 import { useDispatch } from "react-redux";
 import CategoryIcon from "@mui/icons-material/Category";
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import {logout} from '../redux/action';
 
 const Sidebar = () => {
   const xDispatch = useDispatch();
 
   const xNavigate = useNavigate();
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    xDispatch(logout());
+    xNavigate('/')
+  };
+
   return (
     <div className="sidebarr">
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none", textAlign: "center" }}>
+        <Link to="/home" style={{ textDecoration: "none", textAlign: "center" }}>
           <img
             className="logo"
             src="https://i.ibb.co/sbkstqQ/log.png"
@@ -89,18 +96,18 @@ const Sidebar = () => {
             <DisplaySettingsIcon className="iconn" />
             <span>Logs</span>
           </li> */}
-          <li>
+          {/* <li>
             <SettingsIcon className="iconn" />
             <span>Settings</span>
-          </li>
+          </li> */}
           <p className="title">USER</p>
-          <li>
+          {/* <li>
             <ManageAccountsIcon className="iconn" />
             <span>Profile</span>
-          </li>
+          </li> */}
           <li>
             <ExitToAppIcon className="iconn" />
-            <span>Logout</span>
+            <span onClick={(event) => handleClick(event)}>Logout</span>
           </li>
         </ul>
       </div>

@@ -278,7 +278,7 @@ export function getUserById(id) {
       
       dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 }
@@ -325,7 +325,7 @@ export function addToFavorites(user, publication) {
         payload: fav.data,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 }
@@ -340,7 +340,7 @@ export function getFavorites(user) {
         payload: fav.data,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 }
@@ -674,16 +674,9 @@ export function getBudgets (id) {
         dispatch({
           type: GET_BUDGETS,
           payload: filtered,
-
         })
     
-      } catch (error) {
-        console.log(error);
-      }
-    
-
-
-
+      } catch (error) { console.log(error); }
     } 
 
 
@@ -700,8 +693,7 @@ export function createUserChat(user,userName,text,pass) {
             usernames: [userName],
             title: "I want a budget",
             is_direct_chat: false
-
-            
+         
         },{
           headers: {
           'Project-ID': process.env.REACT_APP_CHAT_ORDERS_ID,
@@ -712,15 +704,12 @@ export function createUserChat(user,userName,text,pass) {
         }
           
           );
-
-
-       
+     
       try {
          await axios.post(`https://api.chatengine.io/chats/${chat.data.id}/messages/`,
         {
           text: text,
-
-          
+       
       },{
         headers: {
         'Project-ID': process.env.REACT_APP_CHAT_ORDERS_ID,
@@ -733,13 +722,9 @@ export function createUserChat(user,userName,text,pass) {
         );
   
       
-    } catch (error) {
-        console.log(error);
-    }
+    } catch (error) { console.log(error); }
 
-      } catch (error) {
-          console.log(error);
-      }
+      } catch (error) { console.log(error); }
   }
 };
 
@@ -756,20 +741,9 @@ export function getMyChat(user,pass) {
           "User-Secret": pass,
           }
         });
-        
-      
-        
-      } catch (error) {
-          console.log(error);
-      }
-
-
-
-
+               
+      } catch (error) { console.log(error); }
   }
-
-
-
 };
 
 export function getMyOrders() {
@@ -786,14 +760,11 @@ export function getMyOrders() {
   };
 }
 
-export function postReview(id) {
-   return async (dispatch) => {
+export function postReview(id, input) {
+   return async () => {
     try {
-      const review = await axios.post(`/contracts/review/${id}`);
-      dispatch({
-        type: "POST_REVIEW",
-        payload: review.data,
-      });  
+      const review = await axios.put(`/contracts/review/${id}`, input);
+      return review.data  
     } catch (error) { console.log(error) }
    }
 }
@@ -802,8 +773,6 @@ export function filterprice(value) {
   return (dispatch) => {
     try {
       let response = value
-   
-
       dispatch({ type: "FILTER_PRICE", payload: response });
     } catch (error) {
       swal({
@@ -814,6 +783,32 @@ export function filterprice(value) {
   };
 }
 
+export function filterbyCountry(value) {
+  return (dispatch) => {
+    try {
+      let response = value
+      dispatch({ type: "FILTER_BY_COUNTRY", payload: response });
+    } catch (error) {
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
+    }
+  };
+}
+export function getPublicationsByUserName(value) {
+  return (dispatch) => {
+    try {
+      let response = value
+      dispatch({ type: "FILTER_BY_PUBLICATION_NAME", payload: response });
+    } catch (error) {
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
+    }
+  };
+}
 
 export function createUserChatEngine(email,pass){
     return async () => {

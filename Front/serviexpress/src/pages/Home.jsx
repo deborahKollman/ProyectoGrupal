@@ -34,7 +34,11 @@ import {
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const allPublications = useSelector((state) => state.Publications);
+  const users = useSelector((state) => state.users)
+  const allPublications = useSelector((state) => state.Publications).sort(function(a,b){
+    if(users.find((u)=>u.id===a.userId).seller_reputation>users.find((u)=>u.id===b.userId).seller_reputation){return -1}
+    if(users.find((u)=>u.id===a.userId).seller_reputation<users.find((u)=>u.id===b.userId).seller_reputation){return 1}
+    return 0}) 
   const PublicationsCategory = useSelector(
     (state) => state.Publications_by_categories
   );
@@ -108,7 +112,9 @@ export default function Home() {
   return (
     <Fragment>
       <NavBar msg={msg}></NavBar>
-
+      <div className={Styles.selecCategory}>
+      <h4>SELECT A CATEGORY...</h4>
+      </div>
       <div className={Styles.filtercategories}>
         <FilterByCategories />
       </div>
