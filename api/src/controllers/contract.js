@@ -1,4 +1,4 @@
-const { createContract, deleteContract, getContractById, getContracts, updateContract } = require('../services/contract.js');
+const { createContract, deleteContract, getContractById, getContracts, updateContract, updateContractReview } = require('../services/contract.js');
 const { BAD_REQUEST, CREATED, OK } = require('../routes/helpers/status.js');
 
 exports.getContracts = async (req, res, next) => {
@@ -50,6 +50,22 @@ exports.updateContract = async (req, res, next) => {
     }
   } catch (error) {
     next(error);
+  }
+};
+
+exports.updateContractReview = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {point , comment } = req.body;
+
+    const r = await updateContractReview(id, point ,comment)
+    if (r.err_message) {
+      res.status(BAD_REQUEST).send(r.err_message);
+    } else {
+      res.status(OK).send(r.message);
+    }
+  } catch (error) {
+    next(error)
   }
 };
 
