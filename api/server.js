@@ -32,7 +32,7 @@ server.use(
 );
 
 server.use(express.static('public'));
-server.set('trust proxy',1)
+server.set('trust proxy', 1);
 // server.use(
 //   cookieSession({
 //     name: 'session',
@@ -49,8 +49,8 @@ server.use(
     proxy: true,
     cookie: {
       maxAge: 24 * 60 * 60 * 1000,
-      sameSite: process.env.NODE_ENV === "production"?'none':'lax',
-      secure: process.env.NODE_ENV === "production"
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: process.env.NODE_ENV === 'production'
     }
   })
 );
@@ -60,8 +60,10 @@ server.use(passport.authenticate('session'));
 
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'true');
-  res.header('Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
