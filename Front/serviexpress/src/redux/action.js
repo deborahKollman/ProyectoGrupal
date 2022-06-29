@@ -304,7 +304,10 @@ export function getPublicationsByCategory(a) {
         payload: response.data,
       });
     } catch (error) {
-      console.log("SERVICES NO FOUND");
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
     }
   };
 }
