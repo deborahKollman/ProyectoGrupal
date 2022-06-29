@@ -10,6 +10,10 @@ import {
   SEND_BUDGET,
   POST_CHAT,
   GET_CHAT,
+  GET_BUDGETS,
+  CREATE_USER_CHAT,
+  CREATE_USER_CHAT_ENGINE,
+  
 } from "./action";
 const initialState = {
   rdcr_isAuth: window.sessionStorage.getItem("token"),
@@ -86,6 +90,8 @@ const initialState = {
   favorite_check: false,
   budget: 0,
   chat: [],
+  budgetsId: [],
+
   rdcr_publications_by_user: [],
   orders: [],
 };
@@ -109,7 +115,7 @@ const rootReducer = (state = initialState, action) => {
         Publications: action.payload,
       };
     case "GET_CATEGORIES":
-      console.log("red", action.payload);
+   
       return {
         ...state,
         categories: action.payload,
@@ -359,11 +365,31 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-    case GET_CHAT:
-      return {
-        ...state,
-        chat: action.payload,
-      };
+      case GET_CHAT:   
+        return{
+            ...state,
+            chat: action.payload,
+        }
+
+      case GET_BUDGETS:
+       
+         return {
+              ...state,
+              budgetsId: action.payload,
+
+          } 
+      case CREATE_USER_CHAT:
+          return {
+              ...state,
+
+          }
+
+      case CREATE_USER_CHAT_ENGINE:
+        return {
+            ...state,
+
+        }
+
     default:
       return state;
   }
