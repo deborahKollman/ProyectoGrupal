@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import swal from 'sweetalert'
 
-const Review = ({orderid}) => {
+const Review = () => {
 
   const {id} = useParams()
   console.log(id)
@@ -20,8 +20,8 @@ const Review = ({orderid}) => {
   const navigate = useNavigate()
 
   const [input, setInput] = useState({
-    review: '',
-    rating: '',
+    comment: '',
+    point: '',
     id: id,
   })
 
@@ -37,7 +37,7 @@ const Review = ({orderid}) => {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(postReview(input))
+    dispatch(postReview(id, input))
     console.log(input)
     swal({
       title: "Review Submitted",
@@ -45,8 +45,8 @@ const Review = ({orderid}) => {
       icon: "success",
     })
     setInput({
-      review: '',
-      rating: '',
+      comment: '',
+      point: '',
       id: id
     })
     navigate('/home')
@@ -61,7 +61,7 @@ const Review = ({orderid}) => {
         <h4>Give us your review!</h4>
 
         <Form onSubmit={handleSubmit}>
-         <Form.Control as="textarea" rows={10} placeholder="Write something..." name='review' value={input.review} onChange={(e) => handleChange(e)}/>
+         <Form.Control as="textarea" rows={10} placeholder="Write something..." name='comment' value={input.comment} onChange={(e) => handleChange(e)}/>
 
 
         {[...Array(5)].map((star, i) => {
@@ -70,7 +70,7 @@ const Review = ({orderid}) => {
             <label>
             <input 
             type='radio'
-            name='rating'
+            name='point'
             value={ratingValue}
             onClick={() => setRating(ratingValue)}
             onChange={(e) => handleChange(e)}
