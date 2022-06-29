@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "./styles/Featured.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CircularStatic from './sub components/progressbar'
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+// import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import { getContractsPercentage, getTodayPayments} from '../redux/action.js'
 
 const Featured = () => {
@@ -15,7 +15,7 @@ const Featured = () => {
     dispatch(getContractsPercentage());
     dispatch(getTodayPayments("length"));
     dispatch(getTodayPayments("amount"));
-  },[dispatch, orders_percentage, payments_today_length, payments_today_amount])
+  },[dispatch])
 
   
   return (

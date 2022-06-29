@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./styles/Widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -15,17 +15,27 @@ const Widget = ({ type }) => {
 
 
   useEffect(() => {
-    dispatch(act_getUsersCount());
-    dispatch(getOrders());
-    dispatch(act_getAllServices());
-    dispatch(act_getAllCategories());
-  },[dispatch, rdcr_users_count, orders, rdcr_categories, rdcr_services])
+    switch (type) {
+      case "user":{
+        dispatch(act_getUsersCount());
+      }
+      case "orders":{
+        dispatch(getOrders());
+      }
+      case "categories":{
+        dispatch(act_getAllCategories());
+      }
+      case "services":{
+        dispatch(act_getAllServices());
+      }
+    }
+  },[dispatch, type])
 
 
   let data;
   
     //temporary
-    const diff = 20;
+    // const diff = 20;
   
     switch (type) {
       case "user":
