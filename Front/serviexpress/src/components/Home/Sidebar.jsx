@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { getPublications } from '../../redux/action';
 import SearchGroup from '../SearchGroup';
-import SwitchesGroup from '../Filters/switchprice';
+//import SwitchesGroup from '../Filters/switchprice';
 
 const Sidebar = () => {
     
@@ -35,7 +35,7 @@ const Sidebar = () => {
             ) : (
               true
             )}
-            <SwitchesGroup />
+            {/* <SwitchesGroup /> */}
     </Fragment>
   )
 }
