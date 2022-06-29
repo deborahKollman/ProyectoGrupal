@@ -276,7 +276,7 @@ export function getContractsPercentage(){
 export function getTodayPayments(datas){
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/payments/today`, {
+      const { data } = await axios.get(`/payments`, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

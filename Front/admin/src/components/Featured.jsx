@@ -21,16 +21,16 @@ const Featured = () => {
   return (
     <div className="featured">
       <div className="top">
-        <h1 className="title">Recent transactions</h1>
+        <h1 className="title">Transactions statistics</h1>
         <MoreVertIcon fontSize="small" />
       </div>
       <div className="bottom">
         <div className="featuredChart">
           <CircularStatic value={orders_percentage} text={`Completed \n contracts`}/>
         </div>
-        <p className="title">Total payments registered today</p>
+        <p className="title">Total payments registered</p>
         <p className="amount">{payments_today_length}</p>
-        <p className="title">Total money managed today</p>
+        <p className="title">Total money managed</p>
         <p className="amount">{`$ ${payments_today_amount}`}</p>
         {/* <p className="desc">
           Previous transactions processing. Last payments may not be included.
