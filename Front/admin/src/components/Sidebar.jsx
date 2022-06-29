@@ -36,10 +36,12 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="iconn" />
-            <span>Dashboard</span>
-          </li>
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="iconn" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
@@ -59,13 +61,13 @@ const Sidebar = () => {
               <span>Services</span>
             </li>
           </Link>
-          <Link to="/orders">
+          <Link to="/orders" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="iconn" />
             <span>Orders</span>
           </li>
           </Link>
-          <p className="title">USEFUL</p>
+          {/* <p className="title">USEFUL</p>
           <li>
             <QueryStatsIcon className="iconn" />
             <span>Stats</span>
@@ -73,20 +75,20 @@ const Sidebar = () => {
           <li>
             <NotificationsNoneIcon className="iconn" />
             <span>Notifications</span>
-          </li>
+          </li> */}
           <p className="title">SERVICE</p>
           <li onClick={() => {xNavigate('/attendance')}}>
             <SupportAgentIcon className="iconn" />
             <span>Customer Support</span>
           </li>
-          <li>
+          {/* <li>
             <SettingsSystemDaydreamIcon className="iconn" />
             <span>System Health</span>
           </li>
           <li>
             <DisplaySettingsIcon className="iconn" />
             <span>Logs</span>
-          </li>
+          </li> */}
           <li>
             <SettingsIcon className="iconn" />
             <span>Settings</span>

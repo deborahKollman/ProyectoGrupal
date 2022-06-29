@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
+      },
+      isChequed:{ 
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {

@@ -1,4 +1,4 @@
-const { Contract, User, Publication } = require('../database/postgres.js');
+const { Contract, User, Publication, Op } = require('../database/postgres.js');
 
 exports.getContracts = async () => {
   const contract = await Contract.findAll({
@@ -20,7 +20,7 @@ exports.getContracts = async () => {
         model: Publication
       }
     ],
-    order: [['id', 'ASC']]
+    order: [['id', 'DESC']]
   });
   return contract;
 };
@@ -52,6 +52,21 @@ exports.getContractById = async (id) => {
   return { err_message: 'Contract not found' };
 };
 
+exports.getContractsPercentage = async () => {
+  const contracts = await Contract.findAll({
+    where: {status:'Completed'},
+    raw:true
+  })
+  const allContracts = await Contract.count();
+  var percentage
+  if(allContracts === 0){
+    percentage = 0;    
+  }else{
+    percentage = (contracts.length/allContracts)*100;
+  }
+  return percentage.toString()
+}
+
 exports.createContract = async (
   user,
   publication,
@@ -60,7 +75,8 @@ exports.createContract = async (
   state,
   city,
   address,
-  service_date
+  service_date,
+  status
 ) => {
   console.log('user', user);
   if (!user) {
@@ -79,7 +95,8 @@ exports.createContract = async (
         city,
         state,
         address,
-        service_date
+        service_date,
+        status
       });
       contract.setUser(user);
       contract.setPublication(publication);
