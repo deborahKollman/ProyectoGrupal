@@ -107,6 +107,7 @@ const rootReducer = (state = initialState, action) => {
         rdcr_categories: payload,
       };
     case "GET_PUBLICATIONS":
+      
       return {
         ...state,
         Publications: action.payload,
@@ -196,6 +197,7 @@ const rootReducer = (state = initialState, action) => {
         reg_user: { message: payload },
       };
     case "GET_USER_BY_ID":
+      
       return {
         ...state,
         userId: action.payload,

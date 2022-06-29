@@ -15,7 +15,7 @@ function RadioButtonsGroup2() {
     setValue(event.target.value);
     dispatch(filterprice(event.target.value))
   };
-
+ 
   return (
     categories.length>0?
     <div>
@@ -35,15 +35,17 @@ function RadioButtonsGroup2() {
 
 
 const FilterByCategories = () => {
-
+  const cat= useSelector((state) => state.Publications_by_categories)
   const dispatch = useDispatch();
   
   const all = [{'id':0, name: 'All Categories'}]
   const allCategories = [...all,...useSelector((state) => state.categories)]
   const [value, setValue] = useState()
+
   useEffect(() => { 
     dispatch(getAllCategories())
     }, [dispatch],)
+
 
   useEffect(() => { 
     if (!allCategories[value]) dispatch(filterCategories('all'))
