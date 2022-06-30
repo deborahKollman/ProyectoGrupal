@@ -175,7 +175,7 @@ const FilterByCategories = () => {
   return (
     
     <Tabs className={stylefilter.tabsf}
-      
+      variant="scrollable"
       value={value}
       onChange={handleChange}
       scrollButtons="auto"
