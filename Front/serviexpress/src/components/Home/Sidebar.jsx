@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { getPublications } from "../../redux/action";
-import { RadioButtonsGroup2 } from "../Filters/Filters";
+import { RadioButtonsGroup2, RadioButtonsGroup3, SearchByPublicationName } from "../Filters/Filters";
 import SearchGroup from "../SearchGroup";
 //import SwitchesGroup from '../Filters/switchprice';
 
@@ -44,7 +44,11 @@ const Sidebar = () => {
 
       {/* ////////////////////////////////////////// */}
 
-      <RadioButtonsGroup2 />
+      <RadioButtonsGroup3 />
+
+      {/* ////////////////////////////////////////// */}
+
+      <SearchByPublicationName />
 
     </Fragment>
   );
