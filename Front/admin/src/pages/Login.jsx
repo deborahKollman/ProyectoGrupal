@@ -49,6 +49,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(defaultForm);
   const [error, setError] = useState(defaultForm);
+  const [sendLogin, setSendLogin] = useState(false);
   const { loginSucess } = useSelector((state) => state);
 
   const handleChange = ({ target: { name, value } }) => {
@@ -68,6 +69,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!Object.values(error).some(Boolean)) {
+      setSendLogin(!sendLogin);
       dispatch(
         login({
           username: form.email,
@@ -82,8 +84,11 @@ const Login = () => {
     if (loginSucess) {
       swal("Welcome", "Login correctly", "success");
       navigate("/home");
+    }else{
+      swal("Error", "User or password incorrect", "error");
     }
-  }, [navigate, loginSucess]);
+    
+  }, [dispatch,navigate, loginSucess, sendLogin]);
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
