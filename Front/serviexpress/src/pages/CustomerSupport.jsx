@@ -26,21 +26,46 @@ const CustomerSupport = () => {
     <Fragment>
       <BurgerButton />
 
-      <main className="page_customerSuport-main">
-        <section className="customerSupport-chat">
-          <section ref={refOne}>
-            <ChatWindow visible={visible} />
-          </section>
+      {/* https://i.ibb.co/LZQShv3/call-center.jpg */}
 
-          <Tooltip title="Hi!!!, How can we help you?" placement="left">
-            <Avatar
-              onClick={() => setVisible(true)}
-              alt="Remy Sharp"
-              src="https://i.ibb.co/nfPP3tS/OIP.jpg"
-              sx={{ width: 56, height: 56, margin: "9px" }}
+      <main className="page_customerSuport-main">
+        <section className="main-header">
+          <figure className="main-header-figure">
+            <img
+              src="https://i.ibb.co/LZQShv3/call-center.jpg"
+              alt="call-center"
+              className="main-header-figure-img"
             />
-          </Tooltip>
+            <article>
+              <h1>WELCOME TO OUR CUSTOMER SERVICE</h1>
+              <p>We are here to help you with any questions you may have.</p>
+            </article>
+          </figure>
         </section>
+
+        <section className="main-body-attenance">
+          <div className="page_customerSuport-header">
+            <div className="customerSupport-chat">
+              <section ref={refOne}>
+                <ChatWindow visible={visible} />
+              </section>
+              <Tooltip title="Hi!!!, How can we help you?" placement="left">
+                <Avatar
+                  onClick={() => setVisible(true)}
+                  alt="Remy Sharp"
+                  src="https://i.ibb.co/k93Gs5q/live-chat.png"
+                  sx={{ width: 46, height: 46, margin: "9px" }}
+                />
+              </Tooltip>
+            </div>
+            <div className="page_customerSuport-header-info">
+              <h1 className="page_customerSuport-header-info-title">
+                Customer Support
+              </h1>
+            </div>
+          </div>
+        </section>
+ 
       </main>
     </Fragment>
   );
