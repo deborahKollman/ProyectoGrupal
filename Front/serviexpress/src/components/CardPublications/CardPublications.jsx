@@ -16,6 +16,7 @@ const dispatch = useDispatch()
 const users = useSelector((state) => state.users);
 const favorites = useSelector((state) => state.favorites)
 const user = users.find((u)=>u.id===userId)
+
 const userLogin = useSelector(state => state.user)
 const rdcr_isAuth = useSelector(state => state.rdcr_isAuth)
 const score = user.seller_reputation
@@ -37,6 +38,7 @@ const favClicked = () => {
 const scoreStar = [];
 const scoreStarTotal = [];
 const totalStar = 5-score;
+if(totalStar>=5)totalStar=5
   for (let i = 0; i < score; i++) {
     scoreStar.push(i);
   };
@@ -76,6 +78,7 @@ const totalStar = 5-score;
           </Link>
           <div className={StylesCard.cardtext}>
             <p className={StylesCard.title}>{title}</p>
+            <p className={StylesCard.title}>{"Seller Name:  "+(users.find((u)=>u.id===userId)).name}</p> 
             <div className={StylesCard.summary}>
             <p className={StylesCard.titlesummary}>{summary}</p>
             </div>

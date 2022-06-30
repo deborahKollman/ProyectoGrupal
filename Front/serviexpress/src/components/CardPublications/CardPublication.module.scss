@@ -75,8 +75,8 @@
     justify-content: center;
     color: rgb(171, 145, 29);
     border-color: black;
-    margin-top: -20px;
-    margin-bottom: 20px;
+    margin-top: -30px;
+    margin-bottom: 30px;
   }
 
   .card:hover {
@@ -92,6 +92,7 @@
      
   .titlestar{
     text-align: left;
+    bottom: -10px;
   }
   .title{
     text-align: left;
@@ -104,7 +105,7 @@
   .UL{
   margin-bottom: 20px;
   position: relative;
-  bottom: -10px;
+  bottom: 20px;
   }
   .like{
   position: absolute;

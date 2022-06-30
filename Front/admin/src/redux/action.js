@@ -2,9 +2,6 @@ import axios from "axios";
 
 export const GET_ORDERS = "GET_ORDERS";
 
-
- 
- 
 export const act_themeTogle = () => {
   return {
     type: "TOGGLE",
@@ -14,7 +11,7 @@ export const act_themeTogle = () => {
 export const act_getAllUsers = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/users`);
+      const { data } = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({
         type: "GET_ALL_USERS",
         payload: data.users,
@@ -28,7 +25,7 @@ export const act_getAllUsers = () => {
 export const act_getUsersCount = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/users`);
+      const { data } = await axios.get("/users?page=1&offset=10&limit=100");
       dispatch({
         type: "GET_USERS_COUNT",
         payload: data.count,
@@ -37,7 +34,7 @@ export const act_getUsersCount = () => {
       console.log(error.message);
     }
   };
-}
+};
 
 export function act_getUserById(pIdentity) {
   return async (dispatch) => {
@@ -53,7 +50,7 @@ export function act_getUserById(pIdentity) {
   };
 }
 
-export async function act_getOneCategory (pIdentity) {
+export async function act_getOneCategory(pIdentity) {
   try {
     const { data } = await axios.get( `/categories/${pIdentity}`);
     return data
@@ -84,8 +81,8 @@ export const act_postCategory = (oCategory) => {
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const act_deleteCategory = (pIdentity) => {
   return async () => {
@@ -96,9 +93,8 @@ export const act_deleteCategory = (pIdentity) => {
     } catch (error) {
       console.log(error);
     }
-  }
-}
-
+  };
+};
 
 export const act_getAllServices = () => {
   return async (dispatch) => {
@@ -132,7 +128,7 @@ export const act_filterServicesByCategory = (pObj) => {
       console.log(error.message);
     }
   };
-}
+};
 
 export const act_clearServices = () => {
   return {
@@ -161,7 +157,33 @@ export function getOrders(){
 
 };
 
-export function getPublications(){
+export function login(payload) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post("/login?admin=true", payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+      if(data.message === 'Login successfully'){
+        dispatch({
+          type: "LOGIN_ADMIN",
+          payload: data.message,
+        });
+      }else{
+        dispatch({
+          type: "LOGOUT",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getPublications() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/publications`);
@@ -176,7 +198,7 @@ export function getPublications(){
   };
 }
 
-export function getContractsPercentage(){
+export function getContractsPercentage() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/contracts/percentage`);
@@ -185,14 +207,14 @@ export function getContractsPercentage(){
         type: "GET_CONTRACTS_PERCENTAGE",
         payload: data,
       });
-      console.log(data,parseInt(data))
+      console.log(data, parseInt(data));
     } catch (error) {
       console.log(error.message);
     }
   };
 }
 
-export function getTodayPayments(datas){
+export function getTodayPayments(datas) {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/payments`);
@@ -202,13 +224,13 @@ export function getTodayPayments(datas){
           payload: data,
         });
       }
-      if(datas === 'length'){
+      if (datas === "length") {
         dispatch({
           type: "GET_PAYMENTS_TODAY_LENGTH",
           payload: data,
         });
       }
-      if(datas === 'amount'){
+      if (datas === "amount") {
         dispatch({
           type: "GET_PAYMENTS_TODAY_AMOUNT",
           payload: data,
@@ -220,7 +242,7 @@ export function getTodayPayments(datas){
   };
 }
 
-export function getPublicationByYear(){
+export function getPublicationByYear() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/publications/year`);
@@ -229,9 +251,14 @@ export function getPublicationByYear(){
         type: "GET_PUBLICATIONS_YEAR",
         payload: data,
       });
-      
     } catch (error) {
       console.log(error.message);
     }
+  };
+}
+
+export function logout() {
+  return {
+    type: "LOGOUT",
   };
 }
