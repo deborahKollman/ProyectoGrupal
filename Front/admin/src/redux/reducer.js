@@ -124,6 +124,12 @@ const rootReducer = (state = initialState, action) => {
         publications_year: action.payload,
       };
     }
+    case "LOGOUT": {
+      return {
+        ...state,
+        loginSucess: false,
+      };
+    }
     default:
       return state;
   }

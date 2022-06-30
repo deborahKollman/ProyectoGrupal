@@ -167,11 +167,16 @@ export function login(payload) {
           "Access-Control-Allow-Origin": "*",
         },
       });
-
-      dispatch({
-        type: "LOGIN_ADMIN",
-        payload: data.message,
-      });
+      if(data.message === 'Login successfully'){
+        dispatch({
+          type: "LOGIN_ADMIN",
+          payload: data.message,
+        });
+      }else{
+        dispatch({
+          type: "LOGOUT",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -249,5 +254,11 @@ export function getPublicationByYear() {
     } catch (error) {
       console.log(error.message);
     }
+  };
+}
+
+export function logout() {
+  return {
+    type: "LOGOUT",
   };
 }
