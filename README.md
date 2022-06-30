@@ -52,6 +52,17 @@ Styles have been implemented with some CSS frameworks, primarily MaterialUI and 
 <br>
 Some features have been implemented from the client-side, such as filtering, sorting, and pagination.
 
+## Backend
+The database was developed using PostgreSQL and Sequelize as an ORM. 
+<br>
+The backend was implemented as a CRUD API using Node and Express.
+<br>
+Register and Login features through Google authenticate were built with Passport.js.
+<br>
+Nodemailer was integrated to send emails in proper situations.
+<br>
+Some features have been implemented from the server-side, such as searching.
+
 
 ## Team
 <p>
