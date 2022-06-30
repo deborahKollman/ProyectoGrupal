@@ -53,6 +53,61 @@ Styles have been implemented with some CSS frameworks, primarily MaterialUI and 
 Some features have been implemented from the client-side, such as filtering, sorting, and pagination.
 
 
+## Team
+<p>
+<a href="https://github.com/JalzDeLezZ" text-decoration="none">
+James Cristopher Diaz Lopez
+</a>
+| Frontend - UX/UI Design 
+</p>
+
+<p>
+<a href="https://github.com/Leoagmartin" text-decoration="none">
+Leonardo Martin Aguirre
+</a>
+| Frontend - UX/UI Design
+</p>
+
+<p>
+<a href="https://github.com/sergiodm92" text-decoration="none">
+Sergio Andres David Maioli
+</a>
+| Frontend - UX/UI Design
+</p>
+
+<p>
+<a href="https://github.com/camiFK" text-decoration="none">
+Camila Florencia Kapp
+</a>
+| Frontend - UX/UI Design
+</p>
+
+<p>
+<a href="https://github.com/betopalma" text-decoration="none">
+Norberto Palma
+</a>
+| Backend - DevOps
+</p>
+
+<p>
+<a href="https://github.com/deborahKollman" text-decoration="none">
+Deborah Kollman
+</a>
+| Backend - Support
+</p>
+
+<p>
+<a href="https://github.com/Khatanna" text-decoration="none">
+Carlos Chambi Valencia
+</a>
+| Backend - Tester
+</p>
+
+
+
+
+
+
 
 
 
