@@ -95,7 +95,6 @@ const Review = () => {
            </Form>
         </div>
         
-        <FooterBar />
     </div>
   )
 }
