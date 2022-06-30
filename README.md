@@ -19,26 +19,21 @@ It has a local database and consumes data from an API, all features have been im
 ## Technologies
 - [ ] PostgreSQL - Sequelize
 - [ ] Node.js - Express.js
-- [ ] Passport.js 
+- [ ] Passport.js
+- [ ] Nodemailer
 - [ ] Stripe - MercadoPago
 - [ ] Chatengine.io
 - [ ] React - Redux
 - [ ] CSS modules - Styled Components
 - [ ] MaterialUI - Bootstrap
 
-## Frontend
-The application mockups were designed using Figma. 
-<br>
-The client-side was developed using React for UI and Redux for state management. 
-<br>
-Styles have been implemented with some CSS frameworks, primarily MaterialUI and Bootstrap.
-
-#### Features
+## Features
 - Filtering publications by category.
 - Filtering publications by seller's name.
 - Filtering publications by seller's country.
 - Sorting publications by price.
 - Searching by publication's name.
+- Registering and creating a free account, using local register o Google authenticate.
 - Adding to favorites.
 - Purchasing a default service: payment methods (Stripe and MercadoPago)
 - Orders history.
@@ -47,6 +42,17 @@ Styles have been implemented with some CSS frameworks, primarily MaterialUI and 
 - User's profile customization.
 - Adding, editing, and deleting a publication.
 - Asking for a support chat.
+
+## Frontend
+The application mockups were designed using Figma. 
+<br>
+The client-side was developed using React for UI and Redux for state management. 
+<br>
+Styles have been implemented with some CSS frameworks, primarily MaterialUI and Bootstrap. Also CSS modules and Styled Components.
+<br>
+Some features have been implemented from the client-side, such as filtering, sorting, and pagination.
+
+
 
 
 
