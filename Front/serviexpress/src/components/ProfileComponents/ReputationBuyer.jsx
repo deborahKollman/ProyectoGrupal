@@ -8,11 +8,11 @@ import { CardActionArea} from '@mui/material';
 import { useEffect } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getUser} from '../../redux/action'
+import styles from '../styles/ReputationBuyer.module.scss'
+import Rating from '@mui/material/Rating';
 
 
-
-
-export default function ReputationBuyer(){
+export default function ReputationSeller(){
 
 
     const dispatch = useDispatch();
@@ -24,10 +24,11 @@ export default function ReputationBuyer(){
 
     },[dispatch])
 
-    let ar = [1,2,3,4,5,6]
+    
     console.log(user);
-     return <div>
-            <Stack  alignItems="center">
+     return <div className={styles.container}>
+            <Stack >
+              <div className={styles.head}>
               <Avatar alt="Avatar" src={user.avatar_image}  sx={{ width: 100, height: 100 }}/>
               <Typography gutterBottom variant="h2" component="div">
                 {user.name + "  " + user.last_name}
@@ -35,30 +36,34 @@ export default function ReputationBuyer(){
           <Typography gutterBottom variant="h4" component="div">
             As Buyer..
           </Typography>
+            </div>
 
-            <Stack    direction="row" >
-            {user.buyer_opinions && ar.map(e => <Card sx={{ maxWidth: 345 }}>
+            <Stack >
+            <div className={styles.listOpinions}>
+            {user.seller_opinions && user.seller_opinions.map(e => <Card sx={{ width: 300, bgcolor: 'lightgray'}}>
+
             <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            alt="green iguana"
-        />
+
            <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {e.commenter}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+          <Typography variant="body2" color="text.secondary" fontSize={14}>
+              {e.comment}
           </Typography>
+
+          <Rating name="read-only" value={e.rating} readOnly size='medium' sx={{display: 'flex', justifyContent: 'center', alignContent: 'center'}} />
+
             </CardContent>
+
+            
+
           </CardActionArea>
 
              </Card>    
 
                 )   }
+            </div>
           </Stack>
 
      </Stack>

@@ -14,7 +14,7 @@ export const  GET_CHAT = " GET_CHAT";
 export const GET_BUDGETS = "GET_BUDGETS";
 export const CREATE_USER_CHAT = "CREATE_USER_CHAT";
 export const CREATE_USER_CHAT_ENGINE = 'CREATE_USER_CHAT_ENGINE'; 
-
+export const NOTIFICATIONS = "NOTIFICATIONS";
 
 
 
@@ -274,11 +274,9 @@ export function getPublicationsName(name) {
 export function getUserById(id) {
   return async (dispatch) => {
     try {
-      if (!!id) {
-        console.log(id)
-        let data = await axios.get("/users/" + id);
-        dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
-      }
+      let data = await axios.get("/users/" + id);
+      
+      dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
     } catch (error) {
       console.log(error.response.data);
     }
@@ -832,4 +830,13 @@ export function createUserChatEngine(email,pass){
           console.log(error);
         }
     }
+};
+
+
+export function notifications(){
+
+    
+
+
+
 };

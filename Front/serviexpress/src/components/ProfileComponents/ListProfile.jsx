@@ -47,10 +47,32 @@ export const ListProfile = () => {
 };
 
 export const ListBuyerReputation = () => {
+        const dispatch = useDispatch();
+        const user = useSelector(state => state.user);  
+
+    
+    
+        useEffect(() => {
+          dispatch(getUser());
+
+    
+    
+        },[dispatch,user.id])
+
+
+
+        setTimeout(() => {
+                dispatch(getBudgets(user));
+            
+              },10000)
+        
+
+
+
     return <div>    
             <Navbar />
             <div className={styles.container}>
-            <SideBarProfile></SideBarProfile>
+            <SideBarProfile user={user.id}></SideBarProfile>
             <ReputationBuyer></ReputationBuyer>
             </div>
 
