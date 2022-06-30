@@ -1,3 +1,52 @@
-# ProyectoGrupal
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/SITIO-EN-CONSTRUCCION.jpg/1200px-SITIO-EN-CONSTRUCCION.jpg"/>
+<p align='center'>
+<img width='350' src="https://raw.githubusercontent.com/camiFK/ProyectoGrupal/development/Front/serviexpress/src/assets/icons/log.png"/>
+</p>
+
+## About
+<p>
+ServiExpress is an online service retail shop where you can create a free account and become a client or seller. 
+<br>
+Find hundreds of services at different prices and places, buy a default service or ask for a budget and get a custom one. 
+<br>
+We are an intermediator for the user and guarantee that the services offered here and its sellers are high quality.
+</p>
+
+## Description
+Single Page Application (SPA) designed and developed by seven people as a Group Project for a coding Bootcamp.
+It has a local database and consumes data from an API, all features have been implemented by ourselves.
+
+## Technologies
+- [ ] PostgreSQL - Sequelize
+- [ ] Node.js - Express.js
+- [ ] Passport.js 
+- [ ] Stripe - MercadoPago
+- [ ] Chatengine.io
+- [ ] React - Redux
+- [ ] CSS modules - Styled Components
+- [ ] MaterialUI - Bootstrap
+
+## Frontend
+The application mockups were designed using Figma. 
+<br>
+The client-side was developed using React for UI and Redux for state management. 
+<br>
+Styles have been implemented with some CSS frameworks, primarily MaterialUI and Bootstrap.
+
+#### Features
+- Filtering publications by category.
+- Filtering publications by seller's name.
+- Filtering publications by seller's country.
+- Sorting publications by price.
+- Searching by publication's name.
+- Adding to favorites.
+- Purchasing a default service: payment methods (Stripe and MercadoPago)
+- Orders history.
+- Seller's reviewing and rating options.
+- Asking for a budget using WhatsApp or ChatEngine.
+- User's profile customization.
+- Adding, editing, and deleting a publication.
+- Asking for a support chat.
+
+
+
