@@ -33,7 +33,7 @@ It has a local database and consumes data from an API, all features have been im
 - Filtering publications by seller's country.
 - Sorting publications by price.
 - Searching by publication's name.
-- Registering and creating a free account, using local register o Google authenticate.
+- Registering and creating a free account, using local register or Google authenticate.
 - Adding to favorites.
 - Purchasing a default service: payment methods (Stripe and MercadoPago)
 - Orders history.
