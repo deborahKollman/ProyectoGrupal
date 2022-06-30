@@ -60,7 +60,7 @@ const FilterByCategories = () => {
     
     <Tabs className={stylefilter.tabsf}
       
-      value={value?value:0}
+      value={value}
       onChange={handleChange}
       scrollButtons="auto"   
       >

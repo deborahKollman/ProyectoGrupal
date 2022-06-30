@@ -104,7 +104,9 @@ export default function Home() {
   return (
     <Fragment>
       <NavBar msg={msg}></NavBar>
-      
+      <div className={Styles.selecCategory}>
+      <h4>SELECT A CATEGORY...</h4>
+      </div>
       <div className={Styles.filtercategories}>
         <FilterByCategories />
       </div>
