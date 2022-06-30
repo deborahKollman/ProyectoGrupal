@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import "./styles/CustomerSupport.scss";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import ChatWindow from "../components/SupportWindow/ChatWindow";
+import BurgerButton from "../components/NavBar/NavBar";
 
 const CustomerSupport = () => {
   const refOne = useRef(null);
@@ -22,25 +23,26 @@ const CustomerSupport = () => {
   }, [refOne]);
 
   return (
-    <div className="page_customerSuport">
-      <section>
-        
-      </section>
-      <section className="customerSupport-chat">
-        <section ref={refOne}>
-          <ChatWindow visible={visible} />
-        </section>
+    <Fragment>
+      <BurgerButton />
 
-        <Tooltip title="Hi!!!, How can we help you?" placement="left">
-          <Avatar
-            onClick={() => setVisible(true)}
-            alt="Remy Sharp"
-            src="https://i.ibb.co/nfPP3tS/OIP.jpg"
-            sx={{ width: 56, height: 56, margin: "9px" }}
-          />
-        </Tooltip>
-      </section>
-    </div>
+      <main className="page_customerSuport-main">
+        <section className="customerSupport-chat">
+          <section ref={refOne}>
+            <ChatWindow visible={visible} />
+          </section>
+
+          <Tooltip title="Hi!!!, How can we help you?" placement="left">
+            <Avatar
+              onClick={() => setVisible(true)}
+              alt="Remy Sharp"
+              src="https://i.ibb.co/nfPP3tS/OIP.jpg"
+              sx={{ width: 56, height: 56, margin: "9px" }}
+            />
+          </Tooltip>
+        </section>
+      </main>
+    </Fragment>
   );
 };
 
