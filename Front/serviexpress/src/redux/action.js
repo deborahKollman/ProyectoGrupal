@@ -274,10 +274,13 @@ export function getPublicationsName(name) {
 export function getUserById(id) {
   return async (dispatch) => {
     try {
-      let data = await axios.get("/users/" + id);
-      dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
+      if (!!id) {
+        console.log(id)
+        let data = await axios.get("/users/" + id);
+        dispatch({ type: "GET_USER_BY_ID", payload: data.data.user });
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 }
@@ -324,7 +327,7 @@ export function addToFavorites(user, publication) {
         payload: fav.data,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 }
@@ -339,7 +342,7 @@ export function getFavorites(user) {
         payload: fav.data,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 }
@@ -760,13 +763,10 @@ export function getMyOrders() {
 }
 
 export function postReview(id, input) {
-   return async (dispatch) => {
+   return async () => {
     try {
       const review = await axios.put(`/contracts/review/${id}`, input);
-      dispatch({
-        type: "POST_REVIEW",
-        payload: review.data,
-      });  
+      return review.data  
     } catch (error) { console.log(error) }
    }
 }
