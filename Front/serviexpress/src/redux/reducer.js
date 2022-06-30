@@ -1,3 +1,4 @@
+// import { resetState } from "sweetalert/typings/modules/state";
 import {
   AUTHENTICATE,
   LOGOUT_SESSION,
@@ -179,6 +180,42 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           Publications: response,
         };
+    case "FILTER_BY_COUNTRY":
+      let filtCatCountry = state.Publications_by_categories
+      let users = state.users
+        let res =
+        action.payload === "Argentina"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country==="Argentina")
+            : action.payload === "Bolivia"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country==="Bolivia")
+            : action.payload === "Colombia"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country==="Colombia")
+            : action.payload === "Mexico"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country==="Mexico")
+            : action.payload === "Peru"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country==="Peru")
+            : action.payload === "Uruguay"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country==="Uruguay")
+            : action.payload === "Others"
+            ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country!==("Uruguay"&&"Perú"&&"México"&&"Colombia"&&"Bolivia"&&"Argentina"))
+            : filtCatCountry
+        return {
+          ...state,
+          Publications: res,
+        }; 
+    case "FILTER_BY_PUBLICATION_NAME":
+      let filtbyName = state.Publications_by_categories
+      let userss = state.users
+        let ress =
+        action.payload
+            ? filtbyName.filter((a) => (userss.find((u)=>u.id===a.userId)).name.toLowerCase().includes(action.payload.toLowerCase()))
+            : filtbyName
+            return {
+              ...state,
+              Publications: ress,
+            }; 
+
+              
     case "GET_USER":
       window.sessionStorage.setItem(
         "token",

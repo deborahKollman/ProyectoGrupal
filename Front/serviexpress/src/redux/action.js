@@ -775,8 +775,6 @@ export function filterprice(value) {
   return (dispatch) => {
     try {
       let response = value
-   
-
       dispatch({ type: "FILTER_PRICE", payload: response });
     } catch (error) {
       swal({
@@ -787,6 +785,32 @@ export function filterprice(value) {
   };
 }
 
+export function filterbyCountry(value) {
+  return (dispatch) => {
+    try {
+      let response = value
+      dispatch({ type: "FILTER_BY_COUNTRY", payload: response });
+    } catch (error) {
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
+    }
+  };
+}
+export function getPublicationsByUserName(value) {
+  return (dispatch) => {
+    try {
+      let response = value
+      dispatch({ type: "FILTER_BY_PUBLICATION_NAME", payload: response });
+    } catch (error) {
+      swal({
+        icon: "error",
+        text: 'Sorry! There are no publications yet.',
+      })
+    }
+  };
+}
 
 export function createUserChatEngine(email,pass){
     return async () => {
