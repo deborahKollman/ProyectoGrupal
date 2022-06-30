@@ -10,16 +10,16 @@ import { useSelector } from "react-redux";
 import Attendance from "./pages/Attendance";
 
 function App() {
-  const { rdcr_darkMode } = useSelector((state) => state);
+  const { rdcr_darkMode, loginSucess } = useSelector((state) => state);
 
   return (
     <div className={rdcr_darkMode ? "app dark" : "app"}>
       <Routes>
         <Route path="/">
           <Route index element={<Login />} />
-          <Route path="home" element={<Home />} />
+          {loginSucess && <Route path="home" element={<Home />} />}
           <Route path="users">
-            <Route index element={<List pType={"USER"} />} />
+            {loginSucess && <Route index element={<List pType={"USER"} />} />}
             <Route path=":userId" element={<Single />} />
             <Route
               path="new"
@@ -27,18 +27,18 @@ function App() {
             />
           </Route>
           <Route path="categories">
-            <Route index element={<ListOfCategory pType={"CATEGORY"} />} />
+            {loginSucess && <Route index element={<ListOfCategory pType={"CATEGORY"} />} />}
             <Route path=":productId" element={<Single />} />
           </Route>
           <Route path="services">
-            <Route index element={<ListOfServices />} />
+            {loginSucess && <Route index element={<ListOfServices />} />}
             <Route path=":productId" element={<Single />} />
           </Route>
           <Route path="orders">
-            <Route index element={<Order />} />
+            {loginSucess && <Route index element={<Order />} />}
             <Route path=":productId" element={<Single />} />
           </Route>
-          <Route path="attendance" element={<Attendance />} />
+          {loginSucess && <Route path="attendance" element={<Attendance />} />}
         </Route>
       </Routes>
     </div>
