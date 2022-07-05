@@ -97,9 +97,9 @@ const Login = () => {
       dispatch(clearErrorDataLogin());
     }
     if (rdcr_isAuth && !sendLogin) {  
-/*       dispatch(getUser());
+       dispatch(getUser());
       console.log(user);
-      dispatch(createUserChatEngine(user.email,user.email)); */
+      dispatch(createUserChatEngine(user.email,user.email)); 
       swal("Inicio de sesión correcto", "Logeado", "success");
       navigate("/home");
       // si no da error es una feature 😂

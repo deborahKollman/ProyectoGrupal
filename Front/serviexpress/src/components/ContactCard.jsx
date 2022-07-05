@@ -139,7 +139,7 @@ export default function ContactCard({name,perfil,id_seller,handleClose}){
 
     const handleWhatsapp = (e) => {
        
-        window.open("http://api.whatsapp.com/send?phone=523921195122&text=Hola,%20me%20interesa%20contratar%20su%20servicio")
+        window.open("http://api.whatsapp.com/send?phone=543415068103&text=Hola,%20me%20interesa%20contratar%20su%20servicio")
         handleClose();
     };
    

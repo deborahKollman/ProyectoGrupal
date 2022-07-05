@@ -2,10 +2,26 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import "../styles/SideBarProfile.scss";
+import {useSelector,useDispatch} from 'react-redux';
+import { getBudgets } from "../../redux/action";
+import { useEffect,useState } from "react";
+import Box from '@mui/material/Box';
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
 
-export default function SideBarProfile() {
+
+export default function SideBarProfile({user}) {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const notif = useSelector(state => state.budgetsId);
+
+  console.log(user);
+
+  useEffect(() => {
+      dispatch(getBudgets(user))
+
+  },[dispatch,user])
 
 
 
@@ -16,8 +32,6 @@ export default function SideBarProfile() {
   };
 
 
-
-
   return (
     <div className="sidebarr">
       <div className="center">
@@ -25,38 +39,40 @@ export default function SideBarProfile() {
           <p className="title">BUYER</p>
           <li>
               
-              <button name='buyer-reputation' onClick={handleClick}>Reputation</button>
+              <button name='buyer-reputation' onClick={handleClick} className='btn'>Reputation</button>
             </li>
           
-          <Link to="#" style={{ textDecoration: "none" }}>
-            <li>
+       
+            
               
-              <span>Notifications</span>
-            </li>
-          </Link>
-          <Link to="#" style={{ textDecoration: "none" }}>
-            <li>
-          
-              <span></span>
-            </li>
-          </Link>
+            {/*   <span>{notif.length}</span> */}
+             
+           
+        
+
           <p className="title">SELLER</p>
           <li>
               
-              <button name='seller-reputation' onClick={handleClick}>Reputation</button>
+              <button name='seller-reputation' onClick={handleClick} className='btn'>Reputation</button>
             </li>
-          <li>
+        
            
-            <span>Notifications</span>
-          </li>
+          {/*   <span>Notifications</span>  */}
+           
+    {/*         <Box sx={{ color: 'action.active' }}>
+           <Badge color="secondary" variant="dot">
+          <MailIcon />
+          </Badge>
+          </Box> */}
+
           <p className="title">BUDGET</p>
-          <li>
+        
            
-            <span>Notifications</span>
-          </li>
+            {/*   <span>Notifications</span>  */}
+          
         
             <li>
-              <button name='chats' onClick={handleClick}>Chats</button>
+              <button name='chats' onClick={handleClick} className='btn'>Chats</button>
             </li>
     
 
@@ -64,7 +80,7 @@ export default function SideBarProfile() {
 
             <li>
               
-              <button name='orders' onClick={handleClick}>List Orders</button>
+              <button name='orders' onClick={handleClick} className='btn'>List Orders</button>
             </li>
 
 
