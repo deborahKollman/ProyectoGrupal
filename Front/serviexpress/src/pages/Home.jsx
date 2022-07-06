@@ -13,11 +13,11 @@ import {
 import CardPublications from "../components/CardPublications/CardPublications";
 //import FilterByCategories from "../components/Filters/FilterByCategories";
 import Pagination from "../components/Pagination/Pagination";
-import Loading from "../components/Loading/Loading.js";
+// import Loading from "../components/Loading/Loading.js";
 import NavBar from "../components/NavBar/NavBar";
-import ServicesBar from "../components/ServicesBar";
+// import ServicesBar from "../components/ServicesBar";
 import Styles from "./styles/Home.module.scss";
-import Carousel from "react-bootstrap/Carousel";
+// import Carousel from "react-bootstrap/Carousel";
 // import stylesDetail from "./styles/stylesDetail.module.scss";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
@@ -35,10 +35,9 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users)
-  const allPublications = useSelector((state) => state.Publications).sort(function(a,b){
-    if(users.find((u)=>u.id===a.userId).seller_reputation>users.find((u)=>u.id===b.userId).seller_reputation){return -1}
-    if(users.find((u)=>u.id===a.userId).seller_reputation<users.find((u)=>u.id===b.userId).seller_reputation){return 1}
-    return 0}) 
+  
+  const allPublications = useSelector((state) => state.Publications)
+  
   const PublicationsCategory = useSelector(
     (state) => state.Publications_by_categories
   );
@@ -49,6 +48,7 @@ export default function Home() {
 
   const [CurrentPage, setCurrentPage] = useState(1);
   const [PublicationsPerPage, setPublicationsPerPage] = useState(12);
+  const [loading, setLoading] = useState(true)
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
   let currentServices;
@@ -90,10 +90,19 @@ export default function Home() {
 
     dispatch(getAllCategories());
     dispatch(getFavorites(user.id));
-    setTimeout(() => {
-      dispatch(getPublications());
-    }, 1000);
+    dispatch(getPublications());
+    
   }, [dispatch, errorLogin, navigate, sendLogin, rdcr_isAuth, user, session]);
+
+  useEffect(() => {
+    if(allPublications.length!==0 && users.length!==0 ){
+      allPublications.sort(function(a,b){
+        if(users.find((u)=>u.id===a.userId).seller_reputation>users.find((u)=>u.id===b.userId).seller_reputation){return -1}
+        if(users.find((u)=>u.id===a.userId).seller_reputation<users.find((u)=>u.id===b.userId).seller_reputation){return 1}
+        return 0}) 
+      setLoading(false)
+    }
+  }, [dispatch, users, allPublications])
 
   useEffect(() => {
     setCurrentPage((pag) => (pag = 1));
@@ -146,7 +155,7 @@ export default function Home() {
               />
             </div>
 
-            {allPublications.length > 0 ? (
+            {(allPublications.length > 0 && !loading)? (
               <section className={Styles.serviceshome}>
                 {currentServices?.map((e, i) => {
                   return (
