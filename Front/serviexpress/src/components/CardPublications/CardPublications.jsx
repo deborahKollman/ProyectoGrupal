@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import StylesCard from "./CardPublication.module.scss";
 
 
-const CardPublications = ({ id, summary, album, title, price, userId }) => {
+const CardPublications = ({ id, summary, album, title, price, userId, favorite }) => {
 const dispatch = useDispatch()
 
 const users = useSelector((state) => state.users);
@@ -94,7 +94,8 @@ if(totalStar>=5)totalStar=5
             </div>
             <div className={StylesCard.like}>
             {/* <Checkbox  icon={<FavoriteBorder/>} checkedIcon={<Favorite />} /> */}
-            <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} disabled={!rdcr_isAuth} checkedIcon={<Favorite />} />
+            {/* <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  checked={checked} icon={<FavoriteBorder />} onClick={favClicked} onChange={heartChange} disabled={!rdcr_isAuth} checkedIcon={<Favorite />} /> */}
+            <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}  checked={favorite && rdcr_isAuth} icon={<FavoriteBorder />} onClick={favClicked} disabled={!rdcr_isAuth} checkedIcon={<Favorite />} />
             </div>
            </div>
           </div>
