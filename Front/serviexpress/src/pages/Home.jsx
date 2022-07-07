@@ -35,7 +35,7 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users)
-  
+  const favorites = useSelector((state) => state.favorites)
   const allPublications = useSelector((state) => state.Publications)
   
   const PublicationsCategory = useSelector(
@@ -52,11 +52,17 @@ export default function Home() {
   const indexOfLastPublication = CurrentPage * PublicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - PublicationsPerPage;
   let currentServices;
+  let pubsFav=[];
   if (allPublications.length > 0) {
     currentServices = allPublications?.slice(
       indexOfFirstPublication,
       indexOfLastPublication
     );
+    if (favorites.publications) {pubsFav = favorites.publications.map((e)=>e.id)}
+    currentServices.forEach((e,i)=>{
+      if (pubsFav.find(f=>f===e.id)) e.favorite = true;
+      else e.favorite = false;
+    })
   } else {
     currentServices = [];
   }
@@ -104,18 +110,18 @@ export default function Home() {
     }
   }, [dispatch, users, allPublications])
 
-  useEffect(() => {
+/*   useEffect(() => {
     setCurrentPage((pag) => (pag = 1));
-  }, [allPublications]);
+  }, [allPublications]); */
 
   useEffect(() => {
-    setTimeout(() => {
+
       if (allPublications.length === 0 && PublicationsCategory.length !== 0)
         swal({
           icon: "error",
           text: "Sorry! There are no publications yet.",
         });
-    }, 1000);
+        else setCurrentPage((pag) => (pag = 1));
   }, [allPublications]);
 
   return (
@@ -168,6 +174,7 @@ export default function Home() {
                         summary={e.detail_resume}
                         userId={e.userId}
                         price={e.price}
+                        favorite={e.favorite}
                       />
                     </div>
                   );
