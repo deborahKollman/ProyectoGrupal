@@ -177,10 +177,13 @@ const rootReducer = (state = initialState, action) => {
             : action.payload === "all"
             ? filteredCategories
             : filteredCategories
-        return {
+        if(response.length!==0){
+            return {
           ...state,
           Publications: response,
-        };
+        };}else{
+          throw new Error("empty")
+        }
     case "FILTER_BY_COUNTRY":
       let filtCatCountry = state.Publications_by_categories
       let users = state.users
@@ -200,10 +203,13 @@ const rootReducer = (state = initialState, action) => {
             : action.payload === "Others"
             ? filtCatCountry.filter((a) => (users.find((u)=>u.id===a.userId)).country!==("Uruguay"&&"Perú"&&"México"&&"Colombia"&&"Bolivia"&&"Argentina"))
             : filtCatCountry
-        return {
+        if(res.lenght!==0){
+            return {
           ...state,
           Publications: res,
-        }; 
+        } }else{
+          throw new Error("empty")
+        }
     case "FILTER_BY_PUBLICATION_NAME":
       let filtbyName = state.Publications_by_categories
       let userss = state.users
@@ -211,10 +217,13 @@ const rootReducer = (state = initialState, action) => {
         action.payload
             ? filtbyName.filter((a) => (userss.find((u)=>u.id===a.userId)).name.toLowerCase().includes(action.payload.toLowerCase()))
             : filtbyName
+            if(ress.length!==0){
             return {
               ...state,
               Publications: ress,
-            }; 
+            }; }else{
+              throw new Error("empty")
+            }
 
               
     case "GET_USER":
