@@ -251,12 +251,9 @@ export function getPublicationsName(name) {
         });
       })
       .catch((error) => {
-        dispatch({
-          type: "GET_PUBLICATIONS_NAME",
-          payload: swal({
-            title: "No matches found",
-            icon: "error",
-          })
+        swal({
+          icon: "error",
+          text: 'Sorry! There are no publications yet.',
         })
       })
       // .catch(function () {

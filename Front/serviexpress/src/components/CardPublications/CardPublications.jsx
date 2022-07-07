@@ -37,7 +37,7 @@ const favClicked = () => {
   }};
 const scoreStar = [];
 const scoreStarTotal = [];
-const totalStar = 5-score;
+var totalStar = 5-score;
 if(totalStar>=5)totalStar=5
   for (let i = 0; i < score; i++) {
     scoreStar.push(i);
