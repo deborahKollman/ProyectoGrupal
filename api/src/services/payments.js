@@ -48,7 +48,8 @@ const sendBuyerMail = async function (usremail,title,amount) {
   </div>
   `
       //Envio el mail al comprador
-      const sendmail = await axios.post ("http://localhost:3001/emailpayment",{
+      const baseURL = process.env.API || 'http://localhost:3001'; 
+      const sendmail = await axios.post (`${baseURL}/emailpayment`,{
         "email":usremail,
         "subject": "Servi Express - Payment Confirmation",
         "html": contentHtml
@@ -86,7 +87,8 @@ exports.postPayment = async(stripeid, amount, usremail, idBuyer, idPublication, 
 //exports.postMercadopago = async(title, price,usremail = 'palmabeto@hotmail.com', idBuyer=1, idPublicacion=1) =>{
   exports.postMercadopago = async(title, price, contractId,usremail) =>{
     try {
-        const preference = {
+      const baseURL = process.env.CLIENT_URL || 'http://localhost:3000';  
+      const preference = {
             items: [{
               title,
               unit_price: parseInt(price),
@@ -94,9 +96,9 @@ exports.postPayment = async(stripeid, amount, usremail, idBuyer, idPublication, 
             }
             ],
             back_urls: {
-              "success": "http://localhost:3000/mercado/success?title="+title+"&price="+price+"&contractId="+contractId+"&usremail="+usremail,
-              "failure": "http://localhost:3000/mercado/failure",
-              "pending": "http://localhost:3000/home"
+              "success": `${baseURL}/mercado/success?title=`+title+"&price="+price+"&contractId="+contractId+"&usremail="+usremail,
+              "failure": `${baseURL}/mercado/failure`,
+              "pending": `${baseURL}/home`
             },
             auto_return: "approved",
         }
